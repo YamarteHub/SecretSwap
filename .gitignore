@@ -1,0 +1,25 @@
+# Flutter
+build/
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+ios/Pods/
+android/.gradle/
+android/local.properties
+
+# Node
+node_modules/
+lib/
+.env
+
+# Firebase
+.firebase/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

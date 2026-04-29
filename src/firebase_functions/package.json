@@ -1,0 +1,30 @@
+{
+  "name": "secretswap-firebase-functions",
+  "version": "0.1.0",
+  "private": true,
+  "type": "commonjs",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -w -p tsconfig.json",
+    "lint": "eslint .",
+    "seed:join": "node tools/seed_join_by_code.js",
+    "test:join": "node tools/test_join_by_code.js",
+    "test:e2e:group-join": "node tools/e2e_create_and_join.js",
+    "test": "node -e \"console.log('no tests yet')\""
+  },
+  "dependencies": {
+    "firebase-admin": "^12.3.1",
+    "firebase-functions": "^5.0.1",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.34.0",
+    "@types/node": "^22.18.0",
+    "eslint": "^9.34.0",
+    "globals": "^16.4.0",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.41.0"
+  }
+}
+
