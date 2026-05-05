@@ -15,6 +15,7 @@ export type DrawingLock = {
 export type GroupDoc = {
   ownerUid: string;
   name: string;
+  lifecycleStatus?: "active" | "archived";
   rulesVersionCurrent: number;
   drawStatus: "idle" | "drawing" | "completed" | "failed";
   drawingLock?: DrawingLock | null;
@@ -48,6 +49,13 @@ export async function acquireDrawingLock(params: {
 
     if (group.drawStatus === "drawing" && existingLock) {
       if (existingLock.idempotencyKey === params.idempotencyKey) {
+        if (existingLock.lockedByUid !== params.requestedByUid) {
+          throw new AppError({
+            code: "DRAW_IN_PROGRESS",
+            reasonCode: "DRAW_LOCK_HELD_BY_OTHER",
+            message: "Draw already in progress"
+          });
+        }
         return {
           kind: "idempotent_retry",
           executionId: existingLock.executionId,
@@ -87,13 +95,22 @@ export async function acquireDrawingLock(params: {
 export async function clearDrawingLock(params: {
   groupId: string;
   nextDrawStatus: "completed" | "failed" | "idle";
+  currentExecutionId?: string;
+  lastExecutionId?: string;
 }): Promise<void> {
   const db = getDb();
   const groupRef = db.doc(groupPaths.groupDoc(params.groupId));
-  await groupRef.update({
+  const patch: Record<string, unknown> = {
     drawStatus: params.nextDrawStatus,
     drawingLock: null,
     updatedAt: FieldValue.serverTimestamp()
-  });
+  };
+  if (params.lastExecutionId !== undefined) {
+    patch.lastExecutionId = params.lastExecutionId;
+  }
+  if (params.currentExecutionId !== undefined) {
+    patch.currentExecutionId = params.currentExecutionId;
+  }
+  await groupRef.update(patch);
 }
 

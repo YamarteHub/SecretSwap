@@ -18,13 +18,21 @@ export const ExecuteDrawRequestSchema = z.object({
 });
 export type ExecuteDrawRequest = z.infer<typeof ExecuteDrawRequestSchema>;
 
+export const ExecuteDrawSummarySchema = z.object({
+  participantCount: z.number().int().nonnegative(),
+  subgroupMode: z.string(),
+  internalMatchCount: z.number().int().nonnegative()
+});
+
 export const ExecuteDrawResponseSchema = z.object({
   executionId: z.string().min(1),
   status: ExecutionStatusSchema,
   rulesVersion: z.number().int().positive(),
-  createdAt: z.any()
+  summary: ExecuteDrawSummarySchema,
+  finishedAt: z.any().optional()
 });
 export type ExecuteDrawResponse = z.infer<typeof ExecuteDrawResponseSchema>;
+export type ExecuteDrawSummary = z.infer<typeof ExecuteDrawSummarySchema>;
 
 export const CreateGroupRequestSchema = z.object({
   name: z.string().min(1),
@@ -56,4 +64,62 @@ export const JoinGroupByCodeResponseSchema = z.object({
   groupId: z.string().min(1)
 });
 export type JoinGroupByCodeResponse = z.infer<typeof JoinGroupByCodeResponseSchema>;
+
+export const RotateInviteCodeRequestSchema = z.object({
+  groupId: z.string().min(1)
+});
+export type RotateInviteCodeRequest = z.infer<typeof RotateInviteCodeRequestSchema>;
+
+export const RotateInviteCodeResponseSchema = z.object({
+  groupId: z.string().min(1),
+  inviteCode: z.string().min(8).max(8)
+});
+export type RotateInviteCodeResponse = z.infer<typeof RotateInviteCodeResponseSchema>;
+
+export const ManagedParticipantTypeSchema = z.enum(["managed", "child_managed"]);
+export type ManagedParticipantType = z.infer<typeof ManagedParticipantTypeSchema>;
+
+export const ManagedParticipantDeliveryModeSchema = z.enum(["verbal", "printed", "ownerDelegated"]);
+export type ManagedParticipantDeliveryMode = z.infer<typeof ManagedParticipantDeliveryModeSchema>;
+
+export const CreateManagedParticipantRequestSchema = z.object({
+  groupId: z.string().min(1),
+  displayName: z.string().min(1),
+  participantType: ManagedParticipantTypeSchema,
+  subgroupId: z.string().min(1).nullable().optional(),
+  deliveryMode: ManagedParticipantDeliveryModeSchema
+});
+export type CreateManagedParticipantRequest = z.infer<typeof CreateManagedParticipantRequestSchema>;
+
+export const CreateManagedParticipantResponseSchema = z.object({
+  participantId: z.string().min(1),
+  displayName: z.string().min(1),
+  participantType: ManagedParticipantTypeSchema,
+  subgroupId: z.string().min(1).nullable(),
+  deliveryMode: ManagedParticipantDeliveryModeSchema
+});
+export type CreateManagedParticipantResponse = z.infer<typeof CreateManagedParticipantResponseSchema>;
+
+export const GetManagedAssignmentsRequestSchema = z.object({
+  groupId: z.string().min(1),
+  executionId: z.string().min(1)
+});
+export type GetManagedAssignmentsRequest = z.infer<typeof GetManagedAssignmentsRequestSchema>;
+
+export const ManagedAssignmentItemSchema = z.object({
+  giverParticipantId: z.string().min(1),
+  giverDisplayName: z.string().min(1),
+  giverType: ManagedParticipantTypeSchema,
+  receiverDisplayName: z.string().min(1),
+  receiverType: z.enum(["app_member", "managed", "child_managed"]),
+  receiverSubgroupName: z.string().nullable(),
+  deliveryMode: ManagedParticipantDeliveryModeSchema,
+  managedByCurrentUser: z.boolean()
+});
+export type ManagedAssignmentItem = z.infer<typeof ManagedAssignmentItemSchema>;
+
+export const GetManagedAssignmentsResponseSchema = z.object({
+  assignments: z.array(ManagedAssignmentItemSchema)
+});
+export type GetManagedAssignmentsResponse = z.infer<typeof GetManagedAssignmentsResponseSchema>;
 

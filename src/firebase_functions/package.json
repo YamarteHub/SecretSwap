@@ -4,13 +4,22 @@
   "private": true,
   "type": "commonjs",
   "main": "lib/index.js",
+  "engines": {
+    "node": "22"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "dev": "tsc -w -p tsconfig.json",
+    "emulators:persistent": "firebase emulators:start --only auth,firestore,functions --project tarciswap-dev --import=../../emulator-data --export-on-exit=../../emulator-data",
     "lint": "eslint .",
     "seed:join": "node tools/seed_join_by_code.js",
+    "seed:participants": "node tools/seed_group_participants.js",
+    "test:create-managed-participant": "node tools/test_create_managed_participant.js",
+    "test:execute-draw-unified": "node tools/test_execute_draw_unified.js",
+    "test:get-managed-assignments": "node tools/test_get_managed_assignments.js",
     "test:join": "node tools/test_join_by_code.js",
     "test:e2e:group-join": "node tools/e2e_create_and_join.js",
+    "test:e2e:execute-draw": "node tools/e2e_execute_draw.js",
     "test": "node -e \"console.log('no tests yet')\""
   },
   "dependencies": {

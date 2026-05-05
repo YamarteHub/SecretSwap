@@ -1,0 +1,196 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function memberDocPath(groupId) {
+      return /databases/$(database)/documents/groups/$(groupId)/members/$(request.auth.uid);
+    }
+
+    // Miembro activo: existe el doc y memberState == "active" (usar exists(); no .exists sobre get())
+    function isActiveMember(groupId) {
+      let path = memberDocPath(groupId);
+      return isSignedIn()
+        && exists(path)
+        && get(path).data.memberState == 'active';
+    }
+
+    function groupDocPath(groupId) {
+      return /databases/$(database)/documents/groups/$(groupId);
+    }
+
+    function isOwner(groupId) {
+      let groupPath = groupDocPath(groupId);
+      return isSignedIn()
+        && exists(groupPath)
+        && get(groupPath).data.ownerUid == request.auth.uid;
+    }
+
+    function subgroupColorOptionalOk(data) {
+      return !data.keys().hasAll(['color'])
+        || data.color == null
+        || data.color is string;
+    }
+
+    function validSubgroupCreate(subgroupId) {
+      let d = request.resource.data;
+      return d.subgroupId == subgroupId
+        && d.name is string
+        && d.name.size() > 0
+        && d.keys().hasAll(['subgroupId', 'name', 'createdAt', 'updatedAt'])
+        && (d.keys().hasOnly(['subgroupId', 'name', 'createdAt', 'updatedAt'])
+          || d.keys().hasOnly(['subgroupId', 'name', 'createdAt', 'updatedAt', 'color']))
+        && subgroupColorOptionalOk(d);
+    }
+
+    function validSubgroupUpdate() {
+      let d = request.resource.data;
+      let old = resource.data;
+      return d.subgroupId == old.subgroupId
+        && d.createdAt == old.createdAt
+        && (d.keys().hasOnly(['subgroupId', 'name', 'createdAt', 'updatedAt'])
+          || d.keys().hasOnly(['subgroupId', 'name', 'color', 'createdAt', 'updatedAt']))
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['name', 'color', 'updatedAt'])
+        && subgroupColorOptionalOk(d);
+    }
+
+    function memberOnlySubgroupIdChanged() {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(['subgroupId'])
+        && (!request.resource.data.keys().hasAll(['subgroupId'])
+          || request.resource.data.subgroupId == null
+          || request.resource.data.subgroupId is string);
+    }
+
+    // Solo idle o failed permiten cambiar subgrupo en miembros (no drawing ni completed)
+    function drawAllowsMemberSubgroupEdits(groupId) {
+      let groupPath = groupDocPath(groupId);
+      return exists(groupPath)
+        && (get(groupPath).data.drawStatus == null
+          || get(groupPath).data.drawStatus == 'idle'
+          || get(groupPath).data.drawStatus == 'failed');
+    }
+
+    function drawAllowsNewRulesVersion(groupId) {
+      let groupPath = groupDocPath(groupId);
+      return exists(groupPath)
+        && (get(groupPath).data.drawStatus == null
+          || get(groupPath).data.drawStatus == 'idle'
+          || get(groupPath).data.drawStatus == 'failed');
+    }
+
+    function validRulesSubgroupMode(m) {
+      return m == 'ignore'
+        || m == 'preferDifferent'
+        || m == 'requireDifferent';
+    }
+
+    function intRulesVersion(v) {
+      return v == null ? 1 : int(v);
+    }
+
+    function docIdMatchesVersion(versionDocId, versionNumber) {
+      return versionDocId == string(versionNumber);
+    }
+
+    function nextRulesVersion(groupId) {
+      let groupPath = groupDocPath(groupId);
+      return intRulesVersion(get(groupPath).data.rulesVersionCurrent) + 1;
+    }
+
+    function validNewImmutableRuleDoc(groupId, versionStr) {
+      let groupPath = groupDocPath(groupId);
+      let d = request.resource.data;
+      let next = nextRulesVersion(groupId);
+      return isOwner(groupId)
+        && drawAllowsNewRulesVersion(groupId)
+        && exists(groupPath)
+        && docIdMatchesVersion(versionStr, next)
+        && int(d.version) == next
+        && d.keys().hasAll(['version', 'subgroupMode', 'exclusions', 'createdByUid', 'createdAt'])
+        && d.keys().hasOnly(['version', 'subgroupMode', 'exclusions', 'createdByUid', 'createdAt'])
+        && validRulesSubgroupMode(d.subgroupMode)
+        && d.exclusions is list
+        && d.exclusions.size() == 0
+        && d.createdByUid == request.auth.uid
+        && d.createdAt == request.time;
+    }
+
+    function ownerOnlyBumpsRulesVersionCurrent(groupId) {
+      let diffKeys = request.resource.data.diff(resource.data).affectedKeys();
+      let prev = intRulesVersion(resource.data.rulesVersionCurrent);
+      let next = prev + 1;
+      return isOwner(groupId)
+        && drawAllowsNewRulesVersion(groupId)
+        && (diffKeys.hasOnly(['rulesVersionCurrent'])
+          || diffKeys.hasOnly(['rulesVersionCurrent', 'updatedAt']))
+        && int(request.resource.data.rulesVersionCurrent) == next
+        && (!diffKeys.hasAll(['updatedAt']) || request.resource.data.updatedAt == request.time);
+    }
+
+    // Proyección de índice por usuario; solo lectura del propio uid (escritura: Functions / Admin SDK)
+    match /user_groups/{uid}/groups/{groupId} {
+      allow read: if isSignedIn() && request.auth.uid == uid;
+      allow write: if false;
+    }
+
+    match /groups/{groupId} {
+      allow read: if isActiveMember(groupId);
+      allow create, delete: if false;
+      allow update: if ownerOnlyBumpsRulesVersionCurrent(groupId);
+
+      match /members/{memberUid} {
+        allow read: if isActiveMember(groupId)
+          || (isSignedIn() && request.auth.uid == memberUid);
+        allow create, delete: if false;
+        allow update: if memberOnlySubgroupIdChanged()
+          && drawAllowsMemberSubgroupEdits(groupId)
+          && (
+            isOwner(groupId)
+            || (request.auth.uid == memberUid && isActiveMember(groupId))
+          );
+      }
+
+      match /subgroups/{subgroupId} {
+        allow read: if isActiveMember(groupId);
+        allow create: if isOwner(groupId) && validSubgroupCreate(subgroupId);
+        allow update: if isOwner(groupId) && validSubgroupUpdate();
+        allow delete: if false;
+      }
+
+      match /participants/{participantId} {
+        allow get, list: if isActiveMember(groupId);
+        allow create, update, delete: if false;
+      }
+
+      match /rules/{version} {
+        allow read: if isActiveMember(groupId);
+        allow create: if validNewImmutableRuleDoc(groupId, version);
+        allow update, delete: if false;
+      }
+
+      match /executions/{executionId} {
+        allow read: if isActiveMember(groupId);
+        allow write: if false;
+
+        match /assignments/{giverUid} {
+          allow read: if isSignedIn() && request.auth.uid == giverUid;
+          allow write: if false;
+        }
+      }
+
+      // Incluye invites/current — MVP sin lectura desde cliente
+      match /invites/{inviteId} {
+        allow read, write: if false;
+      }
+    }
+
+    // Solo backend / Admin SDK
+    match /invite_codes/{codeHash} {
+      allow read, write: if false;
+    }
+  }
+}

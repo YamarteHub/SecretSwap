@@ -8,9 +8,12 @@ En esta etapa el repositorio contiene **especificación, decisiones y artefactos
 - **Especificación consolidada**: `spec/SPEC.md`
 - **Esquema de DTOs / modelo de datos**: `spec/DTO_SCHEMA.md`
 - **Producto (MVP)**: `docs/product/PRODUCT_OVERVIEW.md`
+- **Contrato funcional V1**: `docs/product/FUNCTIONAL_CONTRACT_V1.md`
+- **Blueprint técnico Fase 2**: `docs/product/PHASE2_BLUEPRINT.md`
 - **Arquitectura**: `docs/architecture/ARCHITECTURE_OVERVIEW.md`
 - **Seguridad y reglas**: `docs/security/SECURITY_RULES_OVERVIEW.md`
 - **Decisiones (log)**: `docs/decisions/DECISIONS_LOG.md`
+- **Emuladores locales (persistencia)**: `docs/backend/LOCAL_EMULATOR_SETUP.md`
 
 ## Estructura del proyecto (alto nivel)
 

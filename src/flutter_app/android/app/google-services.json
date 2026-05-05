@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "857129315324",
+    "project_id": "tarciswap-dev",
+    "storage_bucket": "tarciswap-dev.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:857129315324:android:0344f4c20006b13c212079",
+        "android_client_info": {
+          "package_name": "com.secretswap.secretswap"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_wnFRIiU7LjckxUsTp3QvJt-ALc6-kPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
