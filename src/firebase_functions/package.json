@@ -15,6 +15,8 @@
     "seed:join": "node tools/seed_join_by_code.js",
     "seed:participants": "node tools/seed_group_participants.js",
     "test:create-managed-participant": "node tools/test_create_managed_participant.js",
+    "test:delete-subgroup": "node tools/test_delete_subgroup.js",
+    "test:managed-participant-mutations": "node tools/test_managed_participant_mutations.js",
     "test:execute-draw-unified": "node tools/test_execute_draw_unified.js",
     "test:get-managed-assignments": "node tools/test_get_managed_assignments.js",
     "test:join": "node tools/test_join_by_code.js",

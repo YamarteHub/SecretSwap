@@ -100,6 +100,49 @@ export const CreateManagedParticipantResponseSchema = z.object({
 });
 export type CreateManagedParticipantResponse = z.infer<typeof CreateManagedParticipantResponseSchema>;
 
+export const UpdateManagedParticipantRequestSchema = z.object({
+  groupId: z.string().min(1),
+  participantId: z.string().min(1),
+  displayName: z.string().min(1),
+  participantType: ManagedParticipantTypeSchema,
+  subgroupId: z.string().min(1).nullable().optional(),
+  deliveryMode: z.enum(["verbal", "printed"])
+});
+export type UpdateManagedParticipantRequest = z.infer<typeof UpdateManagedParticipantRequestSchema>;
+
+export const UpdateManagedParticipantResponseSchema = z.object({
+  participantId: z.string().min(1),
+  displayName: z.string().min(1),
+  participantType: ManagedParticipantTypeSchema,
+  subgroupId: z.string().min(1).nullable(),
+  deliveryMode: z.enum(["verbal", "printed"])
+});
+export type UpdateManagedParticipantResponse = z.infer<typeof UpdateManagedParticipantResponseSchema>;
+
+export const RemoveManagedParticipantRequestSchema = z.object({
+  groupId: z.string().min(1),
+  participantId: z.string().min(1)
+});
+export type RemoveManagedParticipantRequest = z.infer<typeof RemoveManagedParticipantRequestSchema>;
+
+export const RemoveManagedParticipantResponseSchema = z.object({
+  participantId: z.string().min(1),
+  state: z.literal("removed")
+});
+export type RemoveManagedParticipantResponse = z.infer<typeof RemoveManagedParticipantResponseSchema>;
+
+export const DeleteSubgroupRequestSchema = z.object({
+  groupId: z.string().min(1),
+  subgroupId: z.string().min(1)
+});
+export type DeleteSubgroupRequest = z.infer<typeof DeleteSubgroupRequestSchema>;
+
+export const DeleteSubgroupResponseSchema = z.object({
+  subgroupId: z.string().min(1),
+  deleted: z.literal(true)
+});
+export type DeleteSubgroupResponse = z.infer<typeof DeleteSubgroupResponseSchema>;
+
 export const GetManagedAssignmentsRequestSchema = z.object({
   groupId: z.string().min(1),
   executionId: z.string().min(1)
