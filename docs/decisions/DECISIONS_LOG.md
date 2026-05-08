@@ -94,3 +94,110 @@ Formato recomendado: una entrada por decisión, con estado y rationale breve.
   - `joinGroupByCode` hace lookup por `codeHash` solo en backend; nunca se guarda el código en claro.
 - **Motivo**: Lookup O(1) sin queries ni scans, evita persistir secretos en claro y permite rotación futura sin complejidad adicional.
 
+## D-0013 — El MVP prioriza completar amigo secreto
+
+- **Fecha**: 2026-05-08
+- **Estado**: Aceptada
+- **Decisión**: El MVP prioriza cerrar de extremo a extremo la dinámica de amigo secreto antes de cualquier otra dinámica o expansión funcional.
+- **Motivo**: Asegurar entrega útil, estable y publicable sin dispersar esfuerzo en alcance prematuro.
+
+## D-0014 — No reescritura total del proyecto
+
+- **Fecha**: 2026-05-08
+- **Estado**: Aceptada
+- **Decisión**: No se reescribe el proyecto desde cero en esta fase.
+- **Motivo**: Preservar el núcleo funcional ya existente y reducir riesgo de retrasos/regresiones.
+
+## D-0015 — No nuevas features fuera del flujo core
+
+- **Fecha**: 2026-05-08
+- **Estado**: Aceptada
+- **Decisión**: No se implementan nuevas features fuera del flujo core del MVP actual.
+- **Motivo**: Evitar crecimiento descontrolado del alcance y proteger la estabilidad de entrega.
+
+## D-0016 — Alcance funcional congelado del MVP
+
+- **Fecha**: 2026-05-08
+- **Estado**: Aceptada
+- **Decisión**: El alcance funcional del MVP queda limitado a:
+  - Crear grupo.
+  - Unirse por código.
+  - Gestionar participantes con app.
+  - Añadir participantes sin app.
+  - Añadir niños gestionados.
+  - Crear subgrupos.
+  - Asignar participantes a subgrupos.
+  - Configurar regla de sorteo: `ignore`, `preferDifferent`, `requireDifferent`.
+  - Ejecutar sorteo desde backend.
+  - Mostrar a cada usuario solo su asignación.
+  - Mostrar al responsable solo resultados gestionados.
+  - Permitir re-sortear cuando haga falta.
+  - Mantener privacidad.
+  - Mantener UI clara, cálida, simple y sin mezcla de idiomas.
+- **Motivo**: Congelar alcance para cerrar un MVP pequeño, útil y funcional sin convertir el proyecto en un mega sistema.
+
+## D-0017 — Fuera de alcance explícito en MVP
+
+- **Fecha**: 2026-05-08
+- **Estado**: Aceptada
+- **Decisión**: Quedan fuera de alcance del MVP actual:
+  - wishlist
+  - chat
+  - pistas
+  - notificaciones push reales
+  - WhatsApp/email automático
+  - multi-organizador
+  - historial complejo
+  - monetización
+  - nuevas dinámicas
+  - torneos
+  - equipos
+  - pádel
+  - arquitectura excesivamente compleja
+  - reescritura completa del proyecto
+- **Motivo**: Mantener foco en entrega incremental del flujo core, minimizando deuda y desviaciones.
+
+## D-0018 — Privacidad de lectura por rol funcional
+
+- **Fecha**: 2026-05-08
+- **Estado**: Aceptada
+- **Decisión**:
+  - Cada usuario ve solo su asignación.
+  - El responsable ve solo resultados gestionados.
+- **Motivo**: Reforzar privacidad del sorteo y visibilidad mínima necesaria por tipo de actor.
+
+## D-0019 — Separación usuario/participante
+
+- **Fecha**: 2026-05-08
+- **Estado**: Aceptada
+- **Decisión**: Se mantiene la separación conceptual y funcional entre usuario autenticado y participante gestionado.
+- **Motivo**: Soportar casos con participantes sin app y niños gestionados sin romper privacidad ni trazabilidad.
+
+## D-0020 — Mínimo oficial para ejecutar sorteo
+
+- **Fecha**: 2026-05-08
+- **Estado**: Aceptada
+- **Decisión**: El mínimo oficial para ejecutar sorteo será de 3 participantes efectivos.
+- **Motivo**: Garantizar viabilidad práctica del juego y coherencia de UX en casos reales.
+
+## D-0021 — `requireDifferent` exige subgrupo en todos los efectivos
+
+- **Fecha**: 2026-05-08
+- **Estado**: Aceptada
+- **Decisión**: Si `requireDifferent` está activo, todos los participantes efectivos deben tener subgrupo asignado.
+- **Motivo**: Evitar ejecuciones inválidas e imposibilidad de cumplir restricciones del sorteo.
+
+## D-0022 — `user_groups` no es fuente de verdad
+
+- **Fecha**: 2026-05-08
+- **Estado**: Aceptada
+- **Decisión**: `user_groups` se mantiene como proyección de lectura y no como fuente de verdad.
+- **Motivo**: Proteger integridad del dominio manteniendo la verdad en la membresía del grupo.
+
+## D-0023 — Dinámicas futuras como visión, no implementación actual
+
+- **Fecha**: 2026-05-08
+- **Estado**: Aceptada
+- **Decisión**: Las dinámicas futuras se mantienen como visión de producto y no como implementación del MVP actual.
+- **Motivo**: Preservar foco, reducir riesgo y cerrar publicación del MVP core.
+

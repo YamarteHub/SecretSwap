@@ -82,7 +82,7 @@ Semántica:
 ```json
 {
   "version": 1,
-  "subgroupMode": "ignore|different",
+  "subgroupMode": "ignore|preferDifferent|requireDifferent",
   "exclusions": [],
   "createdByUid": "string",
   "createdAt": "timestamp"
@@ -94,7 +94,8 @@ Reglas:
 - **Inmutable**: una versión no se edita una vez creada.
 - `subgroupMode`:
   - `ignore`: no aplica restricciones por subgrupo.
-  - `different`: exige `giver.subgroupId != receiver.subgroupId` y requiere `subgroupId` en miembros activos.
+  - `preferDifferent`: intenta priorizar asignaciones entre subgrupos distintos, pero no bloquea el sorteo si no se puede cumplir al 100%.
+  - `requireDifferent`: exige `giver.subgroupId != receiver.subgroupId` y requiere `subgroupId` en participantes efectivos.
 - `exclusions`: lista de exclusiones explícitas (MVP: `[]` por defecto; se reserva para evolución sin cambiar schema).
 
 ### 2.4. `groups/{groupId}/executions/{executionId}`
@@ -297,9 +298,12 @@ Reglas:
 
 - **Owner único (MVP)**:
   - `groups.ownerUid` define el owner y controla operaciones administrativas.
+- **Mínimo oficial de ejecución**:
+  - `executeDraw` requiere mínimo 3 participantes efectivos.
 - **`subgroupMode`**:
-  - Si `subgroupMode = different` en la `rulesVersion` usada, todos los miembros activos deben tener `subgroupId`.
-  - La ejecución debe garantizar `giver.subgroupId != receiver.subgroupId`.
+  - `ignore`: no aplica restricciones por subgrupo.
+  - `preferDifferent`: prioriza cruces entre subgrupos, sin bloquear ejecución si no se cumple al 100%.
+  - `requireDifferent`: exige subgrupo en todos los participantes efectivos y garantiza `giver.subgroupId != receiver.subgroupId`; si no hay solución válida, la ejecución falla.
 - **Idempotencia**:
   - `executeDraw` debe registrar y reutilizar `{groupId, idempotencyKey}` devolviendo el mismo `executionId`.
 

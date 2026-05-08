@@ -13,6 +13,17 @@ SecretSwap gestiona grupos para realizar un sorteo tipo “amigo secreto”, gen
 - Entregar asignaciones con **privacidad por giver**.
 - Soportar reintentos seguros con **idempotencia** (`idempotencyKey`).
 
+### 2.1. Alcance simplificado del MVP
+
+La documentación técnica de SecretSwap existe para guiar desarrollo y operación, pero la implementación inmediata debe ser incremental y enfocada en cerrar bien el flujo de amigo secreto.
+
+Para este MVP, el alcance queda congelado al núcleo funcional definido en `docs/product/MVP_SCOPE.md`; no debe derivar en una arquitectura innecesariamente grande en esta fase.
+
+Toda propuesta de cambio de modelo o backend debe justificarse por:
+
+- un bug real detectado, o
+- una necesidad directa del MVP actual.
+
 ## 3. Suposiciones y decisiones cerradas (referencia)
 
 Ver `docs/decisions/DECISIONS_LOG.md` (D-0001 en adelante).
@@ -38,9 +49,10 @@ Ver `docs/decisions/DECISIONS_LOG.md` (D-0001 en adelante).
 La versión de reglas (`groups/{groupId}/rules/{version}`) define `subgroupMode`:
 
 - `ignore`: no aplica restricciones por subgrupo.
-- `different`: requiere que giver y receiver pertenezcan a subgrupos distintos.
+- `preferDifferent`: intenta priorizar asignaciones entre subgrupos distintos, pero no bloquea el sorteo si no se puede cumplir al 100%.
+- `requireDifferent`: exige que giver y receiver pertenezcan a subgrupos distintos.
 
-Si `subgroupMode = different`:
+Si `subgroupMode = requireDifferent`:
 
 - Todo miembro activo debe incluir `subgroupId`.
 - La asignación debe cumplir: `giver.subgroupId != receiver.subgroupId`.
@@ -107,8 +119,8 @@ Entrada mínima:
 Comportamiento:
 
 - Valida precondiciones:
-  - suficientes miembros activos (mínimo 2),
-  - si `subgroupMode = different`, todos tienen `subgroupId`,
+  - suficientes participantes efectivos (mínimo 3),
+  - si `subgroupMode = requireDifferent`, todos tienen `subgroupId`,
   - factibilidad de restricciones (si no hay solución, falla sin parcialidades).
 - Ejecuta el algoritmo en backend.
 - Materializa un `execution` y los `assignments` bajo esa ejecución.
