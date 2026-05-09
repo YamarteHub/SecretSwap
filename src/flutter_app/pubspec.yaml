@@ -69,6 +69,10 @@ flutter:
     - assets/brand/TarciSecret_Vertical.png
     - assets/brand/TarciSecret_Horizontal.png
     - assets/brand/TarciSecret_Principal.png
+    - assets/brand/TarciSecret_Icono_Transparent.png
+    - assets/brand/TarciSecret_Vertical_Transparent.png
+    - assets/brand/TarciSecret_Horizontal_Transparent.png
+    - assets/brand/TarciSecret_Principal_Transparent.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
