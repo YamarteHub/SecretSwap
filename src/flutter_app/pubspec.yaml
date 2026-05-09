@@ -65,8 +65,10 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - ../../imagenes/Icono TarciSecret.png
-    - ../../imagenes/Logo TarciSecret.png
+    - ../../imagenes/TarciSecret_Icono.png
+    - ../../imagenes/TarciSecret_Vertical.png
+    - ../../imagenes/TarciSecret_Horizontal.png
+    - ../../imagenes/TarciSecret_Principal.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

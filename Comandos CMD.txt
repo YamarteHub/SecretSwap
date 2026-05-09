@@ -1,0 +1,21 @@
+cd C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap
+firebase emulators:start --only auth,firestore,functions --project tarciswap-dev --import=./emulator-data --export-on-exit=./emulator-data
+
+cd C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\flutter_app
+flutter run -d emulator-5554 --dart-define=USE_FIREBASE_EMULATORS=true --dart-define=FIREBASE_EMULATOR_HOST=10.0.2.2
+
+para subir a github
+cd /c/Users/alberto.yamarte/Desktop/Proyecto/SecretSwap
+git status
+git add .
+git commit -m "feat: actualizacion de app completa al 08/05/2026."
+git push
+
+D2WJ8FM5
+
+
+
+
+
+
+
