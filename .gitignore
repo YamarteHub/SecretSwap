@@ -10,7 +10,8 @@ android/local.properties
 
 # Node
 node_modules/
-lib/
+# Salida compilada de TypeScript (Cloud Functions), no confundir con src/flutter_app/lib/
+src/firebase_functions/lib/
 .env
 
 # Firebase
