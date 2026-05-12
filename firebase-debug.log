@@ -363,3 +363,205 @@ java.net.SocketException: Connection reset
 [debug] [2026-05-09T22:18:25.266Z] May 10, 2026 12:18:25 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
 INFO: Detected HTTP/2 connection.
  {"metadata":{"emulator":{"name":"firestore"},"message":"May 10, 2026 12:18:25 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected HTTP/2 connection.\r\n"}}
+[debug] [2026-05-12T10:52:04.768Z] ----------------------------------------------------------------------
+[debug] [2026-05-12T10:52:04.774Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\alberto.yamarte\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start --only auth,firestore,functions --project tarciswap-dev --import=./emulator-data --export-on-exit=./emulator-data
+[debug] [2026-05-12T10:52:04.774Z] CLI Version:   15.11.0
+[debug] [2026-05-12T10:52:04.774Z] Platform:      win32
+[debug] [2026-05-12T10:52:04.774Z] Node Version:  v22.16.0
+[debug] [2026-05-12T10:52:04.775Z] Time:          Tue May 12 2026 12:52:04 GMT+0200 (hora de verano de Europa central)
+[debug] [2026-05-12T10:52:04.775Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-05-12T10:52:04.776Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2026-05-12T10:52:06.264Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-05-12T10:52:06.265Z] > authorizing via signed-in user (yamartehub@gmail.com)
+[debug] [2026-05-12T10:52:06.367Z] openjdk version "21.0.11" 2026-04-21 LTS
+
+[debug] [2026-05-12T10:52:06.367Z] OpenJDK Runtime Environment Temurin-21.0.11+10 (build 21.0.11+10-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.11+10 (build 21.0.11+10-LTS, mixed mode, sharing)
+
+[debug] [2026-05-12T10:52:06.372Z] Parsed Java major version: 21
+[info] i  emulators: Starting emulators: auth, functions, firestore {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, functions, firestore"}}
+[debug] [2026-05-12T10:52:06.382Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2026-05-12T10:52:06.383Z] [auth] Authentication Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2026-05-12T10:52:06.383Z] [firestore] Firestore Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2026-05-12T10:52:06.383Z] [firestore.websocket] websocket server for firestore only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2026-05-12T10:52:06.383Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8080}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2026-05-12T10:52:06.387Z] Found emulator hub locator: {"version":"15.11.0","origins":["http://127.0.0.1:4400","http://[::1]:4400"],"pid":18028}
+[debug] [2026-05-12T10:52:06.387Z] Write emulator hub locator at C:\Users\ALBERT~1.YAM\AppData\Local\Temp\hub-tarciswap-dev.json
+[debug] [2026-05-12T10:52:06.395Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2026-05-12T10:52:06.396Z] [eventarc] Eventarc Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2026-05-12T10:52:06.396Z] [tasks] Cloud Tasks Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2026-05-12T10:52:06.396Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8080}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5001}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}],"tasks":[{"address":"127.0.0.1","family":"IPv4","port":9499}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
+[warn] !  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: apphosting, database, hosting, pubsub, storage, dataconnect {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mapphosting, database, hosting, pubsub, storage, dataconnect\u001b[22m"}}
+[debug] [2026-05-12T10:52:06.450Z] defaultcredentials: writing to file C:\Users\alberto.yamarte\AppData\Roaming\firebase\yamartehub_gmail_com_application_default_credentials.json
+[debug] [2026-05-12T10:52:06.453Z] Setting GAC to C:\Users\alberto.yamarte\AppData\Roaming\firebase\yamartehub_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\alberto.yamarte\\AppData\\Roaming\\firebase\\yamartehub_gmail_com_application_default_credentials.json"}}
+[debug] [2026-05-12T10:52:06.454Z] Checked if tokens are valid: false, expires at: 1778366226632
+[debug] [2026-05-12T10:52:06.454Z] Checked if tokens are valid: false, expires at: 1778366226632
+[debug] [2026-05-12T10:52:06.454Z] > refreshing access token with scopes: []
+[debug] [2026-05-12T10:52:06.455Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-05-12T10:52:06.455Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-05-12T10:52:06.603Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-05-12T10:52:06.603Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-05-12T10:52:06.614Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/tarciswap-dev/adminSdkConfig [none]
+[debug] [2026-05-12T10:52:06.655Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2026-05-12T10:52:06.655Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2026-05-12T10:52:07.005Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/tarciswap-dev/adminSdkConfig 200
+[debug] [2026-05-12T10:52:07.006Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/tarciswap-dev/adminSdkConfig {"projectId":"tarciswap-dev","storageBucket":"tarciswap-dev.firebasestorage.app"}
+[info] i  firestore: Importing data from C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\emulator-data\firestore_export\firestore_export.overall_export_metadata {"metadata":{"emulator":{"name":"firestore"},"message":"Importing data from C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\emulator-data\\firestore_export\\firestore_export.overall_export_metadata"}}
+[debug] [2026-05-12T10:52:07.026Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-05-12T10:52:07.026Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2026-05-12T10:52:07.026Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","C:\\Users\\alberto.yamarte\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.20.4.jar","--host","127.0.0.1","--port",8080,"--websocket_port",9150,"--project_id","tarciswap-dev","--seed_from_export","C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\emulator-data\\firestore_export\\firestore_export.overall_export_metadata","--rules","C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\firestore.rules","--single_project_mode",true,"--functions_emulator","127.0.0.1:5001"],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false,"shell":false,"port":8080} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\alberto.yamarte\\\\.cache\\\\firebase\\\\emulators\\\\cloud-firestore-emulator-v1.20.4.jar\",\"--host\",\"127.0.0.1\",\"--port\",8080,\"--websocket_port\",9150,\"--project_id\",\"tarciswap-dev\",\"--seed_from_export\",\"C:\\\\Users\\\\alberto.yamarte\\\\Desktop\\\\Proyecto\\\\SecretSwap\\\\emulator-data\\\\firestore_export\\\\firestore_export.overall_export_metadata\",\"--rules\",\"C:\\\\Users\\\\alberto.yamarte\\\\Desktop\\\\Proyecto\\\\SecretSwap\\\\firestore.rules\",\"--single_project_mode\",true,\"--functions_emulator\",\"127.0.0.1:5001\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false,\"shell\":false,\"port\":8080}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[debug] [2026-05-12T10:52:08.209Z] May 12, 2026 12:52:08 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
+INFO: Started WebSocket server on ws://127.0.0.1:9150
+ {"metadata":{"emulator":{"name":"firestore"},"message":"May 12, 2026 12:52:08 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\r\nINFO: Started WebSocket server on ws://127.0.0.1:9150\r\n"}}
+[debug] [2026-05-12T10:52:08.263Z] 
+API endpoint: http:// {"metadata":{"emulator":{"name":"firestore"},"message":"\nAPI endpoint: http://"}}
+[debug] [2026-05-12T10:52:08.263Z] 127.0.0.1:8080
+Database Edition: STANDARD
+Database Mode: CLOUD_FIRESTORE
+
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8080
+
+If you are running a Firestore in Datastore Mode project, run:
+
+   export DATASTORE_EMULATOR_HOST=127.0.0.1:8080
+
+Note: Support for Datastore Mode is in preview. If you encounter any bugs please file at https://github.com/firebase/firebase-tools/issues.
+Dev App Server is now running.
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"127.0.0.1:8080\nDatabase Edition: STANDARD\nDatabase Mode: CLOUD_FIRESTORE\n\nIf you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\r\n\n   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8080\n\nIf you are running a Firestore in Datastore Mode project, run:\r\n\n   export DATASTORE_EMULATOR_HOST=127.0.0.1:8080\n\nNote: Support for Datastore Mode is in preview. If you encounter any bugs please file at https://github.com/firebase/firebase-tools/issues.\r\nDev App Server is now running.\n\r\n"}}
+[info] +  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
+[info] i  auth: Importing config from C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\emulator-data\auth_export\config.json {"metadata":{"emulator":{"name":"auth"},"message":"Importing config from C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\emulator-data\\auth_export\\config.json"}}
+[info] i  auth: Importing accounts from C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\emulator-data\auth_export\accounts.json {"metadata":{"emulator":{"name":"auth"},"message":"Importing accounts from C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\emulator-data\\auth_export\\accounts.json"}}
+[info] i  functions: Watching "C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\" for Cloud Functions..."}}
+[debug] [2026-05-12T10:52:11.878Z] Validating nodejs source
+[warn] !  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] !  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2026-05-12T10:52:12.458Z] > [functions] package.json contents: {
+  "name": "secretswap-firebase-functions",
+  "version": "0.1.0",
+  "private": true,
+  "type": "commonjs",
+  "main": "lib/index.js",
+  "engines": {
+    "node": "22"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -w -p tsconfig.json",
+    "emulators:persistent": "firebase emulators:start --only auth,firestore,functions --project tarciswap-dev --import=../../emulator-data --export-on-exit=../../emulator-data",
+    "lint": "eslint .",
+    "seed:join": "node tools/seed_join_by_code.js",
+    "seed:participants": "node tools/seed_group_participants.js",
+    "test:create-managed-participant": "node tools/test_create_managed_participant.js",
+    "test:delete-subgroup": "node tools/test_delete_subgroup.js",
+    "test:managed-participant-mutations": "node tools/test_managed_participant_mutations.js",
+    "test:execute-draw-unified": "node tools/test_execute_draw_unified.js",
+    "test:get-managed-assignments": "node tools/test_get_managed_assignments.js",
+    "test:join": "node tools/test_join_by_code.js",
+    "test:e2e:group-join": "node tools/e2e_create_and_join.js",
+    "test:e2e:execute-draw": "node tools/e2e_execute_draw.js",
+    "test": "node -e \"console.log('no tests yet')\""
+  },
+  "dependencies": {
+    "firebase-admin": "^12.3.1",
+    "firebase-functions": "^5.0.1",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.34.0",
+    "@types/node": "^22.18.0",
+    "eslint": "^9.34.0",
+    "globals": "^16.4.0",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.41.0"
+  }
+}
+[debug] [2026-05-12T10:52:12.459Z] Building nodejs source
+[debug] [2026-05-12T10:52:12.459Z] Failed to find version of module node: reached end of search path C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\node_modules
+[info] +  functions: Using node@22 from host. 
+[debug] [2026-05-12T10:52:12.461Z] Could not find functions.yaml. Must use http discovery
+[debug] [2026-05-12T10:52:12.465Z] Found firebase-functions binary at 'C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8220
+
+[debug] [2026-05-12T10:52:13.055Z] Got response from /__/functions.yaml {"endpoints":{"createGroup":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createGroup"},"createManagedParticipant":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createManagedParticipant"},"updateManagedParticipant":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateManagedParticipant"},"removeManagedParticipant":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"removeManagedParticipant"},"deleteSubgroup":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"deleteSubgroup"},"joinGroupByCode":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"joinGroupByCode"},"rotateInviteCode":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"rotateInviteCode"},"executeDraw":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"executeDraw"},"getManagedAssignments":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"getManagedAssignments"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[info] +  functions: Loaded functions definitions from source: createGroup, createManagedParticipant, updateManagedParticipant, removeManagedParticipant, deleteSubgroup, joinGroupByCode, rotateInviteCode, executeDraw, getManagedAssignments. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createGroup, createManagedParticipant, updateManagedParticipant, removeManagedParticipant, deleteSubgroup, joinGroupByCode, rotateInviteCode, executeDraw, getManagedAssignments."}}
+[info] +  functions[us-central1-createGroup]: http function initialized (http://127.0.0.1:5001/tarciswap-dev/us-central1/createGroup). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/tarciswap-dev/us-central1/createGroup)."}}
+[info] +  functions[us-central1-createManagedParticipant]: http function initialized (http://127.0.0.1:5001/tarciswap-dev/us-central1/createManagedParticipant). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/tarciswap-dev/us-central1/createManagedParticipant)."}}
+[info] +  functions[us-central1-updateManagedParticipant]: http function initialized (http://127.0.0.1:5001/tarciswap-dev/us-central1/updateManagedParticipant). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/tarciswap-dev/us-central1/updateManagedParticipant)."}}
+[info] +  functions[us-central1-removeManagedParticipant]: http function initialized (http://127.0.0.1:5001/tarciswap-dev/us-central1/removeManagedParticipant). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/tarciswap-dev/us-central1/removeManagedParticipant)."}}
+[info] +  functions[us-central1-deleteSubgroup]: http function initialized (http://127.0.0.1:5001/tarciswap-dev/us-central1/deleteSubgroup). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/tarciswap-dev/us-central1/deleteSubgroup)."}}
+[info] +  functions[us-central1-joinGroupByCode]: http function initialized (http://127.0.0.1:5001/tarciswap-dev/us-central1/joinGroupByCode). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/tarciswap-dev/us-central1/joinGroupByCode)."}}
+[info] +  functions[us-central1-rotateInviteCode]: http function initialized (http://127.0.0.1:5001/tarciswap-dev/us-central1/rotateInviteCode). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/tarciswap-dev/us-central1/rotateInviteCode)."}}
+[info] +  functions[us-central1-executeDraw]: http function initialized (http://127.0.0.1:5001/tarciswap-dev/us-central1/executeDraw). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/tarciswap-dev/us-central1/executeDraw)."}}
+[info] +  functions[us-central1-getManagedAssignments]: http function initialized (http://127.0.0.1:5001/tarciswap-dev/us-central1/getManagedAssignments). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/tarciswap-dev/us-central1/getManagedAssignments)."}}
+[debug] [2026-05-12T10:52:17.125Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: . If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬─────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Authentication │ 127.0.0.1:9099 │ http://127.0.0.1:4000/auth      │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Functions      │ 127.0.0.1:5001 │ http://127.0.0.1:4000/functions │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Firestore      │ 127.0.0.1:8080 │ http://127.0.0.1:4000/firestore │
+└────────────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub host: 127.0.0.1 port: 4400
+  Other reserved ports: 4500, 9150
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2026-05-12T11:03:35.879Z] May 12, 2026 1:03:35 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"May 12, 2026 1:03:35 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected HTTP/2 connection.\r\n"}}
+[debug] [2026-05-12T11:27:45.052Z] May 12, 2026 1:27:45 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"May 12, 2026 1:27:45 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected HTTP/2 connection.\r\n"}}
+[debug] [2026-05-12T11:36:34.530Z] >>> [apiv2][query] POST http://127.0.0.1:5001/functions/projects/tarciswap-dev/trigger_multicast [none]
+[debug] [2026-05-12T11:36:34.542Z] >>> [apiv2][body] POST http://127.0.0.1:5001/functions/projects/tarciswap-dev/trigger_multicast {"eventId":"0d944afb-6a1f-4109-95dd-cc41bf86b748","eventType":"providers/firebase.auth/eventTypes/user.create","resource":{"name":"projects/tarciswap-dev","service":"firebaseauth.googleapis.com"},"params":{},"timestamp":"2026-05-12T11:36:34.481Z","data":{"uid":"eN681JyShGvIVdEitxl6rTCb0zl0","metadata":{"creationTime":"2026-05-12T11:36:34.429Z","lastSignInTime":"2026-05-12T11:36:34.429Z"},"customClaims":{}}}
+[debug] [2026-05-12T11:36:34.709Z] <<< [apiv2][status] POST http://127.0.0.1:5001/functions/projects/tarciswap-dev/trigger_multicast 200
+[debug] [2026-05-12T11:36:34.709Z] <<< [apiv2][body] POST http://127.0.0.1:5001/functions/projects/tarciswap-dev/trigger_multicast {"status":"multicast_acknowledged"}
+[debug] [2026-05-12T11:36:36.794Z] May 12, 2026 1:36:36 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"May 12, 2026 1:36:36 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected HTTP/2 connection.\r\n"}}
+[debug] [2026-05-12T11:41:22.990Z] [work-queue] {"queuedWork":["/tarciswap-dev/us-central1/joinGroupByCode-2026-05-12T11:41:22.967Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2026-05-12T11:41:23.008Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/tarciswap-dev/us-central1/joinGroupByCode-2026-05-12T11:41:22.967Z"],"workRunningCount":1}
+[debug] [2026-05-12T11:41:23.022Z] Accepted request POST /tarciswap-dev/us-central1/joinGroupByCode --> us-central1-joinGroupByCode
+[debug] [2026-05-12T11:41:23.116Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2026-05-12T11:41:23.127Z] [functions] Got req.url=/tarciswap-dev/us-central1/joinGroupByCode, mapping to path=/ {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/tarciswap-dev/us-central1/joinGroupByCode, mapping to path=/"}}
+[debug] [2026-05-12T11:41:23.270Z] [worker-pool] addWorker(us-central1-joinGroupByCode) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(us-central1-joinGroupByCode)"}}
+[debug] [2026-05-12T11:41:23.278Z] [worker-pool] Adding worker with key us-central1-joinGroupByCode, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key us-central1-joinGroupByCode, total=1"}}
+[debug] [2026-05-12T11:41:25.834Z] [runtime-status] [25068] Resolved module firebase-admin {"declared":true,"installed":true,"version":"12.7.0","resolution":"C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\node_modules\\firebase-admin\\lib\\index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-joinGroupByCode"},"extension":{},"message":"[runtime-status] [25068] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"12.7.0\",\"resolution\":\"C:\\\\Users\\\\alberto.yamarte\\\\Desktop\\\\Proyecto\\\\SecretSwap\\\\src\\\\firebase_functions\\\\node_modules\\\\firebase-admin\\\\lib\\\\index.js\"}"}}
+[debug] [2026-05-12T11:41:25.841Z] [runtime-status] [25068] Resolved module firebase-functions {"declared":true,"installed":true,"version":"5.1.1","resolution":"C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\node_modules\\firebase-functions\\lib\\v1\\index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-joinGroupByCode"},"extension":{},"message":"[runtime-status] [25068] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"5.1.1\",\"resolution\":\"C:\\\\Users\\\\alberto.yamarte\\\\Desktop\\\\Proyecto\\\\SecretSwap\\\\src\\\\firebase_functions\\\\node_modules\\\\firebase-functions\\\\lib\\\\v1\\\\index.js\"}"}}
+[debug] [2026-05-12T11:41:25.847Z] [runtime-status] [25068] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}] {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-joinGroupByCode"},"extension":{},"message":"[runtime-status] [25068] Outgoing network have been stubbed. [{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"net\",\"status\":\"mocked\"}]"}}
+[debug] [2026-05-12T11:41:25.848Z] [runtime-status] [25068] Resolved module firebase-functions {"declared":true,"installed":true,"version":"5.1.1","resolution":"C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\node_modules\\firebase-functions\\lib\\v1\\index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-joinGroupByCode"},"extension":{},"message":"[runtime-status] [25068] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"5.1.1\",\"resolution\":\"C:\\\\Users\\\\alberto.yamarte\\\\Desktop\\\\Proyecto\\\\SecretSwap\\\\src\\\\firebase_functions\\\\node_modules\\\\firebase-functions\\\\lib\\\\v1\\\\index.js\"}"}}
+[debug] [2026-05-12T11:41:26.224Z] [runtime-status] [25068] Resolved module firebase-admin {"declared":true,"installed":true,"version":"12.7.0","resolution":"C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\node_modules\\firebase-admin\\lib\\index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-joinGroupByCode"},"extension":{},"message":"[runtime-status] [25068] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"12.7.0\",\"resolution\":\"C:\\\\Users\\\\alberto.yamarte\\\\Desktop\\\\Proyecto\\\\SecretSwap\\\\src\\\\firebase_functions\\\\node_modules\\\\firebase-admin\\\\lib\\\\index.js\"}"}}
+[debug] [2026-05-12T11:41:26.233Z] [runtime-status] [25068] Resolved module firebase-functions {"declared":true,"installed":true,"version":"5.1.1","resolution":"C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\node_modules\\firebase-functions\\lib\\v1\\index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-joinGroupByCode"},"extension":{},"message":"[runtime-status] [25068] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"5.1.1\",\"resolution\":\"C:\\\\Users\\\\alberto.yamarte\\\\Desktop\\\\Proyecto\\\\SecretSwap\\\\src\\\\firebase_functions\\\\node_modules\\\\firebase-functions\\\\lib\\\\v1\\\\index.js\"}"}}
+[debug] [2026-05-12T11:41:26.742Z] [runtime-status] [25068] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"12.7.0","resolution":"C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\node_modules\\firebase-admin\\lib\\index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-joinGroupByCode"},"extension":{},"message":"[runtime-status] [25068] firebase-admin has been stubbed. {\"adminResolution\":{\"declared\":true,\"installed\":true,\"version\":\"12.7.0\",\"resolution\":\"C:\\\\Users\\\\alberto.yamarte\\\\Desktop\\\\Proyecto\\\\SecretSwap\\\\src\\\\firebase_functions\\\\node_modules\\\\firebase-admin\\\\lib\\\\index.js\"}}"}}
+[debug] [2026-05-12T11:41:26.833Z] [runtime-status] [25068] Functions runtime initialized. {"cwd":"C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions","node_version":"22.16.0"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-joinGroupByCode"},"extension":{},"message":"[runtime-status] [25068] Functions runtime initialized. {\"cwd\":\"C:\\\\Users\\\\alberto.yamarte\\\\Desktop\\\\Proyecto\\\\SecretSwap\\\\src\\\\firebase_functions\",\"node_version\":\"22.16.0\"}"}}
+[debug] [2026-05-12T11:41:26.834Z] [runtime-status] [25068] Listening to port: \\?\pipe\fire_emu_17d392e69475c116 {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-joinGroupByCode"},"extension":{},"message":"[runtime-status] [25068] Listening to port: \\\\?\\pipe\\fire_emu_17d392e69475c116"}}
+[debug] [2026-05-12T11:41:26.938Z] [worker-us-central1-joinGroupByCode-3b403c60-db55-454f-b61e-f755a62a3dcd]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-joinGroupByCode"},"extension":{},"message":"[worker-us-central1-joinGroupByCode-3b403c60-db55-454f-b61e-f755a62a3dcd]: IDLE"}}
+[debug] [2026-05-12T11:41:26.939Z] [worker-pool] submitRequest(triggerId=us-central1-joinGroupByCode) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-joinGroupByCode)"}}
+[info] i  functions: Beginning execution of "us-central1-joinGroupByCode" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-joinGroupByCode"},"extension":{},"message":"Beginning execution of \"us-central1-joinGroupByCode\""}}
+[debug] [2026-05-12T11:41:26.952Z] [worker-us-central1-joinGroupByCode-3b403c60-db55-454f-b61e-f755a62a3dcd]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-joinGroupByCode"},"extension":{},"message":"[worker-us-central1-joinGroupByCode-3b403c60-db55-454f-b61e-f755a62a3dcd]: BUSY"}}
+[info] >  {"verifications":{"app":"MISSING","auth":"VALID"},"logging.googleapis.com/labels":{"firebase-log-type":"callable-request-verification"},"severity":"DEBUG","message":"Callable request verification passed"} {"user":{"verifications":{"app":"MISSING","auth":"VALID"},"logging.googleapis.com/labels":{"firebase-log-type":"callable-request-verification"},"severity":"DEBUG","message":"Callable request verification passed"},"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-joinGroupByCode"},"extension":{},"message":"\u001b[90m> \u001b[39m {\"verifications\":{\"app\":\"MISSING\",\"auth\":\"VALID\"},\"logging.googleapis.com/labels\":{\"firebase-log-type\":\"callable-request-verification\"},\"severity\":\"DEBUG\",\"message\":\"Callable request verification passed\"}"}}
+[debug] [2026-05-12T11:41:28.302Z] May 12, 2026 1:41:28 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"May 12, 2026 1:41:28 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected HTTP/2 connection.\r\n"}}
+[debug] [2026-05-12T11:41:29.484Z] Finishing up request with event=pause {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-joinGroupByCode"},"extension":{},"message":"Finishing up request with event=pause"}}
+[info] i  functions: Finished "us-central1-joinGroupByCode" in 2532.1156ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-joinGroupByCode"},"extension":{},"message":"Finished \"us-central1-joinGroupByCode\" in 2532.1156ms"}}
+[debug] [2026-05-12T11:41:29.485Z] [worker-us-central1-joinGroupByCode-3b403c60-db55-454f-b61e-f755a62a3dcd]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-joinGroupByCode"},"extension":{},"message":"[worker-us-central1-joinGroupByCode-3b403c60-db55-454f-b61e-f755a62a3dcd]: IDLE"}}
+[debug] [2026-05-12T11:41:29.485Z] Finishing up request with event=finish {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-joinGroupByCode"},"extension":{},"message":"Finishing up request with event=finish"}}
+[debug] [2026-05-12T11:41:29.485Z] Finishing up request with event=close {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-joinGroupByCode"},"extension":{},"message":"Finishing up request with event=close"}}
+[debug] [2026-05-12T11:41:29.485Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[debug] [2026-05-12T11:42:12.967Z] May 12, 2026 1:42:12 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"May 12, 2026 1:42:12 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected HTTP/2 connection.\r\n"}}
