@@ -90,6 +90,7 @@ class GroupsRepositoryStub implements GroupsRepository {
     required String participantType,
     String? subgroupId,
     required String deliveryMode,
+    String? managedByUid,
   }) async {
     throw UnimplementedError('createManagedParticipant not wired');
   }
@@ -102,6 +103,7 @@ class GroupsRepositoryStub implements GroupsRepository {
     required String participantType,
     String? subgroupId,
     required String deliveryMode,
+    String? managedByUid,
   }) async {
     throw UnimplementedError('updateManagedParticipant not wired');
   }

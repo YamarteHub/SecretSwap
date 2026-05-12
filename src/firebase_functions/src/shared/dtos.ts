@@ -87,7 +87,9 @@ export const CreateManagedParticipantRequestSchema = z.object({
   displayName: z.string().min(1),
   participantType: ManagedParticipantTypeSchema,
   subgroupId: z.string().min(1).nullable().optional(),
-  deliveryMode: ManagedParticipantDeliveryModeSchema
+  deliveryMode: ManagedParticipantDeliveryModeSchema,
+  /** Miembro activo del grupo que recibirá/entregará el resultado. Por defecto: quien crea (owner). */
+  managedByUid: z.string().min(1).optional()
 });
 export type CreateManagedParticipantRequest = z.infer<typeof CreateManagedParticipantRequestSchema>;
 
@@ -106,7 +108,8 @@ export const UpdateManagedParticipantRequestSchema = z.object({
   displayName: z.string().min(1),
   participantType: ManagedParticipantTypeSchema,
   subgroupId: z.string().min(1).nullable().optional(),
-  deliveryMode: z.enum(["verbal", "printed"])
+  deliveryMode: z.enum(["verbal", "printed"]),
+  managedByUid: z.string().min(1).nullable().optional()
 });
 export type UpdateManagedParticipantRequest = z.infer<typeof UpdateManagedParticipantRequestSchema>;
 

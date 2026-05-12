@@ -910,6 +910,35 @@ class AppLocalizationsEs extends AppLocalizations {
       'Resultados en privado: cada quien ve lo suyo.';
 
   @override
+  String get groupMemberPreDrawSubtitle =>
+      'Ya estás dentro. Cuando el organizador lance el sorteo, podrás ver tu asignación en privado.';
+
+  @override
+  String get groupMemberYourHouseTitle => 'Tu casa o equipo';
+
+  @override
+  String get groupMemberYourHousePickHint =>
+      'El organizador definió equipos o casas. Elige el tuyo para ubicarte bien en el sorteo.';
+
+  @override
+  String groupMemberYourHouseAssigned(String name) {
+    return 'Te hemos ubicado en: $name';
+  }
+
+  @override
+  String get groupMemberYourHouseChooseCta => 'Elegir mi casa o equipo';
+
+  @override
+  String get groupMemberYourHouseChangeCta => 'Cambiar mi casa o equipo';
+
+  @override
+  String get groupMemberManagedByYouTitle => 'Personas que gestionas aquí';
+
+  @override
+  String get groupMemberManagedByYouSubtitle =>
+      'Solo verás a quienes el organizador te asignó como responsable.';
+
+  @override
   String get groupBackToDashboard => 'Volver al dashboard';
 
   @override

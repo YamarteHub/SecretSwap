@@ -365,6 +365,17 @@
   "groupCreateSubgroupHint": "e.g. Stan House, Sales, Class 3A",
   "groupHeaderSubtitle": "Prepare your draw with privacy and clarity.",
   "groupDetailTaglinePostDraw": "Private results: everyone sees only their own.",
+  "groupMemberPreDrawSubtitle": "You're in. When the organizer runs the draw, you'll see your assignment privately.",
+  "groupMemberYourHouseTitle": "Your house or team",
+  "groupMemberYourHousePickHint": "The organizer set up teams or houses. Pick yours so the draw can place you correctly.",
+  "groupMemberYourHouseAssigned": "You're placed in: {name}",
+  "@groupMemberYourHouseAssigned": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "groupMemberYourHouseChooseCta": "Choose my house or team",
+  "groupMemberYourHouseChangeCta": "Change my house or team",
+  "groupMemberManagedByYouTitle": "People you manage here",
+  "groupMemberManagedByYouSubtitle": "You'll only see people the organizer assigned to you as their responsible adult.",
   "groupBackToDashboard": "Back to dashboard",
   "groupLoadingDetail": "Loading group...",
   "groupErrorTitle": "We couldn't open this group",

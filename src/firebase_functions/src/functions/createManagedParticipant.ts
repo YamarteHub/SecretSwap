@@ -1,4 +1,5 @@
 import { FieldValue } from "firebase-admin/firestore";
+import type { Firestore } from "firebase-admin/firestore";
 import { onCall, CallableRequest, HttpsError } from "firebase-functions/v2/https";
 import { requireAuthUid } from "../shared/auth";
 import {
@@ -9,6 +10,29 @@ import { AppError } from "../shared/errors";
 import { getDb } from "../shared/firestore";
 import { groupPaths } from "../shared/firestorePaths";
 import { parseOrThrow } from "../shared/validation";
+
+async function requireActiveMemberUid(
+  db: Firestore,
+  groupId: string,
+  memberUid: string
+): Promise<void> {
+  const snap = await db.doc(groupPaths.memberDoc(groupId, memberUid)).get();
+  if (!snap.exists) {
+    throw new AppError({
+      code: "NOT_FOUND",
+      reasonCode: "MEMBER_NOT_FOUND",
+      message: "Guardian must be a member of this group"
+    });
+  }
+  const st = (snap.data() as { memberState?: string } | undefined)?.memberState ?? "active";
+  if (st !== "active") {
+    throw new AppError({
+      code: "VALIDATION_ERROR",
+      reasonCode: "MEMBER_NOT_ACTIVE",
+      message: "Guardian must be an active member"
+    });
+  }
+}
 
 function drawAllowsParticipantsEdit(drawStatus: unknown): boolean {
   return drawStatus == null || drawStatus === "idle" || drawStatus === "failed";
@@ -100,12 +124,17 @@ export const createManagedParticipant = onCall(
       const participantId = participantRef.id;
       const now = FieldValue.serverTimestamp();
 
+      const guardianUid = body.managedByUid?.trim() ? body.managedByUid.trim() : uid;
+      if (guardianUid !== uid) {
+        await requireActiveMemberUid(db, body.groupId, guardianUid);
+      }
+
       await participantRef.set({
         participantId,
         displayName,
         participantType: body.participantType,
         linkedUid: null,
-        managedByUid: uid,
+        managedByUid: guardianUid,
         roleInGroup: "member",
         state: "active",
         subgroupId,

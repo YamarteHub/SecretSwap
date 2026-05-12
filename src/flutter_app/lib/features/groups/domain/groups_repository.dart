@@ -53,6 +53,8 @@ abstract interface class GroupsRepository {
     required String participantType,
     String? subgroupId,
     required String deliveryMode,
+    /// Miembro activo responsable (por defecto: quien crea, el owner).
+    String? managedByUid,
   });
 
   Future<void> updateManagedParticipant({
@@ -62,6 +64,7 @@ abstract interface class GroupsRepository {
     required String participantType,
     String? subgroupId,
     required String deliveryMode,
+    String? managedByUid,
   });
 
   Future<void> removeManagedParticipant({

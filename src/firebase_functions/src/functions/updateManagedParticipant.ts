@@ -1,4 +1,5 @@
 import { FieldValue } from "firebase-admin/firestore";
+import type { Firestore } from "firebase-admin/firestore";
 import { CallableRequest, HttpsError, onCall } from "firebase-functions/v2/https";
 import { requireAuthUid } from "../shared/auth";
 import {
@@ -9,6 +10,29 @@ import { AppError } from "../shared/errors";
 import { getDb } from "../shared/firestore";
 import { groupPaths } from "../shared/firestorePaths";
 import { parseOrThrow } from "../shared/validation";
+
+async function requireActiveMemberUid(
+  db: Firestore,
+  groupId: string,
+  memberUid: string
+): Promise<void> {
+  const snap = await db.doc(groupPaths.memberDoc(groupId, memberUid)).get();
+  if (!snap.exists) {
+    throw new AppError({
+      code: "NOT_FOUND",
+      reasonCode: "MEMBER_NOT_FOUND",
+      message: "Guardian must be a member of this group"
+    });
+  }
+  const st = (snap.data() as { memberState?: string } | undefined)?.memberState ?? "active";
+  if (st !== "active") {
+    throw new AppError({
+      code: "VALIDATION_ERROR",
+      reasonCode: "MEMBER_NOT_ACTIVE",
+      message: "Guardian must be an active member"
+    });
+  }
+}
 
 function drawAllowsParticipantsEdit(drawStatus: unknown): boolean {
   return drawStatus == null || drawStatus === "idle" || drawStatus === "failed";
@@ -94,13 +118,28 @@ export const updateManagedParticipant = onCall(
         }
       }
 
-      await participantRef.update({
+      const updatePayload: Record<string, unknown> = {
         displayName,
         participantType: body.participantType,
         deliveryMode: body.deliveryMode,
         ...(subgroupId == null ? { subgroupId: FieldValue.delete() } : { subgroupId }),
         updatedAt: FieldValue.serverTimestamp()
-      });
+      };
+
+      if (body.managedByUid !== undefined) {
+        const ownerUid = group.ownerUid ?? "";
+        if (body.managedByUid === null) {
+          updatePayload.managedByUid = ownerUid;
+        } else {
+          const g = body.managedByUid.trim();
+          if (g.length > 0) {
+            await requireActiveMemberUid(db, body.groupId, g);
+            updatePayload.managedByUid = g;
+          }
+        }
+      }
+
+      await participantRef.update(updatePayload);
 
       return {
         participantId: body.participantId,

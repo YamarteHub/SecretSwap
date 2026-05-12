@@ -1694,6 +1694,54 @@ abstract class AppLocalizations {
   /// **'Resultados en privado: cada quien ve lo suyo.'**
   String get groupDetailTaglinePostDraw;
 
+  /// No description provided for @groupMemberPreDrawSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya estás dentro. Cuando el organizador lance el sorteo, podrás ver tu asignación en privado.'**
+  String get groupMemberPreDrawSubtitle;
+
+  /// No description provided for @groupMemberYourHouseTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu casa o equipo'**
+  String get groupMemberYourHouseTitle;
+
+  /// No description provided for @groupMemberYourHousePickHint.
+  ///
+  /// In es, this message translates to:
+  /// **'El organizador definió equipos o casas. Elige el tuyo para ubicarte bien en el sorteo.'**
+  String get groupMemberYourHousePickHint;
+
+  /// No description provided for @groupMemberYourHouseAssigned.
+  ///
+  /// In es, this message translates to:
+  /// **'Te hemos ubicado en: {name}'**
+  String groupMemberYourHouseAssigned(String name);
+
+  /// No description provided for @groupMemberYourHouseChooseCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Elegir mi casa o equipo'**
+  String get groupMemberYourHouseChooseCta;
+
+  /// No description provided for @groupMemberYourHouseChangeCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Cambiar mi casa o equipo'**
+  String get groupMemberYourHouseChangeCta;
+
+  /// No description provided for @groupMemberManagedByYouTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Personas que gestionas aquí'**
+  String get groupMemberManagedByYouTitle;
+
+  /// No description provided for @groupMemberManagedByYouSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Solo verás a quienes el organizador te asignó como responsable.'**
+  String get groupMemberManagedByYouSubtitle;
+
   /// No description provided for @groupBackToDashboard.
   ///
   /// In es, this message translates to:

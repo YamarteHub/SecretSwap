@@ -98,26 +98,23 @@ class GroupsRepositoryImpl implements GroupsRepository {
     final rows = snap.docs.map((d) {
       final m = d.data();
       return GroupSummary(
-        groupId: m['groupId'] as String? ?? d.id,
+        groupId: (m['groupId'] as String? ?? d.id).trim(),
         name: m['name'] as String? ?? '',
         role: _parseRole(m['role'] as String? ?? 'member'),
         isActiveMember: m['isActiveMember'] as bool? ?? false,
       );
     }).toList();
-    final ids = rows.map((g) => g.groupId).toList();
+    final ids = rows.map((g) => g.groupId).toSet().toList();
     final drawById = <String, DrawStatus>{};
-    for (var i = 0; i < ids.length; i += 10) {
-      final end = (i + 10) > ids.length ? ids.length : (i + 10);
-      final chunk = ids.sublist(i, end);
-      if (chunk.isEmpty) continue;
-      final qs = await _firestore
-          .collection('groups')
-          .where(FieldPath.documentId, whereIn: chunk)
-          .get();
-      for (final doc in qs.docs) {
-        final raw = doc.data()['drawStatus'];
-        drawById[doc.id] = _parseDrawStatus(
-          raw is String ? raw : 'idle',
+    if (ids.isNotEmpty) {
+      final groupSnaps = await Future.wait(
+        ids.map((id) => _firestore.doc('groups/$id').get()),
+      );
+      for (var i = 0; i < ids.length; i++) {
+        final doc = groupSnaps[i];
+        if (!doc.exists) continue;
+        drawById[ids[i]] = _parseDrawStatus(
+          _readDrawStatusRaw(doc.data()?['drawStatus']),
         );
       }
     }
@@ -143,15 +140,23 @@ class GroupsRepositoryImpl implements GroupsRepository {
     }
     final g = gSnap.data()!;
     final rulesVersion = (g['rulesVersionCurrent'] as num?)?.toInt() ?? 1;
-    final ruleSnap = await _firestore
-        .doc('groups/$groupId/rules/$rulesVersion')
-        .get();
-    final rawMode = ruleSnap.data()?['subgroupMode'] as String?;
+
+    final results = await Future.wait([
+      _firestore.doc('groups/$groupId/rules/$rulesVersion').get(),
+      _firestore.collection('groups/$groupId/members').get(),
+      _firestore.collection('groups/$groupId/subgroups').get(),
+      _firestore.collection('groups/$groupId/participants').get(),
+    ]);
+    final ruleSnap = results[0] as DocumentSnapshot<Map<String, dynamic>>;
+    final membersSnap = results[1] as QuerySnapshot<Map<String, dynamic>>;
+    final subgroupsSnap = results[2] as QuerySnapshot<Map<String, dynamic>>;
+    final participantsSnap = results[3] as QuerySnapshot<Map<String, dynamic>>;
+
+    final rawMode = ruleSnap.exists
+        ? (ruleSnap.data()?['subgroupMode'] as String?)
+        : null;
     final drawSubgroupRule = parseDrawSubgroupRule(rawMode);
 
-    final membersSnap = await _firestore
-        .collection('groups/$groupId/members')
-        .get();
     final members = membersSnap.docs.map((doc) {
       final m = doc.data();
       return GroupMember(
@@ -161,11 +166,9 @@ class GroupsRepositoryImpl implements GroupsRepository {
         nickname: m['nickname'] as String? ?? '',
         subgroupId: m['subgroupId'] as String?,
       );
-    }).toList()..sort((a, b) => a.nickname.compareTo(b.nickname));
+    }).toList()
+      ..sort((a, b) => a.nickname.compareTo(b.nickname));
 
-    final subgroupsSnap = await _firestore
-        .collection('groups/$groupId/subgroups')
-        .get();
     final subgroups = subgroupsSnap.docs.map((doc) {
       final s = doc.data();
       return Subgroup(
@@ -175,11 +178,9 @@ class GroupsRepositoryImpl implements GroupsRepository {
         createdAt: (s['createdAt'] as Timestamp?)?.toDate(),
         updatedAt: (s['updatedAt'] as Timestamp?)?.toDate(),
       );
-    }).toList()..sort((a, b) => a.name.compareTo(b.name));
+    }).toList()
+      ..sort((a, b) => a.name.compareTo(b.name));
 
-    final participantsSnap = await _firestore
-        .collection('groups/$groupId/participants')
-        .get();
     final managedParticipants =
         participantsSnap.docs
             .map((doc) {
@@ -215,7 +216,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
       groupId: g['groupId'] as String? ?? groupId,
       name: g['name'] as String? ?? '',
       ownerUid: g['ownerUid'] as String? ?? '',
-      drawStatus: _parseDrawStatus(g['drawStatus'] as String? ?? 'idle'),
+      drawStatus: _parseDrawStatus(_readDrawStatusRaw(g['drawStatus'])),
       rulesVersionCurrent: rulesVersion,
       drawSubgroupRule: drawSubgroupRule,
       currentExecutionId: g['currentExecutionId'] as String?,
@@ -368,9 +369,10 @@ class GroupsRepositoryImpl implements GroupsRepository {
     required String participantType,
     String? subgroupId,
     required String deliveryMode,
+    String? managedByUid,
   }) async {
     final callable = _functions.httpsCallable('createManagedParticipant');
-    await callable.call(<String, dynamic>{
+    final payload = <String, dynamic>{
       'groupId': groupId,
       'displayName': displayName.trim(),
       'participantType': participantType,
@@ -378,7 +380,11 @@ class GroupsRepositoryImpl implements GroupsRepository {
           ? null
           : subgroupId.trim(),
       'deliveryMode': deliveryMode,
-    });
+    };
+    if (managedByUid != null && managedByUid.trim().isNotEmpty) {
+      payload['managedByUid'] = managedByUid.trim();
+    }
+    await callable.call(payload);
   }
 
   @override
@@ -389,9 +395,10 @@ class GroupsRepositoryImpl implements GroupsRepository {
     required String participantType,
     String? subgroupId,
     required String deliveryMode,
+    String? managedByUid,
   }) async {
     final callable = _functions.httpsCallable('updateManagedParticipant');
-    await callable.call(<String, dynamic>{
+    final payload = <String, dynamic>{
       'groupId': groupId,
       'participantId': participantId,
       'displayName': displayName.trim(),
@@ -400,7 +407,11 @@ class GroupsRepositoryImpl implements GroupsRepository {
           ? null
           : subgroupId.trim(),
       'deliveryMode': deliveryMode,
-    });
+    };
+    if (managedByUid != null) {
+      payload['managedByUid'] = managedByUid.trim().isEmpty ? null : managedByUid.trim();
+    }
+    await callable.call(payload);
   }
 
   @override
@@ -430,10 +441,20 @@ class GroupsRepositoryImpl implements GroupsRepository {
   }
 
   DrawStatus _parseDrawStatus(String s) {
+    final k = s.trim().toLowerCase();
+    if (k == 'complete' || k == 'closed' || k == 'done') {
+      return DrawStatus.completed;
+    }
     return DrawStatus.values.firstWhere(
-      (e) => e.name == s,
+      (e) => e.name == k,
       orElse: () => DrawStatus.idle,
     );
+  }
+
+  String _readDrawStatusRaw(dynamic raw) {
+    if (raw == null) return 'idle';
+    final s = raw.toString().trim();
+    return s.isEmpty ? 'idle' : s;
   }
 
   GroupParticipantType _parseParticipantType(String s) {

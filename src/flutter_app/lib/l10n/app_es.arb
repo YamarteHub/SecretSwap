@@ -365,6 +365,17 @@
   "groupCreateSubgroupHint": "Ej. Casa Stan, Ventas, Clase 3A",
   "groupHeaderSubtitle": "Prepara tu sorteo con privacidad y claridad.",
   "groupDetailTaglinePostDraw": "Resultados en privado: cada quien ve lo suyo.",
+  "groupMemberPreDrawSubtitle": "Ya estás dentro. Cuando el organizador lance el sorteo, podrás ver tu asignación en privado.",
+  "groupMemberYourHouseTitle": "Tu casa o equipo",
+  "groupMemberYourHousePickHint": "El organizador definió equipos o casas. Elige el tuyo para ubicarte bien en el sorteo.",
+  "groupMemberYourHouseAssigned": "Te hemos ubicado en: {name}",
+  "@groupMemberYourHouseAssigned": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "groupMemberYourHouseChooseCta": "Elegir mi casa o equipo",
+  "groupMemberYourHouseChangeCta": "Cambiar mi casa o equipo",
+  "groupMemberManagedByYouTitle": "Personas que gestionas aquí",
+  "groupMemberManagedByYouSubtitle": "Solo verás a quienes el organizador te asignó como responsable.",
   "groupBackToDashboard": "Volver al dashboard",
   "groupLoadingDetail": "Cargando grupo...",
   "groupErrorTitle": "No pudimos abrir este grupo",

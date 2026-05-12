@@ -379,6 +379,36 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
     });
   }
 
+  /// Incluye `managedByUid == null` heredado como responsable = owner.
+  bool _userManagesManagedSecrets(GroupDetail d, String? uid) {
+    if (uid == null) return false;
+    for (final p in d.managedParticipants) {
+      if (p.managedByUid == uid) return true;
+      if (p.managedByUid == null && uid == d.ownerUid) return true;
+    }
+    return false;
+  }
+
+  GroupMember? _selfMember(GroupDetail d) {
+    final uid = widget.currentUid;
+    if (uid == null) return null;
+    for (final m in d.members) {
+      if (m.uid == uid && m.memberState == MemberState.active) return m;
+    }
+    return null;
+  }
+
+  List<GroupParticipant> _managedAssignedToMe(GroupDetail d) {
+    final uid = widget.currentUid;
+    if (uid == null) return const [];
+    return d.managedParticipants.where((p) => p.managedByUid == uid).toList();
+  }
+
+  bool _memberShouldSeeSubgroupPicker(GroupDetail d) {
+    if (d.drawSubgroupRule == DrawSubgroupRule.ignore) return false;
+    return d.subgroups.isNotEmpty;
+  }
+
   bool get _isOwner =>
       widget.currentUid != null && widget.currentUid == widget.detail.ownerUid;
 
@@ -655,11 +685,17 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
       return;
     }
 
+    final guardianCandidates = widget.detail.members
+        .where((m) => m.memberState == MemberState.active)
+        .toList()
+      ..sort((a, b) => a.nickname.compareTo(b.nickname));
     final result = await showDialog<_ManagedParticipantDraft>(
       context: context,
       builder: (ctx) => _CreateManagedParticipantDialog(
         subgroups: widget.detail.subgroups,
         managedByLabel: context.l10n.groupManagedGuardianSelf,
+        guardianCandidates: guardianCandidates,
+        defaultGuardianUid: widget.detail.ownerUid,
       ),
     );
     if (!mounted || result == null) return;
@@ -673,6 +709,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
             participantType: result.participantType,
             subgroupId: result.subgroupId,
             deliveryMode: result.deliveryMode,
+            managedByUid: result.managedByUid,
           );
       _reloadDetail();
       if (mounted) {
@@ -1073,11 +1110,17 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
     if (!_isOwner || !_drawAllowsSubgroupChange(widget.detail.drawStatus)) {
       return;
     }
+    final guardianCandidates = widget.detail.members
+        .where((m) => m.memberState == MemberState.active)
+        .toList()
+      ..sort((a, b) => a.nickname.compareTo(b.nickname));
     final result = await showDialog<_ManagedParticipantDraft>(
       context: context,
       builder: (ctx) => _CreateManagedParticipantDialog(
         subgroups: widget.detail.subgroups,
         managedByLabel: context.l10n.groupManagedGuardianSelf,
+        guardianCandidates: guardianCandidates,
+        defaultGuardianUid: widget.detail.ownerUid,
         initial: participant,
       ),
     );
@@ -1092,6 +1135,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
             participantType: result.participantType,
             subgroupId: result.subgroupId,
             deliveryMode: result.deliveryMode,
+            managedByUid: result.managedByUid,
           );
       _reloadDetail();
       if (mounted) {
@@ -1183,9 +1227,11 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
         isCompleted ? l10n.groupPostDrawHeroTitle : visualStatus;
     final heroSubtitle = isCompleted
         ? l10n.groupPostDrawHeroSubtitle
-        : (drawReadyByParticipants && drawReadyByRule
-            ? l10n.groupStatusReadyInfo
-            : l10n.groupStatusPendingInfo);
+        : !_isOwner
+            ? l10n.groupMemberPreDrawSubtitle
+            : (drawReadyByParticipants && drawReadyByRule
+                ? l10n.groupStatusReadyInfo
+                : l10n.groupStatusPendingInfo);
     final canRunDraw = _isOwner &&
         !_drawing &&
         drawReadyByParticipants &&
@@ -1239,16 +1285,16 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
                       onPressed: () => _openAssignment(execId),
                     )
                   : null,
-          secondary: isCompleted && execId != null && d.managedParticipants.isNotEmpty
+          secondary: isCompleted &&
+                  execId != null &&
+                  _userManagesManagedSecrets(d, widget.currentUid)
               ? _PrimaryAction(
                   label: l10n.groupActionManagedSecrets,
                   icon: Icons.shield_moon_outlined,
                   onPressed: () => _openManagedAssignments(execId),
                 )
               : null,
-          ownerHint: !isCompleted && !_isOwner
-              ? l10n.groupOwnerCanRunHint
-              : null,
+          ownerHint: null,
           pendingHint: !isCompleted && _isOwner && !canRunDraw
               ? (d.drawSubgroupRule == DrawSubgroupRule.requireDifferent &&
                       missingSubgroupCount > 0
@@ -1256,12 +1302,13 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
                   : l10n.groupPendingGeneralHint)
               : null,
           warning: !isCompleted &&
+                  _isOwner &&
                   d.drawSubgroupRule == DrawSubgroupRule.requireDifferent &&
                   missingSubgroupCount > 0
               ? l10n.groupWarningMissingSubgroupCombined
               : null,
         ),
-        if (!isCompleted) ...[
+        if (!isCompleted && _isOwner) ...[
           const SizedBox(height: 16),
           _PreparationChecklist(
             totalEffective: unifiedCounts.effectiveTotal,
@@ -1274,7 +1321,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
             withoutAppCount: unifiedCounts.withoutApp,
           ),
         ],
-        if (!isCompleted) ...[
+        if (!isCompleted && _isOwner) ...[
           const SizedBox(height: 16),
           _RuleSummaryCard(
             ruleTitle: _drawRuleOptionTitle(context, d.drawSubgroupRule),
@@ -1290,7 +1337,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
         // su header. Solo una puede estar abierta a la vez (controlado por
         // `_expandedSection`). Esto evita scroll infinito cuando hay muchos
         // subgrupos, miembros, gestionados o invitaciones acumuladas.
-        if (shouldShowSubgroupsSection) ...[
+        if (_isOwner && shouldShowSubgroupsSection) ...[
           const SizedBox(height: 16),
           _CollapsibleSection(
             icon: Icons.scatter_plot_outlined,
@@ -1316,7 +1363,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
               assignedCount: _subgroupAssignedCount,
             ),
           ),
-        ] else ...[
+        ] else if (_isOwner) ...[
           const SizedBox(height: 12),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -1329,6 +1376,18 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
             ),
           ),
         ],
+        if (!_isOwner && !isCompleted && _memberShouldSeeSubgroupPicker(d)) ...[
+          const SizedBox(height: 16),
+          _MemberSubgroupChoiceCard(
+            detail: d,
+            selfMember: _selfMember(d),
+            onTapAssign: () {
+              final m = _selfMember(d);
+              if (m != null) _showAssignSubgroupDialog(m);
+            },
+          ),
+        ],
+        if (_isOwner) ...[
         const SizedBox(height: 12),
         _CollapsibleSection(
           icon: Icons.people_alt_outlined,
@@ -1418,6 +1477,66 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
             ],
           ),
         ),
+        ],
+        const SizedBox(height: 12),
+        if (!_isOwner && !isCompleted && _managedAssignedToMe(d).isNotEmpty) ...[
+          SectionCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _SectionHeading(
+                  icon: Icons.shield_moon_outlined,
+                  title: l10n.groupMemberManagedByYouTitle,
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  l10n.groupMemberManagedByYouSubtitle,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                    height: 1.35,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                ..._managedAssignedToMe(d).map((p) {
+                  final subgroupName = _subgroupDisplayName(d, p.subgroupId);
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.person_outline,
+                          size: 20,
+                          color: theme.colorScheme.primary,
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                p.displayName,
+                                style: theme.textTheme.bodyLarge?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Text(
+                                subgroupName ?? l10n.groupNoSubgroupAssigned,
+                                style: theme.textTheme.bodySmall?.copyWith(
+                                  color: theme.colorScheme.onSurfaceVariant,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+              ],
+            ),
+          ),
+        ],
+        if (_isOwner) ...[
         const SizedBox(height: 12),
         _CollapsibleSection(
           icon: Icons.shield_moon_outlined,
@@ -1513,6 +1632,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
             ],
           ),
         ),
+        ],
         if (!isCompleted && _isOwner) ...[
           const SizedBox(height: 12),
           _CollapsibleSection(
@@ -1552,6 +1672,66 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
             ),
           ),
         ],
+        ],
+      ),
+    );
+  }
+}
+
+/// Bloque simple para miembros: elegir o ver su casa/subgrupo sin panel de administración.
+class _MemberSubgroupChoiceCard extends StatelessWidget {
+  const _MemberSubgroupChoiceCard({
+    required this.detail,
+    required this.selfMember,
+    required this.onTapAssign,
+  });
+
+  final GroupDetail detail;
+  final GroupMember? selfMember;
+  final VoidCallback onTapAssign;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = context.l10n;
+    final m = selfMember;
+    if (m == null) return const SizedBox.shrink();
+    final subName = _subgroupDisplayName(detail, m.subgroupId);
+    final hasSubgroup = m.subgroupId != null && m.subgroupId!.trim().isNotEmpty;
+    final canTap = m.memberState == MemberState.active &&
+        (detail.drawStatus == DrawStatus.idle ||
+            detail.drawStatus == DrawStatus.failed);
+
+    return SectionCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _SectionHeading(
+            icon: Icons.cottage_outlined,
+            title: l10n.groupMemberYourHouseTitle,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            hasSubgroup
+                ? l10n.groupMemberYourHouseAssigned(subName ?? '')
+                : l10n.groupMemberYourHousePickHint,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.82),
+              height: 1.35,
+            ),
+          ),
+          if (canTap) ...[
+            const SizedBox(height: 12),
+            FilledButton.tonalIcon(
+              onPressed: onTapAssign,
+              icon: Icon(hasSubgroup ? Icons.edit_outlined : Icons.touch_app_outlined),
+              label: Text(
+                hasSubgroup
+                    ? l10n.groupMemberYourHouseChangeCta
+                    : l10n.groupMemberYourHouseChooseCta,
+              ),
+            ),
+          ],
         ],
       ),
     );
@@ -2626,12 +2806,14 @@ class _ManagedParticipantDraft {
     required this.participantType,
     required this.subgroupId,
     required this.deliveryMode,
+    required this.managedByUid,
   });
 
   final String displayName;
   final String participantType;
   final String? subgroupId;
   final String deliveryMode;
+  final String managedByUid;
 }
 
 class _CreateSubgroupDialog extends StatefulWidget {
@@ -2793,11 +2975,15 @@ class _CreateManagedParticipantDialog extends StatefulWidget {
   const _CreateManagedParticipantDialog({
     required this.subgroups,
     required this.managedByLabel,
+    required this.guardianCandidates,
+    required this.defaultGuardianUid,
     this.initial,
   });
 
   final List<Subgroup> subgroups;
   final String managedByLabel;
+  final List<GroupMember> guardianCandidates;
+  final String defaultGuardianUid;
   final GroupParticipant? initial;
 
   @override
@@ -2807,16 +2993,8 @@ class _CreateManagedParticipantDialog extends StatefulWidget {
 
 /// Diálogo crear/editar participante sin app.
 ///
-/// Este popup soporta de forma visual la UX futura completa, aunque el
-/// backend de momento sólo persiste un subconjunto:
-///   - Tipo de participante: adulto sin app / niño (persiste).
-///   - Subgrupo opcional (persiste).
-///   - Forma de entrega: verbal, impreso (persisten); WhatsApp y mostrar
-///     en persona se exponen como opciones premium con badge "próximamente"
-///     y deshabilitadas hasta que el backend las soporte.
-///   - Responsable de entregar el resultado: yo / otro miembro / responsable
-///     específico. Sólo "yo" es funcional ahora; los otros dos están
-///     visualmente preparados como placeholders para no romper modelo.
+/// Persiste tipo, subgrupo, entrega y **responsable** (`managedByUid`):
+/// el organizador por defecto u otro miembro activo del grupo.
 class _CreateManagedParticipantDialogState
     extends State<_CreateManagedParticipantDialog> {
   final _nameCtrl = TextEditingController();
@@ -2828,18 +3006,22 @@ class _CreateManagedParticipantDialogState
   static const _deliveryWhatsapp = 'whatsapp';
   static const _deliveryShow = 'show_in_person';
   String _deliveryMode = _deliveryVerbal;
-  // Responsable visual (sólo "self" es funcional).
+  // Responsable: organizador por defecto u otro miembro activo.
   static const _guardianSelf = 'self';
   static const _guardianOther = 'other';
   static const _guardianSpecific = 'specific';
   String _guardian = _guardianSelf;
+  String? _selectedGuardianUid;
   String? _subgroupId;
 
   @override
   void initState() {
     super.initState();
     final initial = widget.initial;
-    if (initial == null) return;
+    if (initial == null) {
+      _selectedGuardianUid = widget.defaultGuardianUid;
+      return;
+    }
     _nameCtrl.text = initial.displayName;
     _participantType =
         initial.participantType == GroupParticipantType.childManaged
@@ -2851,6 +3033,22 @@ class _CreateManagedParticipantDialogState
       _ => _deliveryVerbal,
     };
     _subgroupId = initial.subgroupId;
+    final mb = initial.managedByUid?.trim();
+    if (mb != null &&
+        mb.isNotEmpty &&
+        mb != widget.defaultGuardianUid) {
+      _guardian = _guardianOther;
+      _selectedGuardianUid = mb;
+    } else {
+      _guardian = _guardianSelf;
+      _selectedGuardianUid = widget.defaultGuardianUid;
+    }
+    final ids = widget.guardianCandidates.map((m) => m.uid).toSet();
+    if (_selectedGuardianUid != null &&
+        !ids.contains(_selectedGuardianUid)) {
+      _guardian = _guardianSelf;
+      _selectedGuardianUid = widget.defaultGuardianUid;
+    }
   }
 
   @override
@@ -2953,8 +3151,7 @@ class _CreateManagedParticipantDialogState
                 value: _guardianOther,
                 icon: Icons.group_outlined,
                 label: l10n.groupManagedDialogGuardianOther,
-                hint: l10n.groupManagedDialogGuardianComingSoon,
-                enabled: false,
+                enabled: widget.guardianCandidates.length > 1,
               ),
               _ChoiceOption(
                 value: _guardianSpecific,
@@ -2965,8 +3162,45 @@ class _CreateManagedParticipantDialogState
               ),
             ],
             selected: _guardian,
-            onChanged: (v) => setState(() => _guardian = v),
+            onChanged: (v) => setState(() {
+              _guardian = v;
+              if (v == _guardianOther) {
+                _selectedGuardianUid ??=
+                    widget.guardianCandidates.firstWhere(
+                      (m) => m.uid != widget.defaultGuardianUid,
+                      orElse: () => widget.guardianCandidates.first,
+                    ).uid;
+              } else {
+                _selectedGuardianUid = widget.defaultGuardianUid;
+              }
+            }),
           ),
+          if (_guardian == _guardianOther && widget.guardianCandidates.length > 1) ...[
+            const SizedBox(height: 10),
+            DropdownButtonFormField<String>(
+              value: () {
+                final ids =
+                    widget.guardianCandidates.map((m) => m.uid).toSet();
+                final v = _selectedGuardianUid;
+                if (v != null && ids.contains(v)) return v;
+                return widget.defaultGuardianUid;
+              }(),
+              decoration: InputDecoration(
+                labelText: l10n.groupManagedDialogGuardianOther,
+              ),
+              items: widget.guardianCandidates
+                  .map(
+                    (m) => DropdownMenuItem(
+                      value: m.uid,
+                      child: Text(
+                        m.nickname.trim().isEmpty ? m.uid : m.nickname.trim(),
+                      ),
+                    ),
+                  )
+                  .toList(),
+              onChanged: (v) => setState(() => _selectedGuardianUid = v),
+            ),
+          ],
           const SizedBox(height: 18),
           // ─── Forma de entrega ────────────────────────────────────────
           Text(
@@ -3019,6 +3253,15 @@ class _CreateManagedParticipantDialogState
           );
           return;
         }
+        final managedByUid = _guardian == _guardianSelf
+            ? widget.defaultGuardianUid
+            : () {
+                final ids =
+                    widget.guardianCandidates.map((m) => m.uid).toSet();
+                final v = _selectedGuardianUid;
+                if (v != null && ids.contains(v)) return v;
+                return widget.defaultGuardianUid;
+              }();
         Navigator.pop(
           context,
           _ManagedParticipantDraft(
@@ -3026,6 +3269,7 @@ class _CreateManagedParticipantDialogState
             participantType: _participantType,
             subgroupId: _subgroupId,
             deliveryMode: _persistableDeliveryMode(),
+            managedByUid: managedByUid,
           ),
         );
       },

@@ -902,6 +902,35 @@ class AppLocalizationsEn extends AppLocalizations {
       'Private results: everyone sees only their own.';
 
   @override
+  String get groupMemberPreDrawSubtitle =>
+      'You\'re in. When the organizer runs the draw, you\'ll see your assignment privately.';
+
+  @override
+  String get groupMemberYourHouseTitle => 'Your house or team';
+
+  @override
+  String get groupMemberYourHousePickHint =>
+      'The organizer set up teams or houses. Pick yours so the draw can place you correctly.';
+
+  @override
+  String groupMemberYourHouseAssigned(String name) {
+    return 'You\'re placed in: $name';
+  }
+
+  @override
+  String get groupMemberYourHouseChooseCta => 'Choose my house or team';
+
+  @override
+  String get groupMemberYourHouseChangeCta => 'Change my house or team';
+
+  @override
+  String get groupMemberManagedByYouTitle => 'People you manage here';
+
+  @override
+  String get groupMemberManagedByYouSubtitle =>
+      'You\'ll only see people the organizer assigned to you as their responsible adult.';
+
+  @override
   String get groupBackToDashboard => 'Back to dashboard';
 
   @override
