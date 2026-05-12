@@ -116,6 +116,24 @@ export const joinGroupByCode = onCall(
           }
         }
 
+        if (group.drawStatus === "completed") {
+          if (!memberSnap.exists) {
+            throw new AppError({
+              code: "FORBIDDEN",
+              reasonCode: "DRAW_COMPLETED_INVITES_CLOSED",
+              message: "Draw completed; this group no longer accepts new participants via invite code"
+            });
+          }
+          const memberAfterChecks = memberSnap.data() as { memberState?: "active" | "left" | "removed" };
+          if (memberAfterChecks.memberState !== "active") {
+            throw new AppError({
+              code: "FORBIDDEN",
+              reasonCode: "DRAW_COMPLETED_INVITES_CLOSED",
+              message: "Draw completed; this group no longer accepts new participants via invite code"
+            });
+          }
+        }
+
         const nowServer = FieldValue.serverTimestamp();
         if (!memberSnap.exists) {
           tx.create(memberRef, {
