@@ -15,6 +15,20 @@ import '../../../../core/theme/premium_ui.dart';
 import '../../domain/group_models.dart';
 import '../providers.dart';
 
+String _homeDrawStatusChipLabel(BuildContext context, DrawStatus status) {
+  final l10n = context.l10n;
+  switch (status) {
+    case DrawStatus.idle:
+      return l10n.homeGroupDrawStatePreparing;
+    case DrawStatus.drawing:
+      return l10n.homeGroupDrawStateDrawing;
+    case DrawStatus.completed:
+      return l10n.homeGroupDrawStateCompleted;
+    case DrawStatus.failed:
+      return l10n.homeGroupDrawStateFailed;
+  }
+}
+
 class GroupsHomeScreen extends ConsumerStatefulWidget {
   const GroupsHomeScreen({super.key});
 
@@ -151,10 +165,20 @@ class _GroupsHomeScreenState extends ConsumerState<GroupsHomeScreen> {
               physics: const AlwaysScrollableScrollPhysics(),
               children: [
                 BrandHero(
+                  headline: context.l10n.homeHeroHeadline,
                   tagline: context.l10n.homeHeaderSubtitle,
                   onSecretLongPress: () => _toggleDebugTools(context),
                 ),
-                const SizedBox(height: 18),
+                const SizedBox(height: 20),
+                Text(
+                  context.l10n.homePrimaryActionsTitle,
+                  style: theme.textTheme.labelLarge?.copyWith(
+                    fontWeight: FontWeight.w800,
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.72),
+                    letterSpacing: 0.2,
+                  ),
+                ),
+                const SizedBox(height: 10),
                 _HomePrimaryActions(
                   onCreate: () async {
                     await context.push(AppRoutes.createGroup);
@@ -183,7 +207,15 @@ class _GroupsHomeScreenState extends ConsumerState<GroupsHomeScreen> {
                       fontWeight: FontWeight.w800,
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 4),
+                  Text(
+                    context.l10n.homeActiveGroupsSubtitle,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                      height: 1.35,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
                   ...activeGroups.map(
                     (g) => _GroupCard(
                       summary: g,
@@ -250,16 +282,26 @@ class _HomePrimaryActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         FilledButton.icon(
+          style: FilledButton.styleFrom(
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 18),
+            textStyle: theme.textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.w800,
+            ),
+          ),
           onPressed: onCreate,
           icon: const Icon(Icons.card_giftcard_rounded),
           label: Text(l10n.createSecretFriend),
         ),
         const SizedBox(height: 12),
         OutlinedButton.icon(
+          style: OutlinedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+          ),
           onPressed: onJoin,
           icon: const Icon(Icons.vpn_key_outlined),
           label: Text(l10n.joinWithCode),
@@ -345,6 +387,27 @@ class _GroupCard extends StatelessWidget {
                           spacing: 6,
                           runSpacing: 6,
                           children: [
+                            if (!completed)
+                              _SoftChip(
+                                label: _homeDrawStatusChipLabel(
+                                  context,
+                                  summary.drawStatus,
+                                ),
+                                icon: summary.drawStatus == DrawStatus.completed
+                                    ? Icons.check_circle_outline
+                                    : summary.drawStatus == DrawStatus.drawing
+                                        ? Icons.hourglass_top_rounded
+                                        : summary.drawStatus == DrawStatus.failed
+                                            ? Icons.warning_amber_rounded
+                                            : Icons.tune_rounded,
+                                color: summary.drawStatus == DrawStatus.completed
+                                    ? AppTheme.sageGreen
+                                    : summary.drawStatus == DrawStatus.drawing
+                                        ? AppTheme.mutedGold
+                                        : summary.drawStatus == DrawStatus.failed
+                                            ? AppTheme.softTerracotta
+                                            : AppTheme.deepPlumAlt,
+                              ),
                             _SoftChip(
                               label: isOwner
                                   ? l10n.groupRoleAdmin

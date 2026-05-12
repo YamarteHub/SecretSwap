@@ -168,7 +168,25 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get homeHeaderSubtitle =>
-      'Tarci Secret organiza dinámicas privadas de grupo con personas reales.';
+      'Organiza amigo secreto y sorteos con quien quieras. Privado por defecto.';
+
+  @override
+  String get homeHeroHeadline => 'Amigo secreto y sorteos de grupo';
+
+  @override
+  String get homeGroupDrawStatePreparing => 'Preparando';
+
+  @override
+  String get homeGroupDrawStateReady => 'Listo para sortear';
+
+  @override
+  String get homeGroupDrawStateDrawing => 'Sorteo en curso';
+
+  @override
+  String get homeGroupDrawStateCompleted => 'Sorteado';
+
+  @override
+  String get homeGroupDrawStateFailed => 'Revisar sorteo';
 
   @override
   String get wizardCreateTitle => 'Crear amigo secreto';
@@ -343,10 +361,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get groupSectionAdvanced => 'Configuración avanzada';
 
   @override
-  String get groupStatusPreparing => 'Tu grupo ya casi está listo';
+  String get groupStatusPreparing => 'Sigue la preparación';
 
   @override
-  String get groupStatusReadyToDraw => 'Todo listo para el sorteo';
+  String get groupStatusReadyToDraw => 'Listo para sortear';
 
   @override
   String get groupStatusCompleted =>
@@ -616,6 +634,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get homeActiveGroupsTitle => 'Grupos activos';
 
   @override
+  String get homeActiveGroupsSubtitle =>
+      'Estado del sorteo según lo último guardado en el grupo.';
+
+  @override
   String get homeEmptyGroupsTitle => 'Aún no tienes grupos';
 
   @override
@@ -774,11 +796,11 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get groupStatusReadyInfo =>
-      'Cuando lances el sorteo, cada uno descubrirá su amigo secreto en privado.';
+      'Al lanzarlo, cada quien verá su asignación en privado.';
 
   @override
   String get groupStatusPendingInfo =>
-      'Añade un poco más de gente o termina de organizar tus subgrupos.';
+      'Revisa participantes o subgrupos pendientes.';
 
   @override
   String groupEffectiveParticipants(int count) {
@@ -884,6 +906,10 @@ class AppLocalizationsEs extends AppLocalizations {
       'Prepara tu sorteo con privacidad y claridad.';
 
   @override
+  String get groupDetailTaglinePostDraw =>
+      'Resultados en privado: cada quien ve lo suyo.';
+
+  @override
   String get groupBackToDashboard => 'Volver al dashboard';
 
   @override
@@ -897,7 +923,23 @@ class AppLocalizationsEs extends AppLocalizations {
       'Este grupo ya no está disponible o no tienes acceso.';
 
   @override
-  String get groupPreparationTitle => 'Cómo va tu grupo';
+  String get groupPreparationTitle => 'Estado del grupo';
+
+  @override
+  String groupPreparationQuickSummary(
+    int total,
+    int withoutApp,
+    int subgroups,
+  ) {
+    return '$total personas en el sorteo · $withoutApp sin app · $subgroups subgrupos';
+  }
+
+  @override
+  String get groupPostDrawHeroTitle => 'Sorteo realizado';
+
+  @override
+  String get groupPostDrawHeroSubtitle =>
+      'Ya puedes ver lo que te corresponde, en privado.';
 
   @override
   String get groupChecklistEnoughPeopleDone => 'Ya tenéis suficientes personas';

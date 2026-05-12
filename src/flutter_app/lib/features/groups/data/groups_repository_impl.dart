@@ -95,7 +95,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
         .doc(_uid)
         .collection('groups')
         .get();
-    return snap.docs.map((d) {
+    final rows = snap.docs.map((d) {
       final m = d.data();
       return GroupSummary(
         groupId: m['groupId'] as String? ?? d.id,
@@ -104,6 +104,34 @@ class GroupsRepositoryImpl implements GroupsRepository {
         isActiveMember: m['isActiveMember'] as bool? ?? false,
       );
     }).toList();
+    final ids = rows.map((g) => g.groupId).toList();
+    final drawById = <String, DrawStatus>{};
+    for (var i = 0; i < ids.length; i += 10) {
+      final end = (i + 10) > ids.length ? ids.length : (i + 10);
+      final chunk = ids.sublist(i, end);
+      if (chunk.isEmpty) continue;
+      final qs = await _firestore
+          .collection('groups')
+          .where(FieldPath.documentId, whereIn: chunk)
+          .get();
+      for (final doc in qs.docs) {
+        final raw = doc.data()['drawStatus'];
+        drawById[doc.id] = _parseDrawStatus(
+          raw is String ? raw : 'idle',
+        );
+      }
+    }
+    return rows
+        .map(
+          (g) => GroupSummary(
+            groupId: g.groupId,
+            name: g.name,
+            role: g.role,
+            isActiveMember: g.isActiveMember,
+            drawStatus: drawById[g.groupId] ?? DrawStatus.idle,
+          ),
+        )
+        .toList();
   }
 
   @override

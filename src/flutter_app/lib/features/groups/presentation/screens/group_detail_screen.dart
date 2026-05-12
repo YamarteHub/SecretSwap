@@ -1174,13 +1174,18 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
     final drawReadyByRule = !(d.drawSubgroupRule ==
             DrawSubgroupRule.requireDifferent &&
         missingSubgroupCount > 0);
-    final visualStatus = isCompleted
-        ? l10n.groupStatusCompleted
-        : !drawReadyByParticipants
-            ? l10n.groupStatusPreparing
-            : !drawReadyByRule
-                ? l10n.groupStatusMissingSubgroups
-                : l10n.groupStatusReadyToDraw;
+    final visualStatus = !drawReadyByParticipants
+        ? l10n.groupStatusPreparing
+        : !drawReadyByRule
+            ? l10n.groupStatusMissingSubgroups
+            : l10n.groupStatusReadyToDraw;
+    final heroTitle =
+        isCompleted ? l10n.groupPostDrawHeroTitle : visualStatus;
+    final heroSubtitle = isCompleted
+        ? l10n.groupPostDrawHeroSubtitle
+        : (drawReadyByParticipants && drawReadyByRule
+            ? l10n.groupStatusReadyInfo
+            : l10n.groupStatusPendingInfo);
     final canRunDraw = _isOwner &&
         !_drawing &&
         drawReadyByParticipants &&
@@ -1207,19 +1212,17 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
         children: [
         _GroupDetailHero(
           groupName: d.name,
-          tagline: l10n.groupHeaderSubtitle,
+          tagline: isCompleted
+              ? l10n.groupDetailTaglinePostDraw
+              : l10n.groupHeaderSubtitle,
           onEditName: _isOwner && _drawAllowsSubgroupChange(d.drawStatus)
               ? _showRenameGroupDialog
               : null,
         ),
         const SizedBox(height: 18),
         _StatusHeroCard(
-          title: visualStatus,
-          subtitle: isCompleted
-              ? l10n.groupStatusCompletedInfo
-              : drawReadyByParticipants && drawReadyByRule
-                  ? l10n.groupStatusReadyInfo
-                  : l10n.groupStatusPendingInfo,
+          title: heroTitle,
+          subtitle: heroSubtitle,
           isCompleted: isCompleted,
           isReady: drawReadyByParticipants && drawReadyByRule && drawReadyByStatus,
           primary: !isCompleted && _isOwner
@@ -1258,15 +1261,19 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
               ? l10n.groupWarningMissingSubgroupCombined
               : null,
         ),
-        const SizedBox(height: 16),
-        _PreparationChecklist(
-          totalEffective: unifiedCounts.effectiveTotal,
-          pending: pendingMembers.length,
-          missingSubgroup: missingSubgroupCount,
-          missingNames: missingSubgroupNames,
-          subgroupRuleActive:
-              d.drawSubgroupRule != DrawSubgroupRule.ignore,
-        ),
+        if (!isCompleted) ...[
+          const SizedBox(height: 16),
+          _PreparationChecklist(
+            totalEffective: unifiedCounts.effectiveTotal,
+            pending: pendingMembers.length,
+            missingSubgroup: missingSubgroupCount,
+            missingNames: missingSubgroupNames,
+            subgroupRuleActive:
+                d.drawSubgroupRule != DrawSubgroupRule.ignore,
+            subgroupsCount: subgroupsCount,
+            withoutAppCount: unifiedCounts.withoutApp,
+          ),
+        ],
         if (!isCompleted) ...[
           const SizedBox(height: 16),
           _RuleSummaryCard(
@@ -1671,7 +1678,7 @@ class _StatusHeroCard extends StatelessWidget {
                 ),
                 child: Icon(
                   isCompleted
-                      ? Icons.celebration_outlined
+                      ? Icons.verified_outlined
                       : isReady
                           ? Icons.check_circle_outline
                           : Icons.pending_actions_outlined,
@@ -1682,7 +1689,10 @@ class _StatusHeroCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   title,
-                  style: theme.textTheme.titleLarge?.copyWith(
+                  style: (isCompleted
+                          ? theme.textTheme.headlineSmall
+                          : theme.textTheme.titleLarge)
+                      ?.copyWith(
                     fontWeight: FontWeight.w800,
                     height: 1.2,
                   ),
@@ -1692,12 +1702,7 @@ class _StatusHeroCard extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            // Cuando el sorteo está completo, sustituimos el subtítulo
-            // genérico por un copy más cálido y centrado en la idea de
-            // que cada quien ya descubrió su amigo secreto.
-            isCompleted
-                ? l10n.groupCompletedHeroSubtitle
-                : subtitle,
+            subtitle,
             style: theme.textTheme.bodyMedium?.copyWith(
               color: theme.colorScheme.onSurface.withValues(alpha: 0.78),
               height: 1.4,
@@ -1706,6 +1711,17 @@ class _StatusHeroCard extends StatelessWidget {
           if (primary != null) ...[
             const SizedBox(height: 16),
             FilledButton.icon(
+              style: isCompleted
+                  ? FilledButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 16,
+                        horizontal: 18,
+                      ),
+                      textStyle: theme.textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.w800,
+                      ),
+                    )
+                  : null,
               onPressed: primary!.loading ? null : primary!.onPressed,
               icon: primary!.loading
                   ? const SizedBox(
@@ -1720,6 +1736,18 @@ class _StatusHeroCard extends StatelessWidget {
           if (secondary != null) ...[
             const SizedBox(height: 10),
             OutlinedButton.icon(
+              style: isCompleted
+                  ? OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 14,
+                        horizontal: 16,
+                      ),
+                      side: BorderSide(
+                        color: AppTheme.deepPlum.withValues(alpha: 0.35),
+                        width: 1.4,
+                      ),
+                    )
+                  : null,
               onPressed: secondary!.onPressed,
               icon: Icon(secondary!.icon),
               label: Text(secondary!.label),
@@ -1825,6 +1853,8 @@ class _PreparationChecklist extends StatelessWidget {
     required this.missingSubgroup,
     required this.missingNames,
     required this.subgroupRuleActive,
+    required this.subgroupsCount,
+    required this.withoutAppCount,
   });
 
   final int totalEffective;
@@ -1832,6 +1862,8 @@ class _PreparationChecklist extends StatelessWidget {
   final int missingSubgroup;
   final List<String> missingNames;
   final bool subgroupRuleActive;
+  final int subgroupsCount;
+  final int withoutAppCount;
 
   @override
   Widget build(BuildContext context) {
@@ -1841,6 +1873,7 @@ class _PreparationChecklist extends StatelessWidget {
     final allHaveSubgroup = missingSubgroup == 0;
 
     return SectionCard(
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 14),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -1848,7 +1881,20 @@ class _PreparationChecklist extends StatelessWidget {
             icon: Icons.checklist_outlined,
             title: l10n.groupPreparationTitle,
           ),
-          const SizedBox(height: 14),
+          const SizedBox(height: 8),
+          Text(
+            l10n.groupPreparationQuickSummary(
+              totalEffective,
+              withoutAppCount,
+              subgroupsCount,
+            ),
+            style: theme.textTheme.labelLarge?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+              fontWeight: FontWeight.w600,
+              height: 1.35,
+            ),
+          ),
+          const SizedBox(height: 12),
           _ChecklistItem(
             done: hasEnoughPeople,
             label: hasEnoughPeople

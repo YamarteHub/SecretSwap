@@ -38,12 +38,15 @@ class GroupSummary {
   final String name;
   final MemberRole role;
   final bool isActiveMember;
+  /// Copiado desde `groups/{id}.drawStatus` al listar (no forma parte de `user_groups`).
+  final DrawStatus drawStatus;
 
   const GroupSummary({
     required this.groupId,
     required this.name,
     required this.role,
     required this.isActiveMember,
+    this.drawStatus = DrawStatus.idle,
   });
 }
 

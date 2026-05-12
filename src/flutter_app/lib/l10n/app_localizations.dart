@@ -389,8 +389,44 @@ abstract class AppLocalizations {
   /// No description provided for @homeHeaderSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Tarci Secret organiza dinámicas privadas de grupo con personas reales.'**
+  /// **'Organiza amigo secreto y sorteos con quien quieras. Privado por defecto.'**
   String get homeHeaderSubtitle;
+
+  /// No description provided for @homeHeroHeadline.
+  ///
+  /// In es, this message translates to:
+  /// **'Amigo secreto y sorteos de grupo'**
+  String get homeHeroHeadline;
+
+  /// No description provided for @homeGroupDrawStatePreparing.
+  ///
+  /// In es, this message translates to:
+  /// **'Preparando'**
+  String get homeGroupDrawStatePreparing;
+
+  /// No description provided for @homeGroupDrawStateReady.
+  ///
+  /// In es, this message translates to:
+  /// **'Listo para sortear'**
+  String get homeGroupDrawStateReady;
+
+  /// No description provided for @homeGroupDrawStateDrawing.
+  ///
+  /// In es, this message translates to:
+  /// **'Sorteo en curso'**
+  String get homeGroupDrawStateDrawing;
+
+  /// No description provided for @homeGroupDrawStateCompleted.
+  ///
+  /// In es, this message translates to:
+  /// **'Sorteado'**
+  String get homeGroupDrawStateCompleted;
+
+  /// No description provided for @homeGroupDrawStateFailed.
+  ///
+  /// In es, this message translates to:
+  /// **'Revisar sorteo'**
+  String get homeGroupDrawStateFailed;
 
   /// No description provided for @wizardCreateTitle.
   ///
@@ -707,13 +743,13 @@ abstract class AppLocalizations {
   /// No description provided for @groupStatusPreparing.
   ///
   /// In es, this message translates to:
-  /// **'Tu grupo ya casi está listo'**
+  /// **'Sigue la preparación'**
   String get groupStatusPreparing;
 
   /// No description provided for @groupStatusReadyToDraw.
   ///
   /// In es, this message translates to:
-  /// **'Todo listo para el sorteo'**
+  /// **'Listo para sortear'**
   String get groupStatusReadyToDraw;
 
   /// No description provided for @groupStatusCompleted.
@@ -1202,6 +1238,12 @@ abstract class AppLocalizations {
   /// **'Grupos activos'**
   String get homeActiveGroupsTitle;
 
+  /// No description provided for @homeActiveGroupsSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Estado del sorteo según lo último guardado en el grupo.'**
+  String get homeActiveGroupsSubtitle;
+
   /// No description provided for @homeEmptyGroupsTitle.
   ///
   /// In es, this message translates to:
@@ -1481,13 +1523,13 @@ abstract class AppLocalizations {
   /// No description provided for @groupStatusReadyInfo.
   ///
   /// In es, this message translates to:
-  /// **'Cuando lances el sorteo, cada uno descubrirá su amigo secreto en privado.'**
+  /// **'Al lanzarlo, cada quien verá su asignación en privado.'**
   String get groupStatusReadyInfo;
 
   /// No description provided for @groupStatusPendingInfo.
   ///
   /// In es, this message translates to:
-  /// **'Añade un poco más de gente o termina de organizar tus subgrupos.'**
+  /// **'Revisa participantes o subgrupos pendientes.'**
   String get groupStatusPendingInfo;
 
   /// No description provided for @groupEffectiveParticipants.
@@ -1646,6 +1688,12 @@ abstract class AppLocalizations {
   /// **'Prepara tu sorteo con privacidad y claridad.'**
   String get groupHeaderSubtitle;
 
+  /// No description provided for @groupDetailTaglinePostDraw.
+  ///
+  /// In es, this message translates to:
+  /// **'Resultados en privado: cada quien ve lo suyo.'**
+  String get groupDetailTaglinePostDraw;
+
   /// No description provided for @groupBackToDashboard.
   ///
   /// In es, this message translates to:
@@ -1673,8 +1721,26 @@ abstract class AppLocalizations {
   /// No description provided for @groupPreparationTitle.
   ///
   /// In es, this message translates to:
-  /// **'Cómo va tu grupo'**
+  /// **'Estado del grupo'**
   String get groupPreparationTitle;
+
+  /// No description provided for @groupPreparationQuickSummary.
+  ///
+  /// In es, this message translates to:
+  /// **'{total} personas en el sorteo · {withoutApp} sin app · {subgroups} subgrupos'**
+  String groupPreparationQuickSummary(int total, int withoutApp, int subgroups);
+
+  /// No description provided for @groupPostDrawHeroTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Sorteo realizado'**
+  String get groupPostDrawHeroTitle;
+
+  /// No description provided for @groupPostDrawHeroSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya puedes ver lo que te corresponde, en privado.'**
+  String get groupPostDrawHeroSubtitle;
 
   /// No description provided for @groupChecklistEnoughPeopleDone.
   ///

@@ -213,12 +213,15 @@ class _BrandFallback extends StatelessWidget {
 /// rectangular) gracias a la variante transparente declarada en `BrandMark`.
 class BrandHero extends StatelessWidget {
   final String tagline;
+  /// Título corto bajo el logo (opcional) para jerarquía en dashboard.
+  final String? headline;
   final VoidCallback? onSecretTap;
   final VoidCallback? onSecretLongPress;
 
   const BrandHero({
     super.key,
     required this.tagline,
+    this.headline,
     this.onSecretTap,
     this.onSecretLongPress,
   });
@@ -275,7 +278,20 @@ class BrandHero extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 14),
+          if (headline != null && headline!.trim().isNotEmpty) ...[
+            const SizedBox(height: 10),
+            Text(
+              headline!,
+              textAlign: TextAlign.center,
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w800,
+                height: 1.25,
+                letterSpacing: -0.2,
+              ),
+            ),
+            const SizedBox(height: 8),
+          ] else
+            const SizedBox(height: 14),
           Text(
             tagline,
             textAlign: TextAlign.center,

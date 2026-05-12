@@ -166,7 +166,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeHeaderSubtitle =>
-      'Tarci Secret hosts private group dynamics with real people.';
+      'Organize Secret Santa and private draws with anyone. Private by default.';
+
+  @override
+  String get homeHeroHeadline => 'Secret Santa and group draws';
+
+  @override
+  String get homeGroupDrawStatePreparing => 'Getting ready';
+
+  @override
+  String get homeGroupDrawStateReady => 'Ready to draw';
+
+  @override
+  String get homeGroupDrawStateDrawing => 'Draw in progress';
+
+  @override
+  String get homeGroupDrawStateCompleted => 'Draw done';
+
+  @override
+  String get homeGroupDrawStateFailed => 'Draw needs attention';
 
   @override
   String get wizardCreateTitle => 'Create Secret Santa';
@@ -340,10 +358,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get groupSectionAdvanced => 'Advanced settings';
 
   @override
-  String get groupStatusPreparing => 'Your group is almost ready';
+  String get groupStatusPreparing => 'Still getting ready';
 
   @override
-  String get groupStatusReadyToDraw => 'All set for the draw';
+  String get groupStatusReadyToDraw => 'Ready to draw';
 
   @override
   String get groupStatusCompleted => 'Your secret friends are picked!';
@@ -610,6 +628,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeActiveGroupsTitle => 'Active groups';
 
   @override
+  String get homeActiveGroupsSubtitle =>
+      'Draw status reflects the latest saved state for each group.';
+
+  @override
   String get homeEmptyGroupsTitle => 'You don\'t have groups yet';
 
   @override
@@ -767,11 +789,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get groupStatusReadyInfo =>
-      'When you launch it, everyone discovers their secret friend privately.';
+      'When you launch it, each person sees their assignment privately.';
 
   @override
   String get groupStatusPendingInfo =>
-      'Add a few more people or finish organizing your subgroups.';
+      'Check pending participants or subgroups.';
 
   @override
   String groupEffectiveParticipants(int count) {
@@ -876,6 +898,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Prepare your draw with privacy and clarity.';
 
   @override
+  String get groupDetailTaglinePostDraw =>
+      'Private results: everyone sees only their own.';
+
+  @override
   String get groupBackToDashboard => 'Back to dashboard';
 
   @override
@@ -889,7 +915,23 @@ class AppLocalizationsEn extends AppLocalizations {
       'This group is no longer available or you don\'t have access.';
 
   @override
-  String get groupPreparationTitle => 'How your group is going';
+  String get groupPreparationTitle => 'Group status';
+
+  @override
+  String groupPreparationQuickSummary(
+    int total,
+    int withoutApp,
+    int subgroups,
+  ) {
+    return '$total people in the draw · $withoutApp without app · $subgroups subgroups';
+  }
+
+  @override
+  String get groupPostDrawHeroTitle => 'Draw completed';
+
+  @override
+  String get groupPostDrawHeroSubtitle =>
+      'You can now see what applies to you, in private.';
 
   @override
   String get groupChecklistEnoughPeopleDone => 'You have enough people';
