@@ -939,6 +939,29 @@ class AppLocalizationsEs extends AppLocalizations {
       'Solo verás a quienes el organizador te asignó como responsable.';
 
   @override
+  String get groupMemberHeroTitlePreDraw => 'Ya estás dentro';
+
+  @override
+  String get groupMemberHeroSubtitlePreDraw =>
+      'Cuando el organizador lance el sorteo, verás tu asignación en privado.';
+
+  @override
+  String get groupMemberHeroTaglinePreDraw =>
+      'Tu grupo, tu espacio. Nadie ve el resultado de los demás.';
+
+  @override
+  String get groupMemberHeroTaglinePostDraw =>
+      'Sorteo listo. Solo tú ves lo que te tocó.';
+
+  @override
+  String get groupMemberPostDrawHeroSubtitle =>
+      'Abre tu resultado cuando quieras; es privado.';
+
+  @override
+  String get groupMemberHeroSubtitleDrawing =>
+      'Estamos sorteando. En un momento podrás ver tu resultado.';
+
+  @override
   String get groupBackToDashboard => 'Volver al dashboard';
 
   @override

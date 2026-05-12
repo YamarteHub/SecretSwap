@@ -685,17 +685,11 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
       return;
     }
 
-    final guardianCandidates = widget.detail.members
-        .where((m) => m.memberState == MemberState.active)
-        .toList()
-      ..sort((a, b) => a.nickname.compareTo(b.nickname));
     final result = await showDialog<_ManagedParticipantDraft>(
       context: context,
       builder: (ctx) => _CreateManagedParticipantDialog(
         subgroups: widget.detail.subgroups,
         managedByLabel: context.l10n.groupManagedGuardianSelf,
-        guardianCandidates: guardianCandidates,
-        defaultGuardianUid: widget.detail.ownerUid,
       ),
     );
     if (!mounted || result == null) return;
@@ -709,7 +703,6 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
             participantType: result.participantType,
             subgroupId: result.subgroupId,
             deliveryMode: result.deliveryMode,
-            managedByUid: result.managedByUid,
           );
       _reloadDetail();
       if (mounted) {
@@ -1110,17 +1103,11 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
     if (!_isOwner || !_drawAllowsSubgroupChange(widget.detail.drawStatus)) {
       return;
     }
-    final guardianCandidates = widget.detail.members
-        .where((m) => m.memberState == MemberState.active)
-        .toList()
-      ..sort((a, b) => a.nickname.compareTo(b.nickname));
     final result = await showDialog<_ManagedParticipantDraft>(
       context: context,
       builder: (ctx) => _CreateManagedParticipantDialog(
         subgroups: widget.detail.subgroups,
         managedByLabel: context.l10n.groupManagedGuardianSelf,
-        guardianCandidates: guardianCandidates,
-        defaultGuardianUid: widget.detail.ownerUid,
         initial: participant,
       ),
     );
@@ -1135,7 +1122,6 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
             participantType: result.participantType,
             subgroupId: result.subgroupId,
             deliveryMode: result.deliveryMode,
-            managedByUid: result.managedByUid,
           );
       _reloadDetail();
       if (mounted) {
@@ -1223,15 +1209,33 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
         : !drawReadyByRule
             ? l10n.groupStatusMissingSubgroups
             : l10n.groupStatusReadyToDraw;
-    final heroTitle =
-        isCompleted ? l10n.groupPostDrawHeroTitle : visualStatus;
+    final memberPreDraw = !_isOwner && !isCompleted;
+    final memberPostDraw = !_isOwner && isCompleted;
+    final heroTitle = isCompleted
+        ? l10n.groupPostDrawHeroTitle
+        : memberPreDraw
+            ? (d.drawStatus == DrawStatus.drawing
+                ? l10n.homeGroupDrawStateDrawing
+                : l10n.groupMemberHeroTitlePreDraw)
+            : visualStatus;
     final heroSubtitle = isCompleted
-        ? l10n.groupPostDrawHeroSubtitle
-        : !_isOwner
-            ? l10n.groupMemberPreDrawSubtitle
+        ? (memberPostDraw
+            ? l10n.groupMemberPostDrawHeroSubtitle
+            : l10n.groupPostDrawHeroSubtitle)
+        : memberPreDraw
+            ? (d.drawStatus == DrawStatus.drawing
+                ? l10n.groupMemberHeroSubtitleDrawing
+                : l10n.groupMemberHeroSubtitlePreDraw)
             : (drawReadyByParticipants && drawReadyByRule
                 ? l10n.groupStatusReadyInfo
                 : l10n.groupStatusPendingInfo);
+    final heroTagline = isCompleted
+        ? (memberPostDraw
+            ? l10n.groupMemberHeroTaglinePostDraw
+            : l10n.groupDetailTaglinePostDraw)
+        : memberPreDraw
+            ? l10n.groupMemberHeroTaglinePreDraw
+            : l10n.groupHeaderSubtitle;
     final canRunDraw = _isOwner &&
         !_drawing &&
         drawReadyByParticipants &&
@@ -1258,9 +1262,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
         children: [
         _GroupDetailHero(
           groupName: d.name,
-          tagline: isCompleted
-              ? l10n.groupDetailTaglinePostDraw
-              : l10n.groupHeaderSubtitle,
+          tagline: heroTagline,
           onEditName: _isOwner && _drawAllowsSubgroupChange(d.drawStatus)
               ? _showRenameGroupDialog
               : null,
@@ -1270,7 +1272,10 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
           title: heroTitle,
           subtitle: heroSubtitle,
           isCompleted: isCompleted,
-          isReady: drawReadyByParticipants && drawReadyByRule && drawReadyByStatus,
+          isReady: drawReadyByParticipants &&
+              drawReadyByRule &&
+              drawReadyByStatus,
+          calmWaiting: memberPreDraw,
           primary: !isCompleted && _isOwner
               ? _PrimaryAction(
                   label: l10n.groupActionRunDraw,
@@ -1809,6 +1814,7 @@ class _StatusHeroCard extends StatelessWidget {
     required this.subtitle,
     required this.isCompleted,
     required this.isReady,
+    this.calmWaiting = false,
     this.primary,
     this.secondary,
     this.ownerHint,
@@ -1820,6 +1826,8 @@ class _StatusHeroCard extends StatelessWidget {
   final String subtitle;
   final bool isCompleted;
   final bool isReady;
+  /// Miembro pre-sorteo: tono neutro (sin “alerta” terracota de preparación admin).
+  final bool calmWaiting;
   final _PrimaryAction? primary;
   final _PrimaryAction? secondary;
   final String? ownerHint;
@@ -1832,9 +1840,18 @@ class _StatusHeroCard extends StatelessWidget {
     final l10n = context.l10n;
     final tone = isCompleted
         ? AppTheme.sageGreen
-        : isReady
-            ? AppTheme.mutedGold
-            : AppTheme.softTerracotta;
+        : calmWaiting
+            ? AppTheme.deepPlumAlt
+            : isReady
+                ? AppTheme.mutedGold
+                : AppTheme.softTerracotta;
+    final icon = isCompleted
+        ? Icons.verified_outlined
+        : calmWaiting
+            ? Icons.hourglass_top_rounded
+            : isReady
+                ? Icons.check_circle_outline
+                : Icons.pending_actions_outlined;
     return SecretCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1846,9 +1863,6 @@ class _StatusHeroCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: tone.withValues(alpha: 0.18),
                   borderRadius: BorderRadius.circular(12),
-                  // Cuando el grupo está completado, añadimos un anillo
-                  // dorado sutil al icono de celebración para que la
-                  // pieza se sienta como un hito sobrio (no infantil).
                   border: isCompleted
                       ? Border.all(
                           color: AppTheme.mutedGold.withValues(alpha: 0.45),
@@ -1857,11 +1871,7 @@ class _StatusHeroCard extends StatelessWidget {
                       : null,
                 ),
                 child: Icon(
-                  isCompleted
-                      ? Icons.verified_outlined
-                      : isReady
-                          ? Icons.check_circle_outline
-                          : Icons.pending_actions_outlined,
+                  icon,
                   color: tone,
                 ),
               ),
@@ -2806,14 +2816,12 @@ class _ManagedParticipantDraft {
     required this.participantType,
     required this.subgroupId,
     required this.deliveryMode,
-    required this.managedByUid,
   });
 
   final String displayName;
   final String participantType;
   final String? subgroupId;
   final String deliveryMode;
-  final String managedByUid;
 }
 
 class _CreateSubgroupDialog extends StatefulWidget {
@@ -2975,15 +2983,11 @@ class _CreateManagedParticipantDialog extends StatefulWidget {
   const _CreateManagedParticipantDialog({
     required this.subgroups,
     required this.managedByLabel,
-    required this.guardianCandidates,
-    required this.defaultGuardianUid,
     this.initial,
   });
 
   final List<Subgroup> subgroups;
   final String managedByLabel;
-  final List<GroupMember> guardianCandidates;
-  final String defaultGuardianUid;
   final GroupParticipant? initial;
 
   @override
@@ -2991,37 +2995,28 @@ class _CreateManagedParticipantDialog extends StatefulWidget {
       _CreateManagedParticipantDialogState();
 }
 
-/// Diálogo crear/editar participante sin app.
-///
-/// Persiste tipo, subgrupo, entrega y **responsable** (`managedByUid`):
-/// el organizador por defecto u otro miembro activo del grupo.
+/// Crear/editar participante sin app (tipo, subgrupo, entrega).
+/// La reasignación a otro responsable queda fuera de esta fase de producto.
 class _CreateManagedParticipantDialogState
     extends State<_CreateManagedParticipantDialog> {
   final _nameCtrl = TextEditingController();
   String _participantType = 'managed';
-  // Modos de entrega persistidos en backend.
   static const _deliveryVerbal = 'verbal';
   static const _deliveryPrinted = 'printed';
-  // Modos visuales adicionales (no persistidos aún).
   static const _deliveryWhatsapp = 'whatsapp';
   static const _deliveryShow = 'show_in_person';
   String _deliveryMode = _deliveryVerbal;
-  // Responsable: organizador por defecto u otro miembro activo.
   static const _guardianSelf = 'self';
   static const _guardianOther = 'other';
   static const _guardianSpecific = 'specific';
   String _guardian = _guardianSelf;
-  String? _selectedGuardianUid;
   String? _subgroupId;
 
   @override
   void initState() {
     super.initState();
     final initial = widget.initial;
-    if (initial == null) {
-      _selectedGuardianUid = widget.defaultGuardianUid;
-      return;
-    }
+    if (initial == null) return;
     _nameCtrl.text = initial.displayName;
     _participantType =
         initial.participantType == GroupParticipantType.childManaged
@@ -3033,22 +3028,6 @@ class _CreateManagedParticipantDialogState
       _ => _deliveryVerbal,
     };
     _subgroupId = initial.subgroupId;
-    final mb = initial.managedByUid?.trim();
-    if (mb != null &&
-        mb.isNotEmpty &&
-        mb != widget.defaultGuardianUid) {
-      _guardian = _guardianOther;
-      _selectedGuardianUid = mb;
-    } else {
-      _guardian = _guardianSelf;
-      _selectedGuardianUid = widget.defaultGuardianUid;
-    }
-    final ids = widget.guardianCandidates.map((m) => m.uid).toSet();
-    if (_selectedGuardianUid != null &&
-        !ids.contains(_selectedGuardianUid)) {
-      _guardian = _guardianSelf;
-      _selectedGuardianUid = widget.defaultGuardianUid;
-    }
   }
 
   @override
@@ -3057,9 +3036,6 @@ class _CreateManagedParticipantDialogState
     super.dispose();
   }
 
-  /// Maps the visual delivery selection to the backend value.
-  /// Solo Verbal e Impreso son seleccionables; los otros se mapean a verbal
-  /// como fallback (aunque en la práctica los chips están deshabilitados).
   String _persistableDeliveryMode() {
     return switch (_deliveryMode) {
       _deliveryPrinted => _deliveryPrinted,
@@ -3130,7 +3106,6 @@ class _CreateManagedParticipantDialogState
             onChanged: (v) => setState(() => _subgroupId = v),
           ),
           const SizedBox(height: 18),
-          // ─── Quién entregará ─────────────────────────────────────────
           Text(
             l10n.groupManagedDialogGuardianSectionTitle,
             style: theme.textTheme.labelLarge?.copyWith(
@@ -3151,7 +3126,8 @@ class _CreateManagedParticipantDialogState
                 value: _guardianOther,
                 icon: Icons.group_outlined,
                 label: l10n.groupManagedDialogGuardianOther,
-                enabled: widget.guardianCandidates.length > 1,
+                hint: l10n.groupManagedDialogGuardianComingSoon,
+                enabled: false,
               ),
               _ChoiceOption(
                 value: _guardianSpecific,
@@ -3162,47 +3138,9 @@ class _CreateManagedParticipantDialogState
               ),
             ],
             selected: _guardian,
-            onChanged: (v) => setState(() {
-              _guardian = v;
-              if (v == _guardianOther) {
-                _selectedGuardianUid ??=
-                    widget.guardianCandidates.firstWhere(
-                      (m) => m.uid != widget.defaultGuardianUid,
-                      orElse: () => widget.guardianCandidates.first,
-                    ).uid;
-              } else {
-                _selectedGuardianUid = widget.defaultGuardianUid;
-              }
-            }),
+            onChanged: (v) => setState(() => _guardian = v),
           ),
-          if (_guardian == _guardianOther && widget.guardianCandidates.length > 1) ...[
-            const SizedBox(height: 10),
-            DropdownButtonFormField<String>(
-              value: () {
-                final ids =
-                    widget.guardianCandidates.map((m) => m.uid).toSet();
-                final v = _selectedGuardianUid;
-                if (v != null && ids.contains(v)) return v;
-                return widget.defaultGuardianUid;
-              }(),
-              decoration: InputDecoration(
-                labelText: l10n.groupManagedDialogGuardianOther,
-              ),
-              items: widget.guardianCandidates
-                  .map(
-                    (m) => DropdownMenuItem(
-                      value: m.uid,
-                      child: Text(
-                        m.nickname.trim().isEmpty ? m.uid : m.nickname.trim(),
-                      ),
-                    ),
-                  )
-                  .toList(),
-              onChanged: (v) => setState(() => _selectedGuardianUid = v),
-            ),
-          ],
           const SizedBox(height: 18),
-          // ─── Forma de entrega ────────────────────────────────────────
           Text(
             l10n.groupManagedDialogDeliverySectionTitle,
             style: theme.textTheme.labelLarge?.copyWith(
@@ -3253,15 +3191,6 @@ class _CreateManagedParticipantDialogState
           );
           return;
         }
-        final managedByUid = _guardian == _guardianSelf
-            ? widget.defaultGuardianUid
-            : () {
-                final ids =
-                    widget.guardianCandidates.map((m) => m.uid).toSet();
-                final v = _selectedGuardianUid;
-                if (v != null && ids.contains(v)) return v;
-                return widget.defaultGuardianUid;
-              }();
         Navigator.pop(
           context,
           _ManagedParticipantDraft(
@@ -3269,7 +3198,6 @@ class _CreateManagedParticipantDialogState
             participantType: _participantType,
             subgroupId: _subgroupId,
             deliveryMode: _persistableDeliveryMode(),
-            managedByUid: managedByUid,
           ),
         );
       },

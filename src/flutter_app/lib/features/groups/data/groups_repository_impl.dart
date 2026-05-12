@@ -95,10 +95,16 @@ class GroupsRepositoryImpl implements GroupsRepository {
         .doc(_uid)
         .collection('groups')
         .get();
+    final drawFromUserRow = <String, DrawStatus>{};
     final rows = snap.docs.map((d) {
       final m = d.data();
+      final gid = (m['groupId'] as String? ?? d.id).trim();
+      final rawUser = m['drawStatus'];
+      if (rawUser is String && rawUser.trim().isNotEmpty) {
+        drawFromUserRow[gid] = _parseDrawStatus(rawUser);
+      }
       return GroupSummary(
-        groupId: (m['groupId'] as String? ?? d.id).trim(),
+        groupId: gid,
         name: m['name'] as String? ?? '',
         role: _parseRole(m['role'] as String? ?? 'member'),
         isActiveMember: m['isActiveMember'] as bool? ?? false,
@@ -113,9 +119,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
       for (var i = 0; i < ids.length; i++) {
         final doc = groupSnaps[i];
         if (!doc.exists) continue;
-        drawById[ids[i]] = _parseDrawStatus(
-          _readDrawStatusRaw(doc.data()?['drawStatus']),
-        );
+        drawById[ids[i]] = _drawStatusFromGroupMap(doc.data()!);
       }
     }
     return rows
@@ -125,7 +129,9 @@ class GroupsRepositoryImpl implements GroupsRepository {
             name: g.name,
             role: g.role,
             isActiveMember: g.isActiveMember,
-            drawStatus: drawById[g.groupId] ?? DrawStatus.idle,
+            drawStatus: drawById[g.groupId] ??
+                drawFromUserRow[g.groupId] ??
+                DrawStatus.idle,
           ),
         )
         .toList();
@@ -140,12 +146,21 @@ class GroupsRepositoryImpl implements GroupsRepository {
     }
     final g = gSnap.data()!;
     final rulesVersion = (g['rulesVersionCurrent'] as num?)?.toInt() ?? 1;
+    final ownerUid = (g['ownerUid'] as String?) ?? '';
+    final isDetailOwner = _uid == ownerUid;
+
+    final participantsFuture = isDetailOwner
+        ? _firestore.collection('groups/$groupId/participants').get()
+        : _firestore
+            .collection('groups/$groupId/participants')
+            .where('managedByUid', isEqualTo: _uid)
+            .get();
 
     final results = await Future.wait([
       _firestore.doc('groups/$groupId/rules/$rulesVersion').get(),
       _firestore.collection('groups/$groupId/members').get(),
       _firestore.collection('groups/$groupId/subgroups').get(),
-      _firestore.collection('groups/$groupId/participants').get(),
+      participantsFuture,
     ]);
     final ruleSnap = results[0] as DocumentSnapshot<Map<String, dynamic>>;
     final membersSnap = results[1] as QuerySnapshot<Map<String, dynamic>>;
@@ -216,7 +231,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
       groupId: g['groupId'] as String? ?? groupId,
       name: g['name'] as String? ?? '',
       ownerUid: g['ownerUid'] as String? ?? '',
-      drawStatus: _parseDrawStatus(_readDrawStatusRaw(g['drawStatus'])),
+      drawStatus: _drawStatusFromGroupMap(g),
       rulesVersionCurrent: rulesVersion,
       drawSubgroupRule: drawSubgroupRule,
       currentExecutionId: g['currentExecutionId'] as String?,
@@ -440,9 +455,38 @@ class GroupsRepositoryImpl implements GroupsRepository {
     );
   }
 
+  /// Combina `drawStatus` explícito con señales del documento (`drawingLock`,
+  /// `lastExecutionId`) para no mostrar "idle" en UI cuando el sorteo ya cerró
+  /// pero el campo quedó desincronizado o en transición.
+  DrawStatus _drawStatusFromGroupMap(Map<String, dynamic> g) {
+    final parsed = _parseDrawStatus(_readDrawStatusRaw(g['drawStatus']));
+    if (parsed == DrawStatus.completed ||
+        parsed == DrawStatus.drawing ||
+        parsed == DrawStatus.failed) {
+      return parsed;
+    }
+    final lock = g['drawingLock'];
+    if (lock is Map) {
+      final ex = lock['executionId'];
+      if (ex is String && ex.trim().isNotEmpty) {
+        return DrawStatus.drawing;
+      }
+    }
+    final last = g['lastExecutionId'];
+    if (last is String && last.trim().isNotEmpty) {
+      return DrawStatus.completed;
+    }
+    return DrawStatus.idle;
+  }
+
   DrawStatus _parseDrawStatus(String s) {
     final k = s.trim().toLowerCase();
-    if (k == 'complete' || k == 'closed' || k == 'done') {
+    if (k == 'complete' ||
+        k == 'closed' ||
+        k == 'done' ||
+        k == 'finished' ||
+        k == 'archived' ||
+        k == 'success') {
       return DrawStatus.completed;
     }
     return DrawStatus.values.firstWhere(

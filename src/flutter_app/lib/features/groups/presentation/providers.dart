@@ -9,9 +9,11 @@ final groupsRepositoryProvider = Provider<GroupsRepository>((ref) {
 });
 
 final myGroupsProvider = FutureProvider.autoDispose<List<GroupSummary>>((ref) async {
+  ref.keepAlive();
   return ref.watch(groupsRepositoryProvider).listMyGroups();
 });
 
 final groupDetailProvider = FutureProvider.autoDispose.family<GroupDetail, String>((ref, groupId) async {
+  ref.keepAlive();
   return ref.watch(groupsRepositoryProvider).getGroupDetail(groupId);
 });

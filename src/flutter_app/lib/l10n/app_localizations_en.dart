@@ -931,6 +931,29 @@ class AppLocalizationsEn extends AppLocalizations {
       'You\'ll only see people the organizer assigned to you as their responsible adult.';
 
   @override
+  String get groupMemberHeroTitlePreDraw => 'You\'re in';
+
+  @override
+  String get groupMemberHeroSubtitlePreDraw =>
+      'When the organizer runs the draw, you\'ll see your assignment privately.';
+
+  @override
+  String get groupMemberHeroTaglinePreDraw =>
+      'Your group, your space. No one else sees your result.';
+
+  @override
+  String get groupMemberHeroTaglinePostDraw =>
+      'Draw done. Only you see what you got.';
+
+  @override
+  String get groupMemberPostDrawHeroSubtitle =>
+      'Open your result whenever you like — it\'s private.';
+
+  @override
+  String get groupMemberHeroSubtitleDrawing =>
+      'We\'re drawing now. You\'ll see your result shortly.';
+
+  @override
   String get groupBackToDashboard => 'Back to dashboard';
 
   @override

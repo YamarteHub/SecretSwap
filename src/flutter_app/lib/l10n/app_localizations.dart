@@ -1742,6 +1742,42 @@ abstract class AppLocalizations {
   /// **'Solo verás a quienes el organizador te asignó como responsable.'**
   String get groupMemberManagedByYouSubtitle;
 
+  /// No description provided for @groupMemberHeroTitlePreDraw.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya estás dentro'**
+  String get groupMemberHeroTitlePreDraw;
+
+  /// No description provided for @groupMemberHeroSubtitlePreDraw.
+  ///
+  /// In es, this message translates to:
+  /// **'Cuando el organizador lance el sorteo, verás tu asignación en privado.'**
+  String get groupMemberHeroSubtitlePreDraw;
+
+  /// No description provided for @groupMemberHeroTaglinePreDraw.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu grupo, tu espacio. Nadie ve el resultado de los demás.'**
+  String get groupMemberHeroTaglinePreDraw;
+
+  /// No description provided for @groupMemberHeroTaglinePostDraw.
+  ///
+  /// In es, this message translates to:
+  /// **'Sorteo listo. Solo tú ves lo que te tocó.'**
+  String get groupMemberHeroTaglinePostDraw;
+
+  /// No description provided for @groupMemberPostDrawHeroSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Abre tu resultado cuando quieras; es privado.'**
+  String get groupMemberPostDrawHeroSubtitle;
+
+  /// No description provided for @groupMemberHeroSubtitleDrawing.
+  ///
+  /// In es, this message translates to:
+  /// **'Estamos sorteando. En un momento podrás ver tu resultado.'**
+  String get groupMemberHeroSubtitleDrawing;
+
   /// No description provided for @groupBackToDashboard.
   ///
   /// In es, this message translates to:
