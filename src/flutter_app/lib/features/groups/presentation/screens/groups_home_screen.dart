@@ -1,0 +1,655 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../../core/firebase/firebase_emulator_config.dart';
+import '../../../../core/l10n/l10n.dart';
+import '../../../../core/l10n/locale_controller.dart';
+import '../../../../core/messaging/functions_user_message.dart';
+import '../../../../core/routing/app_router.dart';
+import '../../../../core/theme/app_theme.dart';
+import '../../../../core/theme/premium_ui.dart';
+import '../../domain/group_models.dart';
+import '../providers.dart';
+
+class GroupsHomeScreen extends ConsumerStatefulWidget {
+  const GroupsHomeScreen({super.key});
+
+  @override
+  ConsumerState<GroupsHomeScreen> createState() => _GroupsHomeScreenState();
+}
+
+class _GroupsHomeScreenState extends ConsumerState<GroupsHomeScreen> {
+  bool _debugUnlocked = false;
+
+  String _shortUid(String? uid) {
+    if (uid == null || uid.isEmpty) return '—';
+    if (uid.length <= 6) return uid;
+    return '${uid.substring(0, 6)}...';
+  }
+
+  Future<void> _openLanguageSelector(BuildContext context, WidgetRef ref) async {
+    await showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      builder: (sheetContext) {
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+            child: Consumer(
+              builder: (innerContext, innerRef, _) {
+                final current = innerRef.watch(localeControllerProvider);
+                final l10n = innerContext.l10n;
+                final theme = Theme.of(innerContext);
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.languageSelectorTitle,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      l10n.languageSelectorSubtitle,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    _LangRadio(
+                      label: l10n.languageSystem,
+                      selected:
+                          (current?.languageCode ?? 'system') == 'system',
+                      onTap: () => innerRef
+                          .read(localeControllerProvider.notifier)
+                          .useSystemLocale(),
+                    ),
+                    _LangRadio(
+                      label: l10n.languageSpanish,
+                      selected: current?.languageCode == 'es',
+                      onTap: () => innerRef
+                          .read(localeControllerProvider.notifier)
+                          .setLocale(const Locale('es')),
+                    ),
+                    _LangRadio(
+                      label: l10n.languageEnglish,
+                      selected: current?.languageCode == 'en',
+                      onTap: () => innerRef
+                          .read(localeControllerProvider.notifier)
+                          .setLocale(const Locale('en')),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _toggleDebugTools(BuildContext context) {
+    if (!kDebugMode) return;
+    HapticFeedback.selectionClick();
+    setState(() => _debugUnlocked = !_debugUnlocked);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          _debugUnlocked
+              ? context.l10n.homeDebugToolsTitle
+              : context.l10n.close,
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final groupsAsync = ref.watch(myGroupsProvider);
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    final shortUid = _shortUid(uid);
+    final environmentLabel = FirebaseEmulatorConfig.shouldUseEmulators
+        ? context.l10n.homeEnvironmentEmulator
+        : context.l10n.homeEnvironmentFirebase;
+
+    final theme = Theme.of(context);
+
+    return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 60,
+        title: null,
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            tooltip: context.l10n.languageSelectorTitle,
+            onPressed: () => _openLanguageSelector(context, ref),
+            icon: const Icon(Icons.language_outlined),
+          ),
+          const SizedBox(width: 4),
+        ],
+      ),
+      body: groupsAsync.when(
+        data: (groups) {
+          final activeGroups = groups.where((g) => g.isActiveMember).toList();
+          final completedGroups = groups
+              .where((g) => !g.isActiveMember)
+              .toList();
+
+          return RefreshIndicator(
+            onRefresh: () async {
+              ref.invalidate(myGroupsProvider);
+              await ref.read(myGroupsProvider.future);
+            },
+            child: ListView(
+              padding: const EdgeInsets.fromLTRB(18, 4, 18, 28),
+              physics: const AlwaysScrollableScrollPhysics(),
+              children: [
+                BrandHero(
+                  tagline: context.l10n.homeHeaderSubtitle,
+                  onSecretLongPress: () => _toggleDebugTools(context),
+                ),
+                const SizedBox(height: 18),
+                _HomePrimaryActions(
+                  onCreate: () async {
+                    await context.push(AppRoutes.createGroup);
+                    if (context.mounted) {
+                      ref.invalidate(myGroupsProvider);
+                    }
+                  },
+                  onJoin: () async {
+                    await context.push(AppRoutes.joinByCode);
+                    if (context.mounted) {
+                      ref.invalidate(myGroupsProvider);
+                    }
+                  },
+                ),
+                const SizedBox(height: 22),
+                if (groups.isEmpty)
+                  EmptyState(
+                    icon: Icons.card_giftcard_outlined,
+                    title: context.l10n.homeEmptyGroupsTitle,
+                    message: context.l10n.homeEmptyGroupsMessage,
+                  )
+                else ...[
+                  Text(
+                    context.l10n.homeActiveGroupsTitle,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  ...activeGroups.map(
+                    (g) => _GroupCard(
+                      summary: g,
+                      onTap: () => context.push('/groups/${g.groupId}'),
+                    ),
+                  ),
+                ],
+                if (completedGroups.isNotEmpty) ...[
+                  const SizedBox(height: 22),
+                  Text(
+                    context.l10n.homeCompletedGroupsTitle,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  ...completedGroups.map(
+                    (g) => _GroupCard(
+                      summary: g,
+                      completed: true,
+                      onTap: () => context.push('/groups/${g.groupId}'),
+                    ),
+                  ),
+                ],
+                if (kDebugMode && _debugUnlocked) ...[
+                  const SizedBox(height: 24),
+                  _DebugToolsCard(
+                    shortUid: shortUid,
+                    environmentLabel: environmentLabel,
+                    onResetUser: () async {
+                      await FirebaseAuth.instance.signOut();
+                      if (context.mounted) context.go(AppRoutes.splash);
+                    },
+                  ),
+                ],
+                const SizedBox(height: 22),
+                _ComingSoonHint(text: context.l10n.homeComingSoonDescription),
+                const SizedBox(height: 12),
+                Text(
+                  context.l10n.homePrivacyFooter,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                    fontStyle: FontStyle.italic,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          );
+        },
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (e, _) => Center(child: Text(userVisibleErrorMessage(e))),
+      ),
+    );
+  }
+}
+
+class _HomePrimaryActions extends StatelessWidget {
+  const _HomePrimaryActions({required this.onCreate, required this.onJoin});
+
+  final VoidCallback onCreate;
+  final VoidCallback onJoin;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        FilledButton.icon(
+          onPressed: onCreate,
+          icon: const Icon(Icons.card_giftcard_rounded),
+          label: Text(l10n.createSecretFriend),
+        ),
+        const SizedBox(height: 12),
+        OutlinedButton.icon(
+          onPressed: onJoin,
+          icon: const Icon(Icons.vpn_key_outlined),
+          label: Text(l10n.joinWithCode),
+        ),
+      ],
+    );
+  }
+}
+
+class _GroupCard extends StatelessWidget {
+  const _GroupCard({
+    required this.summary,
+    required this.onTap,
+    this.completed = false,
+  });
+
+  final GroupSummary summary;
+  final VoidCallback onTap;
+  final bool completed;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = context.l10n;
+    final groupName = summary.name.isEmpty ? summary.groupId : summary.name;
+    final isOwner = summary.role == MemberRole.owner;
+    final accent = completed
+        ? theme.colorScheme.onSurfaceVariant
+        : (isOwner ? AppTheme.mutedGold : AppTheme.deepPlum);
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 14),
+      child: Material(
+        color: AppTheme.softCream,
+        borderRadius: BorderRadius.circular(22),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(22),
+          onTap: onTap,
+          child: Ink(
+            decoration: BoxDecoration(
+              color: AppTheme.softCream,
+              borderRadius: BorderRadius.circular(22),
+              border: Border.all(
+                color: completed
+                    ? theme.colorScheme.outlineVariant
+                    : AppTheme.deepPlum.withValues(alpha: 0.10),
+              ),
+              boxShadow: const [
+                BoxShadow(
+                  color: Color(0x14000000),
+                  blurRadius: 22,
+                  spreadRadius: -10,
+                  offset: Offset(0, 10),
+                ),
+              ],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 14, 16),
+              child: Row(
+                children: [
+                  _GroupAvatar(
+                    name: groupName,
+                    accent: accent,
+                    completed: completed,
+                  ),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          groupName,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: -0.1,
+                            height: 1.15,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Wrap(
+                          spacing: 6,
+                          runSpacing: 6,
+                          children: [
+                            _SoftChip(
+                              label: isOwner
+                                  ? l10n.groupRoleAdmin
+                                  : l10n.groupRoleMember,
+                              icon: isOwner
+                                  ? Icons.workspace_premium_outlined
+                                  : Icons.person_outline,
+                              color: isOwner
+                                  ? AppTheme.mutedGold
+                                  : AppTheme.deepPlumAlt,
+                            ),
+                            if (completed)
+                              _SoftChip(
+                                label: l10n.homeCompletedArchivedLabel,
+                                icon: Icons.check_circle_outline,
+                                color: theme.colorScheme.onSurfaceVariant,
+                              )
+                            else
+                              _SoftChip(
+                                label: summary.isActiveMember
+                                    ? l10n.homeStatusActive
+                                    : l10n.homeStatusInactive,
+                                icon: summary.isActiveMember
+                                    ? Icons.fiber_manual_record
+                                    : Icons.pause_circle_outline,
+                                color: summary.isActiveMember
+                                    ? AppTheme.sageGreen
+                                    : theme.colorScheme.onSurfaceVariant,
+                              ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 6),
+                  Container(
+                    width: 30,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      color: theme.colorScheme.onSurfaceVariant
+                          .withValues(alpha: 0.06),
+                      shape: BoxShape.circle,
+                    ),
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.chevron_right_rounded,
+                      size: 18,
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _GroupAvatar extends StatelessWidget {
+  const _GroupAvatar({
+    required this.name,
+    required this.accent,
+    required this.completed,
+  });
+
+  final String name;
+  final Color accent;
+  final bool completed;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final initial = name.trim().isEmpty
+        ? '·'
+        : name.trim().characters.first.toUpperCase();
+    return SizedBox(
+      width: 56,
+      height: 56,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              gradient: AppTheme.brandHeroGradient,
+              shape: BoxShape.circle,
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(2),
+            decoration: BoxDecoration(
+              color: AppTheme.softCream,
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: accent.withValues(alpha: completed ? 0.20 : 0.32),
+                width: 1.2,
+              ),
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              initial,
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: completed
+                    ? theme.colorScheme.onSurfaceVariant
+                    : AppTheme.deepPlum,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 0,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SoftChip extends StatelessWidget {
+  const _SoftChip({
+    required this.label,
+    required this.icon,
+    required this.color,
+  });
+
+  final String label;
+  final IconData icon;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.10),
+        borderRadius: BorderRadius.circular(999),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 13, color: color),
+          const SizedBox(width: 5),
+          Text(
+            label,
+            style: theme.textTheme.labelSmall?.copyWith(
+              color: color,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 0.1,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _LangRadio extends StatelessWidget {
+  const _LangRadio({
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
+
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return InkWell(
+      borderRadius: BorderRadius.circular(14),
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 10),
+        child: Row(
+          children: [
+            Icon(
+              selected
+                  ? Icons.radio_button_checked
+                  : Icons.radio_button_off_outlined,
+              color: selected
+                  ? theme.colorScheme.primary
+                  : theme.colorScheme.onSurfaceVariant,
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                label,
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _DebugToolsCard extends StatelessWidget {
+  const _DebugToolsCard({
+    required this.shortUid,
+    required this.environmentLabel,
+    required this.onResetUser,
+  });
+
+  final String shortUid;
+  final String environmentLabel;
+  final VoidCallback onResetUser;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final theme = Theme.of(context);
+    return SectionCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.bug_report_outlined,
+                size: 18,
+                color: theme.colorScheme.onSurfaceVariant,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                l10n.homeDebugToolsTitle,
+                style: theme.textTheme.labelLarge?.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Text(
+            l10n.homeDebugUid(shortUid),
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            environmentLabel,
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            l10n.homeDebugUserSwitchHint,
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
+          ),
+          const SizedBox(height: 12),
+          OutlinedButton.icon(
+            onPressed: onResetUser,
+            icon: const Icon(Icons.refresh, size: 20),
+            label: Text(l10n.homeDebugResetUser),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ComingSoonHint extends StatelessWidget {
+  const _ComingSoonHint({required this.text});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      decoration: BoxDecoration(
+        color: AppTheme.mutedGold.withValues(alpha: 0.10),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: AppTheme.mutedGold.withValues(alpha: 0.32)),
+      ),
+      child: Row(
+        children: [
+          const Icon(
+            Icons.auto_awesome_outlined,
+            size: 18,
+            color: AppTheme.mutedGold,
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              text,
+              style: theme.textTheme.labelMedium?.copyWith(
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.85),
+                fontWeight: FontWeight.w600,
+                letterSpacing: 0.1,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

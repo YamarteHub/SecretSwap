@@ -1,0 +1,467 @@
+{
+  "@@locale": "en",
+  "appName": "Tarci Secret",
+  "retry": "Retry",
+  "back": "Back",
+  "next": "Next",
+  "create": "Create",
+  "close": "Close",
+  "save": "Save",
+  "goToGroup": "Go to group",
+  "copyCode": "Copy code",
+  "codeCopied": "Code copied",
+  "joinWithCode": "Join with code",
+  "joinScreenTitle": "Join with code",
+  "joinScreenHeroTitle": "Paste your invitation code",
+  "joinScreenHeroSubtitle": "Your organizer shared it with you. Enter it and we'll add you to their group.",
+  "joinScreenCodeLabel": "Invitation code",
+  "joinScreenCodeHint": "For example, AB12CD",
+  "joinScreenCodeHelper": "Lowercase is fine, we'll handle it.",
+  "joinScreenCodeRequired": "Paste or type the code you received.",
+  "joinScreenCodeTooShort": "That code looks incomplete. Please check and try again.",
+  "joinScreenNicknameLabel": "Your name",
+  "joinScreenNicknameHelper": "This is how the group will see you.",
+  "joinScreenNicknameRequired": "Tell us your name so we can introduce you.",
+  "joinScreenNicknameTooShort": "Use at least 3 letters so the group recognizes you.",
+  "joinScreenCta": "Join the group",
+  "joinScreenCtaLoading": "Joining…",
+  "joinScreenSuccessSnackbar": "You're in!",
+  "joinSuccessTitle": "You're in!",
+  "joinSuccessSubtitle": "You joined {groupName}. In a moment you'll see the rest of the group.",
+  "@joinSuccessSubtitle": {
+    "placeholders": {
+      "groupName": { "type": "String" }
+    }
+  },
+  "joinSuccessChooseSubgroupTitle": "Pick your house or team",
+  "joinSuccessChooseSubgroupHelp": "The organizer created houses or teams. Pick yours so the draw places you correctly.",
+  "joinSuccessSubgroupLabel": "Your house or team",
+  "joinSuccessNoSubgroupsTitle": "No houses or teams yet",
+  "joinSuccessNoSubgroupsHelp": "The organizer hasn't created them yet. You can continue and wait; there's nothing else for you to do right now.",
+  "joinSuccessChooseRequired": "Pick an option to continue.",
+  "joinSuccessPrimaryCta": "Go to group",
+  "joinSuccessSecondaryCta": "Stay here",
+  "createSecretFriend": "Create Secret Santa",
+  "comingSoonMoreDynamics": "Coming soon: draws, teams, duels and pairings.",
+  "mySecretFriend": "My secret friend",
+  "yourSecretFriendIs": "Your secret friend is…",
+  "onlyYouCanSeeAssignment": "Only you can see this assignment.",
+  "keepSecretUntilExchangeDay": "Keep the secret until exchange day.",
+  "managedSecrets": "Secrets you manage",
+  "guardianOfSecret": "Guardian of the secret",
+  "privateResult": "Private result",
+  "splashTagline": "Tarci Secret hosts private group dynamics with real people.",
+  "quickModeTitle": "Quick mode",
+  "quickModeDescription": "You can start without registering. To keep your groups across devices, you will be able to create an account later.",
+  "homeHeaderSubtitle": "Tarci Secret hosts private group dynamics with real people.",
+  "wizardCreateTitle": "Create Secret Santa",
+  "wizardStepOf": "Step {current} of {total}",
+  "@wizardStepOf": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "wizardStepNameTitle": "What is this Secret Santa called?",
+  "wizardStepGroupTypeTitle": "What type of group is it?",
+  "wizardStepModeTitle": "How will it be organized?",
+  "wizardStepRuleTitle": "Choose draw rule",
+  "wizardStepSubgroupsTitle": "Subgroups",
+  "wizardStepParticipantsTitle": "Participants",
+  "wizardStepReviewTitle": "Final review",
+  "wizardGroupNameLabel": "Group name",
+  "wizardGroupNameHint": "Family Christmas 2026",
+  "wizardNicknameLabel": "How do you appear?",
+  "wizardRuleIgnore": "Ignore subgroups",
+  "wizardRulePrefer": "Prefer different subgroup",
+  "wizardRuleRequire": "Require different subgroup",
+  "wizardRuleIgnoreDesc": "Normal draw.",
+  "wizardRulePreferDesc": "Try to mix houses, departments or groups.",
+  "wizardRuleRequireDesc": "Only allow people from different subgroups.",
+  "wizardReviewSaveNotice": "You can adjust participants and subgroups later.",
+  "wizardReviewSummaryHelp": "Check that everything looks right before continuing.",
+  "wizardCreateButton": "Create Secret Santa",
+  "wizardCreatedTitle": "Secret Santa created",
+  "wizardInviteCodeLabel": "Invite code",
+  "wizardInviteCodeDescription": "Share this code so others can join.",
+  "managedSubtitle": "These results belong to people who depend on you. Deliver them privately.",
+  "managedEmptyTitle": "You have no managed secrets",
+  "managedEmptyMessage": "When you manage a child or a person without app, their result will appear here.",
+  "managedLoadErrorTitle": "We couldn't load your managed secrets",
+  "managedLoadErrorMessage": "Try again in a few minutes. You will only see results for people you manage.",
+  "managedAssignedTo": "They should give to…",
+  "managedDeliverInPrivate": "Deliver this result privately",
+  "managedHeroTitle": "Secrets in your care",
+  "managedHeroSubtitle": "You deliver these results privately, without anyone else finding out.",
+  "managedRevealLabel": "Their secret friend is",
+  "managedDeliveryChipLabel": "Delivery",
+  "managedFooterPrivacyNote": "Every secret is private. Only you see it, and only you deliver it.",
+  "myAssignmentNotAvailableTitle": "You can't see your secret friend yet",
+  "myAssignmentNotAvailableMessage": "Your assignment is not available yet. When the draw is completed, you will see it here.",
+  "genericLoadErrorMessage": "We couldn't load this information right now.",
+  "backToGroup": "Back to group",
+  "groupDetailTitle": "Group detail",
+  "groupRoleLabel": "Role",
+  "groupStatusLabel": "Status",
+  "groupLastExecution": "Last",
+  "groupSectionStatus": "Group status",
+  "groupSectionPrimaryAction": "Primary action",
+  "groupSectionDrawRule": "Draw rule",
+  "groupSectionSubgroups": "Subgroups",
+  "groupSectionParticipants": "Participants",
+  "groupSectionManagedParticipants": "Participants without app",
+  "groupSectionInvitations": "Invitations",
+  "groupSectionAdvanced": "Advanced settings",
+  "groupStatusPreparing": "Your group is almost ready",
+  "groupStatusReadyToDraw": "All set for the draw",
+  "groupStatusCompleted": "Your secret friends are picked!",
+  "groupStatusMissingSubgroups": "Someone still needs a subgroup",
+  "groupActionRunDraw": "Run the draw now",
+  "groupActionViewMySecretFriend": "View my secret friend",
+  "groupActionManagedSecrets": "Secrets you manage",
+  "groupActionCreateSubgroup": "Create subgroup",
+  "groupActionEmptySubgroup": "Empty subgroup",
+  "groupActionDeleteSubgroup": "Delete subgroup",
+  "groupActionGenerateNewCode": "Generate new code",
+  "groupActionCopyCode": "Copy code",
+  "groupActionRename": "Rename",
+  "groupActionEdit": "Edit",
+  "groupRoleOrganizer": "Organizer",
+  "groupRoleParticipant": "Participant",
+  "groupTypeAdultNoApp": "Adult without app",
+  "groupTypeChildManaged": "Managed child",
+  "groupNoSubgroupAssigned": "No subgroup assigned",
+  "groupGuardianOfSecret": "Guardian of the secret",
+  "groupPrivateResult": "Private result",
+  "groupWarningMissingSubgroupTitle": "Some people still need a subgroup.",
+  "groupWarningMissingSubgroupRule": "To require different subgroup, everyone must have one.",
+  "groupWarningMissingSubgroupCombined": "Some people still need a subgroup. To require different subgroup, everyone must have one.",
+  "groupDialogDeleteSubgroupTitle": "Delete subgroup",
+  "groupDialogDeleteSubgroupBody": "Are you sure you want to delete \"{name}\"? It will only be deleted if it has no assigned participants.",
+  "@groupDialogDeleteSubgroupBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "groupDialogEmptySubgroupTitle": "Empty \"{name}\"",
+  "@groupDialogEmptySubgroupTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "groupDialogCancel": "Cancel",
+  "groupDialogDelete": "Delete",
+  "groupDialogEmpty": "Empty",
+  "groupDialogMoveAndDelete": "Move and delete",
+  "groupDialogMoveToSubgroup": "Move to another subgroup",
+  "groupDialogBeforeDeleteMoveTo": "Before deleting, move to",
+  "groupDialogLeaveWithoutSubgroup": "Leave without subgroup",
+  "groupDialogNoAlternativeSubgroup": "No other subgroup is available. They will remain without subgroup.",
+  "groupManagedDialogAddTitle": "Add participant without app",
+  "groupManagedDialogEditTitle": "Edit participant without app",
+  "groupManagedDialogNameLabel": "Name",
+  "groupManagedDialogTypeLabel": "Type",
+  "groupManagedDialogTypeAdultNoApp": "Adult without app",
+  "groupManagedDialogTypeChild": "Managed child",
+  "groupManagedDialogSubgroupOptionalLabel": "Subgroup (optional)",
+  "groupManagedDialogNoSubgroup": "No subgroup",
+  "groupManagedDialogDeliveryLabel": "Delivery method",
+  "groupManagedDialogDeliveryVerbal": "Verbal",
+  "groupManagedDialogDeliveryPrinted": "Printed",
+  "groupManagedDialogWhoManagesTitle": "Who will manage this result?",
+  "groupManagedDialogWhoManagesDesc": "For now, you will manage it as organizer.",
+  "groupManagedDialogWhoManagesHelp": "When added to the draw, this person won't see the result in the app. You can deliver it verbally or printed.",
+  "groupManagedDialogManagedBy": "Managed by: {name}",
+  "@groupManagedDialogManagedBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "groupAssignDialogSelfTitle": "Your subgroup",
+  "groupAssignDialogTitle": "Assign subgroup",
+  "groupAssignDialogSelfDesc": "Choose your house, department, class or team.",
+  "groupAssignDialogDesc": "Select the subgroup for this member.",
+  "groupAssignDialogSubgroupLabel": "Subgroup",
+  "groupSnackbarWriteName": "Write a name",
+  "groupSnackbarDrawCompleted": "Draw completed",
+  "groupSnackbarSubgroupUpdated": "Subgroup updated",
+  "groupSnackbarGroupNameUpdated": "Group name updated",
+  "groupSnackbarRuleUpdated": "Draw rule updated",
+  "groupSnackbarNewCodeGenerated": "New code generated",
+  "groupSnackbarManagedAdded": "Participant without app added",
+  "groupSnackbarManagedUpdated": "Participant without app updated",
+  "groupSnackbarManagedDeleted": "Participant without app deleted",
+  "groupDialogEditGroupNameTitle": "Edit group name",
+  "groupDialogGroupNameLabel": "Group name",
+  "groupDialogRenameSubgroupTitle": "Rename subgroup",
+  "groupDialogSubgroupNameLabel": "Subgroup name",
+  "groupDialogDeleteParticipantTitle": "Delete participant",
+  "groupDialogDeleteParticipantBody": "Are you sure you want to delete \"{name}\"?",
+  "@groupDialogDeleteParticipantBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "groupDialogSubgroupAssignedCount": "There are {count} participants assigned to this subgroup.",
+  "@groupDialogSubgroupAssignedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "groupDialogSubgroupAssignedCountDelete": "This subgroup has {count} assigned participants.",
+  "@groupDialogSubgroupAssignedCountDelete": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "languageSystem": "System",
+  "languageSpanish": "Spanish",
+  "languageEnglish": "English",
+  "languageSelectorTitle": "Language",
+  "languageSelectorSubtitle": "Choose how you want to see the app",
+  "homePrimaryActionsTitle": "Primary actions",
+  "homeComingSoonDescription": "Coming soon: draws, teams, duels and pairings.",
+  "homeChipDraws": "Draws",
+  "homeChipTeams": "Teams",
+  "homeChipPairings": "Pairings",
+  "homeActiveGroupsTitle": "Active groups",
+  "homeEmptyGroupsTitle": "You don't have groups yet",
+  "homeEmptyGroupsMessage": "Create your first secret friend or join with a code.",
+  "homeStatusActive": "Active",
+  "homeStatusInactive": "Inactive",
+  "homeCompletedGroupsTitle": "Completed groups",
+  "homeCompletedArchivedLabel": "Completed / archived",
+  "homeDebugToolsTitle": "Development tools",
+  "homeDebugUid": "Test UID: {uid}",
+  "@homeDebugUid": {
+    "placeholders": {
+      "uid": {
+        "type": "String"
+      }
+    }
+  },
+  "homeDebugUserSwitchHint": "Switching test user will show different groups because each user has their own list.",
+  "homeDebugResetUser": "Sign out and create a new test user",
+  "homeEnvironmentEmulator": "Environment: Local emulator",
+  "homeEnvironmentFirebase": "Environment: Real Firebase dev",
+  "homePrivacyFooter": "Your assignment and results remain private by default.",
+  "wizardTypeFamily": "Family",
+  "wizardTypeFriends": "Friends",
+  "wizardTypeCompany": "Company",
+  "wizardTypeClass": "Class",
+  "wizardTypeOther": "Other",
+  "wizardModeInPerson": "In person",
+  "wizardModeRemote": "Remote",
+  "wizardModeMixed": "Mixed",
+  "wizardCreateFunctionsError": "Couldn't create the group. Check whether you are using emulators or real Firebase and whether Functions are deployed.",
+  "wizardNameHelp": "Add a name that identifies the group.",
+  "wizardGroupTypeHelp": "This guides the experience. It is not saved yet.",
+  "wizardModeHelp": "Define how the group will be organized. For now, this is UX preparation.",
+  "wizardRuleHelp": "This setting is saved in the group.",
+  "wizardSubgroupsHelpIgnore": "With this rule you don't need subgroups now.",
+  "wizardSubgroupsHelpEnabled": "You can create and assign subgroups from group detail.",
+  "wizardParticipantsHelp": "Later you can invite by code and add people without app.",
+  "wizardSummaryName": "Name",
+  "wizardSummaryGroupType": "Group type",
+  "wizardSummaryMode": "Mode",
+  "wizardSummaryRule": "Draw rule",
+  "groupRoleAdmin": "Admin",
+  "groupRoleMember": "Member",
+  "groupRuleIgnoreTitle": "Ignore subgroups",
+  "groupRulePreferTitle": "Prefer different subgroup",
+  "groupRuleRequireTitle": "Require different subgroup",
+  "groupRuleIgnoreDescription": "Normal draw. It does not consider houses, departments, or classes.",
+  "groupRulePreferDescription": "Tarci Secret will try to cross gifts between different subgroups, but won't block the draw if not possible.",
+  "groupRuleRequireDescription": "Nobody can give to someone from the same subgroup. It may fail if the group cannot produce a valid combination.",
+  "groupSnackNeedThreeParticipants": "You need at least 3 effective participants for a fun draw.",
+  "groupSnackDrawAlreadyRunningOrDone": "You can't run a new draw while one is in progress or completed.",
+  "groupSnackCannotAddAfterDraw": "You can't add participants after running the draw.",
+  "groupTooltipEditGroupName": "Edit group name",
+  "groupStatusCompletedInfo": "Each person can now see who they're gifting to, in private.",
+  "groupStatusReadyInfo": "When you launch it, everyone discovers their secret friend privately.",
+  "groupStatusPendingInfo": "Add a few more people or finish organizing your subgroups.",
+  "groupEffectiveParticipants": "You have {count} of 3 minimum people",
+  "@groupEffectiveParticipants": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "groupOwnerCanRunHint": "Once everything is ready, the organizer launches the draw.",
+  "groupPendingSubgroupHint": "Place each person in their subgroup and you're done.",
+  "groupPendingGeneralHint": "You're nearly there. Just a bit more setup.",
+  "groupRuleConfigVersion": "Config v{version}",
+  "@groupRuleConfigVersion": {
+    "placeholders": {
+      "version": {
+        "type": "int"
+      }
+    }
+  },
+  "groupRuleLockedHint": "The rule can't be changed while the draw is in progress or completed.",
+  "groupSubgroupSectionHelp": "Organize houses, departments, classes or teams to improve the draw.",
+  "groupSubgroupEmptyHelp": "There are no subgroups yet. You can create one to organize the group better.",
+  "groupSubgroupAssignedOne": "1 assigned participant",
+  "groupSubgroupAssignedMany": "{count} assigned participants",
+  "@groupSubgroupAssignedMany": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "groupSubgroupLockedHint": "You can't modify subgroups after running the draw.",
+  "groupSubgroupDisabledHint": "Subgroups are disabled for this draw. You can enable them by changing the rule.",
+  "groupParticipantSubgroupLockedHint": "Subgroup can't be changed while draw is in progress or completed.",
+  "groupManagedSectionHelp": "These participants don't use the app and their result is delivered privately.",
+  "groupManagedEmptyHelp": "There are no managed participants yet.",
+  "groupManagedGuardianSelf": "you",
+  "groupManagedGuardianOther": "another manager",
+  "groupManagedPrivateDeliveryHint": "They participate without app and their result is delivered privately.",
+  "groupInvitationsHelp": "Generate a code and share it so participants can join.",
+  "groupInvitationCodeTapHint": "Tap the code to copy it",
+  "groupInvitationsClosedHint": "Invitations are closed because the draw was already run.",
+  "groupAdvancedHelp": "Secondary group details are shown here.",
+  "groupAdvancedLastExecution": "Last execution: {id}",
+  "@groupAdvancedLastExecution": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "groupAdvancedInternalStatus": "Internal draw status: {status}",
+  "@groupAdvancedInternalStatus": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "groupCreateSubgroupHint": "e.g. Stan House, Sales, Class 3A",
+  "groupHeaderSubtitle": "Prepare your draw with privacy and clarity.",
+  "groupBackToDashboard": "Back to dashboard",
+  "groupLoadingDetail": "Loading group...",
+  "groupErrorTitle": "We couldn't open this group",
+  "groupErrorNotFound": "This group is no longer available or you don't have access.",
+  "groupPreparationTitle": "How your group is going",
+  "groupChecklistEnoughPeopleDone": "You have enough people",
+  "groupChecklistEnoughPeopleMissing": "You need at least 3 people",
+  "groupChecklistAllInSubgroupDone": "Everyone is in a subgroup",
+  "groupChecklistMissingSubgroupOne": "1 person still needs a subgroup",
+  "groupChecklistMissingSubgroupMany": "{count} people still need a subgroup",
+  "@groupChecklistMissingSubgroupMany": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "groupChecklistPendingMembers": "{count} person(s) left or were removed",
+  "@groupChecklistPendingMembers": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "groupPreparationRegistered": "Registered: {count}",
+  "@groupPreparationRegistered": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "groupPreparationManaged": "Managed: {count}",
+  "@groupPreparationManaged": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "groupPreparationPending": "Pending: {count}",
+  "@groupPreparationPending": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "groupPreparationMissingSubgroup": "No subgroup: {count}",
+  "@groupPreparationMissingSubgroup": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "groupRuleCurrentLabel": "Current rule",
+  "groupRuleChangeCta": "Change rule",
+  "groupSectionExpandHint": "Tap to expand",
+  "groupSectionCollapseHint": "Tap to collapse",
+  "groupSectionItemsCount": "{count} total",
+  "@groupSectionItemsCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "groupManagedDialogGuardianSectionTitle": "Who will deliver the result?",
+  "groupManagedDialogGuardianMe": "Me",
+  "groupManagedDialogGuardianMeHint": "I'll share it privately with them",
+  "groupManagedDialogGuardianOther": "Another member",
+  "groupManagedDialogGuardianSpecific": "Specific person",
+  "groupManagedDialogGuardianComingSoon": "Coming soon",
+  "groupManagedDialogDeliverySectionTitle": "How will you share it?",
+  "groupManagedDialogDeliveryWhatsapp": "WhatsApp",
+  "groupManagedDialogDeliveryShowInPerson": "Show in person",
+  "groupParticipantsRegisteredTitle": "Registered participants",
+  "groupParticipantsPendingTitle": "Pending participants",
+  "groupParticipantsPendingEmpty": "There are no pending participants.",
+  "groupPendingStatusLeft": "Left the group",
+  "groupPendingStatusRemoved": "Removed from group",
+  "myAssignmentSubgroupLabel": "Subgroup: {name}",
+  "@myAssignmentSubgroupLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "managedSubgroupLabel": "Subgroup: {name}",
+  "@managedSubgroupLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "managedYouManageIt": "Managed by you",
+  "managedDeliveryRecommendation": "Recommended delivery: {mode}",
+  "@managedDeliveryRecommendation": {
+    "placeholders": {
+      "mode": {
+        "type": "String"
+      }
+    }
+  },
+  "managedTypeManagedParticipant": "Managed participant",
+  "managedDeliveryOwnerDelegated": "Handled by manager",
+  "myAssignmentPrivateBadge": "Private · just for you",
+  "myAssignmentRevealLabel": "You're gifting to",
+  "myAssignmentEmotionalCopy": "Make them feel special.",
+  "myAssignmentPrivacyTitle": "Only you can see this",
+  "myAssignmentPrivacyBody": "Keep the secret until exchange day. No one else in the group can see who you got.",
+  "myAssignmentNoSubgroupChip": "No subgroup",
+  "groupCompletedHeroSubtitle": "Everyone has found out who they're gifting to.",
+  "groupCompletedPrivacyNote": "Each result is private. Only that person sees their own.",
+  "groupCompletedManagedHint": "You privately deliver the results of the people you manage."
+}

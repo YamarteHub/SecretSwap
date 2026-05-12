@@ -1,0 +1,1053 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for English (`en`).
+class AppLocalizationsEn extends AppLocalizations {
+  AppLocalizationsEn([String locale = 'en']) : super(locale);
+
+  @override
+  String get appName => 'Tarci Secret';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get back => 'Back';
+
+  @override
+  String get next => 'Next';
+
+  @override
+  String get create => 'Create';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get goToGroup => 'Go to group';
+
+  @override
+  String get copyCode => 'Copy code';
+
+  @override
+  String get codeCopied => 'Code copied';
+
+  @override
+  String get joinWithCode => 'Join with code';
+
+  @override
+  String get joinScreenTitle => 'Join with code';
+
+  @override
+  String get joinScreenHeroTitle => 'Paste your invitation code';
+
+  @override
+  String get joinScreenHeroSubtitle =>
+      'Your organizer shared it with you. Enter it and we\'ll add you to their group.';
+
+  @override
+  String get joinScreenCodeLabel => 'Invitation code';
+
+  @override
+  String get joinScreenCodeHint => 'For example, AB12CD';
+
+  @override
+  String get joinScreenCodeHelper => 'Lowercase is fine, we\'ll handle it.';
+
+  @override
+  String get joinScreenCodeRequired => 'Paste or type the code you received.';
+
+  @override
+  String get joinScreenCodeTooShort =>
+      'That code looks incomplete. Please check and try again.';
+
+  @override
+  String get joinScreenNicknameLabel => 'Your name';
+
+  @override
+  String get joinScreenNicknameHelper => 'This is how the group will see you.';
+
+  @override
+  String get joinScreenNicknameRequired =>
+      'Tell us your name so we can introduce you.';
+
+  @override
+  String get joinScreenNicknameTooShort =>
+      'Use at least 3 letters so the group recognizes you.';
+
+  @override
+  String get joinScreenCta => 'Join the group';
+
+  @override
+  String get joinScreenCtaLoading => 'Joining…';
+
+  @override
+  String get joinScreenSuccessSnackbar => 'You\'re in!';
+
+  @override
+  String get joinSuccessTitle => 'You\'re in!';
+
+  @override
+  String joinSuccessSubtitle(String groupName) {
+    return 'You joined $groupName. In a moment you\'ll see the rest of the group.';
+  }
+
+  @override
+  String get joinSuccessChooseSubgroupTitle => 'Pick your house or team';
+
+  @override
+  String get joinSuccessChooseSubgroupHelp =>
+      'The organizer created houses or teams. Pick yours so the draw places you correctly.';
+
+  @override
+  String get joinSuccessSubgroupLabel => 'Your house or team';
+
+  @override
+  String get joinSuccessNoSubgroupsTitle => 'No houses or teams yet';
+
+  @override
+  String get joinSuccessNoSubgroupsHelp =>
+      'The organizer hasn\'t created them yet. You can continue and wait; there\'s nothing else for you to do right now.';
+
+  @override
+  String get joinSuccessChooseRequired => 'Pick an option to continue.';
+
+  @override
+  String get joinSuccessPrimaryCta => 'Go to group';
+
+  @override
+  String get joinSuccessSecondaryCta => 'Stay here';
+
+  @override
+  String get createSecretFriend => 'Create Secret Santa';
+
+  @override
+  String get comingSoonMoreDynamics =>
+      'Coming soon: draws, teams, duels and pairings.';
+
+  @override
+  String get mySecretFriend => 'My secret friend';
+
+  @override
+  String get yourSecretFriendIs => 'Your secret friend is…';
+
+  @override
+  String get onlyYouCanSeeAssignment => 'Only you can see this assignment.';
+
+  @override
+  String get keepSecretUntilExchangeDay =>
+      'Keep the secret until exchange day.';
+
+  @override
+  String get managedSecrets => 'Secrets you manage';
+
+  @override
+  String get guardianOfSecret => 'Guardian of the secret';
+
+  @override
+  String get privateResult => 'Private result';
+
+  @override
+  String get splashTagline =>
+      'Tarci Secret hosts private group dynamics with real people.';
+
+  @override
+  String get quickModeTitle => 'Quick mode';
+
+  @override
+  String get quickModeDescription =>
+      'You can start without registering. To keep your groups across devices, you will be able to create an account later.';
+
+  @override
+  String get homeHeaderSubtitle =>
+      'Tarci Secret hosts private group dynamics with real people.';
+
+  @override
+  String get wizardCreateTitle => 'Create Secret Santa';
+
+  @override
+  String wizardStepOf(int current, int total) {
+    return 'Step $current of $total';
+  }
+
+  @override
+  String get wizardStepNameTitle => 'What is this Secret Santa called?';
+
+  @override
+  String get wizardStepGroupTypeTitle => 'What type of group is it?';
+
+  @override
+  String get wizardStepModeTitle => 'How will it be organized?';
+
+  @override
+  String get wizardStepRuleTitle => 'Choose draw rule';
+
+  @override
+  String get wizardStepSubgroupsTitle => 'Subgroups';
+
+  @override
+  String get wizardStepParticipantsTitle => 'Participants';
+
+  @override
+  String get wizardStepReviewTitle => 'Final review';
+
+  @override
+  String get wizardGroupNameLabel => 'Group name';
+
+  @override
+  String get wizardGroupNameHint => 'Family Christmas 2026';
+
+  @override
+  String get wizardNicknameLabel => 'How do you appear?';
+
+  @override
+  String get wizardRuleIgnore => 'Ignore subgroups';
+
+  @override
+  String get wizardRulePrefer => 'Prefer different subgroup';
+
+  @override
+  String get wizardRuleRequire => 'Require different subgroup';
+
+  @override
+  String get wizardRuleIgnoreDesc => 'Normal draw.';
+
+  @override
+  String get wizardRulePreferDesc =>
+      'Try to mix houses, departments or groups.';
+
+  @override
+  String get wizardRuleRequireDesc =>
+      'Only allow people from different subgroups.';
+
+  @override
+  String get wizardReviewSaveNotice =>
+      'You can adjust participants and subgroups later.';
+
+  @override
+  String get wizardReviewSummaryHelp =>
+      'Check that everything looks right before continuing.';
+
+  @override
+  String get wizardCreateButton => 'Create Secret Santa';
+
+  @override
+  String get wizardCreatedTitle => 'Secret Santa created';
+
+  @override
+  String get wizardInviteCodeLabel => 'Invite code';
+
+  @override
+  String get wizardInviteCodeDescription =>
+      'Share this code so others can join.';
+
+  @override
+  String get managedSubtitle =>
+      'These results belong to people who depend on you. Deliver them privately.';
+
+  @override
+  String get managedEmptyTitle => 'You have no managed secrets';
+
+  @override
+  String get managedEmptyMessage =>
+      'When you manage a child or a person without app, their result will appear here.';
+
+  @override
+  String get managedLoadErrorTitle => 'We couldn\'t load your managed secrets';
+
+  @override
+  String get managedLoadErrorMessage =>
+      'Try again in a few minutes. You will only see results for people you manage.';
+
+  @override
+  String get managedAssignedTo => 'They should give to…';
+
+  @override
+  String get managedDeliverInPrivate => 'Deliver this result privately';
+
+  @override
+  String get managedHeroTitle => 'Secrets in your care';
+
+  @override
+  String get managedHeroSubtitle =>
+      'You deliver these results privately, without anyone else finding out.';
+
+  @override
+  String get managedRevealLabel => 'Their secret friend is';
+
+  @override
+  String get managedDeliveryChipLabel => 'Delivery';
+
+  @override
+  String get managedFooterPrivacyNote =>
+      'Every secret is private. Only you see it, and only you deliver it.';
+
+  @override
+  String get myAssignmentNotAvailableTitle =>
+      'You can\'t see your secret friend yet';
+
+  @override
+  String get myAssignmentNotAvailableMessage =>
+      'Your assignment is not available yet. When the draw is completed, you will see it here.';
+
+  @override
+  String get genericLoadErrorMessage =>
+      'We couldn\'t load this information right now.';
+
+  @override
+  String get backToGroup => 'Back to group';
+
+  @override
+  String get groupDetailTitle => 'Group detail';
+
+  @override
+  String get groupRoleLabel => 'Role';
+
+  @override
+  String get groupStatusLabel => 'Status';
+
+  @override
+  String get groupLastExecution => 'Last';
+
+  @override
+  String get groupSectionStatus => 'Group status';
+
+  @override
+  String get groupSectionPrimaryAction => 'Primary action';
+
+  @override
+  String get groupSectionDrawRule => 'Draw rule';
+
+  @override
+  String get groupSectionSubgroups => 'Subgroups';
+
+  @override
+  String get groupSectionParticipants => 'Participants';
+
+  @override
+  String get groupSectionManagedParticipants => 'Participants without app';
+
+  @override
+  String get groupSectionInvitations => 'Invitations';
+
+  @override
+  String get groupSectionAdvanced => 'Advanced settings';
+
+  @override
+  String get groupStatusPreparing => 'Your group is almost ready';
+
+  @override
+  String get groupStatusReadyToDraw => 'All set for the draw';
+
+  @override
+  String get groupStatusCompleted => 'Your secret friends are picked!';
+
+  @override
+  String get groupStatusMissingSubgroups => 'Someone still needs a subgroup';
+
+  @override
+  String get groupActionRunDraw => 'Run the draw now';
+
+  @override
+  String get groupActionViewMySecretFriend => 'View my secret friend';
+
+  @override
+  String get groupActionManagedSecrets => 'Secrets you manage';
+
+  @override
+  String get groupActionCreateSubgroup => 'Create subgroup';
+
+  @override
+  String get groupActionEmptySubgroup => 'Empty subgroup';
+
+  @override
+  String get groupActionDeleteSubgroup => 'Delete subgroup';
+
+  @override
+  String get groupActionGenerateNewCode => 'Generate new code';
+
+  @override
+  String get groupActionCopyCode => 'Copy code';
+
+  @override
+  String get groupActionRename => 'Rename';
+
+  @override
+  String get groupActionEdit => 'Edit';
+
+  @override
+  String get groupRoleOrganizer => 'Organizer';
+
+  @override
+  String get groupRoleParticipant => 'Participant';
+
+  @override
+  String get groupTypeAdultNoApp => 'Adult without app';
+
+  @override
+  String get groupTypeChildManaged => 'Managed child';
+
+  @override
+  String get groupNoSubgroupAssigned => 'No subgroup assigned';
+
+  @override
+  String get groupGuardianOfSecret => 'Guardian of the secret';
+
+  @override
+  String get groupPrivateResult => 'Private result';
+
+  @override
+  String get groupWarningMissingSubgroupTitle =>
+      'Some people still need a subgroup.';
+
+  @override
+  String get groupWarningMissingSubgroupRule =>
+      'To require different subgroup, everyone must have one.';
+
+  @override
+  String get groupWarningMissingSubgroupCombined =>
+      'Some people still need a subgroup. To require different subgroup, everyone must have one.';
+
+  @override
+  String get groupDialogDeleteSubgroupTitle => 'Delete subgroup';
+
+  @override
+  String groupDialogDeleteSubgroupBody(String name) {
+    return 'Are you sure you want to delete \"$name\"? It will only be deleted if it has no assigned participants.';
+  }
+
+  @override
+  String groupDialogEmptySubgroupTitle(String name) {
+    return 'Empty \"$name\"';
+  }
+
+  @override
+  String get groupDialogCancel => 'Cancel';
+
+  @override
+  String get groupDialogDelete => 'Delete';
+
+  @override
+  String get groupDialogEmpty => 'Empty';
+
+  @override
+  String get groupDialogMoveAndDelete => 'Move and delete';
+
+  @override
+  String get groupDialogMoveToSubgroup => 'Move to another subgroup';
+
+  @override
+  String get groupDialogBeforeDeleteMoveTo => 'Before deleting, move to';
+
+  @override
+  String get groupDialogLeaveWithoutSubgroup => 'Leave without subgroup';
+
+  @override
+  String get groupDialogNoAlternativeSubgroup =>
+      'No other subgroup is available. They will remain without subgroup.';
+
+  @override
+  String get groupManagedDialogAddTitle => 'Add participant without app';
+
+  @override
+  String get groupManagedDialogEditTitle => 'Edit participant without app';
+
+  @override
+  String get groupManagedDialogNameLabel => 'Name';
+
+  @override
+  String get groupManagedDialogTypeLabel => 'Type';
+
+  @override
+  String get groupManagedDialogTypeAdultNoApp => 'Adult without app';
+
+  @override
+  String get groupManagedDialogTypeChild => 'Managed child';
+
+  @override
+  String get groupManagedDialogSubgroupOptionalLabel => 'Subgroup (optional)';
+
+  @override
+  String get groupManagedDialogNoSubgroup => 'No subgroup';
+
+  @override
+  String get groupManagedDialogDeliveryLabel => 'Delivery method';
+
+  @override
+  String get groupManagedDialogDeliveryVerbal => 'Verbal';
+
+  @override
+  String get groupManagedDialogDeliveryPrinted => 'Printed';
+
+  @override
+  String get groupManagedDialogWhoManagesTitle =>
+      'Who will manage this result?';
+
+  @override
+  String get groupManagedDialogWhoManagesDesc =>
+      'For now, you will manage it as organizer.';
+
+  @override
+  String get groupManagedDialogWhoManagesHelp =>
+      'When added to the draw, this person won\'t see the result in the app. You can deliver it verbally or printed.';
+
+  @override
+  String groupManagedDialogManagedBy(String name) {
+    return 'Managed by: $name';
+  }
+
+  @override
+  String get groupAssignDialogSelfTitle => 'Your subgroup';
+
+  @override
+  String get groupAssignDialogTitle => 'Assign subgroup';
+
+  @override
+  String get groupAssignDialogSelfDesc =>
+      'Choose your house, department, class or team.';
+
+  @override
+  String get groupAssignDialogDesc => 'Select the subgroup for this member.';
+
+  @override
+  String get groupAssignDialogSubgroupLabel => 'Subgroup';
+
+  @override
+  String get groupSnackbarWriteName => 'Write a name';
+
+  @override
+  String get groupSnackbarDrawCompleted => 'Draw completed';
+
+  @override
+  String get groupSnackbarSubgroupUpdated => 'Subgroup updated';
+
+  @override
+  String get groupSnackbarGroupNameUpdated => 'Group name updated';
+
+  @override
+  String get groupSnackbarRuleUpdated => 'Draw rule updated';
+
+  @override
+  String get groupSnackbarNewCodeGenerated => 'New code generated';
+
+  @override
+  String get groupSnackbarManagedAdded => 'Participant without app added';
+
+  @override
+  String get groupSnackbarManagedUpdated => 'Participant without app updated';
+
+  @override
+  String get groupSnackbarManagedDeleted => 'Participant without app deleted';
+
+  @override
+  String get groupDialogEditGroupNameTitle => 'Edit group name';
+
+  @override
+  String get groupDialogGroupNameLabel => 'Group name';
+
+  @override
+  String get groupDialogRenameSubgroupTitle => 'Rename subgroup';
+
+  @override
+  String get groupDialogSubgroupNameLabel => 'Subgroup name';
+
+  @override
+  String get groupDialogDeleteParticipantTitle => 'Delete participant';
+
+  @override
+  String groupDialogDeleteParticipantBody(String name) {
+    return 'Are you sure you want to delete \"$name\"?';
+  }
+
+  @override
+  String groupDialogSubgroupAssignedCount(int count) {
+    return 'There are $count participants assigned to this subgroup.';
+  }
+
+  @override
+  String groupDialogSubgroupAssignedCountDelete(int count) {
+    return 'This subgroup has $count assigned participants.';
+  }
+
+  @override
+  String get languageSystem => 'System';
+
+  @override
+  String get languageSpanish => 'Spanish';
+
+  @override
+  String get languageEnglish => 'English';
+
+  @override
+  String get languageSelectorTitle => 'Language';
+
+  @override
+  String get languageSelectorSubtitle => 'Choose how you want to see the app';
+
+  @override
+  String get homePrimaryActionsTitle => 'Primary actions';
+
+  @override
+  String get homeComingSoonDescription =>
+      'Coming soon: draws, teams, duels and pairings.';
+
+  @override
+  String get homeChipDraws => 'Draws';
+
+  @override
+  String get homeChipTeams => 'Teams';
+
+  @override
+  String get homeChipPairings => 'Pairings';
+
+  @override
+  String get homeActiveGroupsTitle => 'Active groups';
+
+  @override
+  String get homeEmptyGroupsTitle => 'You don\'t have groups yet';
+
+  @override
+  String get homeEmptyGroupsMessage =>
+      'Create your first secret friend or join with a code.';
+
+  @override
+  String get homeStatusActive => 'Active';
+
+  @override
+  String get homeStatusInactive => 'Inactive';
+
+  @override
+  String get homeCompletedGroupsTitle => 'Completed groups';
+
+  @override
+  String get homeCompletedArchivedLabel => 'Completed / archived';
+
+  @override
+  String get homeDebugToolsTitle => 'Development tools';
+
+  @override
+  String homeDebugUid(String uid) {
+    return 'Test UID: $uid';
+  }
+
+  @override
+  String get homeDebugUserSwitchHint =>
+      'Switching test user will show different groups because each user has their own list.';
+
+  @override
+  String get homeDebugResetUser => 'Sign out and create a new test user';
+
+  @override
+  String get homeEnvironmentEmulator => 'Environment: Local emulator';
+
+  @override
+  String get homeEnvironmentFirebase => 'Environment: Real Firebase dev';
+
+  @override
+  String get homePrivacyFooter =>
+      'Your assignment and results remain private by default.';
+
+  @override
+  String get wizardTypeFamily => 'Family';
+
+  @override
+  String get wizardTypeFriends => 'Friends';
+
+  @override
+  String get wizardTypeCompany => 'Company';
+
+  @override
+  String get wizardTypeClass => 'Class';
+
+  @override
+  String get wizardTypeOther => 'Other';
+
+  @override
+  String get wizardModeInPerson => 'In person';
+
+  @override
+  String get wizardModeRemote => 'Remote';
+
+  @override
+  String get wizardModeMixed => 'Mixed';
+
+  @override
+  String get wizardCreateFunctionsError =>
+      'Couldn\'t create the group. Check whether you are using emulators or real Firebase and whether Functions are deployed.';
+
+  @override
+  String get wizardNameHelp => 'Add a name that identifies the group.';
+
+  @override
+  String get wizardGroupTypeHelp =>
+      'This guides the experience. It is not saved yet.';
+
+  @override
+  String get wizardModeHelp =>
+      'Define how the group will be organized. For now, this is UX preparation.';
+
+  @override
+  String get wizardRuleHelp => 'This setting is saved in the group.';
+
+  @override
+  String get wizardSubgroupsHelpIgnore =>
+      'With this rule you don\'t need subgroups now.';
+
+  @override
+  String get wizardSubgroupsHelpEnabled =>
+      'You can create and assign subgroups from group detail.';
+
+  @override
+  String get wizardParticipantsHelp =>
+      'Later you can invite by code and add people without app.';
+
+  @override
+  String get wizardSummaryName => 'Name';
+
+  @override
+  String get wizardSummaryGroupType => 'Group type';
+
+  @override
+  String get wizardSummaryMode => 'Mode';
+
+  @override
+  String get wizardSummaryRule => 'Draw rule';
+
+  @override
+  String get groupRoleAdmin => 'Admin';
+
+  @override
+  String get groupRoleMember => 'Member';
+
+  @override
+  String get groupRuleIgnoreTitle => 'Ignore subgroups';
+
+  @override
+  String get groupRulePreferTitle => 'Prefer different subgroup';
+
+  @override
+  String get groupRuleRequireTitle => 'Require different subgroup';
+
+  @override
+  String get groupRuleIgnoreDescription =>
+      'Normal draw. It does not consider houses, departments, or classes.';
+
+  @override
+  String get groupRulePreferDescription =>
+      'Tarci Secret will try to cross gifts between different subgroups, but won\'t block the draw if not possible.';
+
+  @override
+  String get groupRuleRequireDescription =>
+      'Nobody can give to someone from the same subgroup. It may fail if the group cannot produce a valid combination.';
+
+  @override
+  String get groupSnackNeedThreeParticipants =>
+      'You need at least 3 effective participants for a fun draw.';
+
+  @override
+  String get groupSnackDrawAlreadyRunningOrDone =>
+      'You can\'t run a new draw while one is in progress or completed.';
+
+  @override
+  String get groupSnackCannotAddAfterDraw =>
+      'You can\'t add participants after running the draw.';
+
+  @override
+  String get groupTooltipEditGroupName => 'Edit group name';
+
+  @override
+  String get groupStatusCompletedInfo =>
+      'Each person can now see who they\'re gifting to, in private.';
+
+  @override
+  String get groupStatusReadyInfo =>
+      'When you launch it, everyone discovers their secret friend privately.';
+
+  @override
+  String get groupStatusPendingInfo =>
+      'Add a few more people or finish organizing your subgroups.';
+
+  @override
+  String groupEffectiveParticipants(int count) {
+    return 'You have $count of 3 minimum people';
+  }
+
+  @override
+  String get groupOwnerCanRunHint =>
+      'Once everything is ready, the organizer launches the draw.';
+
+  @override
+  String get groupPendingSubgroupHint =>
+      'Place each person in their subgroup and you\'re done.';
+
+  @override
+  String get groupPendingGeneralHint =>
+      'You\'re nearly there. Just a bit more setup.';
+
+  @override
+  String groupRuleConfigVersion(int version) {
+    return 'Config v$version';
+  }
+
+  @override
+  String get groupRuleLockedHint =>
+      'The rule can\'t be changed while the draw is in progress or completed.';
+
+  @override
+  String get groupSubgroupSectionHelp =>
+      'Organize houses, departments, classes or teams to improve the draw.';
+
+  @override
+  String get groupSubgroupEmptyHelp =>
+      'There are no subgroups yet. You can create one to organize the group better.';
+
+  @override
+  String get groupSubgroupAssignedOne => '1 assigned participant';
+
+  @override
+  String groupSubgroupAssignedMany(int count) {
+    return '$count assigned participants';
+  }
+
+  @override
+  String get groupSubgroupLockedHint =>
+      'You can\'t modify subgroups after running the draw.';
+
+  @override
+  String get groupSubgroupDisabledHint =>
+      'Subgroups are disabled for this draw. You can enable them by changing the rule.';
+
+  @override
+  String get groupParticipantSubgroupLockedHint =>
+      'Subgroup can\'t be changed while draw is in progress or completed.';
+
+  @override
+  String get groupManagedSectionHelp =>
+      'These participants don\'t use the app and their result is delivered privately.';
+
+  @override
+  String get groupManagedEmptyHelp => 'There are no managed participants yet.';
+
+  @override
+  String get groupManagedGuardianSelf => 'you';
+
+  @override
+  String get groupManagedGuardianOther => 'another manager';
+
+  @override
+  String get groupManagedPrivateDeliveryHint =>
+      'They participate without app and their result is delivered privately.';
+
+  @override
+  String get groupInvitationsHelp =>
+      'Generate a code and share it so participants can join.';
+
+  @override
+  String get groupInvitationCodeTapHint => 'Tap the code to copy it';
+
+  @override
+  String get groupInvitationsClosedHint =>
+      'Invitations are closed because the draw was already run.';
+
+  @override
+  String get groupAdvancedHelp => 'Secondary group details are shown here.';
+
+  @override
+  String groupAdvancedLastExecution(String id) {
+    return 'Last execution: $id';
+  }
+
+  @override
+  String groupAdvancedInternalStatus(String status) {
+    return 'Internal draw status: $status';
+  }
+
+  @override
+  String get groupCreateSubgroupHint => 'e.g. Stan House, Sales, Class 3A';
+
+  @override
+  String get groupHeaderSubtitle =>
+      'Prepare your draw with privacy and clarity.';
+
+  @override
+  String get groupBackToDashboard => 'Back to dashboard';
+
+  @override
+  String get groupLoadingDetail => 'Loading group...';
+
+  @override
+  String get groupErrorTitle => 'We couldn\'t open this group';
+
+  @override
+  String get groupErrorNotFound =>
+      'This group is no longer available or you don\'t have access.';
+
+  @override
+  String get groupPreparationTitle => 'How your group is going';
+
+  @override
+  String get groupChecklistEnoughPeopleDone => 'You have enough people';
+
+  @override
+  String get groupChecklistEnoughPeopleMissing => 'You need at least 3 people';
+
+  @override
+  String get groupChecklistAllInSubgroupDone => 'Everyone is in a subgroup';
+
+  @override
+  String get groupChecklistMissingSubgroupOne =>
+      '1 person still needs a subgroup';
+
+  @override
+  String groupChecklistMissingSubgroupMany(int count) {
+    return '$count people still need a subgroup';
+  }
+
+  @override
+  String groupChecklistPendingMembers(int count) {
+    return '$count person(s) left or were removed';
+  }
+
+  @override
+  String groupPreparationRegistered(int count) {
+    return 'Registered: $count';
+  }
+
+  @override
+  String groupPreparationManaged(int count) {
+    return 'Managed: $count';
+  }
+
+  @override
+  String groupPreparationPending(int count) {
+    return 'Pending: $count';
+  }
+
+  @override
+  String groupPreparationMissingSubgroup(int count) {
+    return 'No subgroup: $count';
+  }
+
+  @override
+  String get groupRuleCurrentLabel => 'Current rule';
+
+  @override
+  String get groupRuleChangeCta => 'Change rule';
+
+  @override
+  String get groupSectionExpandHint => 'Tap to expand';
+
+  @override
+  String get groupSectionCollapseHint => 'Tap to collapse';
+
+  @override
+  String groupSectionItemsCount(int count) {
+    return '$count total';
+  }
+
+  @override
+  String get groupManagedDialogGuardianSectionTitle =>
+      'Who will deliver the result?';
+
+  @override
+  String get groupManagedDialogGuardianMe => 'Me';
+
+  @override
+  String get groupManagedDialogGuardianMeHint =>
+      'I\'ll share it privately with them';
+
+  @override
+  String get groupManagedDialogGuardianOther => 'Another member';
+
+  @override
+  String get groupManagedDialogGuardianSpecific => 'Specific person';
+
+  @override
+  String get groupManagedDialogGuardianComingSoon => 'Coming soon';
+
+  @override
+  String get groupManagedDialogDeliverySectionTitle => 'How will you share it?';
+
+  @override
+  String get groupManagedDialogDeliveryWhatsapp => 'WhatsApp';
+
+  @override
+  String get groupManagedDialogDeliveryShowInPerson => 'Show in person';
+
+  @override
+  String get groupParticipantsRegisteredTitle => 'Registered participants';
+
+  @override
+  String get groupParticipantsPendingTitle => 'Pending participants';
+
+  @override
+  String get groupParticipantsPendingEmpty =>
+      'There are no pending participants.';
+
+  @override
+  String get groupPendingStatusLeft => 'Left the group';
+
+  @override
+  String get groupPendingStatusRemoved => 'Removed from group';
+
+  @override
+  String myAssignmentSubgroupLabel(String name) {
+    return 'Subgroup: $name';
+  }
+
+  @override
+  String managedSubgroupLabel(String name) {
+    return 'Subgroup: $name';
+  }
+
+  @override
+  String get managedYouManageIt => 'Managed by you';
+
+  @override
+  String managedDeliveryRecommendation(String mode) {
+    return 'Recommended delivery: $mode';
+  }
+
+  @override
+  String get managedTypeManagedParticipant => 'Managed participant';
+
+  @override
+  String get managedDeliveryOwnerDelegated => 'Handled by manager';
+
+  @override
+  String get myAssignmentPrivateBadge => 'Private · just for you';
+
+  @override
+  String get myAssignmentRevealLabel => 'You\'re gifting to';
+
+  @override
+  String get myAssignmentEmotionalCopy => 'Make them feel special.';
+
+  @override
+  String get myAssignmentPrivacyTitle => 'Only you can see this';
+
+  @override
+  String get myAssignmentPrivacyBody =>
+      'Keep the secret until exchange day. No one else in the group can see who you got.';
+
+  @override
+  String get myAssignmentNoSubgroupChip => 'No subgroup';
+
+  @override
+  String get groupCompletedHeroSubtitle =>
+      'Everyone has found out who they\'re gifting to.';
+
+  @override
+  String get groupCompletedPrivacyNote =>
+      'Each result is private. Only that person sees their own.';
+
+  @override
+  String get groupCompletedManagedHint =>
+      'You privately deliver the results of the people you manage.';
+}

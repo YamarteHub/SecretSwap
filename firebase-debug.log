@@ -565,3 +565,183 @@ INFO: Detected HTTP/2 connection.
 [debug] [2026-05-12T11:42:12.967Z] May 12, 2026 1:42:12 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
 INFO: Detected HTTP/2 connection.
  {"metadata":{"emulator":{"name":"firestore"},"message":"May 12, 2026 1:42:12 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected HTTP/2 connection.\r\n"}}
+[debug] [2026-05-12T11:57:10.849Z] File C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\src\functions\joinGroupByCode.ts changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\src\\functions\\joinGroupByCode.ts changed, reloading triggers"}}
+[debug] [2026-05-12T11:57:11.924Z] Validating nodejs source
+[warn] !  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] !  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2026-05-12T11:57:13.577Z] > [functions] package.json contents: {
+  "name": "secretswap-firebase-functions",
+  "version": "0.1.0",
+  "private": true,
+  "type": "commonjs",
+  "main": "lib/index.js",
+  "engines": {
+    "node": "22"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -w -p tsconfig.json",
+    "emulators:persistent": "firebase emulators:start --only auth,firestore,functions --project tarciswap-dev --import=../../emulator-data --export-on-exit=../../emulator-data",
+    "lint": "eslint .",
+    "seed:join": "node tools/seed_join_by_code.js",
+    "seed:participants": "node tools/seed_group_participants.js",
+    "test:create-managed-participant": "node tools/test_create_managed_participant.js",
+    "test:delete-subgroup": "node tools/test_delete_subgroup.js",
+    "test:managed-participant-mutations": "node tools/test_managed_participant_mutations.js",
+    "test:execute-draw-unified": "node tools/test_execute_draw_unified.js",
+    "test:get-managed-assignments": "node tools/test_get_managed_assignments.js",
+    "test:join": "node tools/test_join_by_code.js",
+    "test:e2e:group-join": "node tools/e2e_create_and_join.js",
+    "test:e2e:execute-draw": "node tools/e2e_execute_draw.js",
+    "test": "node -e \"console.log('no tests yet')\""
+  },
+  "dependencies": {
+    "firebase-admin": "^12.3.1",
+    "firebase-functions": "^5.0.1",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.34.0",
+    "@types/node": "^22.18.0",
+    "eslint": "^9.34.0",
+    "globals": "^16.4.0",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.41.0"
+  }
+}
+[debug] [2026-05-12T11:57:13.577Z] Building nodejs source
+[debug] [2026-05-12T11:57:13.578Z] Failed to find version of module node: reached end of search path C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\node_modules
+[info] +  functions: Using node@22 from host. 
+[debug] [2026-05-12T11:57:13.586Z] Could not find functions.yaml. Must use http discovery
+[debug] [2026-05-12T11:57:13.605Z] Found firebase-functions binary at 'C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8280
+
+[debug] [2026-05-12T11:57:14.410Z] Got response from /__/functions.yaml {"endpoints":{"createGroup":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createGroup"},"createManagedParticipant":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createManagedParticipant"},"updateManagedParticipant":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateManagedParticipant"},"removeManagedParticipant":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"removeManagedParticipant"},"deleteSubgroup":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"deleteSubgroup"},"joinGroupByCode":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"joinGroupByCode"},"rotateInviteCode":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"rotateInviteCode"},"executeDraw":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"executeDraw"},"getManagedAssignments":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"getManagedAssignments"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[debug] [2026-05-12T11:57:14.625Z] May 12, 2026 1:57:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"May 12, 2026 1:57:14 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected HTTP/2 connection.\r\n"}}
+[info] +  functions: Loaded functions definitions from source: createGroup, createManagedParticipant, updateManagedParticipant, removeManagedParticipant, deleteSubgroup, joinGroupByCode, rotateInviteCode, executeDraw, getManagedAssignments. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createGroup, createManagedParticipant, updateManagedParticipant, removeManagedParticipant, deleteSubgroup, joinGroupByCode, rotateInviteCode, executeDraw, getManagedAssignments."}}
+[debug] [2026-05-12T11:57:18.479Z] [worker-pool] Shutting down IDLE worker (us-central1-joinGroupByCode) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Shutting down IDLE worker (us-central1-joinGroupByCode)"}}
+[debug] [2026-05-12T11:57:18.479Z] [worker-us-central1-joinGroupByCode-3b403c60-db55-454f-b61e-f755a62a3dcd]: FINISHING {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-joinGroupByCode"},"extension":{},"message":"[worker-us-central1-joinGroupByCode-3b403c60-db55-454f-b61e-f755a62a3dcd]: FINISHING"}}
+[debug] [2026-05-12T11:57:18.486Z] [worker-us-central1-joinGroupByCode-3b403c60-db55-454f-b61e-f755a62a3dcd]: exited {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-joinGroupByCode"},"extension":{},"message":"[worker-us-central1-joinGroupByCode-3b403c60-db55-454f-b61e-f755a62a3dcd]: exited"}}
+[debug] [2026-05-12T11:57:18.486Z] [worker-us-central1-joinGroupByCode-3b403c60-db55-454f-b61e-f755a62a3dcd]: FINISHED {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-joinGroupByCode"},"extension":{},"message":"[worker-us-central1-joinGroupByCode-3b403c60-db55-454f-b61e-f755a62a3dcd]: FINISHED"}}
+[debug] [2026-05-12T11:57:18.579Z] May 12, 2026 1:57:18 PM io.netty.channel.DefaultChannelPipeline onUnhandledInboundException
+WARNING: An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.net.SocketException: Connection reset
+	at java.base/sun.nio.ch.SocketChannelImpl.throwConnectionReset(SocketChannelImpl.java:401)
+	at java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:434)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:255)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:356)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:796)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"May 12, 2026 1:57:18 PM io.netty.channel.DefaultChannelPipeline onUnhandledInboundException\r\nWARNING: An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.\r\njava.net.SocketException: Connection reset\r\n\tat java.base/sun.nio.ch.SocketChannelImpl.throwConnectionReset(SocketChannelImpl.java:401)\r\n\tat java.base/sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:434)\r\n\tat io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:255)\r\n\tat io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)\r\n\tat io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:356)\r\n\tat io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)\r\n\tat io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:796)\r\n\tat io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)\r\n\tat io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)\r\n\tat io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)\r\n\tat io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)\r\n\tat io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)\r\n\tat io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)\r\n\tat java.base/java.lang.Thread.run(Thread.java:1583)\r\n\r\n"}}
+[debug] [2026-05-12T11:57:51.340Z] May 12, 2026 1:57:51 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"May 12, 2026 1:57:51 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected HTTP/2 connection.\r\n"}}
+[debug] [2026-05-12T11:57:51.340Z] May 12, 2026 1:57:51 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"May 12, 2026 1:57:51 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected HTTP/2 connection.\r\n"}}
+[debug] [2026-05-12T11:57:55.924Z] File C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\lib\shared\errors.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\lib\\shared\\errors.js changed, reloading triggers"}}
+[debug] [2026-05-12T11:57:55.941Z] File C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\lib\shared\auth.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\lib\\shared\\auth.js changed, reloading triggers"}}
+[debug] [2026-05-12T11:57:55.954Z] File C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\lib\shared\firestore.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\lib\\shared\\firestore.js changed, reloading triggers"}}
+[debug] [2026-05-12T11:57:55.966Z] File C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\lib\shared\firestorePaths.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\lib\\shared\\firestorePaths.js changed, reloading triggers"}}
+[debug] [2026-05-12T11:57:55.966Z] File C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\lib\shared\dtos.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\lib\\shared\\dtos.js changed, reloading triggers"}}
+[debug] [2026-05-12T11:57:55.966Z] File C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\lib\shared\validation.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\lib\\shared\\validation.js changed, reloading triggers"}}
+[debug] [2026-05-12T11:57:55.966Z] File C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\lib\functions\createGroup.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\lib\\functions\\createGroup.js changed, reloading triggers"}}
+[debug] [2026-05-12T11:57:55.976Z] File C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\lib\shared\invites.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\lib\\shared\\invites.js changed, reloading triggers"}}
+[debug] [2026-05-12T11:57:55.978Z] File C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\lib\functions\getManagedAssignments.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\lib\\functions\\getManagedAssignments.js changed, reloading triggers"}}
+[debug] [2026-05-12T11:57:55.978Z] File C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\lib\functions\createManagedParticipant.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\lib\\functions\\createManagedParticipant.js changed, reloading triggers"}}
+[debug] [2026-05-12T11:57:56.004Z] File C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\lib\functions\updateManagedParticipant.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\lib\\functions\\updateManagedParticipant.js changed, reloading triggers"}}
+[debug] [2026-05-12T11:57:56.005Z] File C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\lib\functions\removeManagedParticipant.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\lib\\functions\\removeManagedParticipant.js changed, reloading triggers"}}
+[debug] [2026-05-12T11:57:56.009Z] File C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\lib\shared\drawMatching.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\lib\\shared\\drawMatching.js changed, reloading triggers"}}
+[debug] [2026-05-12T11:57:56.009Z] File C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\lib\functions\deleteSubgroup.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\lib\\functions\\deleteSubgroup.js changed, reloading triggers"}}
+[debug] [2026-05-12T11:57:56.014Z] File C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\lib\shared\lock.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\lib\\shared\\lock.js changed, reloading triggers"}}
+[debug] [2026-05-12T11:57:56.035Z] File C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\lib\functions\executeDraw.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\lib\\functions\\executeDraw.js changed, reloading triggers"}}
+[debug] [2026-05-12T11:57:56.036Z] File C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\lib\functions\joinGroupByCode.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\lib\\functions\\joinGroupByCode.js changed, reloading triggers"}}
+[debug] [2026-05-12T11:57:56.041Z] File C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\lib\index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\lib\\index.js changed, reloading triggers"}}
+[debug] [2026-05-12T11:57:56.041Z] File C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\lib\functions\rotateInviteCode.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\alberto.yamarte\\Desktop\\Proyecto\\SecretSwap\\src\\firebase_functions\\lib\\functions\\rotateInviteCode.js changed, reloading triggers"}}
+[debug] [2026-05-12T11:57:57.056Z] Validating nodejs source
+[warn] !  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] !  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2026-05-12T11:57:57.710Z] > [functions] package.json contents: {
+  "name": "secretswap-firebase-functions",
+  "version": "0.1.0",
+  "private": true,
+  "type": "commonjs",
+  "main": "lib/index.js",
+  "engines": {
+    "node": "22"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -w -p tsconfig.json",
+    "emulators:persistent": "firebase emulators:start --only auth,firestore,functions --project tarciswap-dev --import=../../emulator-data --export-on-exit=../../emulator-data",
+    "lint": "eslint .",
+    "seed:join": "node tools/seed_join_by_code.js",
+    "seed:participants": "node tools/seed_group_participants.js",
+    "test:create-managed-participant": "node tools/test_create_managed_participant.js",
+    "test:delete-subgroup": "node tools/test_delete_subgroup.js",
+    "test:managed-participant-mutations": "node tools/test_managed_participant_mutations.js",
+    "test:execute-draw-unified": "node tools/test_execute_draw_unified.js",
+    "test:get-managed-assignments": "node tools/test_get_managed_assignments.js",
+    "test:join": "node tools/test_join_by_code.js",
+    "test:e2e:group-join": "node tools/e2e_create_and_join.js",
+    "test:e2e:execute-draw": "node tools/e2e_execute_draw.js",
+    "test": "node -e \"console.log('no tests yet')\""
+  },
+  "dependencies": {
+    "firebase-admin": "^12.3.1",
+    "firebase-functions": "^5.0.1",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.34.0",
+    "@types/node": "^22.18.0",
+    "eslint": "^9.34.0",
+    "globals": "^16.4.0",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.41.0"
+  }
+}
+[debug] [2026-05-12T11:57:57.711Z] Building nodejs source
+[debug] [2026-05-12T11:57:57.711Z] Failed to find version of module node: reached end of search path C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\node_modules
+[info] +  functions: Using node@22 from host. 
+[debug] [2026-05-12T11:57:57.713Z] Could not find functions.yaml. Must use http discovery
+[debug] [2026-05-12T11:57:57.722Z] Found firebase-functions binary at 'C:\Users\alberto.yamarte\Desktop\Proyecto\SecretSwap\src\firebase_functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8007
+
+[debug] [2026-05-12T11:57:58.137Z] Got response from /__/functions.yaml {"endpoints":{"createGroup":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createGroup"},"createManagedParticipant":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"createManagedParticipant"},"updateManagedParticipant":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"updateManagedParticipant"},"removeManagedParticipant":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"removeManagedParticipant"},"deleteSubgroup":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"deleteSubgroup"},"joinGroupByCode":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"joinGroupByCode"},"rotateInviteCode":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"rotateInviteCode"},"executeDraw":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"executeDraw"},"getManagedAssignments":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"callableTrigger":{},"entryPoint":"getManagedAssignments"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[info] +  functions: Loaded functions definitions from source: createGroup, createManagedParticipant, updateManagedParticipant, removeManagedParticipant, deleteSubgroup, joinGroupByCode, rotateInviteCode, executeDraw, getManagedAssignments. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: createGroup, createManagedParticipant, updateManagedParticipant, removeManagedParticipant, deleteSubgroup, joinGroupByCode, rotateInviteCode, executeDraw, getManagedAssignments."}}
+[debug] [2026-05-12T12:13:17.513Z] May 12, 2026 2:13:17 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"May 12, 2026 2:13:17 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected HTTP/2 connection.\r\n"}}
+[debug] [2026-05-12T12:27:40.031Z] May 12, 2026 2:27:40 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"May 12, 2026 2:27:40 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected HTTP/2 connection.\r\n"}}
+[debug] [2026-05-12T12:43:17.380Z] May 12, 2026 2:43:17 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"May 12, 2026 2:43:17 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected HTTP/2 connection.\r\n"}}
+[debug] [2026-05-12T12:59:04.164Z] May 12, 2026 2:59:04 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"May 12, 2026 2:59:04 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected HTTP/2 connection.\r\n"}}
+[debug] [2026-05-12T12:59:04.165Z] May 12, 2026 2:59:04 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"May 12, 2026 2:59:04 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected HTTP/2 connection.\r\n"}}
+[debug] [2026-05-12T12:59:18.317Z] May 12, 2026 2:59:18 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"May 12, 2026 2:59:18 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected HTTP/2 connection.\r\n"}}
+[debug] [2026-05-12T12:59:18.318Z] May 12, 2026 2:59:18 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"May 12, 2026 2:59:18 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected HTTP/2 connection.\r\n"}}
+[debug] [2026-05-12T13:13:17.641Z] May 12, 2026 3:13:17 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"May 12, 2026 3:13:17 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\r\nINFO: Detected HTTP/2 connection.\r\n"}}

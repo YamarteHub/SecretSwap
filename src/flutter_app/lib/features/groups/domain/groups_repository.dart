@@ -1,0 +1,71 @@
+import 'group_models.dart';
+
+abstract interface class GroupsRepository {
+  Future<List<GroupSummary>> listMyGroups();
+
+  Future<CreatedGroup> createGroup({
+    required String name,
+    required String nickname,
+  });
+
+  Future<void> renameGroup({required String groupId, required String name});
+
+  Future<String> joinGroupByCode({required String code, String? nickname});
+
+  Future<GroupDetail> getGroupDetail(String groupId);
+
+  /// Crea un subgrupo (Firestore: `groups/{groupId}/subgroups/{id}`).
+  Future<Subgroup> createSubgroup({
+    required String groupId,
+    required String name,
+  });
+
+  Future<void> renameSubgroup({
+    required String groupId,
+    required String subgroupId,
+    required String name,
+  });
+
+  Future<void> deleteSubgroup({
+    required String groupId,
+    required String subgroupId,
+  });
+
+  /// Asigna o quita subgrupo del miembro (`subgroupId` null = sin subgrupo).
+  Future<void> setMemberSubgroup({
+    required String groupId,
+    required String memberUid,
+    String? subgroupId,
+  });
+
+  /// Crea `rules/{N+1}` inmutable y actualiza `rulesVersionCurrent` (solo owner + reglas Firestore).
+  Future<void> setDrawSubgroupRule({
+    required String groupId,
+    required DrawSubgroupRule mode,
+  });
+
+  /// Genera un nuevo código de invitación y devuelve el código en claro.
+  Future<String> rotateInviteCode({required String groupId});
+
+  Future<void> createManagedParticipant({
+    required String groupId,
+    required String displayName,
+    required String participantType,
+    String? subgroupId,
+    required String deliveryMode,
+  });
+
+  Future<void> updateManagedParticipant({
+    required String groupId,
+    required String participantId,
+    required String displayName,
+    required String participantType,
+    String? subgroupId,
+    required String deliveryMode,
+  });
+
+  Future<void> removeManagedParticipant({
+    required String groupId,
+    required String participantId,
+  });
+}
