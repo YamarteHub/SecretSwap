@@ -307,6 +307,13 @@ export const executeDraw = onCall(async (req: CallableRequest<unknown>): Promise
     if (group.ownerUid !== uid) {
       throw new AppError({ code: "FORBIDDEN", message: "Only owner can execute draw in MVP" });
     }
+    if (group.drawStatus === "completed") {
+      throw new AppError({
+        code: "DRAW_ALREADY_COMPLETED",
+        reasonCode: "DRAW_ALREADY_COMPLETED",
+        message: "Draw already completed for this group"
+      });
+    }
     if (group.lifecycleStatus === "archived") {
       throw new AppError({
         code: "FORBIDDEN",

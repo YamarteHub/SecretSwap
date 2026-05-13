@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -419,6 +420,8 @@ enum _DetailSection { subgroups, registered, managed, invitations }
 
 class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
   bool _drawing = false;
+  /// Evita doble invocación a `executeDraw` (doble tap o reentrada) antes de que `_drawing` se refleje en el árbol.
+  bool _runDrawInFlight = false;
   bool _savingRule = false;
   bool _rotatingInviteCode = false;
   String? _lastInviteCode;
@@ -533,6 +536,12 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
   }
 
   Future<void> _runDraw() async {
+    if (_runDrawInFlight) {
+      if (kDebugMode) {
+        debugPrint('[runDraw] ignored: already running groupId=${widget.groupId}');
+      }
+      return;
+    }
     final unifiedCounts = _buildUnifiedPreparationCounts(widget.detail);
     if (unifiedCounts.effectiveTotal < 3) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -559,14 +568,21 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
     }
     final idempotencyKey =
         'app-${DateTime.now().microsecondsSinceEpoch}-${widget.groupId}';
+    _runDrawInFlight = true;
     setState(() => _drawing = true);
     try {
+      if (kDebugMode) {
+        debugPrint('[runDraw] calling executeDraw groupId=${widget.groupId}');
+      }
       final draw = ref.read(drawRepositoryProvider);
       await draw.executeDraw(
         groupId: widget.groupId,
         idempotencyKey: idempotencyKey,
       );
       if (!mounted) return;
+      if (kDebugMode) {
+        debugPrint('[runDraw] executeDraw success groupId=${widget.groupId}');
+      }
       widget.onAfterDraw();
       try {
         await ref.read(groupDetailProvider(widget.groupId).future);
@@ -579,13 +595,34 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
         SnackBar(content: Text(context.l10n.groupSnackbarDrawCompleted)),
       );
     } catch (e) {
-      if (mounted) {
+      if (!mounted) return;
+      if (executeDrawErrorIsAlreadyCompleted(e)) {
+        if (kDebugMode) {
+          debugPrint(
+            '[runDraw] backend reports already completed; syncing UI groupId=${widget.groupId}',
+          );
+        }
+        widget.onAfterDraw();
+        try {
+          await ref.read(groupDetailProvider(widget.groupId).future);
+        } catch (_) {}
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(context.l10n.groupSnackbarDrawCompleted)),
+        );
+      } else {
+        if (kDebugMode) {
+          debugPrint('[runDraw] error groupId=${widget.groupId} e=$e');
+        }
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(userVisibleActionErrorMessage(e))),
         );
       }
     } finally {
-      if (mounted) setState(() => _drawing = false);
+      _runDrawInFlight = false;
+      if (mounted) {
+        setState(() => _drawing = false);
+      }
     }
   }
 
@@ -1302,6 +1339,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
             : l10n.groupHeaderSubtitle;
     final canRunDraw = _isOwner &&
         !_drawing &&
+        !_runDrawInFlight &&
         drawReadyByParticipants &&
         drawReadyByStatus &&
         drawReadyByRule;

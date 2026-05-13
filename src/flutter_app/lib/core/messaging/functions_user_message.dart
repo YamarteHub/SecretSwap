@@ -21,6 +21,8 @@ String userVisibleErrorMessage(Object error) {
         return 'No puedes volver a unirte a este grupo.';
       case 'DRAW_IN_PROGRESS':
         return 'El sorteo está en curso. Inténtalo más tarde.';
+      case 'DRAW_ALREADY_COMPLETED':
+        return 'Este sorteo ya se había completado.';
       case 'DRAW_COMPLETED_INVITES_CLOSED':
         return 'Este sorteo ya fue realizado y ya no admite nuevos participantes.';
       case 'SUBGROUP_IN_USE':
@@ -76,8 +78,26 @@ String? _reasonCodeFromDetails(Object? details) {
   if (details is Map) {
     final rc = details['reasonCode'];
     if (rc != null) return rc.toString();
+    final nested = details['details'];
+    if (nested is Map) {
+      final rc2 = nested['reasonCode'];
+      if (rc2 != null) return rc2.toString();
+    }
   }
   return null;
+}
+
+/// `executeDraw` devolvió que el grupo ya estaba en estado completado (p. ej. doble tap).
+bool executeDrawErrorIsAlreadyCompleted(Object error) {
+  if (error is FirebaseFunctionsException) {
+    final reason = _reasonCodeFromDetails(error.details);
+    if (reason == 'DRAW_ALREADY_COMPLETED') return true;
+    final msg = (error.message ?? '').toLowerCase();
+    if (msg.contains('already completed') && msg.contains('draw')) {
+      return true;
+    }
+  }
+  return false;
 }
 
 bool _isLikelyEnvironmentOrSessionIssue(Object error) {
