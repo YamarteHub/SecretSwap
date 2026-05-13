@@ -2009,17 +2009,25 @@ class _StatusHeroCard extends StatelessWidget {
           if (primary != null) ...[
             const SizedBox(height: 16),
             FilledButton.icon(
-              style: isCompleted
-                  ? FilledButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
+              style: FilledButton.styleFrom(
+                padding: isCompleted
+                    ? const EdgeInsets.symmetric(
                         vertical: 16,
                         horizontal: 18,
-                      ),
-                      textStyle: theme.textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.w800,
-                      ),
-                    )
-                  : null,
+                      )
+                    : null,
+                textStyle: const TextStyle(inherit: false).merge(
+                  ((isCompleted
+                              ? (theme.textTheme.titleSmall ??
+                                  theme.textTheme.labelLarge)
+                              : theme.textTheme.labelLarge) ??
+                          theme.textTheme.bodyLarge!)
+                      .copyWith(
+                    fontWeight:
+                        isCompleted ? FontWeight.w800 : FontWeight.w600,
+                  ),
+                ),
+              ),
               onPressed: primary!.loading ? null : primary!.onPressed,
               icon: primary!.loading
                   ? const SizedBox(
@@ -2034,18 +2042,26 @@ class _StatusHeroCard extends StatelessWidget {
           if (secondary != null) ...[
             const SizedBox(height: 10),
             OutlinedButton.icon(
-              style: isCompleted
-                  ? OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
+              style: OutlinedButton.styleFrom(
+                padding: isCompleted
+                    ? const EdgeInsets.symmetric(
                         vertical: 14,
                         horizontal: 16,
-                      ),
-                      side: BorderSide(
+                      )
+                    : null,
+                side: isCompleted
+                    ? BorderSide(
                         color: AppTheme.deepPlum.withValues(alpha: 0.35),
                         width: 1.4,
-                      ),
-                    )
-                  : null,
+                      )
+                    : null,
+                textStyle: const TextStyle(inherit: false).merge(
+                  (theme.textTheme.labelLarge ?? theme.textTheme.bodyLarge!)
+                      .copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
               onPressed: secondary!.onPressed,
               icon: Icon(secondary!.icon),
               label: Text(secondary!.label),
