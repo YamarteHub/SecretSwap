@@ -17,6 +17,12 @@ src/firebase_functions/lib/
 # Firebase
 .firebase/
 
+# Emulador / depuración local (no versionar)
+emulator-data/
+firebase-debug.log
+firestore-debug.log
+*.log
+
 # OS
 .DS_Store
 Thumbs.db
