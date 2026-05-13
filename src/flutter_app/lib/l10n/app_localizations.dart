@@ -482,6 +482,36 @@ abstract class AppLocalizations {
   /// **'Participantes'**
   String get wizardStepParticipantsTitle;
 
+  /// No description provided for @wizardStepEventDateTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Cuándo es el intercambio?'**
+  String get wizardStepEventDateTitle;
+
+  /// No description provided for @wizardStepEventDateHelp.
+  ///
+  /// In es, this message translates to:
+  /// **'Opcional. Sirve para recordar la entrega y, cuando el sorteo esté hecho, para mover el grupo al historial tras esa fecha.'**
+  String get wizardStepEventDateHelp;
+
+  /// No description provided for @wizardSummaryEventDate.
+  ///
+  /// In es, this message translates to:
+  /// **'Fecha del evento'**
+  String get wizardSummaryEventDate;
+
+  /// No description provided for @wizardEventDateNotSet.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin definir'**
+  String get wizardEventDateNotSet;
+
+  /// No description provided for @wizardEventDateClear.
+  ///
+  /// In es, this message translates to:
+  /// **'Quitar fecha'**
+  String get wizardEventDateClear;
+
   /// No description provided for @wizardStepReviewTitle.
   ///
   /// In es, this message translates to:

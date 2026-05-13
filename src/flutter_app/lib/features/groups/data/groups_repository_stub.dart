@@ -6,6 +6,7 @@ class GroupsRepositoryStub implements GroupsRepository {
   Future<CreatedGroup> createGroup({
     required String name,
     required String nickname,
+    DateTime? eventDate,
   }) async {
     throw UnimplementedError('createGroup not wired');
   }

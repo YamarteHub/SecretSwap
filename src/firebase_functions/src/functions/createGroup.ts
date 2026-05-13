@@ -1,4 +1,4 @@
-import { FieldValue } from "firebase-admin/firestore";
+import { FieldValue, Timestamp } from "firebase-admin/firestore";
 import { onCall, CallableRequest, HttpsError } from "firebase-functions/v2/https";
 import { requireAuthUid } from "../shared/auth";
 import { getDb } from "../shared/firestore";
@@ -14,10 +14,18 @@ import {
 import { parseOrThrow } from "../shared/validation";
 import { generateInviteCode, hashInviteCode } from "../shared/invites";
 
+function optionalEventTimestamp(epochMs: number | undefined): Timestamp | undefined {
+  if (epochMs === undefined) return undefined;
+  const d = new Date(epochMs);
+  if (Number.isNaN(d.getTime())) return undefined;
+  return Timestamp.fromMillis(epochMs);
+}
+
 export const createGroup = onCall(async (req: CallableRequest<unknown>): Promise<CreateGroupResponse> => {
   try {
     const uid = requireAuthUid(req.auth?.uid);
     const body = parseOrThrow(CreateGroupRequestSchema, req.data);
+    const eventDateTs = optionalEventTimestamp(body.eventDateEpochMs);
 
     const db = getDb();
     const groupRef = db.collection("groups").doc();
@@ -54,7 +62,8 @@ export const createGroup = onCall(async (req: CallableRequest<unknown>): Promise
             rulesVersionCurrent,
             drawingLock: null,
             createdAt: now,
-            updatedAt: now
+            updatedAt: now,
+            ...(eventDateTs ? { eventDate: eventDateTs } : {})
           });
 
           tx.create(db.doc(groupPaths.memberDoc(groupId, uid)), {

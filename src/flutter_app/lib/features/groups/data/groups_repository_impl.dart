@@ -43,12 +43,22 @@ class GroupsRepositoryImpl implements GroupsRepository {
   Future<CreatedGroup> createGroup({
     required String name,
     required String nickname,
+    DateTime? eventDate,
   }) async {
     final callable = _functions.httpsCallable('createGroup');
-    final result = await callable.call(<String, dynamic>{
+    final payload = <String, dynamic>{
       'name': name,
       'nickname': nickname,
-    });
+    };
+    if (eventDate != null) {
+      final day = DateTime(
+        eventDate.year,
+        eventDate.month,
+        eventDate.day,
+      );
+      payload['eventDateEpochMs'] = day.millisecondsSinceEpoch;
+    }
+    final result = await callable.call(payload);
     final data = _asStringKeyMap(result.data);
     final groupId = data['groupId'] as String?;
     final inviteCode = data['inviteCode'] as String?;

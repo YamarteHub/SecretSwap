@@ -218,6 +218,22 @@ class AppLocalizationsEs extends AppLocalizations {
   String get wizardStepParticipantsTitle => 'Participantes';
 
   @override
+  String get wizardStepEventDateTitle => '¿Cuándo es el intercambio?';
+
+  @override
+  String get wizardStepEventDateHelp =>
+      'Opcional. Sirve para recordar la entrega y, cuando el sorteo esté hecho, para mover el grupo al historial tras esa fecha.';
+
+  @override
+  String get wizardSummaryEventDate => 'Fecha del evento';
+
+  @override
+  String get wizardEventDateNotSet => 'Sin definir';
+
+  @override
+  String get wizardEventDateClear => 'Quitar fecha';
+
+  @override
   String get wizardStepReviewTitle => 'Revisión final';
 
   @override

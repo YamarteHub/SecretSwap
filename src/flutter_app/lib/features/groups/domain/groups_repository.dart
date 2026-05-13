@@ -6,6 +6,8 @@ abstract interface class GroupsRepository {
   Future<CreatedGroup> createGroup({
     required String name,
     required String nickname,
+    /// Día civil local del evento/entrega; opcional (`groups.eventDate` en Firestore).
+    DateTime? eventDate,
   });
 
   Future<void> renameGroup({required String groupId, required String name});

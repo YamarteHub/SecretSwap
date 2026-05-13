@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../core/l10n/l10n.dart';
 import '../../../../core/messaging/functions_user_message.dart';
@@ -20,7 +21,7 @@ class CreateGroupScreen extends ConsumerStatefulWidget {
 }
 
 class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
-  static const int _totalSteps = 6;
+  static const int _totalSteps = 7;
 
   final _nameCtrl = TextEditingController();
   final _nickCtrl = TextEditingController(text: 'Yo');
@@ -28,6 +29,7 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
   int _step = 0;
   String _groupType = 'family';
   DrawSubgroupRule _drawRule = DrawSubgroupRule.ignore;
+  DateTime? _eventDate;
 
   static const _groupTypeOptions = ['family', 'friends', 'company', 'class', 'other'];
 
@@ -112,11 +114,17 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
         );
       case 4:
         return (
+          icon: Icons.event_outlined,
+          title: context.l10n.wizardStepEventDateTitle,
+          help: context.l10n.wizardStepEventDateHelp,
+        );
+      case 5:
+        return (
           icon: Icons.person_outline,
           title: context.l10n.wizardStepParticipantsTitle,
           help: context.l10n.wizardParticipantsHelp,
         );
-      case 5:
+      case 6:
         return (
           icon: Icons.fact_check_outlined,
           title: context.l10n.wizardStepReviewTitle,
@@ -138,7 +146,7 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
       );
       return false;
     }
-    if (_step == 4 && _nickCtrl.text.trim().isEmpty) {
+    if (_step == 5 && _nickCtrl.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(context.l10n.wizardNicknameLabel)),
       );
@@ -196,7 +204,11 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
     setState(() => _loading = true);
     try {
       final repo = ref.read(groupsRepositoryProvider);
-      final created = await repo.createGroup(name: name, nickname: nick);
+      final created = await repo.createGroup(
+        name: name,
+        nickname: nick,
+        eventDate: _eventDate,
+      );
       if (_drawRule != DrawSubgroupRule.ignore) {
         await repo.setDrawSubgroupRule(
           groupId: created.groupId,
@@ -414,6 +426,98 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
         ];
       case 4:
         return [
+          Text(
+            context.l10n.wizardStepEventDateHelp,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+              height: 1.45,
+            ),
+          ),
+          const SizedBox(height: 14),
+          Material(
+            color: AppTheme.warmIvory,
+            borderRadius: BorderRadius.circular(14),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(14),
+              onTap: () async {
+                final initial = _eventDate ?? DateTime.now();
+                final picked = await showDatePicker(
+                  context: context,
+                  initialDate: initial,
+                  firstDate: DateTime(2000),
+                  lastDate: DateTime(2100),
+                  locale: Localizations.localeOf(context),
+                );
+                if (picked != null && context.mounted) {
+                  setState(
+                    () => _eventDate = DateTime(
+                      picked.year,
+                      picked.month,
+                      picked.day,
+                    ),
+                  );
+                }
+              },
+              child: Ink(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: theme.colorScheme.outlineVariant),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                child: Row(
+                  children: [
+                    Icon(Icons.event_outlined, color: AppTheme.deepPlum),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            context.l10n.wizardSummaryEventDate,
+                            style: theme.textTheme.labelSmall?.copyWith(
+                              color: theme.colorScheme.onSurfaceVariant,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: 0.4,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            _eventDate == null
+                                ? context.l10n.wizardEventDateNotSet
+                                : DateFormat.yMMMMd(
+                                    Localizations.localeOf(context)
+                                        .toString(),
+                                  ).format(_eventDate!),
+                            style: theme.textTheme.titleSmall?.copyWith(
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Icon(
+                      Icons.calendar_month_outlined,
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          if (_eventDate != null) ...[
+            const SizedBox(height: 8),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton.icon(
+                onPressed: () => setState(() => _eventDate = null),
+                icon: const Icon(Icons.clear, size: 18),
+                label: Text(context.l10n.wizardEventDateClear),
+              ),
+            ),
+          ],
+        ];
+      case 5:
+        return [
           TextField(
             controller: _nickCtrl,
             decoration: InputDecoration(
@@ -424,7 +528,7 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
             textCapitalization: TextCapitalization.words,
           ),
         ];
-      case 5:
+      case 6:
         return [
           Container(
             padding: const EdgeInsets.fromLTRB(16, 14, 16, 6),
@@ -453,6 +557,16 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
                   icon: Icons.tune_outlined,
                   label: context.l10n.wizardSummaryRule,
                   value: _ruleTitle(context, _drawRule),
+                ),
+                _SummaryDivider(theme: theme),
+                _summaryRow(
+                  icon: Icons.event_outlined,
+                  label: context.l10n.wizardSummaryEventDate,
+                  value: _eventDate == null
+                      ? context.l10n.wizardEventDateNotSet
+                      : DateFormat.yMMMMd(
+                          Localizations.localeOf(context).toString(),
+                        ).format(_eventDate!),
                 ),
               ],
             ),

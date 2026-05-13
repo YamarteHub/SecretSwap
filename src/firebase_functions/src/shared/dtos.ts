@@ -36,7 +36,9 @@ export type ExecuteDrawSummary = z.infer<typeof ExecuteDrawSummarySchema>;
 
 export const CreateGroupRequestSchema = z.object({
   name: z.string().min(1),
-  nickname: z.string().min(1)
+  nickname: z.string().min(1),
+  /** Día del evento/entrega (medianoche local del cliente), epoch ms. Opcional. */
+  eventDateEpochMs: z.number().int().finite().positive().optional()
 });
 export type CreateGroupRequest = z.infer<typeof CreateGroupRequestSchema>;
 
