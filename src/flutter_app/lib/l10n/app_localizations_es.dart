@@ -1515,4 +1515,59 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get groupCompletedManagedHint =>
       'Tú entregas en privado los resultados de las personas que gestionas.';
+
+  @override
+  String get chatGroupSectionTitle => 'Conversación del grupo';
+
+  @override
+  String get chatGroupSectionSubtitle =>
+      'Bromea, suelta pistas y mantén vivo el ambiente.';
+
+  @override
+  String get chatGroupEnterCta => 'Entrar al chat';
+
+  @override
+  String chatGroupEventLine(String date) {
+    return 'Entrega: $date';
+  }
+
+  @override
+  String get chatDrawCompletedChip => 'Sorteo realizado';
+
+  @override
+  String get chatInputHint => 'Escribe algo para el grupo…';
+
+  @override
+  String get chatSendCta => 'Enviar';
+
+  @override
+  String get chatTarciLabel => 'Tarci';
+
+  @override
+  String get chatEmptyTitle => 'Aún no hay mensajes';
+
+  @override
+  String get chatEmptyBody =>
+      'Cuando alguien escriba o Tarci avise de algo importante, lo verás aquí.';
+
+  @override
+  String get chatLoadError =>
+      'No pudimos cargar el chat. Comprueba tu conexión o vuelve a intentarlo.';
+
+  @override
+  String get chatSendError =>
+      'No se pudo enviar el mensaje. Inténtalo otra vez.';
+
+  @override
+  String get chatSystemGroupCreatedV1 =>
+      '🎁 El grupo ya está en marcha. Soltad pistas, soltad caña y que ruede el cotilleo sano.';
+
+  @override
+  String get chatSystemDrawCompletedV1 =>
+      '🤫 Sorteo hecho. A partir de ahora, cada pregunta rara cuenta como evidencia.';
+
+  @override
+  String chatSystemUnknownTemplate(String templateKey) {
+    return 'Mensaje del sistema ($templateKey)';
+  }
 }

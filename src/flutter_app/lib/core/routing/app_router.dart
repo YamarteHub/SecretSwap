@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/chat/presentation/screens/group_chat_screen.dart';
 import '../../features/draw/presentation/screens/managed_assignments_screen.dart';
 import '../../features/draw/presentation/screens/my_assignment_screen.dart';
 import '../../features/groups/presentation/screens/create_group_screen.dart';
@@ -19,6 +20,9 @@ class AppRoutes {
   static const myAssignment = '/groups/:groupId/executions/:executionId/my-assignment';
   static const managedAssignments = '/groups/:groupId/executions/:executionId/managed-assignments';
   static const wishlistEdit = '/groups/:groupId/wishlist/:participantId/edit';
+  static const groupChat = '/groups/:groupId/chat';
+
+  static String groupChatFor(String groupId) => '/groups/$groupId/chat';
 }
 
 GoRouter buildRouter() {
@@ -40,6 +44,19 @@ GoRouter buildRouter() {
       GoRoute(
         path: AppRoutes.joinByCode,
         builder: (context, state) => const JoinByCodeScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.groupChat,
+        builder: (context, state) {
+          final groupId = state.pathParameters['groupId']!;
+          final extra = state.extra as GroupChatRouteExtra?;
+          return GroupChatScreen(
+            groupId: groupId,
+            groupName: extra?.groupName ?? '',
+            eventDate: extra?.eventDate,
+            drawCompleted: extra?.drawCompleted ?? false,
+          );
+        },
       ),
       GoRoute(
         path: AppRoutes.groupDetail,

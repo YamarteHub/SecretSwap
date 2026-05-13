@@ -2689,6 +2689,96 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Tú entregas en privado los resultados de las personas que gestionas.'**
   String get groupCompletedManagedHint;
+
+  /// No description provided for @chatGroupSectionTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Conversación del grupo'**
+  String get chatGroupSectionTitle;
+
+  /// No description provided for @chatGroupSectionSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Bromea, suelta pistas y mantén vivo el ambiente.'**
+  String get chatGroupSectionSubtitle;
+
+  /// No description provided for @chatGroupEnterCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Entrar al chat'**
+  String get chatGroupEnterCta;
+
+  /// No description provided for @chatGroupEventLine.
+  ///
+  /// In es, this message translates to:
+  /// **'Entrega: {date}'**
+  String chatGroupEventLine(String date);
+
+  /// No description provided for @chatDrawCompletedChip.
+  ///
+  /// In es, this message translates to:
+  /// **'Sorteo realizado'**
+  String get chatDrawCompletedChip;
+
+  /// No description provided for @chatInputHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Escribe algo para el grupo…'**
+  String get chatInputHint;
+
+  /// No description provided for @chatSendCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Enviar'**
+  String get chatSendCta;
+
+  /// No description provided for @chatTarciLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Tarci'**
+  String get chatTarciLabel;
+
+  /// No description provided for @chatEmptyTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Aún no hay mensajes'**
+  String get chatEmptyTitle;
+
+  /// No description provided for @chatEmptyBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Cuando alguien escriba o Tarci avise de algo importante, lo verás aquí.'**
+  String get chatEmptyBody;
+
+  /// No description provided for @chatLoadError.
+  ///
+  /// In es, this message translates to:
+  /// **'No pudimos cargar el chat. Comprueba tu conexión o vuelve a intentarlo.'**
+  String get chatLoadError;
+
+  /// No description provided for @chatSendError.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo enviar el mensaje. Inténtalo otra vez.'**
+  String get chatSendError;
+
+  /// No description provided for @chatSystemGroupCreatedV1.
+  ///
+  /// In es, this message translates to:
+  /// **'🎁 El grupo ya está en marcha. Soltad pistas, soltad caña y que ruede el cotilleo sano.'**
+  String get chatSystemGroupCreatedV1;
+
+  /// No description provided for @chatSystemDrawCompletedV1.
+  ///
+  /// In es, this message translates to:
+  /// **'🤫 Sorteo hecho. A partir de ahora, cada pregunta rara cuenta como evidencia.'**
+  String get chatSystemDrawCompletedV1;
+
+  /// No description provided for @chatSystemUnknownTemplate.
+  ///
+  /// In es, this message translates to:
+  /// **'Mensaje del sistema ({templateKey})'**
+  String chatSystemUnknownTemplate(String templateKey);
 }
 
 class _AppLocalizationsDelegate

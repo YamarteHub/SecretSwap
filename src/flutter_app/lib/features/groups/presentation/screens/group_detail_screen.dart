@@ -14,6 +14,7 @@ import '../../../../core/routing/app_router.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/theme/premium_ui.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../chat/presentation/screens/group_chat_screen.dart';
 import '../../../draw/presentation/providers.dart';
 import '../../../wishlist/presentation/widgets/group_wishlist_summary_section.dart';
 import '../../domain/group_models.dart';
@@ -75,6 +76,14 @@ String? _groupDetailDrawDateLine(BuildContext context, GroupDetail d) {
     return context.l10n.homeDrawDateLine(formatted);
   }
   return null;
+}
+
+bool _isActiveAppMember(GroupDetail d, String? uid) {
+  if (uid == null || uid.isEmpty) return false;
+  for (final m in d.members) {
+    if (m.uid == uid && m.memberState == MemberState.active) return true;
+  }
+  return false;
 }
 
 const _drawRuleOrder = [
@@ -1416,6 +1425,15 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
               ? l10n.groupWarningMissingSubgroupCombined
               : null,
         ),
+        if (_isActiveAppMember(d, widget.currentUid)) ...[
+          const SizedBox(height: 16),
+          _GroupChatAccessCard(
+            groupId: widget.groupId,
+            groupName: d.name,
+            eventDate: d.eventDate,
+            drawCompleted: isCompleted,
+          ),
+        ],
         if (isCompleted) ...[
           const SizedBox(height: 16),
           GroupWishlistSummarySection(
@@ -1913,6 +1931,87 @@ class _GroupDetailHero extends StatelessWidget {
               ],
             ),
           ],
+        ],
+      ),
+    );
+  }
+}
+
+class _GroupChatAccessCard extends StatelessWidget {
+  const _GroupChatAccessCard({
+    required this.groupId,
+    required this.groupName,
+    this.eventDate,
+    required this.drawCompleted,
+  });
+
+  final String groupId;
+  final String groupName;
+  final DateTime? eventDate;
+  final bool drawCompleted;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final theme = Theme.of(context);
+    return SecretCard(
+      padding: const EdgeInsets.fromLTRB(18, 18, 18, 18),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: AppTheme.mutedGold.withValues(alpha: 0.2),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  Icons.forum_rounded,
+                  color: AppTheme.deepPlum.withValues(alpha: 0.85),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.chatGroupSectionTitle,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      l10n.chatGroupSectionSubtitle,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                        height: 1.4,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 14),
+          FilledButton.tonalIcon(
+            onPressed: () {
+              context.push(
+                AppRoutes.groupChatFor(groupId),
+                extra: GroupChatRouteExtra(
+                  groupName: groupName,
+                  eventDate: eventDate,
+                  drawCompleted: drawCompleted,
+                ),
+              );
+            },
+            icon: const Icon(Icons.chat_bubble_outline_rounded),
+            label: Text(l10n.chatGroupEnterCta),
+          ),
         ],
       ),
     );

@@ -224,3 +224,15 @@ export const SetWishlistResponseSchema = z.object({
   ok: z.literal(true)
 });
 export type SetWishlistResponse = z.infer<typeof SetWishlistResponseSchema>;
+
+export const SendGroupChatMessageRequestSchema = z.object({
+  groupId: z.string().min(1),
+  text: z.string().min(1).max(500)
+});
+export type SendGroupChatMessageRequest = z.infer<typeof SendGroupChatMessageRequestSchema>;
+
+export const SendGroupChatMessageResponseSchema = z.object({
+  ok: z.literal(true),
+  messageId: z.string().min(1)
+});
+export type SendGroupChatMessageResponse = z.infer<typeof SendGroupChatMessageResponseSchema>;

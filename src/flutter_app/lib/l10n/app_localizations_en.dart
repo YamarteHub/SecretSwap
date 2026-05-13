@@ -1504,4 +1504,59 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get groupCompletedManagedHint =>
       'You privately deliver the results of the people you manage.';
+
+  @override
+  String get chatGroupSectionTitle => 'Group conversation';
+
+  @override
+  String get chatGroupSectionSubtitle =>
+      'Joke around, drop hints, and keep the vibe alive.';
+
+  @override
+  String get chatGroupEnterCta => 'Open chat';
+
+  @override
+  String chatGroupEventLine(String date) {
+    return 'Exchange: $date';
+  }
+
+  @override
+  String get chatDrawCompletedChip => 'Draw completed';
+
+  @override
+  String get chatInputHint => 'Say something to the group…';
+
+  @override
+  String get chatSendCta => 'Send';
+
+  @override
+  String get chatTarciLabel => 'Tarci';
+
+  @override
+  String get chatEmptyTitle => 'No messages yet';
+
+  @override
+  String get chatEmptyBody =>
+      'When someone writes or Tarci shares an update, it will show up here.';
+
+  @override
+  String get chatLoadError =>
+      'We couldn\'t load the chat. Check your connection and try again.';
+
+  @override
+  String get chatSendError =>
+      'We couldn\'t send your message. Please try again.';
+
+  @override
+  String get chatSystemGroupCreatedV1 =>
+      '🎁 The group is live. Drop hints, stir the pot, and let the playful chaos begin.';
+
+  @override
+  String get chatSystemDrawCompletedV1 =>
+      '🤫 The draw is done. From here on, every weird question is evidence.';
+
+  @override
+  String chatSystemUnknownTemplate(String templateKey) {
+    return 'System message ($templateKey)';
+  }
 }

@@ -665,5 +665,26 @@
   "myAssignmentNoSubgroupChip": "No subgroup",
   "groupCompletedHeroSubtitle": "Everyone has found out who they're gifting to.",
   "groupCompletedPrivacyNote": "Each result is private. Only that person sees their own.",
-  "groupCompletedManagedHint": "You privately deliver the results of the people you manage."
+  "groupCompletedManagedHint": "You privately deliver the results of the people you manage.",
+  "chatGroupSectionTitle": "Group conversation",
+  "chatGroupSectionSubtitle": "Joke around, drop hints, and keep the vibe alive.",
+  "chatGroupEnterCta": "Open chat",
+  "chatGroupEventLine": "Exchange: {date}",
+  "@chatGroupEventLine": {
+    "placeholders": { "date": { "type": "String" } }
+  },
+  "chatDrawCompletedChip": "Draw completed",
+  "chatInputHint": "Say something to the group…",
+  "chatSendCta": "Send",
+  "chatTarciLabel": "Tarci",
+  "chatEmptyTitle": "No messages yet",
+  "chatEmptyBody": "When someone writes or Tarci shares an update, it will show up here.",
+  "chatLoadError": "We couldn't load the chat. Check your connection and try again.",
+  "chatSendError": "We couldn't send your message. Please try again.",
+  "chatSystemGroupCreatedV1": "🎁 The group is live. Drop hints, stir the pot, and let the playful chaos begin.",
+  "chatSystemDrawCompletedV1": "🤫 The draw is done. From here on, every weird question is evidence.",
+  "chatSystemUnknownTemplate": "System message ({templateKey})",
+  "@chatSystemUnknownTemplate": {
+    "placeholders": { "templateKey": { "type": "String" } }
+  }
 }

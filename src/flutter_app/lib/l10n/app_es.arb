@@ -665,5 +665,26 @@
   "myAssignmentNoSubgroupChip": "Sin subgrupo",
   "groupCompletedHeroSubtitle": "Cada persona ya descubrió a quién le toca regalar.",
   "groupCompletedPrivacyNote": "Cada resultado es privado. Solo cada persona ve el suyo.",
-  "groupCompletedManagedHint": "Tú entregas en privado los resultados de las personas que gestionas."
+  "groupCompletedManagedHint": "Tú entregas en privado los resultados de las personas que gestionas.",
+  "chatGroupSectionTitle": "Conversación del grupo",
+  "chatGroupSectionSubtitle": "Bromea, suelta pistas y mantén vivo el ambiente.",
+  "chatGroupEnterCta": "Entrar al chat",
+  "chatGroupEventLine": "Entrega: {date}",
+  "@chatGroupEventLine": {
+    "placeholders": { "date": { "type": "String" } }
+  },
+  "chatDrawCompletedChip": "Sorteo realizado",
+  "chatInputHint": "Escribe algo para el grupo…",
+  "chatSendCta": "Enviar",
+  "chatTarciLabel": "Tarci",
+  "chatEmptyTitle": "Aún no hay mensajes",
+  "chatEmptyBody": "Cuando alguien escriba o Tarci avise de algo importante, lo verás aquí.",
+  "chatLoadError": "No pudimos cargar el chat. Comprueba tu conexión o vuelve a intentarlo.",
+  "chatSendError": "No se pudo enviar el mensaje. Inténtalo otra vez.",
+  "chatSystemGroupCreatedV1": "🎁 El grupo ya está en marcha. Soltad pistas, soltad caña y que ruede el cotilleo sano.",
+  "chatSystemDrawCompletedV1": "🤫 Sorteo hecho. A partir de ahora, cada pregunta rara cuenta como evidencia.",
+  "chatSystemUnknownTemplate": "Mensaje del sistema ({templateKey})",
+  "@chatSystemUnknownTemplate": {
+    "placeholders": { "templateKey": { "type": "String" } }
+  }
 }

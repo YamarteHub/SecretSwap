@@ -190,6 +190,11 @@ service cloud.firestore {
       match /wishlists/{participantId} {
         allow read, write: if false;
       }
+
+      match /chatMessages/{messageId} {
+        allow read: if isActiveMember(groupId);
+        allow create, update, delete: if false;
+      }
     }
 
     // Solo backend / Admin SDK

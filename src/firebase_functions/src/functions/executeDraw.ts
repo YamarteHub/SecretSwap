@@ -1,5 +1,6 @@
 import { FieldValue } from "firebase-admin/firestore";
 import type { Firestore, QueryDocumentSnapshot } from "firebase-admin/firestore";
+import * as logger from "firebase-functions/logger";
 import { onCall, CallableRequest, HttpsError } from "firebase-functions/v2/https";
 import { requireAuthUid } from "../shared/auth";
 import {
@@ -15,6 +16,7 @@ import {
 } from "../shared/dtos";
 import { AppError } from "../shared/errors";
 import { getDb } from "../shared/firestore";
+import { appendGroupChatSystemMessageIfNew } from "../shared/groupChat";
 import { groupPaths } from "../shared/firestorePaths";
 import { acquireDrawingLock, clearDrawingLock } from "../shared/lock";
 import { parseOrThrow } from "../shared/validation";
@@ -285,6 +287,26 @@ function buildSuccessExecuteDrawResponse(
   };
 }
 
+async function returnSuccessfulDrawWithChat(
+  db: Firestore,
+  groupId: string,
+  executionId: string,
+  rulesVersion: number,
+  executionDocData: Record<string, unknown>
+): Promise<ExecuteDrawResponse> {
+  try {
+    await appendGroupChatSystemMessageIfNew(
+      db,
+      groupId,
+      `system_drawCompleted_${executionId}`,
+      "chat.system.drawCompleted.v1"
+    );
+  } catch (e) {
+    logger.warn("executeDraw: chat system message failed", { groupId, executionId, err: e });
+  }
+  return buildSuccessExecuteDrawResponse(executionId, rulesVersion, executionDocData);
+}
+
 export const executeDraw = onCall(async (req: CallableRequest<unknown>): Promise<ExecuteDrawResponse> => {
   const uid = requireAuthUid(req.auth?.uid);
   const body = parseOrThrow(ExecuteDrawRequestSchema, req.data);
@@ -373,7 +395,13 @@ export const executeDraw = onCall(async (req: CallableRequest<unknown>): Promise
           });
         }
         await ensureGroupNotStuckInDrawing(db, body.groupId, eid);
-        return buildSuccessExecuteDrawResponse(eid, d.rulesVersion, edoc.data() as Record<string, unknown>);
+        return await returnSuccessfulDrawWithChat(
+          db,
+          body.groupId,
+          eid,
+          d.rulesVersion,
+          edoc.data() as Record<string, unknown>
+        );
       }
       if (d.status === "failed") {
         const raw = edoc.data() as Record<string, unknown>;
@@ -462,7 +490,13 @@ export const executeDraw = onCall(async (req: CallableRequest<unknown>): Promise
       }
       await ensureGroupNotStuckInDrawing(db, body.groupId, executionId);
       lockHeldForExecution = null;
-      return buildSuccessExecuteDrawResponse(executionId, exData.rulesVersion, exSnap.data() as Record<string, unknown>);
+      return await returnSuccessfulDrawWithChat(
+        db,
+        body.groupId,
+        executionId,
+        exData.rulesVersion,
+        exSnap.data() as Record<string, unknown>
+      );
     }
 
     if (exData.status === "failed") {
@@ -540,7 +574,7 @@ export const executeDraw = onCall(async (req: CallableRequest<unknown>): Promise
       if ((fd.status as string) !== "success") {
         throw new AppError({ code: "INTERNAL", message: "Repair transaction did not complete execution" });
       }
-      return buildSuccessExecuteDrawResponse(executionId, rulesVersion, fd);
+      return await returnSuccessfulDrawWithChat(db, body.groupId, executionId, rulesVersion, fd);
     }
 
     const seedInput = `${body.idempotencyKey}:${body.groupId}:${executionId}`;
@@ -679,7 +713,7 @@ export const executeDraw = onCall(async (req: CallableRequest<unknown>): Promise
     if (assignSnap.size !== n) {
       throw new AppError({ code: "INTERNAL", message: "Assignments not written" });
     }
-    return buildSuccessExecuteDrawResponse(executionId, rulesVersion, outData);
+    return await returnSuccessfulDrawWithChat(db, body.groupId, executionId, rulesVersion, outData);
   } catch (e) {
     if (lockHeldForExecution) {
       try {

@@ -1,5 +1,6 @@
 import { FieldValue, Timestamp } from "firebase-admin/firestore";
 import { onCall, CallableRequest, HttpsError } from "firebase-functions/v2/https";
+import * as logger from "firebase-functions/logger";
 import { requireAuthUid } from "../shared/auth";
 import { getDb } from "../shared/firestore";
 import { groupPaths, inviteCodePaths, userGroupPaths } from "../shared/firestorePaths";
@@ -12,6 +13,7 @@ import {
   MemberStateSchema
 } from "../shared/dtos";
 import { parseOrThrow } from "../shared/validation";
+import { appendGroupChatSystemMessageIfNew } from "../shared/groupChat";
 import { generateInviteCode, hashInviteCode } from "../shared/invites";
 
 function optionalEventTimestamp(epochMs: number | undefined): Timestamp | undefined {
@@ -114,6 +116,17 @@ export const createGroup = onCall(async (req: CallableRequest<unknown>): Promise
         if (attempt === 4) throw err;
         // retry only for collisions or transient transaction retries
       }
+    }
+
+    try {
+      await appendGroupChatSystemMessageIfNew(
+        db,
+        groupId,
+        "system_groupCreated_v1",
+        "chat.system.groupCreated.v1"
+      );
+    } catch (e) {
+      logger.warn("createGroup: welcome chat message failed", { groupId, err: e });
     }
 
     return {

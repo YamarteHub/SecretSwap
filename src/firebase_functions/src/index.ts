@@ -9,6 +9,7 @@ import { deleteSubgroup } from "./functions/deleteSubgroup";
 import { executeDraw } from "./functions/executeDraw";
 import { joinGroupByCode } from "./functions/joinGroupByCode";
 import { rotateInviteCode } from "./functions/rotateInviteCode";
+import { sendGroupChatMessage } from "./functions/sendGroupChatMessage";
 
 export {
   createGroup,
@@ -21,6 +22,7 @@ export {
   executeDraw,
   getManagedAssignments,
   getWishlist,
-  setWishlist
+  setWishlist,
+  sendGroupChatMessage
 };
 
