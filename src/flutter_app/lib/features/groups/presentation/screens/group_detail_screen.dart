@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -59,6 +60,15 @@ String _managedResponsibleNickname(
     if (m.uid == effectiveUid) return m.nickname;
   }
   return l10n.groupManagedResponsibleUnavailable;
+}
+
+String? _groupDetailDrawDateLine(BuildContext context, GroupDetail d) {
+  if (d.drawStatus != DrawStatus.completed || d.lastDrawCompletedAt == null) {
+    return null;
+  }
+  final loc = Localizations.localeOf(context).toString();
+  final formatted = DateFormat.yMMMMd(loc).format(d.lastDrawCompletedAt!);
+  return context.l10n.homeDrawDateLine(formatted);
 }
 
 const _drawRuleOrder = [
@@ -1305,6 +1315,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
         _GroupDetailHero(
           groupName: d.name,
           tagline: heroTagline,
+          drawCompletedLine: _groupDetailDrawDateLine(context, d),
           onEditName: _isOwner && _drawAllowsSubgroupChange(d.drawStatus)
               ? _showRenameGroupDialog
               : null,
@@ -1789,11 +1800,13 @@ class _GroupDetailHero extends StatelessWidget {
   const _GroupDetailHero({
     required this.groupName,
     required this.tagline,
+    this.drawCompletedLine,
     this.onEditName,
   });
 
   final String groupName;
   final String tagline;
+  final String? drawCompletedLine;
   final VoidCallback? onEditName;
 
   @override
@@ -1842,6 +1855,28 @@ class _GroupDetailHero extends StatelessWidget {
               height: 1.4,
             ),
           ),
+          if (drawCompletedLine != null) ...[
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Icon(
+                  Icons.event_outlined,
+                  size: 18,
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.55),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    drawCompletedLine!,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.72),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ],
       ),
     );

@@ -160,6 +160,9 @@ class AppLocalizationsEs extends AppLocalizations {
       'Tarci Secret organiza dinámicas privadas de grupo con personas reales.';
 
   @override
+  String get splashLoadingHint => 'Preparando todo para ti…';
+
+  @override
   String get quickModeTitle => 'Modo rápido';
 
   @override
@@ -637,11 +640,19 @@ class AppLocalizationsEs extends AppLocalizations {
   String get homeChipPairings => 'Emparejamientos';
 
   @override
-  String get homeActiveGroupsTitle => 'Grupos activos';
+  String get homeActiveGroupsTitle => 'En curso';
 
   @override
   String get homeActiveGroupsSubtitle =>
-      'Estado del sorteo según lo último guardado en el grupo.';
+      'Sorteo aún no completado: preparación, invitaciones o sorteo pendiente.';
+
+  @override
+  String get homeActiveGroupsEmpty => 'No tienes grupos en esta fase.';
+
+  @override
+  String homeDrawDateLine(String date) {
+    return 'Sorteo: $date';
+  }
 
   @override
   String get homeEmptyGroupsTitle => 'Aún no tienes grupos';
@@ -657,7 +668,18 @@ class AppLocalizationsEs extends AppLocalizations {
   String get homeStatusInactive => 'Inactivo';
 
   @override
-  String get homeCompletedGroupsTitle => 'Grupos completados';
+  String get homeCompletedGroupsTitle => 'Sorteos finalizados';
+
+  @override
+  String get homeCompletedGroupsSubtitle =>
+      'El sorteo ya se realizó; sigues en el grupo para consultar tu resultado.';
+
+  @override
+  String get homePastGroupsTitle => 'Grupos anteriores';
+
+  @override
+  String get homePastGroupsSubtitle =>
+      'Ya no participas activamente en estos grupos.';
 
   @override
   String get homeCompletedArchivedLabel => 'Completado / archivado';

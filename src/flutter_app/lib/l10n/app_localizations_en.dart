@@ -158,6 +158,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Tarci Secret hosts private group dynamics with real people.';
 
   @override
+  String get splashLoadingHint => 'Getting things ready for you…';
+
+  @override
   String get quickModeTitle => 'Quick mode';
 
   @override
@@ -631,11 +634,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeChipPairings => 'Pairings';
 
   @override
-  String get homeActiveGroupsTitle => 'Active groups';
+  String get homeActiveGroupsTitle => 'In progress';
 
   @override
   String get homeActiveGroupsSubtitle =>
-      'Draw status reflects the latest saved state for each group.';
+      'Draw not finished yet: setup, invites, or draw still pending.';
+
+  @override
+  String get homeActiveGroupsEmpty => 'You have no groups in this stage.';
+
+  @override
+  String homeDrawDateLine(String date) {
+    return 'Draw: $date';
+  }
 
   @override
   String get homeEmptyGroupsTitle => 'You don\'t have groups yet';
@@ -651,7 +662,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeStatusInactive => 'Inactive';
 
   @override
-  String get homeCompletedGroupsTitle => 'Completed groups';
+  String get homeCompletedGroupsTitle => 'Finished draws';
+
+  @override
+  String get homeCompletedGroupsSubtitle =>
+      'The draw is done; you remain in the group to see your result.';
+
+  @override
+  String get homePastGroupsTitle => 'Past groups';
+
+  @override
+  String get homePastGroupsSubtitle =>
+      'You are no longer an active member of these groups.';
 
   @override
   String get homeCompletedArchivedLabel => 'Completed / archived';

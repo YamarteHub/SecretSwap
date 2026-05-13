@@ -34,7 +34,11 @@ class ManagedDeliveryLauncher {
     );
     try {
       if (await canLaunchUrl(mailto)) {
-        return launchUrl(mailto, mode: LaunchMode.platformDefault);
+        var ok = await launchUrl(mailto, mode: LaunchMode.platformDefault);
+        if (ok) return true;
+        // Algunos OEMs responden mejor con modo explícito fuera de la app.
+        ok = await launchUrl(mailto, mode: LaunchMode.externalApplication);
+        if (ok) return true;
       }
     } catch (e) {
       debugPrint('mailto launch failed: $e');

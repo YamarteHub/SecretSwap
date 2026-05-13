@@ -657,6 +657,7 @@ export const executeDraw = onCall(async (req: CallableRequest<unknown>): Promise
         drawingLock: null,
         currentExecutionId: executionId,
         lastExecutionId: executionId,
+        lastDrawCompletedAt: nowTs,
         updatedAt: FieldValue.serverTimestamp()
       });
     });

@@ -47,6 +47,8 @@ class GroupSummary {
   final bool isActiveMember;
   /// Copiado desde `groups/{id}.drawStatus` al listar (no forma parte de `user_groups`).
   final DrawStatus drawStatus;
+  /// `groups/{id}.lastDrawCompletedAt` cuando el sorteo ya se ejecutó (opcional).
+  final DateTime? lastDrawCompletedAt;
 
   const GroupSummary({
     required this.groupId,
@@ -54,6 +56,7 @@ class GroupSummary {
     required this.role,
     required this.isActiveMember,
     this.drawStatus = DrawStatus.idle,
+    this.lastDrawCompletedAt,
   });
 }
 
@@ -108,6 +111,7 @@ class GroupDetail {
   final DrawSubgroupRule drawSubgroupRule;
   final String? currentExecutionId;
   final String? lastExecutionId;
+  final DateTime? lastDrawCompletedAt;
   final List<Subgroup> subgroups;
   final List<GroupMember> members;
   final List<GroupParticipant> managedParticipants;
@@ -121,6 +125,7 @@ class GroupDetail {
     required this.drawSubgroupRule,
     required this.currentExecutionId,
     required this.lastExecutionId,
+    this.lastDrawCompletedAt,
     required this.subgroups,
     required this.members,
     required this.managedParticipants,

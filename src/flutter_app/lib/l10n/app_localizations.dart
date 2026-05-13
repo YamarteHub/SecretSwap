@@ -374,6 +374,12 @@ abstract class AppLocalizations {
   /// **'Tarci Secret organiza dinámicas privadas de grupo con personas reales.'**
   String get splashTagline;
 
+  /// No description provided for @splashLoadingHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Preparando todo para ti…'**
+  String get splashLoadingHint;
+
   /// No description provided for @quickModeTitle.
   ///
   /// In es, this message translates to:
@@ -1247,14 +1253,26 @@ abstract class AppLocalizations {
   /// No description provided for @homeActiveGroupsTitle.
   ///
   /// In es, this message translates to:
-  /// **'Grupos activos'**
+  /// **'En curso'**
   String get homeActiveGroupsTitle;
 
   /// No description provided for @homeActiveGroupsSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Estado del sorteo según lo último guardado en el grupo.'**
+  /// **'Sorteo aún no completado: preparación, invitaciones o sorteo pendiente.'**
   String get homeActiveGroupsSubtitle;
+
+  /// No description provided for @homeActiveGroupsEmpty.
+  ///
+  /// In es, this message translates to:
+  /// **'No tienes grupos en esta fase.'**
+  String get homeActiveGroupsEmpty;
+
+  /// No description provided for @homeDrawDateLine.
+  ///
+  /// In es, this message translates to:
+  /// **'Sorteo: {date}'**
+  String homeDrawDateLine(String date);
 
   /// No description provided for @homeEmptyGroupsTitle.
   ///
@@ -1283,8 +1301,26 @@ abstract class AppLocalizations {
   /// No description provided for @homeCompletedGroupsTitle.
   ///
   /// In es, this message translates to:
-  /// **'Grupos completados'**
+  /// **'Sorteos finalizados'**
   String get homeCompletedGroupsTitle;
+
+  /// No description provided for @homeCompletedGroupsSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'El sorteo ya se realizó; sigues en el grupo para consultar tu resultado.'**
+  String get homeCompletedGroupsSubtitle;
+
+  /// No description provided for @homePastGroupsTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Grupos anteriores'**
+  String get homePastGroupsTitle;
+
+  /// No description provided for @homePastGroupsSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya no participas activamente en estos grupos.'**
+  String get homePastGroupsSubtitle;
 
   /// No description provided for @homeCompletedArchivedLabel.
   ///

@@ -13,6 +13,12 @@ Map<String, dynamic> _asStringKeyMap(dynamic raw) {
   throw ArgumentError('Respuesta inesperada del backend');
 }
 
+DateTime? _readFirestoreOptionalDate(Map<String, dynamic> data, String key) {
+  final raw = data[key];
+  if (raw is Timestamp) return raw.toDate();
+  return null;
+}
+
 class GroupsRepositoryImpl implements GroupsRepository {
   GroupsRepositoryImpl({
     FirebaseFirestore? firestore,
@@ -112,6 +118,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
     }).toList();
     final ids = rows.map((g) => g.groupId).toSet().toList();
     final drawById = <String, DrawStatus>{};
+    final lastDrawAtById = <String, DateTime?>{};
     if (ids.isNotEmpty) {
       final groupSnaps = await Future.wait(
         ids.map((id) => _firestore.doc('groups/$id').get()),
@@ -119,7 +126,11 @@ class GroupsRepositoryImpl implements GroupsRepository {
       for (var i = 0; i < ids.length; i++) {
         final doc = groupSnaps[i];
         if (!doc.exists) continue;
-        drawById[ids[i]] = _drawStatusFromGroupMap(doc.data()!);
+        final gid = ids[i];
+        final data = doc.data()!;
+        drawById[gid] = _drawStatusFromGroupMap(data);
+        lastDrawAtById[gid] =
+            _readFirestoreOptionalDate(data, 'lastDrawCompletedAt');
       }
     }
     return rows
@@ -132,6 +143,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
             drawStatus: drawById[g.groupId] ??
                 drawFromUserRow[g.groupId] ??
                 DrawStatus.idle,
+            lastDrawCompletedAt: lastDrawAtById[g.groupId],
           ),
         )
         .toList();
@@ -236,6 +248,8 @@ class GroupsRepositoryImpl implements GroupsRepository {
       drawSubgroupRule: drawSubgroupRule,
       currentExecutionId: g['currentExecutionId'] as String?,
       lastExecutionId: g['lastExecutionId'] as String?,
+      lastDrawCompletedAt:
+          _readFirestoreOptionalDate(g, 'lastDrawCompletedAt'),
       subgroups: subgroups,
       members: members,
       managedParticipants: managedParticipants,

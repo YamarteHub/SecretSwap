@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../core/firebase/firebase_emulator_config.dart';
 import '../../../../core/l10n/l10n.dart';
@@ -14,6 +15,15 @@ import '../../../../core/theme/app_theme.dart';
 import '../../../../core/theme/premium_ui.dart';
 import '../../domain/group_models.dart';
 import '../providers.dart';
+
+String? _formatGroupDrawDateLine(BuildContext context, GroupSummary g) {
+  if (g.drawStatus != DrawStatus.completed || g.lastDrawCompletedAt == null) {
+    return null;
+  }
+  final loc = Localizations.localeOf(context).toString();
+  final formatted = DateFormat.yMMMMd(loc).format(g.lastDrawCompletedAt!);
+  return context.l10n.homeDrawDateLine(formatted);
+}
 
 String _homeDrawStatusChipLabel(BuildContext context, DrawStatus status) {
   final l10n = context.l10n;
@@ -150,10 +160,29 @@ class _GroupsHomeScreenState extends ConsumerState<GroupsHomeScreen> {
       ),
       body: groupsAsync.when(
         data: (groups) {
-          final activeGroups = groups.where((g) => g.isActiveMember).toList();
-          final completedGroups = groups
-              .where((g) => !g.isActiveMember)
-              .toList();
+          final activeMembership =
+              groups.where((g) => g.isActiveMember).toList();
+          final inProgress = activeMembership
+              .where((g) => g.drawStatus != DrawStatus.completed)
+              .toList()
+            ..sort((a, b) => a.name.compareTo(b.name));
+          final finishedDraws = activeMembership
+              .where((g) => g.drawStatus == DrawStatus.completed)
+              .toList()
+            ..sort((a, b) {
+              final da = a.lastDrawCompletedAt;
+              final db = b.lastDrawCompletedAt;
+              if (da == null && db == null) {
+                return a.name.compareTo(b.name);
+              }
+              if (da == null) return 1;
+              if (db == null) return -1;
+              final byDate = db.compareTo(da);
+              if (byDate != 0) return byDate;
+              return a.name.compareTo(b.name);
+            });
+          final pastMembership = groups.where((g) => !g.isActiveMember).toList()
+            ..sort((a, b) => a.name.compareTo(b.name));
 
           return RefreshIndicator(
             onRefresh: () async {
@@ -216,14 +245,28 @@ class _GroupsHomeScreenState extends ConsumerState<GroupsHomeScreen> {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  ...activeGroups.map(
-                    (g) => _GroupCard(
-                      summary: g,
-                      onTap: () => context.push('/groups/${g.groupId}'),
+                  if (inProgress.isEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 6),
+                      child: Text(
+                        context.l10n.homeActiveGroupsEmpty,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                          fontStyle: FontStyle.italic,
+                          height: 1.35,
+                        ),
+                      ),
+                    )
+                  else
+                    ...inProgress.map(
+                      (g) => _GroupCard(
+                        summary: g,
+                        drawDateLine: _formatGroupDrawDateLine(context, g),
+                        onTap: () => context.push('/groups/${g.groupId}'),
+                      ),
                     ),
-                  ),
                 ],
-                if (completedGroups.isNotEmpty) ...[
+                if (finishedDraws.isNotEmpty) ...[
                   const SizedBox(height: 22),
                   Text(
                     context.l10n.homeCompletedGroupsTitle,
@@ -231,11 +274,45 @@ class _GroupsHomeScreenState extends ConsumerState<GroupsHomeScreen> {
                       fontWeight: FontWeight.w800,
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  ...completedGroups.map(
+                  const SizedBox(height: 4),
+                  Text(
+                    context.l10n.homeCompletedGroupsSubtitle,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                      height: 1.35,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  ...finishedDraws.map(
+                    (g) => _GroupCard(
+                      summary: g,
+                      drawDateLine: _formatGroupDrawDateLine(context, g),
+                      onTap: () => context.push('/groups/${g.groupId}'),
+                    ),
+                  ),
+                ],
+                if (pastMembership.isNotEmpty) ...[
+                  const SizedBox(height: 22),
+                  Text(
+                    context.l10n.homePastGroupsTitle,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    context.l10n.homePastGroupsSubtitle,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                      height: 1.35,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  ...pastMembership.map(
                     (g) => _GroupCard(
                       summary: g,
                       completed: true,
+                      drawDateLine: _formatGroupDrawDateLine(context, g),
                       onTap: () => context.push('/groups/${g.groupId}'),
                     ),
                   ),
@@ -316,11 +393,13 @@ class _GroupCard extends StatelessWidget {
     required this.summary,
     required this.onTap,
     this.completed = false,
+    this.drawDateLine,
   });
 
   final GroupSummary summary;
   final VoidCallback onTap;
   final bool completed;
+  final String? drawDateLine;
 
   @override
   Widget build(BuildContext context) {
@@ -439,6 +518,28 @@ class _GroupCard extends StatelessWidget {
                               ),
                           ],
                         ),
+                        if (drawDateLine != null) ...[
+                          const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.event_outlined,
+                                size: 16,
+                                color: theme.colorScheme.onSurfaceVariant,
+                              ),
+                              const SizedBox(width: 6),
+                              Expanded(
+                                child: Text(
+                                  drawDateLine!,
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    color: theme.colorScheme.onSurfaceVariant,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ],
                     ),
                   ),

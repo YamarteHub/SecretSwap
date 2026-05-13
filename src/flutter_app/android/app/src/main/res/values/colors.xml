@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Coincide con AppTheme.warmIvory (Flutter) para el splash nativo. -->
+    <color name="warm_ivory">#FAF7F1</color>
+</resources>

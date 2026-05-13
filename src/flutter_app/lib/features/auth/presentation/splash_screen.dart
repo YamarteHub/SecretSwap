@@ -153,13 +153,22 @@ class _SplashScreenState extends State<SplashScreen>
                     onPressed: _loading ? null : _boot,
                     child: Text(l10n.retry),
                   ),
-                ] else if (_loading)
+                ] else if (_loading) ...[
                   const SizedBox(
                     width: 28,
                     height: 28,
                     child: CircularProgressIndicator(strokeWidth: 2.5),
-                  )
-                else
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    l10n.splashLoadingHint,
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                      height: 1.35,
+                    ),
+                  ),
+                ] else
                   const SizedBox.shrink(),
                 const SizedBox(height: 14),
               ],
