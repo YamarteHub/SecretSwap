@@ -1025,7 +1025,7 @@ abstract class AppLocalizations {
   /// No description provided for @groupManagedDialogWhoManagesDesc.
   ///
   /// In es, this message translates to:
-  /// **'De momento lo gestionarás tú como organizador.'**
+  /// **'Elige quién verá el resultado en la app para poder entregarlo en privado.'**
   String get groupManagedDialogWhoManagesDesc;
 
   /// No description provided for @groupManagedDialogWhoManagesHelp.
@@ -1969,6 +1969,60 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Mostrar en persona'**
   String get groupManagedDialogDeliveryShowInPerson;
+
+  /// No description provided for @groupManagedResponsibleUnavailable.
+  ///
+  /// In es, this message translates to:
+  /// **'Responsable no disponible'**
+  String get groupManagedResponsibleUnavailable;
+
+  /// No description provided for @groupManagedDeliversResponsible.
+  ///
+  /// In es, this message translates to:
+  /// **'Lo gestiona: {name}'**
+  String groupManagedDeliversResponsible(String name);
+
+  /// No description provided for @groupManagedDialogPickGuardianTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Quién lo entregará?'**
+  String get groupManagedDialogPickGuardianTitle;
+
+  /// No description provided for @groupManagedDialogGuardianOtherSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Este miembro verá el resultado y podrá entregárselo en privado.'**
+  String get groupManagedDialogGuardianOtherSubtitle;
+
+  /// No description provided for @groupManagedDialogGuardianNoEligibleMembers.
+  ///
+  /// In es, this message translates to:
+  /// **'Cuando se una otro miembro con app, podrás asignárselo.'**
+  String get groupManagedDialogGuardianNoEligibleMembers;
+
+  /// No description provided for @groupManagedDialogPickMemberCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Elegir miembro'**
+  String get groupManagedDialogPickMemberCta;
+
+  /// No description provided for @groupManagedDialogSelectOtherFirst.
+  ///
+  /// In es, this message translates to:
+  /// **'Elige primero a un miembro del grupo.'**
+  String get groupManagedDialogSelectOtherFirst;
+
+  /// No description provided for @groupManagedDialogGuardianMustReassign.
+  ///
+  /// In es, this message translates to:
+  /// **'Ese miembro ya no está activo en el grupo. Elige a otro responsable o «Yo».'**
+  String get groupManagedDialogGuardianMustReassign;
+
+  /// No description provided for @groupManagedDialogDeliversSummary.
+  ///
+  /// In es, this message translates to:
+  /// **'Lo entrega: {name}'**
+  String groupManagedDialogDeliversSummary(String name);
 
   /// No description provided for @groupParticipantsRegisteredTitle.
   ///

@@ -514,7 +514,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get groupManagedDialogWhoManagesDesc =>
-      'De momento lo gestionarás tú como organizador.';
+      'Elige quién verá el resultado en la app para poder entregarlo en privado.';
 
   @override
   String get groupManagedDialogWhoManagesHelp =>
@@ -1083,6 +1083,41 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get groupManagedDialogDeliveryShowInPerson => 'Mostrar en persona';
+
+  @override
+  String get groupManagedResponsibleUnavailable => 'Responsable no disponible';
+
+  @override
+  String groupManagedDeliversResponsible(String name) {
+    return 'Lo gestiona: $name';
+  }
+
+  @override
+  String get groupManagedDialogPickGuardianTitle => '¿Quién lo entregará?';
+
+  @override
+  String get groupManagedDialogGuardianOtherSubtitle =>
+      'Este miembro verá el resultado y podrá entregárselo en privado.';
+
+  @override
+  String get groupManagedDialogGuardianNoEligibleMembers =>
+      'Cuando se una otro miembro con app, podrás asignárselo.';
+
+  @override
+  String get groupManagedDialogPickMemberCta => 'Elegir miembro';
+
+  @override
+  String get groupManagedDialogSelectOtherFirst =>
+      'Elige primero a un miembro del grupo.';
+
+  @override
+  String get groupManagedDialogGuardianMustReassign =>
+      'Ese miembro ya no está activo en el grupo. Elige a otro responsable o «Yo».';
+
+  @override
+  String groupManagedDialogDeliversSummary(String name) {
+    return 'Lo entrega: $name';
+  }
 
   @override
   String get groupParticipantsRegisteredTitle => 'Participantes registrados';

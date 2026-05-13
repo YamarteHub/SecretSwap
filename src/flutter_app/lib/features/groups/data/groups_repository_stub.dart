@@ -104,6 +104,7 @@ class GroupsRepositoryStub implements GroupsRepository {
     String? subgroupId,
     required String deliveryMode,
     String? managedByUid,
+    bool syncManagedByUid = false,
   }) async {
     throw UnimplementedError('updateManagedParticipant not wired');
   }

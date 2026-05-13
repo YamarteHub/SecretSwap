@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,6 +22,43 @@ String? _subgroupDisplayName(GroupDetail detail, String? subgroupId) {
     if (s.subgroupId == subgroupId) return s.name;
   }
   return subgroupId;
+}
+
+/// Miembros con app activos elegibles como responsable (excluye al organizador).
+List<GroupMember> _eligibleDelegatedGuardians(GroupDetail d) {
+  return d.members
+      .where(
+        (m) =>
+            m.memberState == MemberState.active && m.uid != d.ownerUid,
+      )
+      .toList()
+    ..sort(
+      (a, b) => a.nickname.toLowerCase().compareTo(b.nickname.toLowerCase()),
+    );
+}
+
+bool _isManagedSecretResponsible(
+  GroupDetail d,
+  GroupParticipant p,
+  String uid,
+) {
+  final ownerUid = d.ownerUid;
+  final r = p.managedByUid;
+  if (r != null && r == uid) return true;
+  if ((r == null || r == ownerUid) && uid == ownerUid) return true;
+  return false;
+}
+
+String _managedResponsibleNickname(
+  GroupDetail d,
+  GroupParticipant p,
+  AppLocalizations l10n,
+) {
+  final effectiveUid = p.managedByUid ?? d.ownerUid;
+  for (final m in d.members) {
+    if (m.uid == effectiveUid) return m.nickname;
+  }
+  return l10n.groupManagedResponsibleUnavailable;
 }
 
 const _drawRuleOrder = [
@@ -379,14 +418,10 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
     });
   }
 
-  /// Incluye `managedByUid == null` heredado como responsable = owner.
   bool _userManagesManagedSecrets(GroupDetail d, String? uid) {
     if (uid == null) return false;
-    for (final p in d.managedParticipants) {
-      if (p.managedByUid == uid) return true;
-      if (p.managedByUid == null && uid == d.ownerUid) return true;
-    }
-    return false;
+    return d.managedParticipants
+        .any((p) => _isManagedSecretResponsible(d, p, uid));
   }
 
   GroupMember? _selfMember(GroupDetail d) {
@@ -401,7 +436,9 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
   List<GroupParticipant> _managedAssignedToMe(GroupDetail d) {
     final uid = widget.currentUid;
     if (uid == null) return const [];
-    return d.managedParticipants.where((p) => p.managedByUid == uid).toList();
+    return d.managedParticipants
+        .where((p) => _isManagedSecretResponsible(d, p, uid))
+        .toList();
   }
 
   bool _memberShouldSeeSubgroupPicker(GroupDetail d) {
@@ -689,7 +726,9 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
       context: context,
       builder: (ctx) => _CreateManagedParticipantDialog(
         subgroups: widget.detail.subgroups,
-        managedByLabel: context.l10n.groupManagedGuardianSelf,
+        ownerUid: widget.detail.ownerUid,
+        eligibleDelegatedMembers:
+            _eligibleDelegatedGuardians(widget.detail),
       ),
     );
     if (!mounted || result == null) return;
@@ -703,6 +742,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
             participantType: result.participantType,
             subgroupId: result.subgroupId,
             deliveryMode: result.deliveryMode,
+            managedByUid: result.managedByUid,
           );
       _reloadDetail();
       if (mounted) {
@@ -1107,7 +1147,9 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
       context: context,
       builder: (ctx) => _CreateManagedParticipantDialog(
         subgroups: widget.detail.subgroups,
-        managedByLabel: context.l10n.groupManagedGuardianSelf,
+        ownerUid: widget.detail.ownerUid,
+        eligibleDelegatedMembers:
+            _eligibleDelegatedGuardians(widget.detail),
         initial: participant,
       ),
     );
@@ -1122,6 +1164,8 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
             participantType: result.participantType,
             subgroupId: result.subgroupId,
             deliveryMode: result.deliveryMode,
+            managedByUid: result.managedByUid,
+            syncManagedByUid: true,
           );
       _reloadDetail();
       if (mounted) {
@@ -1575,10 +1619,8 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
                     widget.detail,
                     p.subgroupId,
                   );
-                  final guardianLabel = p.managedByUid == null ||
-                          p.managedByUid == widget.currentUid
-                      ? l10n.groupManagedGuardianSelf
-                      : l10n.groupManagedGuardianOther;
+                  final respName =
+                      _managedResponsibleNickname(widget.detail, p, l10n);
                   return GuardianTile(
                     name: p.displayName,
                     personTypeLabel:
@@ -1586,10 +1628,10 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
                             ? l10n.groupTypeChildManaged
                             : l10n.groupTypeAdultNoApp,
                     subgroupName: subgroupName,
-                    guardianLabel: guardianLabel,
+                    responsibilityLine:
+                        l10n.groupManagedDeliversResponsible(respName),
                     subgroupPrefix: l10n.groupSectionSubgroups,
                     noSubgroupLabel: l10n.groupNoSubgroupAssigned,
-                    guardianPrefix: l10n.groupGuardianOfSecret,
                     privateResultLabel: l10n.groupPrivateResult,
                     trailing: _isOwner && _canManageManagedParticipants
                         ? PopupMenuButton<String>(
@@ -2816,12 +2858,15 @@ class _ManagedParticipantDraft {
     required this.participantType,
     required this.subgroupId,
     required this.deliveryMode,
+    this.managedByUid,
   });
 
   final String displayName;
   final String participantType;
   final String? subgroupId;
   final String deliveryMode;
+  /// `null` = responsable el organizador (contrato backend / Firestore).
+  final String? managedByUid;
 }
 
 class _CreateSubgroupDialog extends StatefulWidget {
@@ -2982,12 +3027,14 @@ class _AssignSubgroupDialogState extends State<_AssignSubgroupDialog> {
 class _CreateManagedParticipantDialog extends StatefulWidget {
   const _CreateManagedParticipantDialog({
     required this.subgroups,
-    required this.managedByLabel,
+    required this.ownerUid,
+    required this.eligibleDelegatedMembers,
     this.initial,
   });
 
   final List<Subgroup> subgroups;
-  final String managedByLabel;
+  final String ownerUid;
+  final List<GroupMember> eligibleDelegatedMembers;
   final GroupParticipant? initial;
 
   @override
@@ -2995,8 +3042,7 @@ class _CreateManagedParticipantDialog extends StatefulWidget {
       _CreateManagedParticipantDialogState();
 }
 
-/// Crear/editar participante sin app (tipo, subgrupo, entrega).
-/// La reasignación a otro responsable queda fuera de esta fase de producto.
+/// Crear/editar participante sin app (tipo, subgrupo, responsable de entrega, modo entrega).
 class _CreateManagedParticipantDialogState
     extends State<_CreateManagedParticipantDialog> {
   final _nameCtrl = TextEditingController();
@@ -3011,6 +3057,7 @@ class _CreateManagedParticipantDialogState
   static const _guardianSpecific = 'specific';
   String _guardian = _guardianSelf;
   String? _subgroupId;
+  String? _otherGuardianUid;
 
   @override
   void initState() {
@@ -3028,6 +3075,15 @@ class _CreateManagedParticipantDialogState
       _ => _deliveryVerbal,
     };
     _subgroupId = initial.subgroupId;
+    final m = initial.managedByUid;
+    final owner = widget.ownerUid;
+    if (m == null || m == owner) {
+      _guardian = _guardianSelf;
+      _otherGuardianUid = null;
+    } else {
+      _guardian = _guardianOther;
+      _otherGuardianUid = m;
+    }
   }
 
   @override
@@ -3044,10 +3100,87 @@ class _CreateManagedParticipantDialogState
     };
   }
 
+  String? _subgroupNameForMember(GroupMember m) {
+    final id = m.subgroupId;
+    if (id == null || id.isEmpty) return null;
+    for (final s in widget.subgroups) {
+      if (s.subgroupId == id) return s.name;
+    }
+    return null;
+  }
+
+  String? _nicknameForDelegatedUid(String uid) {
+    for (final m in widget.eligibleDelegatedMembers) {
+      if (m.uid == uid) return m.nickname;
+    }
+    return null;
+  }
+
+  Future<void> _openDelegatedGuardianPicker(BuildContext context) async {
+    final l10n = context.l10n;
+    final members = widget.eligibleDelegatedMembers;
+    final picked = await showModalBottomSheet<GroupMember>(
+      context: context,
+      showDragHandle: true,
+      builder: (sheetCtx) {
+        final theme = Theme.of(sheetCtx);
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 12, 20, 8),
+                  child: Text(
+                    l10n.groupManagedDialogPickGuardianTitle,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                for (final m in members)
+                  ListTile(
+                    title: Text(m.nickname),
+                    subtitle: _subgroupNameForMember(m) != null
+                        ? Text(_subgroupNameForMember(m)!)
+                        : null,
+                    onTap: () => Navigator.pop(sheetCtx, m),
+                  ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+    if (!mounted || picked == null) return;
+    setState(() {
+      _guardian = _guardianOther;
+      _otherGuardianUid = picked.uid;
+    });
+  }
+
+  void _onGuardianChoice(String v, BuildContext context) {
+    if (v == _guardianSelf) {
+      setState(() {
+        _guardian = _guardianSelf;
+        _otherGuardianUid = null;
+      });
+      return;
+    }
+    if (v == _guardianOther) {
+      if (widget.eligibleDelegatedMembers.isEmpty) return;
+      setState(() => _guardian = _guardianOther);
+      unawaited(_openDelegatedGuardianPicker(context));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l10n = context.l10n;
+    final canDelegate =
+        widget.eligibleDelegatedMembers.isNotEmpty;
     return PremiumDialog(
       icon: Icons.shield_moon_outlined,
       title: widget.initial == null
@@ -3119,15 +3252,17 @@ class _CreateManagedParticipantDialogState
                 value: _guardianSelf,
                 icon: Icons.person_outline,
                 label: l10n.groupManagedDialogGuardianMe,
-                hint: widget.managedByLabel,
+                hint: l10n.groupManagedDialogGuardianMeHint,
                 enabled: true,
               ),
               _ChoiceOption(
                 value: _guardianOther,
                 icon: Icons.group_outlined,
                 label: l10n.groupManagedDialogGuardianOther,
-                hint: l10n.groupManagedDialogGuardianComingSoon,
-                enabled: false,
+                hint: canDelegate
+                    ? null
+                    : l10n.groupManagedDialogGuardianNoEligibleMembers,
+                enabled: canDelegate,
               ),
               _ChoiceOption(
                 value: _guardianSpecific,
@@ -3138,8 +3273,40 @@ class _CreateManagedParticipantDialogState
               ),
             ],
             selected: _guardian,
-            onChanged: (v) => setState(() => _guardian = v),
+            onChanged: (v) => _onGuardianChoice(v, context),
           ),
+          if (_guardian == _guardianOther) ...[
+            const SizedBox(height: 10),
+            Text(
+              l10n.groupManagedDialogGuardianOtherSubtitle,
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+                height: 1.35,
+              ),
+            ),
+            const SizedBox(height: 8),
+            if (_otherGuardianUid != null)
+              Align(
+                alignment: Alignment.centerLeft,
+                child: TextButton.icon(
+                  onPressed: () => _openDelegatedGuardianPicker(context),
+                  icon: const Icon(Icons.edit_outlined, size: 18),
+                  label: Text(
+                    l10n.groupManagedDialogDeliversSummary(
+                      _nicknameForDelegatedUid(_otherGuardianUid!) ??
+                          l10n.groupManagedResponsibleUnavailable,
+                    ),
+                  ),
+                ),
+              )
+            else
+              FilledButton.tonal(
+                onPressed: canDelegate
+                    ? () => _openDelegatedGuardianPicker(context)
+                    : null,
+                child: Text(l10n.groupManagedDialogPickMemberCta),
+              ),
+          ],
           const SizedBox(height: 18),
           Text(
             l10n.groupManagedDialogDeliverySectionTitle,
@@ -3191,6 +3358,28 @@ class _CreateManagedParticipantDialogState
           );
           return;
         }
+        if (_guardian == _guardianOther) {
+          final uid = _otherGuardianUid?.trim();
+          if (uid == null || uid.isEmpty) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(l10n.groupManagedDialogSelectOtherFirst)),
+            );
+            return;
+          }
+          final allowed =
+              widget.eligibleDelegatedMembers.any((m) => m.uid == uid);
+          if (!allowed) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(l10n.groupManagedDialogGuardianMustReassign),
+              ),
+            );
+            return;
+          }
+        }
+        final managedByUid = _guardian == _guardianSelf
+            ? null
+            : _otherGuardianUid!.trim();
         Navigator.pop(
           context,
           _ManagedParticipantDraft(
@@ -3198,6 +3387,7 @@ class _CreateManagedParticipantDialogState
             participantType: _participantType,
             subgroupId: _subgroupId,
             deliveryMode: _persistableDeliveryMode(),
+            managedByUid: managedByUid,
           ),
         );
       },
@@ -3247,7 +3437,7 @@ class _ChoiceRow extends StatelessWidget {
       spacing: 8,
       runSpacing: 8,
       children: options.map((opt) {
-        final isSelected = opt.value == selected && opt.enabled;
+        final isSelected = opt.value == selected;
         return _ChoiceChip(
           option: opt,
           selected: isSelected,

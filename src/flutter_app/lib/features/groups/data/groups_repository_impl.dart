@@ -411,6 +411,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
     String? subgroupId,
     required String deliveryMode,
     String? managedByUid,
+    bool syncManagedByUid = false,
   }) async {
     final callable = _functions.httpsCallable('updateManagedParticipant');
     final payload = <String, dynamic>{
@@ -423,8 +424,10 @@ class GroupsRepositoryImpl implements GroupsRepository {
           : subgroupId.trim(),
       'deliveryMode': deliveryMode,
     };
-    if (managedByUid != null) {
-      payload['managedByUid'] = managedByUid.trim().isEmpty ? null : managedByUid.trim();
+    if (syncManagedByUid) {
+      payload['managedByUid'] = managedByUid == null || managedByUid.trim().isEmpty
+          ? null
+          : managedByUid.trim();
     }
     await callable.call(payload);
   }

@@ -183,7 +183,7 @@
   "groupManagedDialogDeliveryVerbal": "Verbal",
   "groupManagedDialogDeliveryPrinted": "Impresa",
   "groupManagedDialogWhoManagesTitle": "¿Quién gestionará su resultado?",
-  "groupManagedDialogWhoManagesDesc": "De momento lo gestionarás tú como organizador.",
+  "groupManagedDialogWhoManagesDesc": "Elige quién verá el resultado en la app para poder entregarlo en privado.",
   "groupManagedDialogWhoManagesHelp": "Cuando se integre al sorteo, esta persona no verá el resultado en la app. Tú podrás entregárselo de forma verbal o impresa.",
   "groupManagedDialogManagedBy": "Gestionado por: {name}",
   "@groupManagedDialogManagedBy": {
@@ -458,6 +458,25 @@
   "groupManagedDialogDeliverySectionTitle": "¿Cómo se lo harás llegar?",
   "groupManagedDialogDeliveryWhatsapp": "WhatsApp",
   "groupManagedDialogDeliveryShowInPerson": "Mostrar en persona",
+  "groupManagedResponsibleUnavailable": "Responsable no disponible",
+  "groupManagedDeliversResponsible": "Lo gestiona: {name}",
+  "@groupManagedDeliversResponsible": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "groupManagedDialogPickGuardianTitle": "¿Quién lo entregará?",
+  "groupManagedDialogGuardianOtherSubtitle": "Este miembro verá el resultado y podrá entregárselo en privado.",
+  "groupManagedDialogGuardianNoEligibleMembers": "Cuando se una otro miembro con app, podrás asignárselo.",
+  "groupManagedDialogPickMemberCta": "Elegir miembro",
+  "groupManagedDialogSelectOtherFirst": "Elige primero a un miembro del grupo.",
+  "groupManagedDialogGuardianMustReassign": "Ese miembro ya no está activo en el grupo. Elige a otro responsable o «Yo».",
+  "groupManagedDialogDeliversSummary": "Lo entrega: {name}",
+  "@groupManagedDialogDeliversSummary": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
   "groupParticipantsRegisteredTitle": "Participantes registrados",
   "groupParticipantsPendingTitle": "Participantes pendientes",
   "groupParticipantsPendingEmpty": "No hay participantes pendientes.",

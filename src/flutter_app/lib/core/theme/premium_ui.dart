@@ -619,11 +619,10 @@ class PersonTile extends StatelessWidget {
 class GuardianTile extends StatelessWidget {
   final String name;
   final String personTypeLabel;
+  final String responsibilityLine;
   final String? subgroupName;
-  final String guardianLabel;
   final String subgroupPrefix;
   final String noSubgroupLabel;
-  final String guardianPrefix;
   final String privateResultLabel;
   final Widget? trailing;
 
@@ -631,11 +630,10 @@ class GuardianTile extends StatelessWidget {
     super.key,
     required this.name,
     required this.personTypeLabel,
+    required this.responsibilityLine,
     required this.subgroupName,
-    required this.guardianLabel,
     this.subgroupPrefix = 'Subgrupo',
     this.noSubgroupLabel = 'Sin subgrupo asignado',
-    this.guardianPrefix = 'Guardián del secreto',
     this.privateResultLabel = 'Resultado privado',
     this.trailing,
   });
@@ -678,7 +676,7 @@ class GuardianTile extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '$personTypeLabel · $guardianPrefix: $guardianLabel',
+                  '$personTypeLabel · $responsibilityLine',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: theme.textTheme.bodySmall?.copyWith(

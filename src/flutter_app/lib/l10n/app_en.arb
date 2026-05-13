@@ -183,7 +183,7 @@
   "groupManagedDialogDeliveryVerbal": "Verbal",
   "groupManagedDialogDeliveryPrinted": "Printed",
   "groupManagedDialogWhoManagesTitle": "Who will manage this result?",
-  "groupManagedDialogWhoManagesDesc": "For now, you will manage it as organizer.",
+  "groupManagedDialogWhoManagesDesc": "Choose who will see the result in the app so they can deliver it privately.",
   "groupManagedDialogWhoManagesHelp": "When added to the draw, this person won't see the result in the app. You can deliver it verbally or printed.",
   "groupManagedDialogManagedBy": "Managed by: {name}",
   "@groupManagedDialogManagedBy": {
@@ -458,6 +458,25 @@
   "groupManagedDialogDeliverySectionTitle": "How will you share it?",
   "groupManagedDialogDeliveryWhatsapp": "WhatsApp",
   "groupManagedDialogDeliveryShowInPerson": "Show in person",
+  "groupManagedResponsibleUnavailable": "Responsible not available",
+  "groupManagedDeliversResponsible": "Managed by: {name}",
+  "@groupManagedDeliversResponsible": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "groupManagedDialogPickGuardianTitle": "Who will deliver it?",
+  "groupManagedDialogGuardianOtherSubtitle": "This member will see the result and can pass it on in private.",
+  "groupManagedDialogGuardianNoEligibleMembers": "When another member joins with the app, you can assign them.",
+  "groupManagedDialogPickMemberCta": "Choose member",
+  "groupManagedDialogSelectOtherFirst": "Choose a group member first.",
+  "groupManagedDialogGuardianMustReassign": "That member is no longer active in the group. Pick another responsible person or \"Me\".",
+  "groupManagedDialogDeliversSummary": "Delivers: {name}",
+  "@groupManagedDialogDeliversSummary": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
   "groupParticipantsRegisteredTitle": "Registered participants",
   "groupParticipantsPendingTitle": "Pending participants",
   "groupParticipantsPendingEmpty": "There are no pending participants.",

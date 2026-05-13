@@ -65,6 +65,8 @@ abstract interface class GroupsRepository {
     String? subgroupId,
     required String deliveryMode,
     String? managedByUid,
+    /// Si es `true`, se envía `managedByUid` al callable (`null` = organizador).
+    bool syncManagedByUid = false,
   });
 
   Future<void> removeManagedParticipant({
