@@ -63,12 +63,16 @@ String _managedResponsibleNickname(
 }
 
 String? _groupDetailDrawDateLine(BuildContext context, GroupDetail d) {
-  if (d.drawStatus != DrawStatus.completed || d.lastDrawCompletedAt == null) {
-    return null;
-  }
   final loc = Localizations.localeOf(context).toString();
-  final formatted = DateFormat.yMMMMd(loc).format(d.lastDrawCompletedAt!);
-  return context.l10n.homeDrawDateLine(formatted);
+  if (d.eventDate != null) {
+    final formatted = DateFormat.yMMMMd(loc).format(d.eventDate!);
+    return context.l10n.homeDeliveryDateLine(formatted);
+  }
+  if (d.drawStatus == DrawStatus.completed && d.lastDrawCompletedAt != null) {
+    final formatted = DateFormat.yMMMMd(loc).format(d.lastDrawCompletedAt!);
+    return context.l10n.homeDrawDateLine(formatted);
+  }
+  return null;
 }
 
 const _drawRuleOrder = [

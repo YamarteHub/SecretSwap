@@ -119,6 +119,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
     final ids = rows.map((g) => g.groupId).toSet().toList();
     final drawById = <String, DrawStatus>{};
     final lastDrawAtById = <String, DateTime?>{};
+    final eventDateById = <String, DateTime?>{};
     if (ids.isNotEmpty) {
       final groupSnaps = await Future.wait(
         ids.map((id) => _firestore.doc('groups/$id').get()),
@@ -131,6 +132,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
         drawById[gid] = _drawStatusFromGroupMap(data);
         lastDrawAtById[gid] =
             _readFirestoreOptionalDate(data, 'lastDrawCompletedAt');
+        eventDateById[gid] = _readFirestoreOptionalDate(data, 'eventDate');
       }
     }
     return rows
@@ -144,6 +146,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
                 drawFromUserRow[g.groupId] ??
                 DrawStatus.idle,
             lastDrawCompletedAt: lastDrawAtById[g.groupId],
+            eventDate: eventDateById[g.groupId],
           ),
         )
         .toList();
@@ -250,6 +253,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
       lastExecutionId: g['lastExecutionId'] as String?,
       lastDrawCompletedAt:
           _readFirestoreOptionalDate(g, 'lastDrawCompletedAt'),
+      eventDate: _readFirestoreOptionalDate(g, 'eventDate'),
       subgroups: subgroups,
       members: members,
       managedParticipants: managedParticipants,

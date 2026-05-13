@@ -1259,14 +1259,20 @@ abstract class AppLocalizations {
   /// No description provided for @homeActiveGroupsSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Sorteo aún no completado: preparación, invitaciones o sorteo pendiente.'**
+  /// **'Preparación o sorteo pendiente; o sorteo hecho con entrega hoy o futura, o sin fecha de entrega definida.'**
   String get homeActiveGroupsSubtitle;
 
   /// No description provided for @homeActiveGroupsEmpty.
   ///
   /// In es, this message translates to:
-  /// **'No tienes grupos en esta fase.'**
+  /// **'No tienes grupos en esta sección.'**
   String get homeActiveGroupsEmpty;
+
+  /// No description provided for @homeDeliveryDateLine.
+  ///
+  /// In es, this message translates to:
+  /// **'Entrega: {date}'**
+  String homeDeliveryDateLine(String date);
 
   /// No description provided for @homeDrawDateLine.
   ///
@@ -1307,7 +1313,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeCompletedGroupsSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'El sorteo ya se realizó; sigues en el grupo para consultar tu resultado.'**
+  /// **'Sorteo realizado y fecha de entrega ya pasada.'**
   String get homeCompletedGroupsSubtitle;
 
   /// No description provided for @homePastGroupsTitle.

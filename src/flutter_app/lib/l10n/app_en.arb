@@ -250,8 +250,14 @@
   "homeChipTeams": "Teams",
   "homeChipPairings": "Pairings",
   "homeActiveGroupsTitle": "In progress",
-  "homeActiveGroupsSubtitle": "Draw not finished yet: setup, invites, or draw still pending.",
-  "homeActiveGroupsEmpty": "You have no groups in this stage.",
+  "homeActiveGroupsSubtitle": "Setup or draw still pending; or draw done with delivery today or in the future, or no delivery date set yet.",
+  "homeActiveGroupsEmpty": "You have no groups in this section.",
+  "homeDeliveryDateLine": "Delivery: {date}",
+  "@homeDeliveryDateLine": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
   "homeDrawDateLine": "Draw: {date}",
   "@homeDrawDateLine": {
     "placeholders": {
@@ -263,7 +269,7 @@
   "homeStatusActive": "Active",
   "homeStatusInactive": "Inactive",
   "homeCompletedGroupsTitle": "Finished draws",
-  "homeCompletedGroupsSubtitle": "The draw is done; you remain in the group to see your result.",
+  "homeCompletedGroupsSubtitle": "Draw completed and the delivery date has passed.",
   "homePastGroupsTitle": "Past groups",
   "homePastGroupsSubtitle": "You are no longer an active member of these groups.",
   "homeCompletedArchivedLabel": "Completed / archived",

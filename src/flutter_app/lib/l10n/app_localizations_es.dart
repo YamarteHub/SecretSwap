@@ -644,10 +644,15 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get homeActiveGroupsSubtitle =>
-      'Sorteo aún no completado: preparación, invitaciones o sorteo pendiente.';
+      'Preparación o sorteo pendiente; o sorteo hecho con entrega hoy o futura, o sin fecha de entrega definida.';
 
   @override
-  String get homeActiveGroupsEmpty => 'No tienes grupos en esta fase.';
+  String get homeActiveGroupsEmpty => 'No tienes grupos en esta sección.';
+
+  @override
+  String homeDeliveryDateLine(String date) {
+    return 'Entrega: $date';
+  }
 
   @override
   String homeDrawDateLine(String date) {
@@ -672,7 +677,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get homeCompletedGroupsSubtitle =>
-      'El sorteo ya se realizó; sigues en el grupo para consultar tu resultado.';
+      'Sorteo realizado y fecha de entrega ya pasada.';
 
   @override
   String get homePastGroupsTitle => 'Grupos anteriores';

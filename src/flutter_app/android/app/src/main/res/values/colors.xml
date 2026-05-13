@@ -2,4 +2,5 @@
 <resources>
     <!-- Coincide con AppTheme.warmIvory (Flutter) para el splash nativo. -->
     <color name="warm_ivory">#FAF7F1</color>
+	<color name="ic_launcher_background">#FAF7F1</color>
 </resources>

@@ -49,6 +49,8 @@ class GroupSummary {
   final DrawStatus drawStatus;
   /// `groups/{id}.lastDrawCompletedAt` cuando el sorteo ya se ejecutó (opcional).
   final DateTime? lastDrawCompletedAt;
+  /// `groups/{id}.eventDate` — fecha de entrega o evento (opcional).
+  final DateTime? eventDate;
 
   const GroupSummary({
     required this.groupId,
@@ -57,6 +59,7 @@ class GroupSummary {
     required this.isActiveMember,
     this.drawStatus = DrawStatus.idle,
     this.lastDrawCompletedAt,
+    this.eventDate,
   });
 }
 
@@ -112,6 +115,7 @@ class GroupDetail {
   final String? currentExecutionId;
   final String? lastExecutionId;
   final DateTime? lastDrawCompletedAt;
+  final DateTime? eventDate;
   final List<Subgroup> subgroups;
   final List<GroupMember> members;
   final List<GroupParticipant> managedParticipants;
@@ -126,6 +130,7 @@ class GroupDetail {
     required this.currentExecutionId,
     required this.lastExecutionId,
     this.lastDrawCompletedAt,
+    this.eventDate,
     required this.subgroups,
     required this.members,
     required this.managedParticipants,

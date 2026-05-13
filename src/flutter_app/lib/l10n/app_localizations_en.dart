@@ -638,10 +638,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeActiveGroupsSubtitle =>
-      'Draw not finished yet: setup, invites, or draw still pending.';
+      'Setup or draw still pending; or draw done with delivery today or in the future, or no delivery date set yet.';
 
   @override
-  String get homeActiveGroupsEmpty => 'You have no groups in this stage.';
+  String get homeActiveGroupsEmpty => 'You have no groups in this section.';
+
+  @override
+  String homeDeliveryDateLine(String date) {
+    return 'Delivery: $date';
+  }
 
   @override
   String homeDrawDateLine(String date) {
@@ -666,7 +671,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeCompletedGroupsSubtitle =>
-      'The draw is done; you remain in the group to see your result.';
+      'Draw completed and the delivery date has passed.';
 
   @override
   String get homePastGroupsTitle => 'Past groups';
