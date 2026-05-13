@@ -1,0 +1,452 @@
+[
+  {
+    "templateKey": "chat.system.auto.playful.001.v1",
+    "category": "playful",
+    "es": "Aquí ya huele a sospechas… y todavía nadie ha confesado nada.",
+    "en": "Suspicion is already in the air… and nobody has confessed a thing.",
+    "it": "Qui c'è già aria di sospetti… e nessuno ha ancora confessato nulla.",
+    "pt": "Já há cheiro de suspeitas por aqui… e ninguém confessou nada ainda.",
+    "fr": "L'ambiance sent déjà le soupçon… et personne n'a encore rien avoué."
+  },
+  {
+    "templateKey": "chat.system.auto.playful.002.v1",
+    "category": "playful",
+    "es": "Desde que hay sorteo, cada pregunta inocente parece estrategia.",
+    "en": "Now that the draw is done, every innocent question sounds strategic.",
+    "it": "Da quando c'è stato il sorteggio, ogni domanda innocente sembra strategica.",
+    "pt": "Desde que houve sorteio, toda pergunta inocente parece estratégica.",
+    "fr": "Depuis le tirage, chaque question innocente semble calculée."
+  },
+  {
+    "templateKey": "chat.system.auto.playful.003.v1",
+    "category": "playful",
+    "es": "Consejo de Tarci: investiga con sutileza, no con interrogatorio.",
+    "en": "Tarci tip: investigate with subtlety, not like an interrogation.",
+    "it": "Consiglio di Tarci: indaga con discrezione, non come in un interrogatorio.",
+    "pt": "Dica da Tarci: investigue com sutileza, não como num interrogatório.",
+    "fr": "Conseil de Tarci : enquête avec subtilité, pas comme dans un interrogatoire."
+  },
+  {
+    "templateKey": "chat.system.auto.playful.004.v1",
+    "category": "playful",
+    "es": "Hay quien ya tiene regalo. Hay quien tiene fe.",
+    "en": "Some already have a gift. Others have faith.",
+    "it": "C'è chi ha già il regalo. E chi ha fede.",
+    "pt": "Há quem já tenha presente. E há quem tenha fé.",
+    "fr": "Certains ont déjà leur cadeau. D'autres ont la foi."
+  },
+  {
+    "templateKey": "chat.system.auto.playful.005.v1",
+    "category": "playful",
+    "es": "Si alguien pregunta por tallas, colores y hobbies seguidos, toma nota.",
+    "en": "If someone asks about sizes, colors and hobbies all at once, take note.",
+    "it": "Se qualcuno chiede taglie, colori e hobby tutti insieme, prendi nota.",
+    "pt": "Se alguém perguntar por tamanhos, cores e hobbies de uma vez, fique atento.",
+    "fr": "Si quelqu'un demande tailles, couleurs et loisirs d'un coup, prends note."
+  },
+  {
+    "templateKey": "chat.system.auto.playful.006.v1",
+    "category": "playful",
+    "es": "Un buen regalo sorprende. Un gran regalo deja historia.",
+    "en": "A good gift surprises. A great gift becomes a story.",
+    "it": "Un buon regalo sorprende. Un grande regalo lascia il segno.",
+    "pt": "Um bom presente surpreende. Um grande presente vira história.",
+    "fr": "Un bon cadeau surprend. Un grand cadeau laisse un souvenir."
+  },
+  {
+    "templateKey": "chat.system.auto.playful.007.v1",
+    "category": "playful",
+    "es": "Las sonrisas sospechosas cuentan como pista.",
+    "en": "Suspicious smiles count as clues.",
+    "it": "I sorrisi sospetti contano come indizi.",
+    "pt": "Sorrisos suspeitos contam como pistas.",
+    "fr": "Les sourires suspects comptent comme des indices."
+  },
+  {
+    "templateKey": "chat.system.auto.playful.008.v1",
+    "category": "playful",
+    "es": "Se permite despistar. Se recomienda no pasarse.",
+    "en": "Misdirection is allowed. Overdoing it is not recommended.",
+    "it": "Depistare è concesso. Esagerare è sconsigliato.",
+    "pt": "Despistar é permitido. Exagerar, nem tanto.",
+    "fr": "Brouiller les pistes est permis. En faire trop, moins."
+  },
+  {
+    "templateKey": "chat.system.auto.playful.009.v1",
+    "category": "playful",
+    "es": "El silencio de algunos empieza a parecer planificación.",
+    "en": "Some people's silence is starting to look like a plan.",
+    "it": "Il silenzio di qualcuno comincia a sembrare una strategia.",
+    "pt": "O silêncio de algumas pessoas já parece planejamento.",
+    "fr": "Le silence de certains commence à ressembler à une stratégie."
+  },
+  {
+    "templateKey": "chat.system.auto.playful.010.v1",
+    "category": "playful",
+    "es": "Si vas a improvisar, al menos improvisa con cariño.",
+    "en": "If you are going to improvise, at least improvise with care.",
+    "it": "Se improvvisi, fallo almeno con affetto.",
+    "pt": "Se for improvisar, pelo menos improvise com carinho.",
+    "fr": "Si tu improvises, fais-le au moins avec attention."
+  },
+  {
+    "templateKey": "chat.system.auto.playful.011.v1",
+    "category": "playful",
+    "es": "Tarci detecta energía de regalo épico… y de pánico elegante.",
+    "en": "Tarci detects energy for epic gifts… and elegant panic.",
+    "it": "Tarci percepisce energia da regalo epico… e da panico elegante.",
+    "pt": "A Tarci percebe energia de presente épico… e de pânico elegante.",
+    "fr": "Tarci détecte une énergie de cadeau épique… et de panique élégante."
+  },
+  {
+    "templateKey": "chat.system.auto.playful.012.v1",
+    "category": "playful",
+    "es": "Quien dice “yo ya lo tengo” sin pruebas despierta dudas.",
+    "en": "Anyone saying “I already have it” without proof raises suspicion.",
+    "it": "Chi dice “ce l'ho già” senza prove suscita sospetti.",
+    "pt": "Quem diz “já resolvi” sem provas levanta suspeitas.",
+    "fr": "Celui qui dit « c'est déjà réglé » sans preuve éveille les soupçons."
+  },
+  {
+    "templateKey": "chat.system.auto.playful.013.v1",
+    "category": "playful",
+    "es": "Recordatorio amable: el misterio también se disfruta.",
+    "en": "Friendly reminder: the mystery is part of the fun.",
+    "it": "Promemoria gentile: anche il mistero fa parte del divertimento.",
+    "pt": "Lembrete carinhoso: o mistério também faz parte da graça.",
+    "fr": "Petit rappel : le mystère fait aussi partie du plaisir."
+  },
+  {
+    "templateKey": "chat.system.auto.playful.014.v1",
+    "category": "playful",
+    "es": "Cada grupo tiene un detective. ¿Ya sabéis quién es?",
+    "en": "Every group has a detective. Do you already know who it is?",
+    "it": "Ogni gruppo ha un detective. Avete già capito chi è?",
+    "pt": "Todo grupo tem um detetive. Já sabem quem é?",
+    "fr": "Chaque groupe a son détective. Vous savez déjà qui c'est ?"
+  },
+  {
+    "templateKey": "chat.system.auto.playful.015.v1",
+    "category": "playful",
+    "es": "Un detalle con intención vale más que un regalo sin alma.",
+    "en": "A thoughtful detail is worth more than a gift without soul.",
+    "it": "Un pensiero fatto con intenzione vale più di un regalo senza anima.",
+    "pt": "Um detalhe com intenção vale mais do que um presente sem alma.",
+    "fr": "Une attention sincère vaut plus qu'un cadeau sans âme."
+  },
+  {
+    "templateKey": "chat.system.auto.playful.016.v1",
+    "category": "playful",
+    "es": "Este chat está oficialmente en modo sospecha.",
+    "en": "This chat is officially in suspicion mode.",
+    "it": "Questa chat è ufficialmente in modalità sospetto.",
+    "pt": "Este chat está oficialmente em modo suspeita.",
+    "fr": "Ce chat est officiellement en mode soupçon."
+  },
+  {
+    "templateKey": "chat.system.auto.playful.017.v1",
+    "category": "playful",
+    "es": "Si acabas de buscar ideas en secreto, nadie te juzga.",
+    "en": "If you just searched for gift ideas in secret, nobody is judging.",
+    "it": "Se hai appena cercato idee regalo di nascosto, nessuno ti giudica.",
+    "pt": "Se você acabou de procurar ideias em segredo, ninguém vai julgar.",
+    "fr": "Si tu viens de chercher des idées en secret, personne ne juge."
+  },
+  {
+    "templateKey": "chat.system.auto.playful.018.v1",
+    "category": "playful",
+    "es": "Hay miradas en la vida real que ahora significan demasiado.",
+    "en": "Some real-life glances suddenly mean far too much.",
+    "it": "Certi sguardi nella vita reale ora significano fin troppo.",
+    "pt": "Alguns olhares na vida real agora significam coisa demais.",
+    "fr": "Certains regards dans la vraie vie veulent soudain dire beaucoup trop."
+  },
+  {
+    "templateKey": "chat.system.auto.playful.019.v1",
+    "category": "playful",
+    "es": "La misión no es gastar más. Es acertar mejor.",
+    "en": "The mission is not to spend more. It is to get it right.",
+    "it": "La missione non è spendere di più. È azzeccarci meglio.",
+    "pt": "A missão não é gastar mais. É acertar melhor.",
+    "fr": "Le but n'est pas de dépenser plus. C'est de mieux viser."
+  },
+  {
+    "templateKey": "chat.system.auto.playful.020.v1",
+    "category": "playful",
+    "es": "Disimular bien también es parte del juego.",
+    "en": "Hiding it well is also part of the game.",
+    "it": "Saper dissimulare fa parte del gioco.",
+    "pt": "Disfarçar bem também faz parte do jogo.",
+    "fr": "Bien dissimuler fait aussi partie du jeu."
+  },
+  {
+    "templateKey": "chat.system.auto.playful.021.v1",
+    "category": "playful",
+    "es": "Tarci apuesta a que alguien aquí ya tiene un plan brillante.",
+    "en": "Tarci bets someone here already has a brilliant plan.",
+    "it": "Tarci scommette che qualcuno qui ha già un piano geniale.",
+    "pt": "A Tarci aposta que alguém aqui já tem um plano brilhante.",
+    "fr": "Tarci parie que quelqu'un ici a déjà un plan brillant."
+  },
+  {
+    "templateKey": "chat.system.auto.debate.001.v1",
+    "category": "debate",
+    "es": "Debate rápido: ¿regalo útil o regalo que haga reír?",
+    "en": "Quick debate: a useful gift or a gift that makes people laugh?",
+    "it": "Dibattito rapido: regalo utile o regalo che fa ridere?",
+    "pt": "Debate rápido: presente útil ou presente que faça rir?",
+    "fr": "Débat express : cadeau utile ou cadeau qui fait rire ?"
+  },
+  {
+    "templateKey": "chat.system.auto.debate.002.v1",
+    "category": "debate",
+    "es": "¿Mejor sorpresa total o pista bien aprovechada?",
+    "en": "Better a total surprise or a well-used hint?",
+    "it": "Meglio una sorpresa totale o un indizio sfruttato bene?",
+    "pt": "Melhor surpresa total ou pista bem aproveitada?",
+    "fr": "Mieux vaut une surprise totale ou un indice bien utilisé ?"
+  },
+  {
+    "templateKey": "chat.system.auto.debate.003.v1",
+    "category": "debate",
+    "es": "¿Qué gana: creatividad o precisión?",
+    "en": "What wins: creativity or precision?",
+    "it": "Cosa vince: creatività o precisione?",
+    "pt": "O que ganha: criatividade ou precisão?",
+    "fr": "Qu'est-ce qui l'emporte : créativité ou précision ?"
+  },
+  {
+    "templateKey": "chat.system.auto.debate.004.v1",
+    "category": "debate",
+    "es": "Abrimos debate: ¿el envoltorio espectacular importa?",
+    "en": "Open debate: does spectacular wrapping matter?",
+    "it": "Dibattito aperto: una confezione spettacolare conta?",
+    "pt": "Debate aberto: uma embalagem caprichada faz diferença?",
+    "fr": "Débat ouvert : un emballage spectaculaire, ça compte ?"
+  },
+  {
+    "templateKey": "chat.system.auto.debate.005.v1",
+    "category": "debate",
+    "es": "¿Investigación discreta o lista de deseos al rescate?",
+    "en": "Discreet research or wish list to the rescue?",
+    "it": "Indagine discreta o lista dei desideri in soccorso?",
+    "pt": "Investigação discreta ou lista de desejos para salvar?",
+    "fr": "Enquête discrète ou liste d'envies à la rescousse ?"
+  },
+  {
+    "templateKey": "chat.system.auto.debate.006.v1",
+    "category": "debate",
+    "es": "Sin señalar a nadie: ¿quién del grupo improvisa al final?",
+    "en": "Without naming names: who in this group improvises at the last minute?",
+    "it": "Senza fare nomi: chi in questo gruppo improvvisa all'ultimo?",
+    "pt": "Sem citar nomes: quem deste grupo improvisa no final?",
+    "fr": "Sans citer personne : qui dans ce groupe improvise à la dernière minute ?"
+  },
+  {
+    "templateKey": "chat.system.auto.debate.007.v1",
+    "category": "debate",
+    "es": "¿Regalo pequeño con historia o grande sin historia?",
+    "en": "A small gift with a story or a big gift without one?",
+    "it": "Meglio un piccolo regalo con una storia o uno grande senza?",
+    "pt": "Presente pequeno com história ou grande sem história?",
+    "fr": "Petit cadeau avec une histoire ou grand cadeau sans histoire ?"
+  },
+  {
+    "templateKey": "chat.system.auto.debate.008.v1",
+    "category": "debate",
+    "es": "¿Se vale despistar en el chat o eso ya es juego sucio?",
+    "en": "Is misdirection in the chat fair play or already dirty tactics?",
+    "it": "Depistare in chat è lecito o è già gioco sporco?",
+    "pt": "Despistar no chat vale ou já é jogo sujo?",
+    "fr": "Brouiller les pistes dans le chat, fair-play ou déjà limite ?"
+  },
+  {
+    "templateKey": "chat.system.auto.debate.009.v1",
+    "category": "debate",
+    "es": "¿Qué emociona más: acertar o sorprender?",
+    "en": "What feels better: getting it right or surprising someone?",
+    "it": "Cosa emoziona di più: azzeccare o sorprendere?",
+    "pt": "O que emociona mais: acertar ou surpreender?",
+    "fr": "Qu'est-ce qui émeut le plus : viser juste ou surprendre ?"
+  },
+  {
+    "templateKey": "chat.system.auto.debate.010.v1",
+    "category": "debate",
+    "es": "Si tuvieras que elegir: ¿práctico, divertido o sentimental?",
+    "en": "If you had to choose: practical, fun or sentimental?",
+    "it": "Se dovessi scegliere: pratico, divertente o sentimentale?",
+    "pt": "Se tivesse de escolher: prático, divertido ou sentimental?",
+    "fr": "S'il fallait choisir : pratique, drôle ou sentimental ?"
+  },
+  {
+    "templateKey": "chat.system.auto.wishlist.001.v1",
+    "category": "wishlistReminder",
+    "es": "Algunas listas siguen vacías. Una pista a tiempo puede salvar un regalo.",
+    "en": "Some wish lists are still empty. A timely hint can save a gift.",
+    "it": "Alcune liste dei desideri sono ancora vuote. Un indizio al momento giusto può salvare un regalo.",
+    "pt": "Algumas listas de desejos ainda estão vazias. Uma pista na hora certa pode salvar um presente.",
+    "fr": "Certaines listes d'envies sont encore vides. Un indice donné à temps peut sauver un cadeau."
+  },
+  {
+    "templateKey": "chat.system.auto.wishlist.002.v1",
+    "category": "wishlistReminder",
+    "es": "Tu lista de deseos no quita magia; evita adivinar a ciegas.",
+    "en": "Your wish list does not remove the magic; it avoids guessing blindly.",
+    "it": "La tua lista dei desideri non toglie magia; evita di andare alla cieca.",
+    "pt": "Sua lista de desejos não tira a magia; evita tentar adivinhar no escuro.",
+    "fr": "Ta liste d'envies n'enlève rien à la magie ; elle évite de deviner à l'aveugle."
+  },
+  {
+    "templateKey": "chat.system.auto.wishlist.003.v1",
+    "category": "wishlistReminder",
+    "es": "Si quieres que acierten contigo, deja alguna idea.",
+    "en": "If you want them to get it right, leave a few ideas.",
+    "it": "Se vuoi che ci azzecchino, lascia qualche idea.",
+    "pt": "Se quiser que acertem com você, deixe algumas ideias.",
+    "fr": "Si tu veux qu'on vise juste, laisse quelques idées."
+  },
+  {
+    "templateKey": "chat.system.auto.wishlist.004.v1",
+    "category": "wishlistReminder",
+    "es": "Hay alguien preparando regalo con muy pocas pistas. Ejem.",
+    "en": "Someone is preparing a gift with very few clues. Ahem.",
+    "it": "Qualcuno sta preparando un regalo con pochissimi indizi. Ehm.",
+    "pt": "Tem alguém preparando presente com pouquíssimas pistas. Cof cof.",
+    "fr": "Quelqu'un prépare un cadeau avec très peu d'indices. Hum hum."
+  },
+  {
+    "templateKey": "chat.system.auto.wishlist.005.v1",
+    "category": "wishlistReminder",
+    "es": "Completar la lista es ayudar sin revelar demasiado.",
+    "en": "Filling in your list helps without revealing too much.",
+    "it": "Completare la lista aiuta senza svelare troppo.",
+    "pt": "Completar a lista ajuda sem revelar demais.",
+    "fr": "Compléter sa liste aide sans trop en dévoiler."
+  },
+  {
+    "templateKey": "chat.system.auto.wishlist.006.v1",
+    "category": "wishlistReminder",
+    "es": "Un enlace, un gusto, una pista: todo suma.",
+    "en": "A link, a preference, a clue: it all helps.",
+    "it": "Un link, un gusto, un indizio: tutto aiuta.",
+    "pt": "Um link, um gosto, uma pista: tudo ajuda.",
+    "fr": "Un lien, un goût, un indice : tout aide."
+  },
+  {
+    "templateKey": "chat.system.auto.wishlist.007.v1",
+    "category": "wishlistReminder",
+    "es": "Las mejores sorpresas también agradecen orientación.",
+    "en": "Even the best surprises appreciate a little guidance.",
+    "it": "Anche le migliori sorprese apprezzano un po' di orientamento.",
+    "pt": "Até as melhores surpresas agradecem um pouco de orientação.",
+    "fr": "Même les meilleures surprises apprécient un peu d'orientation."
+  },
+  {
+    "templateKey": "chat.system.auto.wishlist.008.v1",
+    "category": "wishlistReminder",
+    "es": "Si tu lista está vacía, tu amigo secreto está jugando en modo difícil.",
+    "en": "If your list is empty, your Secret Santa is playing on hard mode.",
+    "it": "Se la tua lista è vuota, il tuo amico segreto sta giocando in modalità difficile.",
+    "pt": "Se sua lista está vazia, seu amigo secreto está jogando no modo difícil.",
+    "fr": "Si ta liste est vide, ton ami secret joue en mode difficile."
+  },
+  {
+    "templateKey": "chat.system.auto.quiet.001.v1",
+    "category": "quietChatNudge",
+    "es": "Mucho silencio por aquí… ¿comprando o escondiendo pruebas?",
+    "en": "It is very quiet here… shopping or hiding evidence?",
+    "it": "Qui c'è molto silenzio… state comprando o nascondendo le prove?",
+    "pt": "Muito silêncio por aqui… comprando ou escondendo provas?",
+    "fr": "C'est bien silencieux ici… achats en cours ou preuves cachées ?"
+  },
+  {
+    "templateKey": "chat.system.auto.quiet.002.v1",
+    "category": "quietChatNudge",
+    "es": "Este grupo está demasiado tranquilo. Alguien que rompa el hielo.",
+    "en": "This group is far too quiet. Someone break the ice.",
+    "it": "Questo gruppo è fin troppo tranquillo. Qualcuno rompa il ghiaccio.",
+    "pt": "Este grupo está quieto demais. Alguém precisa quebrar o gelo.",
+    "fr": "Ce groupe est beaucoup trop calme. Quelqu'un brise la glace."
+  },
+  {
+    "templateKey": "chat.system.auto.quiet.003.v1",
+    "category": "quietChatNudge",
+    "es": "Tarci pasa lista: ¿sigue vivo el cachondeo?",
+    "en": "Tarci is taking attendance: is the playful chaos still alive?",
+    "it": "Tarci fa l'appello: il divertimento è ancora vivo?",
+    "pt": "A Tarci está fazendo chamada: a brincadeira continua viva?",
+    "fr": "Tarci fait l'appel : l'ambiance est toujours là ?"
+  },
+  {
+    "templateKey": "chat.system.auto.quiet.004.v1",
+    "category": "quietChatNudge",
+    "es": "Pregunta de reactivación: ¿quién se ve más sospechoso hoy?",
+    "en": "Reactivation question: who looks most suspicious today?",
+    "it": "Domanda per riattivare il gruppo: chi sembra più sospetto oggi?",
+    "pt": "Pergunta para reanimar: quem parece mais suspeito hoje?",
+    "fr": "Question pour relancer : qui a l'air le plus suspect aujourd'hui ?"
+  },
+  {
+    "templateKey": "chat.system.auto.quiet.005.v1",
+    "category": "quietChatNudge",
+    "es": "Si nadie escribe, Tarci empieza a inventar teorías.",
+    "en": "If nobody writes, Tarci will start making up theories.",
+    "it": "Se nessuno scrive, Tarci inizierà a inventare teorie.",
+    "pt": "Se ninguém escrever, a Tarci vai começar a inventar teorias.",
+    "fr": "Si personne n'écrit, Tarci va commencer à inventer des théories."
+  },
+  {
+    "templateKey": "chat.system.auto.quiet.006.v1",
+    "category": "quietChatNudge",
+    "es": "Chat dormido, misterio despierto. Comentad algo.",
+    "en": "Sleeping chat, wide-awake mystery. Say something.",
+    "it": "Chat addormentata, mistero sveglissimo. Scrivete qualcosa.",
+    "pt": "Chat dormindo, mistério bem acordado. Digam alguma coisa.",
+    "fr": "Chat endormi, mystère bien réveillé. Dites quelque chose."
+  },
+  {
+    "templateKey": "chat.system.auto.countdown.014.v1",
+    "category": "countdown",
+    "es": "Quedan 14 días. Todavía hay margen, pero la excusa se está acabando.",
+    "en": "14 days left. There is still time, but excuses are running out.",
+    "it": "Mancano 14 giorni. C'è ancora margine, ma le scuse stanno finendo.",
+    "pt": "Faltam 14 dias. Ainda há tempo, mas as desculpas estão acabando.",
+    "fr": "Il reste 14 jours. Il y a encore de la marge, mais les excuses s'épuisent."
+  },
+  {
+    "templateKey": "chat.system.auto.countdown.007.v1",
+    "category": "countdown",
+    "es": "Quedan 7 días. Quien no tenga idea entra en fase de búsqueda seria.",
+    "en": "7 days left. Anyone without an idea has officially entered serious search mode.",
+    "it": "Mancano 7 giorni. Chi non ha ancora un'idea entra ufficialmente in fase ricerca seria.",
+    "pt": "Faltam 7 dias. Quem ainda não tem ideia entrou oficialmente em busca séria.",
+    "fr": "Il reste 7 jours. Ceux qui n'ont pas encore d'idée passent officiellement en mode recherche sérieuse."
+  },
+  {
+    "templateKey": "chat.system.auto.countdown.003.v1",
+    "category": "countdown",
+    "es": "Quedan 3 días. Ya no es planificación: es operación rescate.",
+    "en": "3 days left. This is no longer planning; it is a rescue operation.",
+    "it": "Mancano 3 giorni. Non è più pianificazione: è operazione salvataggio.",
+    "pt": "Faltam 3 dias. Já não é planejamento: é operação resgate.",
+    "fr": "Il reste 3 jours. Ce n'est plus de l'organisation : c'est une opération sauvetage."
+  },
+  {
+    "templateKey": "chat.system.auto.countdown.001.v1",
+    "category": "countdown",
+    "es": "Falta 1 día. Envuelve, respira y finge normalidad.",
+    "en": "1 day left. Wrap it, breathe, and act natural.",
+    "it": "Manca 1 giorno. Incarta, respira e fai finta di niente.",
+    "pt": "Falta 1 dia. Embrulhe, respire e finja naturalidade.",
+    "fr": "Il reste 1 jour. Emballe, respire et fais comme si de rien n'était."
+  },
+  {
+    "templateKey": "chat.system.auto.countdown.000.v1",
+    "category": "countdown",
+    "es": "Hoy es el intercambio. Que haya sorpresas, risas y cero confesiones antes de tiempo.",
+    "en": "Today is the exchange. May there be surprises, laughs, and zero early confessions.",
+    "it": "Oggi è il giorno dello scambio. Che ci siano sorprese, risate e zero confessioni in anticipo.",
+    "pt": "Hoje é o dia da troca. Que haja surpresas, risadas e nenhuma confissão antes da hora.",
+    "fr": "Aujourd'hui, c'est le jour de l'échange. Place aux surprises, aux rires et à zéro aveu prématuré."
+  }
+]

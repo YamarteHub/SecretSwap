@@ -18,7 +18,8 @@ export const groupPaths = {
   assignmentDoc: (groupId: string, executionId: string, giverUid: string) =>
     `groups/${groupId}/executions/${executionId}/assignments/${giverUid}`,
   chatMessagesCol: (groupId: string) => `groups/${groupId}/chatMessages`,
-  chatMessageDoc: (groupId: string, messageId: string) => `groups/${groupId}/chatMessages/${messageId}`
+  chatMessageDoc: (groupId: string, messageId: string) => `groups/${groupId}/chatMessages/${messageId}`,
+  chatAutomationTarciStateDoc: (groupId: string) => `groups/${groupId}/chatAutomation/tarciState`
 };
 
 export const userGroupPaths = {

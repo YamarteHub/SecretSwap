@@ -7,6 +7,7 @@ import '../../../../core/l10n/l10n.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/theme/premium_ui.dart';
 import '../../domain/group_chat_message.dart';
+import '../tarci_auto_chat_l10n.dart';
 import '../providers.dart';
 
 /// Extra opcional al navegar al chat (nombre, fecha de entrega, estado sorteo).
@@ -62,6 +63,8 @@ class _GroupChatScreenState extends ConsumerState<GroupChatScreen> {
 
   String _systemText(BuildContext context, String templateKey) {
     final l10n = context.l10n;
+    final auto = localizedTarciAutoMessage(l10n, templateKey);
+    if (auto != null && auto.isNotEmpty) return auto;
     switch (templateKey) {
       case 'chat.system.groupCreated.v1':
         return l10n.chatSystemGroupCreatedV1;

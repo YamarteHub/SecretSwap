@@ -10,6 +10,8 @@ import { executeDraw } from "./functions/executeDraw";
 import { joinGroupByCode } from "./functions/joinGroupByCode";
 import { rotateInviteCode } from "./functions/rotateInviteCode";
 import { sendGroupChatMessage } from "./functions/sendGroupChatMessage";
+import { publishTarciScheduledChatMessages } from "./functions/publishTarciScheduledChatMessages";
+import { devRunTarciChatAutomation } from "./functions/devRunTarciChatAutomation";
 
 export {
   createGroup,
@@ -23,6 +25,8 @@ export {
   getManagedAssignments,
   getWishlist,
   setWishlist,
-  sendGroupChatMessage
+  sendGroupChatMessage,
+  publishTarciScheduledChatMessages,
+  devRunTarciChatAutomation
 };
 

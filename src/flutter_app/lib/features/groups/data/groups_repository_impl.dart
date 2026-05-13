@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
+import 'package:intl/intl.dart';
 
 import '../domain/group_models.dart';
 import '../domain/groups_repository.dart';
@@ -57,6 +59,15 @@ class GroupsRepositoryImpl implements GroupsRepository {
         eventDate.day,
       );
       payload['eventDateEpochMs'] = day.millisecondsSinceEpoch;
+      payload['eventDateDayKey'] = DateFormat('yyyy-MM-dd').format(day);
+      try {
+        final tz = await FlutterTimezone.getLocalTimezone();
+        if (tz.isNotEmpty) {
+          payload['eventTimeZone'] = tz;
+        }
+      } catch (_) {
+        // Sin zona IANA el backend omite countdown exacto; el resto del motor sigue activo.
+      }
     }
     final result = await callable.call(payload);
     final data = _asStringKeyMap(result.data);

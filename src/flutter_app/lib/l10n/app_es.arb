@@ -30,7 +30,9 @@
   "joinSuccessSubtitle": "Te uniste a {groupName}. En un momento podrás ver al resto del grupo.",
   "@joinSuccessSubtitle": {
     "placeholders": {
-      "groupName": { "type": "String" }
+      "groupName": {
+        "type": "String"
+      }
     }
   },
   "joinSuccessChooseSubgroupTitle": "Elige tu casa o equipo",
@@ -133,7 +135,9 @@
   "wishlistLinksHelp": "Hasta {max} enlaces con http o https.",
   "@wishlistLinksHelp": {
     "placeholders": {
-      "max": { "type": "int" }
+      "max": {
+        "type": "int"
+      }
     }
   },
   "wishlistAddLinkCta": "Añadir enlace",
@@ -143,7 +147,9 @@
   "wishlistLinkRowTitle": "Enlace {index}",
   "@wishlistLinkRowTitle": {
     "placeholders": {
-      "index": { "type": "int" }
+      "index": {
+        "type": "int"
+      }
     }
   },
   "wishlistSaveCta": "Guardar",
@@ -153,13 +159,17 @@
   "wishlistLinksMax": "Como máximo {max} enlaces.",
   "@wishlistLinksMax": {
     "placeholders": {
-      "max": { "type": "int" }
+      "max": {
+        "type": "int"
+      }
     }
   },
   "wishlistMyAssignmentReceiverWishlistHeading": "Qué le gustaría recibir a {receiverName}",
   "@wishlistMyAssignmentReceiverWishlistHeading": {
     "placeholders": {
-      "receiverName": { "type": "String" }
+      "receiverName": {
+        "type": "String"
+      }
     }
   },
   "wishlistMyAssignmentReceiverNameFallback": "tu destinatario",
@@ -322,13 +332,17 @@
   "homeDeliveryDateLine": "Entrega: {date}",
   "@homeDeliveryDateLine": {
     "placeholders": {
-      "date": { "type": "String" }
+      "date": {
+        "type": "String"
+      }
     }
   },
   "homeDrawDateLine": "Sorteo: {date}",
   "@homeDrawDateLine": {
     "placeholders": {
-      "date": { "type": "String" }
+      "date": {
+        "type": "String"
+      }
     }
   },
   "homeEmptyGroupsTitle": "Aún no tienes grupos",
@@ -456,7 +470,11 @@
   "groupMemberYourHousePickHint": "El organizador definió equipos o casas. Elige el tuyo para ubicarte bien en el sorteo.",
   "groupMemberYourHouseAssigned": "Te hemos ubicado en: {name}",
   "@groupMemberYourHouseAssigned": {
-    "placeholders": { "name": { "type": "String" } }
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   },
   "groupMemberYourHouseChooseCta": "Elegir mi casa o equipo",
   "groupMemberYourHouseChangeCta": "Cambiar mi casa o equipo",
@@ -476,9 +494,15 @@
   "groupPreparationQuickSummary": "{total} personas en el sorteo · {withoutApp} sin app · {subgroups} subgrupos",
   "@groupPreparationQuickSummary": {
     "placeholders": {
-      "total": { "type": "int" },
-      "withoutApp": { "type": "int" },
-      "subgroups": { "type": "int" }
+      "total": {
+        "type": "int"
+      },
+      "withoutApp": {
+        "type": "int"
+      },
+      "subgroups": {
+        "type": "int"
+      }
     }
   },
   "groupPostDrawHeroTitle": "Sorteo realizado",
@@ -489,11 +513,19 @@
   "groupChecklistMissingSubgroupOne": "Falta colocar a 1 persona en su subgrupo",
   "groupChecklistMissingSubgroupMany": "Faltan {count} personas por colocar en su subgrupo",
   "@groupChecklistMissingSubgroupMany": {
-    "placeholders": { "count": { "type": "int" } }
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "groupChecklistPendingMembers": "{count} persona(s) salieron o fueron retiradas",
   "@groupChecklistPendingMembers": {
-    "placeholders": { "count": { "type": "int" } }
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "groupPreparationRegistered": "Registrados: {count}",
   "@groupPreparationRegistered": {
@@ -533,7 +565,11 @@
   "groupSectionCollapseHint": "Toca para cerrar",
   "groupSectionItemsCount": "{count} en total",
   "@groupSectionItemsCount": {
-    "placeholders": { "count": { "type": "int" } }
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "groupManagedDialogGuardianSectionTitle": "¿Quién entregará el resultado?",
   "groupManagedDialogGuardianMe": "Yo",
@@ -546,7 +582,9 @@
   "groupManagedDeliversResponsible": "Lo gestiona: {name}",
   "@groupManagedDeliversResponsible": {
     "placeholders": {
-      "name": { "type": "String" }
+      "name": {
+        "type": "String"
+      }
     }
   },
   "groupManagedDialogPickGuardianTitle": "¿Quién lo entregará?",
@@ -558,7 +596,9 @@
   "groupManagedDialogDeliversSummary": "Lo entrega: {name}",
   "@groupManagedDialogDeliversSummary": {
     "placeholders": {
-      "name": { "type": "String" }
+      "name": {
+        "type": "String"
+      }
     }
   },
   "groupParticipantsRegisteredTitle": "Participantes registrados",
@@ -604,42 +644,78 @@
   "managedDeliveryWhatsappBrand": "🎁 Tarci Secret",
   "managedDeliveryWhatsappHello": "Hola, {name}.",
   "@managedDeliveryWhatsappHello": {
-    "placeholders": { "name": { "type": "String" } }
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   },
   "managedDeliveryWhatsappDrawLine": "Ya se realizó el amigo secreto de «{groupName}».",
   "@managedDeliveryWhatsappDrawLine": {
-    "placeholders": { "groupName": { "type": "String" } }
+    "placeholders": {
+      "groupName": {
+        "type": "String"
+      }
+    }
   },
   "managedDeliveryWhatsappGiftIntro": "A ti te toca regalar a:",
   "managedDeliveryWhatsappReceiverLine": "✨ {receiverName}",
   "@managedDeliveryWhatsappReceiverLine": {
-    "placeholders": { "receiverName": { "type": "String" } }
+    "placeholders": {
+      "receiverName": {
+        "type": "String"
+      }
+    }
   },
   "managedDeliverySubgroupBelongsTo": "Pertenece a: {subgroup}",
   "@managedDeliverySubgroupBelongsTo": {
-    "placeholders": { "subgroup": { "type": "String" } }
+    "placeholders": {
+      "subgroup": {
+        "type": "String"
+      }
+    }
   },
   "managedDeliveryClosingSecret": "Guarda el secreto 🤫",
   "managedDeliveryEmailSubject": "Tu amigo secreto de {groupName} ya está listo 🎁",
   "@managedDeliveryEmailSubject": {
-    "placeholders": { "groupName": { "type": "String" } }
+    "placeholders": {
+      "groupName": {
+        "type": "String"
+      }
+    }
   },
   "managedDeliveryEmailGreeting": "Hola, {name}:",
   "@managedDeliveryEmailGreeting": {
-    "placeholders": { "name": { "type": "String" } }
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   },
   "managedDeliveryEmailLead": "Te escribimos con el resultado privado del amigo secreto del grupo «{groupName}».",
   "@managedDeliveryEmailLead": {
-    "placeholders": { "groupName": { "type": "String" } }
+    "placeholders": {
+      "groupName": {
+        "type": "String"
+      }
+    }
   },
   "managedDeliveryEmailGiftLabel": "A quien te toca regalar es a:",
   "managedDeliveryEmailReceiverLine": "{receiverName}",
   "@managedDeliveryEmailReceiverLine": {
-    "placeholders": { "receiverName": { "type": "String" } }
+    "placeholders": {
+      "receiverName": {
+        "type": "String"
+      }
+    }
   },
   "managedDeliveryEmailSubgroupLine": "Casa o equipo: {subgroup}",
   "@managedDeliveryEmailSubgroupLine": {
-    "placeholders": { "subgroup": { "type": "String" } }
+    "placeholders": {
+      "subgroup": {
+        "type": "String"
+      }
+    }
   },
   "managedDeliveryEmailClosing": "Por favor, guarda este resultado solo para ti. Nadie más debe verlo.",
   "managedDeliveryEmailSignoff": "Un abrazo,\nTarci Secret",
@@ -671,7 +747,11 @@
   "chatGroupEnterCta": "Entrar al chat",
   "chatGroupEventLine": "Entrega: {date}",
   "@chatGroupEventLine": {
-    "placeholders": { "date": { "type": "String" } }
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
   },
   "chatDrawCompletedChip": "Sorteo realizado",
   "chatInputHint": "Escribe algo para el grupo…",
@@ -685,6 +765,60 @@
   "chatSystemDrawCompletedV1": "🤫 Sorteo hecho. A partir de ahora, cada pregunta rara cuenta como evidencia.",
   "chatSystemUnknownTemplate": "Mensaje del sistema ({templateKey})",
   "@chatSystemUnknownTemplate": {
-    "placeholders": { "templateKey": { "type": "String" } }
-  }
+    "placeholders": {
+      "templateKey": {
+        "type": "String"
+      }
+    }
+  },
+  "chatSystemAutoPlayful001V1": "Aquí ya huele a sospechas… y todavía nadie ha confesado nada.",
+  "chatSystemAutoPlayful002V1": "Desde que hay sorteo, cada pregunta inocente parece estrategia.",
+  "chatSystemAutoPlayful003V1": "Consejo de Tarci: investiga con sutileza, no con interrogatorio.",
+  "chatSystemAutoPlayful004V1": "Hay quien ya tiene regalo. Hay quien tiene fe.",
+  "chatSystemAutoPlayful005V1": "Si alguien pregunta por tallas, colores y hobbies seguidos, toma nota.",
+  "chatSystemAutoPlayful006V1": "Un buen regalo sorprende. Un gran regalo deja historia.",
+  "chatSystemAutoPlayful007V1": "Las sonrisas sospechosas cuentan como pista.",
+  "chatSystemAutoPlayful008V1": "Se permite despistar. Se recomienda no pasarse.",
+  "chatSystemAutoPlayful009V1": "El silencio de algunos empieza a parecer planificación.",
+  "chatSystemAutoPlayful010V1": "Si vas a improvisar, al menos improvisa con cariño.",
+  "chatSystemAutoPlayful011V1": "Tarci detecta energía de regalo épico… y de pánico elegante.",
+  "chatSystemAutoPlayful012V1": "Quien dice “yo ya lo tengo” sin pruebas despierta dudas.",
+  "chatSystemAutoPlayful013V1": "Recordatorio amable: el misterio también se disfruta.",
+  "chatSystemAutoPlayful014V1": "Cada grupo tiene un detective. ¿Ya sabéis quién es?",
+  "chatSystemAutoPlayful015V1": "Un detalle con intención vale más que un regalo sin alma.",
+  "chatSystemAutoPlayful016V1": "Este chat está oficialmente en modo sospecha.",
+  "chatSystemAutoPlayful017V1": "Si acabas de buscar ideas en secreto, nadie te juzga.",
+  "chatSystemAutoPlayful018V1": "Hay miradas en la vida real que ahora significan demasiado.",
+  "chatSystemAutoPlayful019V1": "La misión no es gastar más. Es acertar mejor.",
+  "chatSystemAutoPlayful020V1": "Disimular bien también es parte del juego.",
+  "chatSystemAutoPlayful021V1": "Tarci apuesta a que alguien aquí ya tiene un plan brillante.",
+  "chatSystemAutoDebate001V1": "Debate rápido: ¿regalo útil o regalo que haga reír?",
+  "chatSystemAutoDebate002V1": "¿Mejor sorpresa total o pista bien aprovechada?",
+  "chatSystemAutoDebate003V1": "¿Qué gana: creatividad o precisión?",
+  "chatSystemAutoDebate004V1": "Abrimos debate: ¿el envoltorio espectacular importa?",
+  "chatSystemAutoDebate005V1": "¿Investigación discreta o lista de deseos al rescate?",
+  "chatSystemAutoDebate006V1": "Sin señalar a nadie: ¿quién del grupo improvisa al final?",
+  "chatSystemAutoDebate007V1": "¿Regalo pequeño con historia o grande sin historia?",
+  "chatSystemAutoDebate008V1": "¿Se vale despistar en el chat o eso ya es juego sucio?",
+  "chatSystemAutoDebate009V1": "¿Qué emociona más: acertar o sorprender?",
+  "chatSystemAutoDebate010V1": "Si tuvieras que elegir: ¿práctico, divertido o sentimental?",
+  "chatSystemAutoWishlist001V1": "Algunas listas siguen vacías. Una pista a tiempo puede salvar un regalo.",
+  "chatSystemAutoWishlist002V1": "Tu lista de deseos no quita magia; evita adivinar a ciegas.",
+  "chatSystemAutoWishlist003V1": "Si quieres que acierten contigo, deja alguna idea.",
+  "chatSystemAutoWishlist004V1": "Hay alguien preparando regalo con muy pocas pistas. Ejem.",
+  "chatSystemAutoWishlist005V1": "Completar la lista es ayudar sin revelar demasiado.",
+  "chatSystemAutoWishlist006V1": "Un enlace, un gusto, una pista: todo suma.",
+  "chatSystemAutoWishlist007V1": "Las mejores sorpresas también agradecen orientación.",
+  "chatSystemAutoWishlist008V1": "Si tu lista está vacía, tu amigo secreto está jugando en modo difícil.",
+  "chatSystemAutoQuiet001V1": "Mucho silencio por aquí… ¿comprando o escondiendo pruebas?",
+  "chatSystemAutoQuiet002V1": "Este grupo está demasiado tranquilo. Alguien que rompa el hielo.",
+  "chatSystemAutoQuiet003V1": "Tarci pasa lista: ¿sigue vivo el cachondeo?",
+  "chatSystemAutoQuiet004V1": "Pregunta de reactivación: ¿quién se ve más sospechoso hoy?",
+  "chatSystemAutoQuiet005V1": "Si nadie escribe, Tarci empieza a inventar teorías.",
+  "chatSystemAutoQuiet006V1": "Chat dormido, misterio despierto. Comentad algo.",
+  "chatSystemAutoCountdown014V1": "Quedan 14 días. Todavía hay margen, pero la excusa se está acabando.",
+  "chatSystemAutoCountdown007V1": "Quedan 7 días. Quien no tenga idea entra en fase de búsqueda seria.",
+  "chatSystemAutoCountdown003V1": "Quedan 3 días. Ya no es planificación: es operación rescate.",
+  "chatSystemAutoCountdown001V1": "Falta 1 día. Envuelve, respira y finge normalidad.",
+  "chatSystemAutoCountdown000V1": "Hoy es el intercambio. Que haya sorpresas, risas y cero confesiones antes de tiempo."
 }

@@ -1570,4 +1570,203 @@ class AppLocalizationsEs extends AppLocalizations {
   String chatSystemUnknownTemplate(String templateKey) {
     return 'Mensaje del sistema ($templateKey)';
   }
+
+  @override
+  String get chatSystemAutoPlayful001V1 =>
+      'Aquí ya huele a sospechas… y todavía nadie ha confesado nada.';
+
+  @override
+  String get chatSystemAutoPlayful002V1 =>
+      'Desde que hay sorteo, cada pregunta inocente parece estrategia.';
+
+  @override
+  String get chatSystemAutoPlayful003V1 =>
+      'Consejo de Tarci: investiga con sutileza, no con interrogatorio.';
+
+  @override
+  String get chatSystemAutoPlayful004V1 =>
+      'Hay quien ya tiene regalo. Hay quien tiene fe.';
+
+  @override
+  String get chatSystemAutoPlayful005V1 =>
+      'Si alguien pregunta por tallas, colores y hobbies seguidos, toma nota.';
+
+  @override
+  String get chatSystemAutoPlayful006V1 =>
+      'Un buen regalo sorprende. Un gran regalo deja historia.';
+
+  @override
+  String get chatSystemAutoPlayful007V1 =>
+      'Las sonrisas sospechosas cuentan como pista.';
+
+  @override
+  String get chatSystemAutoPlayful008V1 =>
+      'Se permite despistar. Se recomienda no pasarse.';
+
+  @override
+  String get chatSystemAutoPlayful009V1 =>
+      'El silencio de algunos empieza a parecer planificación.';
+
+  @override
+  String get chatSystemAutoPlayful010V1 =>
+      'Si vas a improvisar, al menos improvisa con cariño.';
+
+  @override
+  String get chatSystemAutoPlayful011V1 =>
+      'Tarci detecta energía de regalo épico… y de pánico elegante.';
+
+  @override
+  String get chatSystemAutoPlayful012V1 =>
+      'Quien dice “yo ya lo tengo” sin pruebas despierta dudas.';
+
+  @override
+  String get chatSystemAutoPlayful013V1 =>
+      'Recordatorio amable: el misterio también se disfruta.';
+
+  @override
+  String get chatSystemAutoPlayful014V1 =>
+      'Cada grupo tiene un detective. ¿Ya sabéis quién es?';
+
+  @override
+  String get chatSystemAutoPlayful015V1 =>
+      'Un detalle con intención vale más que un regalo sin alma.';
+
+  @override
+  String get chatSystemAutoPlayful016V1 =>
+      'Este chat está oficialmente en modo sospecha.';
+
+  @override
+  String get chatSystemAutoPlayful017V1 =>
+      'Si acabas de buscar ideas en secreto, nadie te juzga.';
+
+  @override
+  String get chatSystemAutoPlayful018V1 =>
+      'Hay miradas en la vida real que ahora significan demasiado.';
+
+  @override
+  String get chatSystemAutoPlayful019V1 =>
+      'La misión no es gastar más. Es acertar mejor.';
+
+  @override
+  String get chatSystemAutoPlayful020V1 =>
+      'Disimular bien también es parte del juego.';
+
+  @override
+  String get chatSystemAutoPlayful021V1 =>
+      'Tarci apuesta a que alguien aquí ya tiene un plan brillante.';
+
+  @override
+  String get chatSystemAutoDebate001V1 =>
+      'Debate rápido: ¿regalo útil o regalo que haga reír?';
+
+  @override
+  String get chatSystemAutoDebate002V1 =>
+      '¿Mejor sorpresa total o pista bien aprovechada?';
+
+  @override
+  String get chatSystemAutoDebate003V1 => '¿Qué gana: creatividad o precisión?';
+
+  @override
+  String get chatSystemAutoDebate004V1 =>
+      'Abrimos debate: ¿el envoltorio espectacular importa?';
+
+  @override
+  String get chatSystemAutoDebate005V1 =>
+      '¿Investigación discreta o lista de deseos al rescate?';
+
+  @override
+  String get chatSystemAutoDebate006V1 =>
+      'Sin señalar a nadie: ¿quién del grupo improvisa al final?';
+
+  @override
+  String get chatSystemAutoDebate007V1 =>
+      '¿Regalo pequeño con historia o grande sin historia?';
+
+  @override
+  String get chatSystemAutoDebate008V1 =>
+      '¿Se vale despistar en el chat o eso ya es juego sucio?';
+
+  @override
+  String get chatSystemAutoDebate009V1 =>
+      '¿Qué emociona más: acertar o sorprender?';
+
+  @override
+  String get chatSystemAutoDebate010V1 =>
+      'Si tuvieras que elegir: ¿práctico, divertido o sentimental?';
+
+  @override
+  String get chatSystemAutoWishlist001V1 =>
+      'Algunas listas siguen vacías. Una pista a tiempo puede salvar un regalo.';
+
+  @override
+  String get chatSystemAutoWishlist002V1 =>
+      'Tu lista de deseos no quita magia; evita adivinar a ciegas.';
+
+  @override
+  String get chatSystemAutoWishlist003V1 =>
+      'Si quieres que acierten contigo, deja alguna idea.';
+
+  @override
+  String get chatSystemAutoWishlist004V1 =>
+      'Hay alguien preparando regalo con muy pocas pistas. Ejem.';
+
+  @override
+  String get chatSystemAutoWishlist005V1 =>
+      'Completar la lista es ayudar sin revelar demasiado.';
+
+  @override
+  String get chatSystemAutoWishlist006V1 =>
+      'Un enlace, un gusto, una pista: todo suma.';
+
+  @override
+  String get chatSystemAutoWishlist007V1 =>
+      'Las mejores sorpresas también agradecen orientación.';
+
+  @override
+  String get chatSystemAutoWishlist008V1 =>
+      'Si tu lista está vacía, tu amigo secreto está jugando en modo difícil.';
+
+  @override
+  String get chatSystemAutoQuiet001V1 =>
+      'Mucho silencio por aquí… ¿comprando o escondiendo pruebas?';
+
+  @override
+  String get chatSystemAutoQuiet002V1 =>
+      'Este grupo está demasiado tranquilo. Alguien que rompa el hielo.';
+
+  @override
+  String get chatSystemAutoQuiet003V1 =>
+      'Tarci pasa lista: ¿sigue vivo el cachondeo?';
+
+  @override
+  String get chatSystemAutoQuiet004V1 =>
+      'Pregunta de reactivación: ¿quién se ve más sospechoso hoy?';
+
+  @override
+  String get chatSystemAutoQuiet005V1 =>
+      'Si nadie escribe, Tarci empieza a inventar teorías.';
+
+  @override
+  String get chatSystemAutoQuiet006V1 =>
+      'Chat dormido, misterio despierto. Comentad algo.';
+
+  @override
+  String get chatSystemAutoCountdown014V1 =>
+      'Quedan 14 días. Todavía hay margen, pero la excusa se está acabando.';
+
+  @override
+  String get chatSystemAutoCountdown007V1 =>
+      'Quedan 7 días. Quien no tenga idea entra en fase de búsqueda seria.';
+
+  @override
+  String get chatSystemAutoCountdown003V1 =>
+      'Quedan 3 días. Ya no es planificación: es operación rescate.';
+
+  @override
+  String get chatSystemAutoCountdown001V1 =>
+      'Falta 1 día. Envuelve, respira y finge normalidad.';
+
+  @override
+  String get chatSystemAutoCountdown000V1 =>
+      'Hoy es el intercambio. Que haya sorpresas, risas y cero confesiones antes de tiempo.';
 }

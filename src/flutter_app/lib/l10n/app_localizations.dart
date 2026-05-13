@@ -2779,6 +2779,306 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Mensaje del sistema ({templateKey})'**
   String chatSystemUnknownTemplate(String templateKey);
+
+  /// No description provided for @chatSystemAutoPlayful001V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Aquí ya huele a sospechas… y todavía nadie ha confesado nada.'**
+  String get chatSystemAutoPlayful001V1;
+
+  /// No description provided for @chatSystemAutoPlayful002V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Desde que hay sorteo, cada pregunta inocente parece estrategia.'**
+  String get chatSystemAutoPlayful002V1;
+
+  /// No description provided for @chatSystemAutoPlayful003V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Consejo de Tarci: investiga con sutileza, no con interrogatorio.'**
+  String get chatSystemAutoPlayful003V1;
+
+  /// No description provided for @chatSystemAutoPlayful004V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Hay quien ya tiene regalo. Hay quien tiene fe.'**
+  String get chatSystemAutoPlayful004V1;
+
+  /// No description provided for @chatSystemAutoPlayful005V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Si alguien pregunta por tallas, colores y hobbies seguidos, toma nota.'**
+  String get chatSystemAutoPlayful005V1;
+
+  /// No description provided for @chatSystemAutoPlayful006V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Un buen regalo sorprende. Un gran regalo deja historia.'**
+  String get chatSystemAutoPlayful006V1;
+
+  /// No description provided for @chatSystemAutoPlayful007V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Las sonrisas sospechosas cuentan como pista.'**
+  String get chatSystemAutoPlayful007V1;
+
+  /// No description provided for @chatSystemAutoPlayful008V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Se permite despistar. Se recomienda no pasarse.'**
+  String get chatSystemAutoPlayful008V1;
+
+  /// No description provided for @chatSystemAutoPlayful009V1.
+  ///
+  /// In es, this message translates to:
+  /// **'El silencio de algunos empieza a parecer planificación.'**
+  String get chatSystemAutoPlayful009V1;
+
+  /// No description provided for @chatSystemAutoPlayful010V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Si vas a improvisar, al menos improvisa con cariño.'**
+  String get chatSystemAutoPlayful010V1;
+
+  /// No description provided for @chatSystemAutoPlayful011V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Tarci detecta energía de regalo épico… y de pánico elegante.'**
+  String get chatSystemAutoPlayful011V1;
+
+  /// No description provided for @chatSystemAutoPlayful012V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Quien dice “yo ya lo tengo” sin pruebas despierta dudas.'**
+  String get chatSystemAutoPlayful012V1;
+
+  /// No description provided for @chatSystemAutoPlayful013V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Recordatorio amable: el misterio también se disfruta.'**
+  String get chatSystemAutoPlayful013V1;
+
+  /// No description provided for @chatSystemAutoPlayful014V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Cada grupo tiene un detective. ¿Ya sabéis quién es?'**
+  String get chatSystemAutoPlayful014V1;
+
+  /// No description provided for @chatSystemAutoPlayful015V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Un detalle con intención vale más que un regalo sin alma.'**
+  String get chatSystemAutoPlayful015V1;
+
+  /// No description provided for @chatSystemAutoPlayful016V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Este chat está oficialmente en modo sospecha.'**
+  String get chatSystemAutoPlayful016V1;
+
+  /// No description provided for @chatSystemAutoPlayful017V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Si acabas de buscar ideas en secreto, nadie te juzga.'**
+  String get chatSystemAutoPlayful017V1;
+
+  /// No description provided for @chatSystemAutoPlayful018V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Hay miradas en la vida real que ahora significan demasiado.'**
+  String get chatSystemAutoPlayful018V1;
+
+  /// No description provided for @chatSystemAutoPlayful019V1.
+  ///
+  /// In es, this message translates to:
+  /// **'La misión no es gastar más. Es acertar mejor.'**
+  String get chatSystemAutoPlayful019V1;
+
+  /// No description provided for @chatSystemAutoPlayful020V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Disimular bien también es parte del juego.'**
+  String get chatSystemAutoPlayful020V1;
+
+  /// No description provided for @chatSystemAutoPlayful021V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Tarci apuesta a que alguien aquí ya tiene un plan brillante.'**
+  String get chatSystemAutoPlayful021V1;
+
+  /// No description provided for @chatSystemAutoDebate001V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Debate rápido: ¿regalo útil o regalo que haga reír?'**
+  String get chatSystemAutoDebate001V1;
+
+  /// No description provided for @chatSystemAutoDebate002V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Mejor sorpresa total o pista bien aprovechada?'**
+  String get chatSystemAutoDebate002V1;
+
+  /// No description provided for @chatSystemAutoDebate003V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué gana: creatividad o precisión?'**
+  String get chatSystemAutoDebate003V1;
+
+  /// No description provided for @chatSystemAutoDebate004V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Abrimos debate: ¿el envoltorio espectacular importa?'**
+  String get chatSystemAutoDebate004V1;
+
+  /// No description provided for @chatSystemAutoDebate005V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Investigación discreta o lista de deseos al rescate?'**
+  String get chatSystemAutoDebate005V1;
+
+  /// No description provided for @chatSystemAutoDebate006V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin señalar a nadie: ¿quién del grupo improvisa al final?'**
+  String get chatSystemAutoDebate006V1;
+
+  /// No description provided for @chatSystemAutoDebate007V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Regalo pequeño con historia o grande sin historia?'**
+  String get chatSystemAutoDebate007V1;
+
+  /// No description provided for @chatSystemAutoDebate008V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Se vale despistar en el chat o eso ya es juego sucio?'**
+  String get chatSystemAutoDebate008V1;
+
+  /// No description provided for @chatSystemAutoDebate009V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué emociona más: acertar o sorprender?'**
+  String get chatSystemAutoDebate009V1;
+
+  /// No description provided for @chatSystemAutoDebate010V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Si tuvieras que elegir: ¿práctico, divertido o sentimental?'**
+  String get chatSystemAutoDebate010V1;
+
+  /// No description provided for @chatSystemAutoWishlist001V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Algunas listas siguen vacías. Una pista a tiempo puede salvar un regalo.'**
+  String get chatSystemAutoWishlist001V1;
+
+  /// No description provided for @chatSystemAutoWishlist002V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu lista de deseos no quita magia; evita adivinar a ciegas.'**
+  String get chatSystemAutoWishlist002V1;
+
+  /// No description provided for @chatSystemAutoWishlist003V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Si quieres que acierten contigo, deja alguna idea.'**
+  String get chatSystemAutoWishlist003V1;
+
+  /// No description provided for @chatSystemAutoWishlist004V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Hay alguien preparando regalo con muy pocas pistas. Ejem.'**
+  String get chatSystemAutoWishlist004V1;
+
+  /// No description provided for @chatSystemAutoWishlist005V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Completar la lista es ayudar sin revelar demasiado.'**
+  String get chatSystemAutoWishlist005V1;
+
+  /// No description provided for @chatSystemAutoWishlist006V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Un enlace, un gusto, una pista: todo suma.'**
+  String get chatSystemAutoWishlist006V1;
+
+  /// No description provided for @chatSystemAutoWishlist007V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Las mejores sorpresas también agradecen orientación.'**
+  String get chatSystemAutoWishlist007V1;
+
+  /// No description provided for @chatSystemAutoWishlist008V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Si tu lista está vacía, tu amigo secreto está jugando en modo difícil.'**
+  String get chatSystemAutoWishlist008V1;
+
+  /// No description provided for @chatSystemAutoQuiet001V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Mucho silencio por aquí… ¿comprando o escondiendo pruebas?'**
+  String get chatSystemAutoQuiet001V1;
+
+  /// No description provided for @chatSystemAutoQuiet002V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Este grupo está demasiado tranquilo. Alguien que rompa el hielo.'**
+  String get chatSystemAutoQuiet002V1;
+
+  /// No description provided for @chatSystemAutoQuiet003V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Tarci pasa lista: ¿sigue vivo el cachondeo?'**
+  String get chatSystemAutoQuiet003V1;
+
+  /// No description provided for @chatSystemAutoQuiet004V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Pregunta de reactivación: ¿quién se ve más sospechoso hoy?'**
+  String get chatSystemAutoQuiet004V1;
+
+  /// No description provided for @chatSystemAutoQuiet005V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Si nadie escribe, Tarci empieza a inventar teorías.'**
+  String get chatSystemAutoQuiet005V1;
+
+  /// No description provided for @chatSystemAutoQuiet006V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Chat dormido, misterio despierto. Comentad algo.'**
+  String get chatSystemAutoQuiet006V1;
+
+  /// No description provided for @chatSystemAutoCountdown014V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Quedan 14 días. Todavía hay margen, pero la excusa se está acabando.'**
+  String get chatSystemAutoCountdown014V1;
+
+  /// No description provided for @chatSystemAutoCountdown007V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Quedan 7 días. Quien no tenga idea entra en fase de búsqueda seria.'**
+  String get chatSystemAutoCountdown007V1;
+
+  /// No description provided for @chatSystemAutoCountdown003V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Quedan 3 días. Ya no es planificación: es operación rescate.'**
+  String get chatSystemAutoCountdown003V1;
+
+  /// No description provided for @chatSystemAutoCountdown001V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Falta 1 día. Envuelve, respira y finge normalidad.'**
+  String get chatSystemAutoCountdown001V1;
+
+  /// No description provided for @chatSystemAutoCountdown000V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Hoy es el intercambio. Que haya sorpresas, risas y cero confesiones antes de tiempo.'**
+  String get chatSystemAutoCountdown000V1;
 }
 
 class _AppLocalizationsDelegate

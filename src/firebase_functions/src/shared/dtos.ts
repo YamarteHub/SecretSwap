@@ -34,12 +34,33 @@ export const ExecuteDrawResponseSchema = z.object({
 export type ExecuteDrawResponse = z.infer<typeof ExecuteDrawResponseSchema>;
 export type ExecuteDrawSummary = z.infer<typeof ExecuteDrawSummarySchema>;
 
-export const CreateGroupRequestSchema = z.object({
-  name: z.string().min(1),
-  nickname: z.string().min(1),
-  /** Día del evento/entrega (medianoche local del cliente), epoch ms. Opcional. */
-  eventDateEpochMs: z.number().int().finite().positive().optional()
-});
+export const CreateGroupRequestSchema = z
+  .object({
+    name: z.string().min(1),
+    nickname: z.string().min(1),
+    /** Día del evento/entrega (medianoche local del cliente), epoch ms. Opcional. */
+    eventDateEpochMs: z.number().int().finite().positive().optional(),
+    /** Día civil elegido por el usuario (YYYY-MM-DD en su calendario local). Obligatorio si hay eventDateEpochMs. */
+    eventDateDayKey: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+    /** Zona IANA del dispositivo (p. ej. Europe/Madrid). Recomendada con fecha para countdown fiable. */
+    eventTimeZone: z.string().min(1).max(80).optional()
+  })
+  .superRefine((d, ctx) => {
+    if (d.eventDateEpochMs !== undefined && !d.eventDateDayKey) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["eventDateDayKey"],
+        message: "eventDateDayKey is required when eventDateEpochMs is set"
+      });
+    }
+    if (d.eventDateDayKey !== undefined && d.eventDateEpochMs === undefined) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["eventDateEpochMs"],
+        message: "eventDateEpochMs is required when eventDateDayKey is set"
+      });
+    }
+  });
 export type CreateGroupRequest = z.infer<typeof CreateGroupRequestSchema>;
 
 export const CreateGroupResponseSchema = z.object({
@@ -236,3 +257,10 @@ export const SendGroupChatMessageResponseSchema = z.object({
   messageId: z.string().min(1)
 });
 export type SendGroupChatMessageResponse = z.infer<typeof SendGroupChatMessageResponseSchema>;
+
+export const DevRunTarciChatAutomationRequestSchema = z.object({
+  groupId: z.string().min(1).optional(),
+  dryRun: z.boolean().optional(),
+  maxGroups: z.number().int().positive().max(500).optional()
+});
+export type DevRunTarciChatAutomationRequest = z.infer<typeof DevRunTarciChatAutomationRequestSchema>;

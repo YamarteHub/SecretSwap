@@ -195,6 +195,10 @@ service cloud.firestore {
         allow read: if isActiveMember(groupId);
         allow create, update, delete: if false;
       }
+
+      match /chatAutomation/{docId} {
+        allow read, write: if false;
+      }
     }
 
     // Solo backend / Admin SDK

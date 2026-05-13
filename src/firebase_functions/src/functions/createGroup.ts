@@ -65,7 +65,13 @@ export const createGroup = onCall(async (req: CallableRequest<unknown>): Promise
             drawingLock: null,
             createdAt: now,
             updatedAt: now,
-            ...(eventDateTs ? { eventDate: eventDateTs } : {})
+            ...(eventDateTs
+              ? {
+                  eventDate: eventDateTs,
+                  eventDateDayKey: body.eventDateDayKey,
+                  ...(body.eventTimeZone ? { eventTimeZone: body.eventTimeZone } : {})
+                }
+              : {})
           });
 
           tx.create(db.doc(groupPaths.memberDoc(groupId, uid)), {

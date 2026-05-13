@@ -58,15 +58,27 @@ export const sendGroupChatMessage = onCall(
         typeof nickRaw === "string" && nickRaw.trim().length > 0 ? nickRaw.trim() : "Tarci";
 
       const col = groupRef.collection("chatMessages");
-      const docRef = await col.add({
+      const msgRef = col.doc();
+      const stateRef = db.doc(groupPaths.chatAutomationTarciStateDoc(body.groupId));
+      const batch = db.batch();
+      batch.set(msgRef, {
         type: "user",
         senderUid: uid,
         senderDisplayName: nickname,
         text,
         createdAt: FieldValue.serverTimestamp()
       });
+      batch.set(
+        stateRef,
+        {
+          lastHumanMessageAt: FieldValue.serverTimestamp(),
+          updatedAt: FieldValue.serverTimestamp()
+        },
+        { merge: true }
+      );
+      await batch.commit();
 
-      return { ok: true as const, messageId: docRef.id };
+      return { ok: true as const, messageId: msgRef.id };
     } catch (e) {
       const err = e as unknown;
       if (err instanceof AppError) {
