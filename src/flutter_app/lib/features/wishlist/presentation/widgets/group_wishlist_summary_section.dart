@@ -9,7 +9,11 @@ import '../../../groups/domain/group_models.dart';
 import '../providers.dart';
 import '../screens/wishlist_edit_screen.dart';
 
-bool _isManagedSecretResponsible(GroupDetail d, GroupParticipant p, String uid) {
+bool _isManagedSecretResponsible(
+  GroupDetail d,
+  GroupParticipant p,
+  String uid,
+) {
   final ownerUid = d.ownerUid;
   final r = p.managedByUid;
   if (r != null && r == uid) return true;
@@ -63,8 +67,9 @@ class GroupWishlistSummarySection extends ConsumerWidget {
         final key = myPid != null
             ? WishlistParticipantKey(groupId: groupId, participantId: myPid)
             : null;
-        final wishAsync =
-            key != null ? ref.watch(wishlistDataProvider(key)) : null;
+        final wishAsync = key != null
+            ? ref.watch(wishlistDataProvider(key))
+            : null;
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -111,7 +116,9 @@ class GroupWishlistSummarySection extends ConsumerWidget {
                                   vertical: 6,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: AppTheme.sageGreen.withValues(alpha: 0.14),
+                                  color: AppTheme.sageGreen.withValues(
+                                    alpha: 0.14,
+                                  ),
                                   borderRadius: BorderRadius.circular(999),
                                 ),
                                 child: Text(
@@ -131,7 +138,9 @@ class GroupWishlistSummarySection extends ConsumerWidget {
                                 readOnly: false,
                               ),
                               icon: Icon(
-                                ready ? Icons.edit_outlined : Icons.edit_note_outlined,
+                                ready
+                                    ? Icons.edit_outlined
+                                    : Icons.edit_note_outlined,
                               ),
                               label: Text(
                                 ready
@@ -179,19 +188,19 @@ class GroupWishlistSummarySection extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    ...managed.map(
-                      (p) => ListTile(
+                    ...managed.map((p) {
+                      final t = p.displayName.trim();
+                      final initial = t.isEmpty
+                          ? '?'
+                          : t.substring(0, 1).toUpperCase();
+                      return ListTile(
                         contentPadding: EdgeInsets.zero,
                         leading: CircleAvatar(
-                          backgroundColor:
-                              AppTheme.deepPlum.withValues(alpha: 0.1),
+                          backgroundColor: AppTheme.deepPlum.withValues(
+                            alpha: 0.1,
+                          ),
                           child: Text(
-                            p.displayName.isNotEmpty
-                                ? p.displayName
-                                    .trim()
-                                    .substring(0, 1)
-                                    .toUpperCase()
-                                : '?',
+                            initial,
                             style: const TextStyle(
                               fontWeight: FontWeight.w700,
                               color: AppTheme.deepPlum,
@@ -199,7 +208,9 @@ class GroupWishlistSummarySection extends ConsumerWidget {
                           ),
                         ),
                         title: Text(
-                          p.displayName.isNotEmpty ? p.displayName : p.participantId,
+                          p.displayName.isNotEmpty
+                              ? p.displayName
+                              : p.participantId,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: theme.textTheme.titleSmall?.copyWith(
@@ -213,8 +224,8 @@ class GroupWishlistSummarySection extends ConsumerWidget {
                           displayName: p.displayName,
                           readOnly: false,
                         ),
-                      ),
-                    ),
+                      );
+                    }),
                   ],
                 ),
               ),

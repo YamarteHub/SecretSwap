@@ -491,7 +491,7 @@ abstract class AppLocalizations {
   /// No description provided for @wizardStepEventDateHelp.
   ///
   /// In es, this message translates to:
-  /// **'Opcional. Sirve para recordar la entrega y, cuando el sorteo esté hecho, para mover el grupo al historial tras esa fecha.'**
+  /// **'Es opcional. Nos servirá para recordar la entrega y mover el grupo al historial cuando pase.'**
   String get wizardStepEventDateHelp;
 
   /// No description provided for @wizardSummaryEventDate.

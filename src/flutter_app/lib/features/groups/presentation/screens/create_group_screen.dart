@@ -426,14 +426,6 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
         ];
       case 4:
         return [
-          Text(
-            context.l10n.wizardStepEventDateHelp,
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
-              height: 1.45,
-            ),
-          ),
-          const SizedBox(height: 14),
           Material(
             color: AppTheme.warmIvory,
             borderRadius: BorderRadius.circular(14),

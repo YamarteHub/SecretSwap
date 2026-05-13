@@ -568,6 +568,13 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
       );
       if (!mounted) return;
       widget.onAfterDraw();
+      try {
+        await ref.read(groupDetailProvider(widget.groupId).future);
+      } catch (_) {
+        // El sorteo ya terminó en backend; un fallo puntual de lectura no
+        // debe mostrarse como error del sorteo. El usuario puede refrescar.
+      }
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(context.l10n.groupSnackbarDrawCompleted)),
       );
@@ -1713,28 +1720,6 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
               inviteCode: _lastInviteCode,
               onGenerate: _rotateInviteCode,
               onCopy: _copyInviteCode,
-            ),
-          ),
-        ],
-        if (isCompleted && _isOwner) ...[
-          const SizedBox(height: 16),
-          SectionCard(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _SectionHeading(
-                  icon: Icons.mail_outline,
-                  title: l10n.groupSectionInvitations,
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  l10n.groupInvitationsClosedHint,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: theme.colorScheme.onSurfaceVariant,
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
-              ],
             ),
           ),
         ],

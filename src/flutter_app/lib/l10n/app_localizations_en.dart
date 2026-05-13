@@ -220,7 +220,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get wizardStepEventDateHelp =>
-      'Optional. Helps you remember the delivery date; once the draw is done, it also moves the group to history after that day.';
+      'Optional. We use it to remind you about the exchange and move the group to your history once that day has passed.';
 
   @override
   String get wizardSummaryEventDate => 'Event date';

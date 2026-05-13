@@ -80,7 +80,7 @@
   "wizardStepSubgroupsTitle": "Subgrupos",
   "wizardStepParticipantsTitle": "Participantes",
   "wizardStepEventDateTitle": "¿Cuándo es el intercambio?",
-  "wizardStepEventDateHelp": "Opcional. Sirve para recordar la entrega y, cuando el sorteo esté hecho, para mover el grupo al historial tras esa fecha.",
+  "wizardStepEventDateHelp": "Es opcional. Nos servirá para recordar la entrega y mover el grupo al historial cuando pase.",
   "wizardSummaryEventDate": "Fecha del evento",
   "wizardEventDateNotSet": "Sin definir",
   "wizardEventDateClear": "Quitar fecha",

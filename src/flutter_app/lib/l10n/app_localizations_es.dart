@@ -222,7 +222,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get wizardStepEventDateHelp =>
-      'Opcional. Sirve para recordar la entrega y, cuando el sorteo esté hecho, para mover el grupo al historial tras esa fecha.';
+      'Es opcional. Nos servirá para recordar la entrega y mover el grupo al historial cuando pase.';
 
   @override
   String get wizardSummaryEventDate => 'Fecha del evento';

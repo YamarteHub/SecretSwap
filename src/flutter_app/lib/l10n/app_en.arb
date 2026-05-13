@@ -80,7 +80,7 @@
   "wizardStepSubgroupsTitle": "Subgroups",
   "wizardStepParticipantsTitle": "Participants",
   "wizardStepEventDateTitle": "When is the exchange?",
-  "wizardStepEventDateHelp": "Optional. Helps you remember the delivery date; once the draw is done, it also moves the group to history after that day.",
+  "wizardStepEventDateHelp": "Optional. We use it to remind you about the exchange and move the group to your history once that day has passed.",
   "wizardSummaryEventDate": "Event date",
   "wizardEventDateNotSet": "Not set",
   "wizardEventDateClear": "Clear date",
