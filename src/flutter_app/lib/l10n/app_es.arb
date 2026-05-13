@@ -181,7 +181,9 @@
   "groupManagedDialogNoSubgroup": "Sin subgrupo",
   "groupManagedDialogDeliveryLabel": "Forma de entrega",
   "groupManagedDialogDeliveryVerbal": "Verbal",
-  "groupManagedDialogDeliveryPrinted": "Impresa",
+  "groupManagedDialogDeliveryEmail": "Correo",
+  "groupManagedDialogDeliveryWhatsapp": "WhatsApp",
+  "groupManagedDialogDeliveryPrinted": "Impresa / PDF",
   "groupManagedDialogWhoManagesTitle": "¿Quién gestionará su resultado?",
   "groupManagedDialogWhoManagesDesc": "Elige quién verá el resultado en la app para poder entregarlo en privado.",
   "groupManagedDialogWhoManagesHelp": "Cuando se integre al sorteo, esta persona no verá el resultado en la app. Tú podrás entregárselo de forma verbal o impresa.",
@@ -456,8 +458,6 @@
   "groupManagedDialogGuardianSpecific": "Responsable específico",
   "groupManagedDialogGuardianComingSoon": "Próximamente",
   "groupManagedDialogDeliverySectionTitle": "¿Cómo se lo harás llegar?",
-  "groupManagedDialogDeliveryWhatsapp": "WhatsApp",
-  "groupManagedDialogDeliveryShowInPerson": "Mostrar en persona",
   "groupManagedResponsibleUnavailable": "Responsable no disponible",
   "groupManagedDeliversResponsible": "Lo gestiona: {name}",
   "@groupManagedDeliversResponsible": {
@@ -509,6 +509,70 @@
   },
   "managedTypeManagedParticipant": "Participante gestionado",
   "managedDeliveryOwnerDelegated": "Gestionada por responsable",
+  "managedDeliveryModeWhatsapp": "WhatsApp",
+  "managedDeliveryModeEmail": "Correo",
+  "managedDeliveryModePdf": "Impresa / PDF",
+  "managedDeliveryCtaWhatsapp": "Compartir por WhatsApp",
+  "managedDeliveryCtaEmail": "Preparar correo",
+  "managedDeliveryCtaPdf": "Generar PDF",
+  "managedDeliveryVerbalBadge": "Entrega verbal",
+  "managedDeliveryPdfGenerating": "Generando PDF…",
+  "managedDeliveryWhatsappBrand": "🎁 Tarci Secret",
+  "managedDeliveryWhatsappHello": "Hola, {name}.",
+  "@managedDeliveryWhatsappHello": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "managedDeliveryWhatsappDrawLine": "Ya se realizó el amigo secreto de «{groupName}».",
+  "@managedDeliveryWhatsappDrawLine": {
+    "placeholders": { "groupName": { "type": "String" } }
+  },
+  "managedDeliveryWhatsappGiftIntro": "A ti te toca regalar a:",
+  "managedDeliveryWhatsappReceiverLine": "✨ {receiverName}",
+  "@managedDeliveryWhatsappReceiverLine": {
+    "placeholders": { "receiverName": { "type": "String" } }
+  },
+  "managedDeliverySubgroupBelongsTo": "Pertenece a: {subgroup}",
+  "@managedDeliverySubgroupBelongsTo": {
+    "placeholders": { "subgroup": { "type": "String" } }
+  },
+  "managedDeliveryClosingSecret": "Guarda el secreto 🤫",
+  "managedDeliveryEmailSubject": "Tu amigo secreto de {groupName} ya está listo 🎁",
+  "@managedDeliveryEmailSubject": {
+    "placeholders": { "groupName": { "type": "String" } }
+  },
+  "managedDeliveryEmailGreeting": "Hola, {name}:",
+  "@managedDeliveryEmailGreeting": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "managedDeliveryEmailLead": "Te escribimos con el resultado privado del amigo secreto del grupo «{groupName}».",
+  "@managedDeliveryEmailLead": {
+    "placeholders": { "groupName": { "type": "String" } }
+  },
+  "managedDeliveryEmailGiftLabel": "A quien te toca regalar es a:",
+  "managedDeliveryEmailReceiverLine": "{receiverName}",
+  "@managedDeliveryEmailReceiverLine": {
+    "placeholders": { "receiverName": { "type": "String" } }
+  },
+  "managedDeliveryEmailSubgroupLine": "Casa o equipo: {subgroup}",
+  "@managedDeliveryEmailSubgroupLine": {
+    "placeholders": { "subgroup": { "type": "String" } }
+  },
+  "managedDeliveryEmailClosing": "Por favor, guarda este resultado solo para ti. Nadie más debe verlo.",
+  "managedDeliveryEmailSignoff": "Un abrazo,\nTarci Secret",
+  "managedPdfDocTitle": "amigo-secreto",
+  "managedPdfHeadline": "Tu amigo secreto ya está listo",
+  "managedPdfForLabel": "Para",
+  "managedPdfGroupLabel": "Grupo",
+  "managedPdfGiftHeading": "Te toca regalar a…",
+  "managedPdfFooterKeepSecret": "Guarda el secreto. Nadie más debe verlo.",
+  "managedPdfFooterBrand": "Generado con Tarci Secret",
+  "managedDeliveryFallbackGroupName": "tu grupo",
+  "managedDeliveryErrorMissingData": "No hay datos suficientes para preparar el mensaje.",
+  "managedDeliveryErrorWhatsapp": "No pudimos abrir WhatsApp. Puedes compartir el texto con otra app.",
+  "managedDeliveryErrorEmail": "No encontramos una app de correo en este dispositivo.",
+  "managedDeliveryErrorPdf": "No se pudo generar el PDF. Inténtalo de nuevo.",
+  "managedDeliveryErrorShare": "No se pudo compartir. Inténtalo otra vez.",
+  "managedDeliveryErrorGeneric": "Algo salió mal. Inténtalo de nuevo.",
   "myAssignmentPrivateBadge": "Privado · solo para ti",
   "myAssignmentRevealLabel": "Te toca regalar a",
   "myAssignmentEmotionalCopy": "Hazle sentir especial.",

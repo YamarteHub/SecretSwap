@@ -506,7 +506,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String get groupManagedDialogDeliveryVerbal => 'Verbal';
 
   @override
-  String get groupManagedDialogDeliveryPrinted => 'Impresa';
+  String get groupManagedDialogDeliveryEmail => 'Correo';
+
+  @override
+  String get groupManagedDialogDeliveryWhatsapp => 'WhatsApp';
+
+  @override
+  String get groupManagedDialogDeliveryPrinted => 'Impresa / PDF';
 
   @override
   String get groupManagedDialogWhoManagesTitle =>
@@ -1079,12 +1085,6 @@ class AppLocalizationsEs extends AppLocalizations {
       '¿Cómo se lo harás llegar?';
 
   @override
-  String get groupManagedDialogDeliveryWhatsapp => 'WhatsApp';
-
-  @override
-  String get groupManagedDialogDeliveryShowInPerson => 'Mostrar en persona';
-
-  @override
   String get groupManagedResponsibleUnavailable => 'Responsable no disponible';
 
   @override
@@ -1158,6 +1158,143 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get managedDeliveryOwnerDelegated => 'Gestionada por responsable';
+
+  @override
+  String get managedDeliveryModeWhatsapp => 'WhatsApp';
+
+  @override
+  String get managedDeliveryModeEmail => 'Correo';
+
+  @override
+  String get managedDeliveryModePdf => 'Impresa / PDF';
+
+  @override
+  String get managedDeliveryCtaWhatsapp => 'Compartir por WhatsApp';
+
+  @override
+  String get managedDeliveryCtaEmail => 'Preparar correo';
+
+  @override
+  String get managedDeliveryCtaPdf => 'Generar PDF';
+
+  @override
+  String get managedDeliveryVerbalBadge => 'Entrega verbal';
+
+  @override
+  String get managedDeliveryPdfGenerating => 'Generando PDF…';
+
+  @override
+  String get managedDeliveryWhatsappBrand => '🎁 Tarci Secret';
+
+  @override
+  String managedDeliveryWhatsappHello(String name) {
+    return 'Hola, $name.';
+  }
+
+  @override
+  String managedDeliveryWhatsappDrawLine(String groupName) {
+    return 'Ya se realizó el amigo secreto de «$groupName».';
+  }
+
+  @override
+  String get managedDeliveryWhatsappGiftIntro => 'A ti te toca regalar a:';
+
+  @override
+  String managedDeliveryWhatsappReceiverLine(String receiverName) {
+    return '✨ $receiverName';
+  }
+
+  @override
+  String managedDeliverySubgroupBelongsTo(String subgroup) {
+    return 'Pertenece a: $subgroup';
+  }
+
+  @override
+  String get managedDeliveryClosingSecret => 'Guarda el secreto 🤫';
+
+  @override
+  String managedDeliveryEmailSubject(String groupName) {
+    return 'Tu amigo secreto de $groupName ya está listo 🎁';
+  }
+
+  @override
+  String managedDeliveryEmailGreeting(String name) {
+    return 'Hola, $name:';
+  }
+
+  @override
+  String managedDeliveryEmailLead(String groupName) {
+    return 'Te escribimos con el resultado privado del amigo secreto del grupo «$groupName».';
+  }
+
+  @override
+  String get managedDeliveryEmailGiftLabel => 'A quien te toca regalar es a:';
+
+  @override
+  String managedDeliveryEmailReceiverLine(String receiverName) {
+    return '$receiverName';
+  }
+
+  @override
+  String managedDeliveryEmailSubgroupLine(String subgroup) {
+    return 'Casa o equipo: $subgroup';
+  }
+
+  @override
+  String get managedDeliveryEmailClosing =>
+      'Por favor, guarda este resultado solo para ti. Nadie más debe verlo.';
+
+  @override
+  String get managedDeliveryEmailSignoff => 'Un abrazo,\nTarci Secret';
+
+  @override
+  String get managedPdfDocTitle => 'amigo-secreto';
+
+  @override
+  String get managedPdfHeadline => 'Tu amigo secreto ya está listo';
+
+  @override
+  String get managedPdfForLabel => 'Para';
+
+  @override
+  String get managedPdfGroupLabel => 'Grupo';
+
+  @override
+  String get managedPdfGiftHeading => 'Te toca regalar a…';
+
+  @override
+  String get managedPdfFooterKeepSecret =>
+      'Guarda el secreto. Nadie más debe verlo.';
+
+  @override
+  String get managedPdfFooterBrand => 'Generado con Tarci Secret';
+
+  @override
+  String get managedDeliveryFallbackGroupName => 'tu grupo';
+
+  @override
+  String get managedDeliveryErrorMissingData =>
+      'No hay datos suficientes para preparar el mensaje.';
+
+  @override
+  String get managedDeliveryErrorWhatsapp =>
+      'No pudimos abrir WhatsApp. Puedes compartir el texto con otra app.';
+
+  @override
+  String get managedDeliveryErrorEmail =>
+      'No encontramos una app de correo en este dispositivo.';
+
+  @override
+  String get managedDeliveryErrorPdf =>
+      'No se pudo generar el PDF. Inténtalo de nuevo.';
+
+  @override
+  String get managedDeliveryErrorShare =>
+      'No se pudo compartir. Inténtalo otra vez.';
+
+  @override
+  String get managedDeliveryErrorGeneric =>
+      'Algo salió mal. Inténtalo de nuevo.';
 
   @override
   String get myAssignmentPrivateBadge => 'Privado · solo para ti';

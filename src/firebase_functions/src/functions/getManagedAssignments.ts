@@ -89,7 +89,11 @@ export const getManagedAssignments = onCall(
       const participantsSnap = await db.collection(`groups/${body.groupId}/participants`).get();
       const managedByParticipantId = new Map<
         string,
-        { displayName: string; giverType: "managed" | "child_managed"; deliveryMode: "verbal" | "printed" | "ownerDelegated" }
+        {
+          displayName: string;
+          giverType: "managed" | "child_managed";
+          deliveryMode: "verbal" | "printed" | "ownerDelegated" | "whatsapp" | "email";
+        }
       >();
 
       for (const doc of participantsSnap.docs) {
@@ -104,7 +108,11 @@ export const getManagedAssignments = onCall(
         if (resolvedResponsibleUid !== uid) continue;
 
         const deliveryMode =
-          p.deliveryMode === "verbal" || p.deliveryMode === "printed" || p.deliveryMode === "ownerDelegated"
+          p.deliveryMode === "verbal" ||
+          p.deliveryMode === "printed" ||
+          p.deliveryMode === "ownerDelegated" ||
+          p.deliveryMode === "whatsapp" ||
+          p.deliveryMode === "email"
             ? p.deliveryMode
             : "ownerDelegated";
 

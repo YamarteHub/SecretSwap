@@ -519,6 +519,8 @@ class GroupsRepositoryImpl implements GroupsRepository {
     if (s == 'inApp') return ManagedParticipantDeliveryMode.inApp;
     if (s == 'verbal') return ManagedParticipantDeliveryMode.verbal;
     if (s == 'printed') return ManagedParticipantDeliveryMode.printed;
+    if (s == 'whatsapp') return ManagedParticipantDeliveryMode.whatsapp;
+    if (s == 'email') return ManagedParticipantDeliveryMode.email;
     return ManagedParticipantDeliveryMode.ownerDelegated;
   }
 }

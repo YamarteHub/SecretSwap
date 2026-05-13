@@ -79,7 +79,13 @@ export type RotateInviteCodeResponse = z.infer<typeof RotateInviteCodeResponseSc
 export const ManagedParticipantTypeSchema = z.enum(["managed", "child_managed"]);
 export type ManagedParticipantType = z.infer<typeof ManagedParticipantTypeSchema>;
 
-export const ManagedParticipantDeliveryModeSchema = z.enum(["verbal", "printed", "ownerDelegated"]);
+export const ManagedParticipantDeliveryModeSchema = z.enum([
+  "verbal",
+  "printed",
+  "ownerDelegated",
+  "whatsapp",
+  "email"
+]);
 export type ManagedParticipantDeliveryMode = z.infer<typeof ManagedParticipantDeliveryModeSchema>;
 
 export const CreateManagedParticipantRequestSchema = z.object({
@@ -108,7 +114,7 @@ export const UpdateManagedParticipantRequestSchema = z.object({
   displayName: z.string().min(1),
   participantType: ManagedParticipantTypeSchema,
   subgroupId: z.string().min(1).nullable().optional(),
-  deliveryMode: z.enum(["verbal", "printed"]),
+  deliveryMode: ManagedParticipantDeliveryModeSchema,
   managedByUid: z.string().min(1).nullable().optional()
 });
 export type UpdateManagedParticipantRequest = z.infer<typeof UpdateManagedParticipantRequestSchema>;
@@ -118,7 +124,7 @@ export const UpdateManagedParticipantResponseSchema = z.object({
   displayName: z.string().min(1),
   participantType: ManagedParticipantTypeSchema,
   subgroupId: z.string().min(1).nullable(),
-  deliveryMode: z.enum(["verbal", "printed"])
+  deliveryMode: ManagedParticipantDeliveryModeSchema
 });
 export type UpdateManagedParticipantResponse = z.infer<typeof UpdateManagedParticipantResponseSchema>;
 

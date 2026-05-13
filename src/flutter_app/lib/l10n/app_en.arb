@@ -181,7 +181,9 @@
   "groupManagedDialogNoSubgroup": "No subgroup",
   "groupManagedDialogDeliveryLabel": "Delivery method",
   "groupManagedDialogDeliveryVerbal": "Verbal",
-  "groupManagedDialogDeliveryPrinted": "Printed",
+  "groupManagedDialogDeliveryEmail": "Email",
+  "groupManagedDialogDeliveryWhatsapp": "WhatsApp",
+  "groupManagedDialogDeliveryPrinted": "Printed / PDF",
   "groupManagedDialogWhoManagesTitle": "Who will manage this result?",
   "groupManagedDialogWhoManagesDesc": "Choose who will see the result in the app so they can deliver it privately.",
   "groupManagedDialogWhoManagesHelp": "When added to the draw, this person won't see the result in the app. You can deliver it verbally or printed.",
@@ -456,8 +458,6 @@
   "groupManagedDialogGuardianSpecific": "Specific person",
   "groupManagedDialogGuardianComingSoon": "Coming soon",
   "groupManagedDialogDeliverySectionTitle": "How will you share it?",
-  "groupManagedDialogDeliveryWhatsapp": "WhatsApp",
-  "groupManagedDialogDeliveryShowInPerson": "Show in person",
   "groupManagedResponsibleUnavailable": "Responsible not available",
   "groupManagedDeliversResponsible": "Managed by: {name}",
   "@groupManagedDeliversResponsible": {
@@ -509,6 +509,70 @@
   },
   "managedTypeManagedParticipant": "Managed participant",
   "managedDeliveryOwnerDelegated": "Handled by manager",
+  "managedDeliveryModeWhatsapp": "WhatsApp",
+  "managedDeliveryModeEmail": "Email",
+  "managedDeliveryModePdf": "Printed / PDF",
+  "managedDeliveryCtaWhatsapp": "Share via WhatsApp",
+  "managedDeliveryCtaEmail": "Prepare email",
+  "managedDeliveryCtaPdf": "Create PDF",
+  "managedDeliveryVerbalBadge": "Verbal delivery",
+  "managedDeliveryPdfGenerating": "Creating PDF…",
+  "managedDeliveryWhatsappBrand": "🎁 Tarci Secret",
+  "managedDeliveryWhatsappHello": "Hi, {name}.",
+  "@managedDeliveryWhatsappHello": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "managedDeliveryWhatsappDrawLine": "The Secret Santa draw for \"{groupName}\" is ready.",
+  "@managedDeliveryWhatsappDrawLine": {
+    "placeholders": { "groupName": { "type": "String" } }
+  },
+  "managedDeliveryWhatsappGiftIntro": "You're giving a gift to:",
+  "managedDeliveryWhatsappReceiverLine": "✨ {receiverName}",
+  "@managedDeliveryWhatsappReceiverLine": {
+    "placeholders": { "receiverName": { "type": "String" } }
+  },
+  "managedDeliverySubgroupBelongsTo": "Group / house / team: {subgroup}",
+  "@managedDeliverySubgroupBelongsTo": {
+    "placeholders": { "subgroup": { "type": "String" } }
+  },
+  "managedDeliveryClosingSecret": "Keep it secret 🤫",
+  "managedDeliveryEmailSubject": "Your Secret Santa result for {groupName} is ready 🎁",
+  "@managedDeliveryEmailSubject": {
+    "placeholders": { "groupName": { "type": "String" } }
+  },
+  "managedDeliveryEmailGreeting": "Hi {name},",
+  "@managedDeliveryEmailGreeting": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "managedDeliveryEmailLead": "Here is the private Secret Santa result for the group \"{groupName}\".",
+  "@managedDeliveryEmailLead": {
+    "placeholders": { "groupName": { "type": "String" } }
+  },
+  "managedDeliveryEmailGiftLabel": "You are giving a gift to:",
+  "managedDeliveryEmailReceiverLine": "{receiverName}",
+  "@managedDeliveryEmailReceiverLine": {
+    "placeholders": { "receiverName": { "type": "String" } }
+  },
+  "managedDeliveryEmailSubgroupLine": "House or team: {subgroup}",
+  "@managedDeliveryEmailSubgroupLine": {
+    "placeholders": { "subgroup": { "type": "String" } }
+  },
+  "managedDeliveryEmailClosing": "Please keep this result private. No one else should see it.",
+  "managedDeliveryEmailSignoff": "Warm wishes,\nTarci Secret",
+  "managedPdfDocTitle": "secret-santa",
+  "managedPdfHeadline": "Your Secret Santa result is ready",
+  "managedPdfForLabel": "For",
+  "managedPdfGroupLabel": "Group",
+  "managedPdfGiftHeading": "You're giving a gift to…",
+  "managedPdfFooterKeepSecret": "Keep the secret. No one else should see this.",
+  "managedPdfFooterBrand": "Made with Tarci Secret",
+  "managedDeliveryFallbackGroupName": "your group",
+  "managedDeliveryErrorMissingData": "Not enough data to prepare the message.",
+  "managedDeliveryErrorWhatsapp": "We couldn't open WhatsApp. You can share the text with another app.",
+  "managedDeliveryErrorEmail": "No email app is available on this device.",
+  "managedDeliveryErrorPdf": "The PDF could not be generated. Please try again.",
+  "managedDeliveryErrorShare": "Sharing failed. Please try again.",
+  "managedDeliveryErrorGeneric": "Something went wrong. Please try again.",
   "myAssignmentPrivateBadge": "Private · just for you",
   "myAssignmentRevealLabel": "You're gifting to",
   "myAssignmentEmotionalCopy": "Make them feel special.",

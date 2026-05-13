@@ -31,7 +31,14 @@ enum MemberRole { owner, member }
 enum MemberState { active, left, removed }
 enum GroupParticipantType { appMember, managed, childManaged }
 enum GroupParticipantState { active, removed }
-enum ManagedParticipantDeliveryMode { inApp, ownerDelegated, verbal, printed }
+enum ManagedParticipantDeliveryMode {
+  inApp,
+  ownerDelegated,
+  verbal,
+  printed,
+  whatsapp,
+  email,
+}
 
 class GroupSummary {
   final String groupId;
@@ -146,5 +153,24 @@ class GroupParticipant {
     required this.canReceiveDirectResult,
     required this.source,
   });
+}
+
+/// Valores persistidos en Cloud Functions / Firestore para participantes gestionados.
+extension ManagedParticipantDeliveryModeApi on ManagedParticipantDeliveryMode {
+  String toFirestoreString() {
+    switch (this) {
+      case ManagedParticipantDeliveryMode.printed:
+        return 'printed';
+      case ManagedParticipantDeliveryMode.verbal:
+        return 'verbal';
+      case ManagedParticipantDeliveryMode.whatsapp:
+        return 'whatsapp';
+      case ManagedParticipantDeliveryMode.email:
+        return 'email';
+      case ManagedParticipantDeliveryMode.ownerDelegated:
+      case ManagedParticipantDeliveryMode.inApp:
+        return 'verbal';
+    }
+  }
 }
 

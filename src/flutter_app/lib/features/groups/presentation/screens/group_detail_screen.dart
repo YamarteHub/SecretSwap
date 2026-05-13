@@ -949,9 +949,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
             ? 'child_managed'
             : 'managed',
         subgroupId: toSubgroupId,
-        deliveryMode: p.deliveryMode == ManagedParticipantDeliveryMode.printed
-            ? 'printed'
-            : 'verbal',
+        deliveryMode: p.deliveryMode.toFirestoreString(),
       );
     }
   }
@@ -3050,7 +3048,7 @@ class _CreateManagedParticipantDialogState
   static const _deliveryVerbal = 'verbal';
   static const _deliveryPrinted = 'printed';
   static const _deliveryWhatsapp = 'whatsapp';
-  static const _deliveryShow = 'show_in_person';
+  static const _deliveryEmail = 'email';
   String _deliveryMode = _deliveryVerbal;
   static const _guardianSelf = 'self';
   static const _guardianOther = 'other';
@@ -3072,7 +3070,11 @@ class _CreateManagedParticipantDialogState
     _deliveryMode = switch (initial.deliveryMode) {
       ManagedParticipantDeliveryMode.printed => _deliveryPrinted,
       ManagedParticipantDeliveryMode.verbal => _deliveryVerbal,
-      _ => _deliveryVerbal,
+      ManagedParticipantDeliveryMode.whatsapp => _deliveryWhatsapp,
+      ManagedParticipantDeliveryMode.email => _deliveryEmail,
+      ManagedParticipantDeliveryMode.ownerDelegated ||
+      ManagedParticipantDeliveryMode.inApp =>
+        _deliveryVerbal,
     };
     _subgroupId = initial.subgroupId;
     final m = initial.managedByUid;
@@ -3096,6 +3098,8 @@ class _CreateManagedParticipantDialogState
     return switch (_deliveryMode) {
       _deliveryPrinted => _deliveryPrinted,
       _deliveryVerbal => _deliveryVerbal,
+      _deliveryWhatsapp => _deliveryWhatsapp,
+      _deliveryEmail => _deliveryEmail,
       _ => _deliveryVerbal,
     };
   }
@@ -3321,8 +3325,13 @@ class _CreateManagedParticipantDialogState
                 value: _deliveryWhatsapp,
                 icon: Icons.chat_bubble_outline,
                 label: l10n.groupManagedDialogDeliveryWhatsapp,
-                hint: l10n.groupManagedDialogGuardianComingSoon,
-                enabled: false,
+                enabled: true,
+              ),
+              _ChoiceOption(
+                value: _deliveryEmail,
+                icon: Icons.mail_outline,
+                label: l10n.groupManagedDialogDeliveryEmail,
+                enabled: true,
               ),
               _ChoiceOption(
                 value: _deliveryVerbal,
@@ -3332,16 +3341,9 @@ class _CreateManagedParticipantDialogState
               ),
               _ChoiceOption(
                 value: _deliveryPrinted,
-                icon: Icons.print_outlined,
+                icon: Icons.picture_as_pdf_outlined,
                 label: l10n.groupManagedDialogDeliveryPrinted,
                 enabled: true,
-              ),
-              _ChoiceOption(
-                value: _deliveryShow,
-                icon: Icons.visibility_outlined,
-                label: l10n.groupManagedDialogDeliveryShowInPerson,
-                hint: l10n.groupManagedDialogGuardianComingSoon,
-                enabled: false,
               ),
             ],
             selected: _deliveryMode,

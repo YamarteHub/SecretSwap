@@ -1010,10 +1010,22 @@ abstract class AppLocalizations {
   /// **'Verbal'**
   String get groupManagedDialogDeliveryVerbal;
 
+  /// No description provided for @groupManagedDialogDeliveryEmail.
+  ///
+  /// In es, this message translates to:
+  /// **'Correo'**
+  String get groupManagedDialogDeliveryEmail;
+
+  /// No description provided for @groupManagedDialogDeliveryWhatsapp.
+  ///
+  /// In es, this message translates to:
+  /// **'WhatsApp'**
+  String get groupManagedDialogDeliveryWhatsapp;
+
   /// No description provided for @groupManagedDialogDeliveryPrinted.
   ///
   /// In es, this message translates to:
-  /// **'Impresa'**
+  /// **'Impresa / PDF'**
   String get groupManagedDialogDeliveryPrinted;
 
   /// No description provided for @groupManagedDialogWhoManagesTitle.
@@ -1958,18 +1970,6 @@ abstract class AppLocalizations {
   /// **'¿Cómo se lo harás llegar?'**
   String get groupManagedDialogDeliverySectionTitle;
 
-  /// No description provided for @groupManagedDialogDeliveryWhatsapp.
-  ///
-  /// In es, this message translates to:
-  /// **'WhatsApp'**
-  String get groupManagedDialogDeliveryWhatsapp;
-
-  /// No description provided for @groupManagedDialogDeliveryShowInPerson.
-  ///
-  /// In es, this message translates to:
-  /// **'Mostrar en persona'**
-  String get groupManagedDialogDeliveryShowInPerson;
-
   /// No description provided for @groupManagedResponsibleUnavailable.
   ///
   /// In es, this message translates to:
@@ -2089,6 +2089,228 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Gestionada por responsable'**
   String get managedDeliveryOwnerDelegated;
+
+  /// No description provided for @managedDeliveryModeWhatsapp.
+  ///
+  /// In es, this message translates to:
+  /// **'WhatsApp'**
+  String get managedDeliveryModeWhatsapp;
+
+  /// No description provided for @managedDeliveryModeEmail.
+  ///
+  /// In es, this message translates to:
+  /// **'Correo'**
+  String get managedDeliveryModeEmail;
+
+  /// No description provided for @managedDeliveryModePdf.
+  ///
+  /// In es, this message translates to:
+  /// **'Impresa / PDF'**
+  String get managedDeliveryModePdf;
+
+  /// No description provided for @managedDeliveryCtaWhatsapp.
+  ///
+  /// In es, this message translates to:
+  /// **'Compartir por WhatsApp'**
+  String get managedDeliveryCtaWhatsapp;
+
+  /// No description provided for @managedDeliveryCtaEmail.
+  ///
+  /// In es, this message translates to:
+  /// **'Preparar correo'**
+  String get managedDeliveryCtaEmail;
+
+  /// No description provided for @managedDeliveryCtaPdf.
+  ///
+  /// In es, this message translates to:
+  /// **'Generar PDF'**
+  String get managedDeliveryCtaPdf;
+
+  /// No description provided for @managedDeliveryVerbalBadge.
+  ///
+  /// In es, this message translates to:
+  /// **'Entrega verbal'**
+  String get managedDeliveryVerbalBadge;
+
+  /// No description provided for @managedDeliveryPdfGenerating.
+  ///
+  /// In es, this message translates to:
+  /// **'Generando PDF…'**
+  String get managedDeliveryPdfGenerating;
+
+  /// No description provided for @managedDeliveryWhatsappBrand.
+  ///
+  /// In es, this message translates to:
+  /// **'🎁 Tarci Secret'**
+  String get managedDeliveryWhatsappBrand;
+
+  /// No description provided for @managedDeliveryWhatsappHello.
+  ///
+  /// In es, this message translates to:
+  /// **'Hola, {name}.'**
+  String managedDeliveryWhatsappHello(String name);
+
+  /// No description provided for @managedDeliveryWhatsappDrawLine.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya se realizó el amigo secreto de «{groupName}».'**
+  String managedDeliveryWhatsappDrawLine(String groupName);
+
+  /// No description provided for @managedDeliveryWhatsappGiftIntro.
+  ///
+  /// In es, this message translates to:
+  /// **'A ti te toca regalar a:'**
+  String get managedDeliveryWhatsappGiftIntro;
+
+  /// No description provided for @managedDeliveryWhatsappReceiverLine.
+  ///
+  /// In es, this message translates to:
+  /// **'✨ {receiverName}'**
+  String managedDeliveryWhatsappReceiverLine(String receiverName);
+
+  /// No description provided for @managedDeliverySubgroupBelongsTo.
+  ///
+  /// In es, this message translates to:
+  /// **'Pertenece a: {subgroup}'**
+  String managedDeliverySubgroupBelongsTo(String subgroup);
+
+  /// No description provided for @managedDeliveryClosingSecret.
+  ///
+  /// In es, this message translates to:
+  /// **'Guarda el secreto 🤫'**
+  String get managedDeliveryClosingSecret;
+
+  /// No description provided for @managedDeliveryEmailSubject.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu amigo secreto de {groupName} ya está listo 🎁'**
+  String managedDeliveryEmailSubject(String groupName);
+
+  /// No description provided for @managedDeliveryEmailGreeting.
+  ///
+  /// In es, this message translates to:
+  /// **'Hola, {name}:'**
+  String managedDeliveryEmailGreeting(String name);
+
+  /// No description provided for @managedDeliveryEmailLead.
+  ///
+  /// In es, this message translates to:
+  /// **'Te escribimos con el resultado privado del amigo secreto del grupo «{groupName}».'**
+  String managedDeliveryEmailLead(String groupName);
+
+  /// No description provided for @managedDeliveryEmailGiftLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'A quien te toca regalar es a:'**
+  String get managedDeliveryEmailGiftLabel;
+
+  /// No description provided for @managedDeliveryEmailReceiverLine.
+  ///
+  /// In es, this message translates to:
+  /// **'{receiverName}'**
+  String managedDeliveryEmailReceiverLine(String receiverName);
+
+  /// No description provided for @managedDeliveryEmailSubgroupLine.
+  ///
+  /// In es, this message translates to:
+  /// **'Casa o equipo: {subgroup}'**
+  String managedDeliveryEmailSubgroupLine(String subgroup);
+
+  /// No description provided for @managedDeliveryEmailClosing.
+  ///
+  /// In es, this message translates to:
+  /// **'Por favor, guarda este resultado solo para ti. Nadie más debe verlo.'**
+  String get managedDeliveryEmailClosing;
+
+  /// No description provided for @managedDeliveryEmailSignoff.
+  ///
+  /// In es, this message translates to:
+  /// **'Un abrazo,\nTarci Secret'**
+  String get managedDeliveryEmailSignoff;
+
+  /// No description provided for @managedPdfDocTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'amigo-secreto'**
+  String get managedPdfDocTitle;
+
+  /// No description provided for @managedPdfHeadline.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu amigo secreto ya está listo'**
+  String get managedPdfHeadline;
+
+  /// No description provided for @managedPdfForLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Para'**
+  String get managedPdfForLabel;
+
+  /// No description provided for @managedPdfGroupLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Grupo'**
+  String get managedPdfGroupLabel;
+
+  /// No description provided for @managedPdfGiftHeading.
+  ///
+  /// In es, this message translates to:
+  /// **'Te toca regalar a…'**
+  String get managedPdfGiftHeading;
+
+  /// No description provided for @managedPdfFooterKeepSecret.
+  ///
+  /// In es, this message translates to:
+  /// **'Guarda el secreto. Nadie más debe verlo.'**
+  String get managedPdfFooterKeepSecret;
+
+  /// No description provided for @managedPdfFooterBrand.
+  ///
+  /// In es, this message translates to:
+  /// **'Generado con Tarci Secret'**
+  String get managedPdfFooterBrand;
+
+  /// No description provided for @managedDeliveryFallbackGroupName.
+  ///
+  /// In es, this message translates to:
+  /// **'tu grupo'**
+  String get managedDeliveryFallbackGroupName;
+
+  /// No description provided for @managedDeliveryErrorMissingData.
+  ///
+  /// In es, this message translates to:
+  /// **'No hay datos suficientes para preparar el mensaje.'**
+  String get managedDeliveryErrorMissingData;
+
+  /// No description provided for @managedDeliveryErrorWhatsapp.
+  ///
+  /// In es, this message translates to:
+  /// **'No pudimos abrir WhatsApp. Puedes compartir el texto con otra app.'**
+  String get managedDeliveryErrorWhatsapp;
+
+  /// No description provided for @managedDeliveryErrorEmail.
+  ///
+  /// In es, this message translates to:
+  /// **'No encontramos una app de correo en este dispositivo.'**
+  String get managedDeliveryErrorEmail;
+
+  /// No description provided for @managedDeliveryErrorPdf.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo generar el PDF. Inténtalo de nuevo.'**
+  String get managedDeliveryErrorPdf;
+
+  /// No description provided for @managedDeliveryErrorShare.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo compartir. Inténtalo otra vez.'**
+  String get managedDeliveryErrorShare;
+
+  /// No description provided for @managedDeliveryErrorGeneric.
+  ///
+  /// In es, this message translates to:
+  /// **'Algo salió mal. Inténtalo de nuevo.'**
+  String get managedDeliveryErrorGeneric;
 
   /// No description provided for @myAssignmentPrivateBadge.
   ///

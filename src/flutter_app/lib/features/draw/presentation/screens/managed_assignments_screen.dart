@@ -4,26 +4,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/l10n/l10n.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/theme/premium_ui.dart';
+import '../../../../l10n/app_localizations.dart';
+import '../../../groups/domain/group_models.dart';
+import '../../../groups/presentation/providers.dart';
 import '../../domain/draw_models.dart';
+import '../../services/managed_assignment_pdf.dart';
+import '../../services/managed_delivery_launcher.dart';
+import '../../services/managed_delivery_text.dart';
 import '../providers.dart';
 
 /// Pantalla "Secretos que gestionas".
-///
-/// Aquí el organizador (o el responsable) ve los resultados de las personas
-/// que dependen de él (niños y adultos sin app). La intención visual es
-/// **responsabilidad privada**, no reporte administrativo:
-///
-///   - Fondo `warmIvory` y AppBar limpio con `BrandMark.icon`.
-///   - Hero textual cálido que enmarca la responsabilidad ("Tú entregas
-///     estos resultados en privado, sin que nadie más se entere.").
-///   - Cada gestionado se presenta como una `_GuardianAssignmentCard`:
-///     header con avatar de inicial, nombre del giver y badge de tipo
-///     (niño / sin app), label sobrio "Su amigo secreto es", nombre del
-///     receptor protagonista, y dos chips finales (subgrupo + entrega).
-///   - Reminder de privacidad consolidado en el footer (antes aparecía
-///     repetido en cada card; ahora una vez al final, más sobrio).
-///
-/// Responde en menos de 3 segundos: "¿Qué secretos debo gestionar yo?"
 class ManagedAssignmentsScreen extends ConsumerWidget {
   final String groupId;
   final String executionId;
@@ -37,7 +27,8 @@ class ManagedAssignmentsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final future =
+    final groupAsync = ref.watch(groupDetailProvider(groupId));
+    final assignmentsAsync =
         ref.watch(_managedAssignmentsProvider((groupId, executionId)));
     return Scaffold(
       backgroundColor: AppTheme.warmIvory,
@@ -57,53 +48,82 @@ class ManagedAssignmentsScreen extends ConsumerWidget {
       ),
       body: SafeArea(
         top: false,
-        child: future.when(
-          loading: () => const Padding(
-            padding: EdgeInsets.symmetric(vertical: 80),
-            child: Center(child: CircularProgressIndicator()),
-          ),
-          error: (e, _) => Padding(
-            padding: const EdgeInsets.fromLTRB(20, 8, 20, 28),
-            child: EmptyState(
-              icon: Icons.lock_person_outlined,
-              title: l10n.managedLoadErrorTitle,
-              message: l10n.managedLoadErrorMessage,
-            ),
-          ),
-          data: (items) => ListView(
-            padding: const EdgeInsets.fromLTRB(20, 8, 20, 28),
-            children: [
-              _ManagedHero(
-                title: l10n.managedHeroTitle,
-                subtitle: l10n.managedHeroSubtitle,
-              ),
-              const SizedBox(height: 18),
-              if (items.isEmpty)
-                EmptyState(
-                  icon: Icons.inbox_outlined,
-                  title: l10n.managedEmptyTitle,
-                  message: l10n.managedEmptyMessage,
-                )
-              else ...[
-                ...items.map(
-                  (a) => Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: _GuardianAssignmentCard(assignment: a),
-                  ),
-                ),
-                const SizedBox(height: 6),
-                _PrivacyFooterNote(text: l10n.managedFooterPrivacyNote),
-              ],
-            ],
-          ),
+        child: _ManagedAssignmentsBody(
+          l10n: l10n,
+          groupAsync: groupAsync,
+          assignmentsAsync: assignmentsAsync,
         ),
       ),
     );
   }
 }
 
-/// Hero cálido para la pantalla. Reemplaza el `PremiumHeader` genérico
-/// con un bloque más emocional centrado en la responsabilidad privada.
+class _ManagedAssignmentsBody extends StatelessWidget {
+  const _ManagedAssignmentsBody({
+    required this.l10n,
+    required this.groupAsync,
+    required this.assignmentsAsync,
+  });
+
+  final AppLocalizations l10n;
+  final AsyncValue<GroupDetail> groupAsync;
+  final AsyncValue<List<ManagedAssignment>> assignmentsAsync;
+
+  @override
+  Widget build(BuildContext context) {
+    if (assignmentsAsync.isLoading || groupAsync.isLoading) {
+      return const Padding(
+        padding: EdgeInsets.symmetric(vertical: 80),
+        child: Center(child: CircularProgressIndicator()),
+      );
+    }
+    if (assignmentsAsync.hasError) {
+      return Padding(
+        padding: const EdgeInsets.fromLTRB(20, 8, 20, 28),
+        child: EmptyState(
+          icon: Icons.lock_person_outlined,
+          title: l10n.managedLoadErrorTitle,
+          message: l10n.managedLoadErrorMessage,
+        ),
+      );
+    }
+    final items = assignmentsAsync.requireValue;
+    final rawName = groupAsync.value?.name.trim() ?? '';
+    final groupDisplayName =
+        rawName.isEmpty ? l10n.managedDeliveryFallbackGroupName : rawName;
+
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(20, 8, 20, 28),
+      children: [
+        _ManagedHero(
+          title: l10n.managedHeroTitle,
+          subtitle: l10n.managedHeroSubtitle,
+        ),
+        const SizedBox(height: 18),
+        if (items.isEmpty)
+          EmptyState(
+            icon: Icons.inbox_outlined,
+            title: l10n.managedEmptyTitle,
+            message: l10n.managedEmptyMessage,
+          )
+        else ...[
+          ...items.map(
+            (a) => Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: _GuardianAssignmentCard(
+                assignment: a,
+                groupDisplayName: groupDisplayName,
+              ),
+            ),
+          ),
+          const SizedBox(height: 6),
+          _PrivacyFooterNote(text: l10n.managedFooterPrivacyNote),
+        ],
+      ],
+    );
+  }
+}
+
 class _ManagedHero extends StatelessWidget {
   const _ManagedHero({required this.title, required this.subtitle});
 
@@ -167,19 +187,14 @@ class _ManagedHero extends StatelessWidget {
   }
 }
 
-/// Tarjeta de asignación gestionada. Diseñada como ficha privada con
-/// jerarquía clara y sin textos repetidos:
-///
-///   1. Header: avatar circular con la inicial + nombre del giver + badge
-///      del tipo (niño / sin app).
-///   2. Línea separadora suave.
-///   3. Label sobrio "Su amigo secreto es".
-///   4. Nombre del receiver protagonista (`headlineSmall`).
-///   5. Chips finales: subgrupo (si aplica) + forma de entrega.
 class _GuardianAssignmentCard extends StatelessWidget {
-  const _GuardianAssignmentCard({required this.assignment});
+  const _GuardianAssignmentCard({
+    required this.assignment,
+    required this.groupDisplayName,
+  });
 
   final ManagedAssignment assignment;
+  final String groupDisplayName;
 
   @override
   Widget build(BuildContext context) {
@@ -277,14 +292,223 @@ class _GuardianAssignmentCard extends StatelessWidget {
               ),
             ],
           ),
+          const SizedBox(height: 16),
+          _ManagedDeliveryActions(
+            assignment: assignment,
+            groupDisplayName: groupDisplayName,
+          ),
         ],
       ),
     );
   }
 }
 
-/// Avatar circular discreto con inicial del nombre. Aporta calidez sin
-/// invadir el mensaje principal (que es el receptor, no el giver).
+class _ManagedDeliveryActions extends StatefulWidget {
+  const _ManagedDeliveryActions({
+    required this.assignment,
+    required this.groupDisplayName,
+  });
+
+  final ManagedAssignment assignment;
+  final String groupDisplayName;
+
+  @override
+  State<_ManagedDeliveryActions> createState() =>
+      _ManagedDeliveryActionsState();
+}
+
+class _ManagedDeliveryActionsState extends State<_ManagedDeliveryActions> {
+  bool _pdfBusy = false;
+
+  void _snack(String message) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }
+
+  bool _validateNames() {
+    final l10n = context.l10n;
+    final g = widget.assignment.giverDisplayName.trim();
+    final r = widget.assignment.receiverDisplayName.trim();
+    if (g.isEmpty || r.isEmpty) {
+      _snack(l10n.managedDeliveryErrorMissingData);
+      return false;
+    }
+    return true;
+  }
+
+  Future<void> _whatsapp() async {
+    final l10n = context.l10n;
+    if (!_validateNames()) return;
+    try {
+      final text = ManagedDeliveryText.whatsappBody(
+        l10n,
+        managedName: widget.assignment.giverDisplayName.trim(),
+        groupName: widget.groupDisplayName.trim(),
+        receiverName: widget.assignment.receiverDisplayName.trim(),
+        receiverSubgroupName: widget.assignment.receiverSubgroupName,
+      );
+      await ManagedDeliveryLauncher.shareWhatsAppOrFallback(text);
+    } catch (_) {
+      _snack(l10n.managedDeliveryErrorWhatsapp);
+    }
+  }
+
+  Future<void> _email() async {
+    final l10n = context.l10n;
+    if (!_validateNames()) return;
+    try {
+      final subject = ManagedDeliveryText.emailSubject(
+        l10n,
+        widget.groupDisplayName.trim(),
+      );
+      final body = ManagedDeliveryText.emailBody(
+        l10n,
+        managedName: widget.assignment.giverDisplayName.trim(),
+        groupName: widget.groupDisplayName.trim(),
+        receiverName: widget.assignment.receiverDisplayName.trim(),
+        receiverSubgroupName: widget.assignment.receiverSubgroupName,
+      );
+      final ok = await ManagedDeliveryLauncher.openEmailComposer(
+        subject: subject,
+        body: body,
+      );
+      if (!ok && mounted) {
+        _snack(l10n.managedDeliveryErrorEmail);
+      }
+    } catch (_) {
+      _snack(l10n.managedDeliveryErrorEmail);
+    }
+  }
+
+  Future<void> _pdf() async {
+    final l10n = context.l10n;
+    if (!_validateNames()) return;
+    setState(() => _pdfBusy = true);
+    try {
+      final sub = widget.assignment.receiverSubgroupName?.trim();
+      final subgroupLine = (sub != null && sub.isNotEmpty)
+          ? l10n.managedDeliverySubgroupBelongsTo(sub)
+          : null;
+      final bytes = await ManagedAssignmentPdf.buildDocument(
+        headline: l10n.managedPdfHeadline,
+        forLabel: l10n.managedPdfForLabel,
+        managedName: widget.assignment.giverDisplayName.trim(),
+        groupLabel: l10n.managedPdfGroupLabel,
+        groupName: widget.groupDisplayName.trim(),
+        giftHeading: l10n.managedPdfGiftHeading,
+        receiverName: widget.assignment.receiverDisplayName.trim(),
+        receiverSubgroupLine: subgroupLine,
+        footerSecret: l10n.managedPdfFooterKeepSecret,
+        footerBrand: l10n.managedPdfFooterBrand,
+      );
+      if (!mounted) return;
+      await ManagedAssignmentPdf.previewAndShare(
+        bytes: bytes,
+        documentName: l10n.managedPdfDocTitle,
+      );
+    } catch (_) {
+      if (mounted) _snack(l10n.managedDeliveryErrorPdf);
+    } finally {
+      if (mounted) setState(() => _pdfBusy = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final mode = widget.assignment.deliveryMode;
+
+    if (mode == 'verbal') {
+      return Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        decoration: BoxDecoration(
+          color: AppTheme.softCream,
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: AppTheme.deepPlum.withValues(alpha: 0.12)),
+        ),
+        child: Row(
+          children: [
+            Icon(
+              Icons.record_voice_over_outlined,
+              size: 20,
+              color: AppTheme.deepPlum.withValues(alpha: 0.85),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                l10n.managedDeliveryVerbalBadge,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    if (mode == 'whatsapp') {
+      return FilledButton.icon(
+        onPressed: _whatsapp,
+        icon: const Icon(Icons.chat_bubble_outline),
+        label: Text(l10n.managedDeliveryCtaWhatsapp),
+        style: FilledButton.styleFrom(
+          backgroundColor: AppTheme.deepPlum,
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+        ),
+      );
+    }
+
+    if (mode == 'email') {
+      return FilledButton.icon(
+        onPressed: _email,
+        icon: const Icon(Icons.mail_outline),
+        label: Text(l10n.managedDeliveryCtaEmail),
+        style: FilledButton.styleFrom(
+          backgroundColor: AppTheme.deepPlumAlt,
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+        ),
+      );
+    }
+
+    if (mode == 'printed') {
+      return FilledButton.tonalIcon(
+        onPressed: _pdfBusy ? null : _pdf,
+        icon: _pdfBusy
+            ? const SizedBox(
+                width: 20,
+                height: 20,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              )
+            : const Icon(Icons.picture_as_pdf_outlined),
+        label: Text(
+          _pdfBusy
+              ? l10n.managedDeliveryPdfGenerating
+              : l10n.managedDeliveryCtaPdf,
+        ),
+        style: FilledButton.styleFrom(
+          padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+        ),
+      );
+    }
+
+    // ownerDelegated u otros: recordatorio suave sin CTA de canales
+    return Text(
+      l10n.managedDeliveryOwnerDelegated,
+      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+            fontStyle: FontStyle.italic,
+          ),
+    );
+  }
+}
+
 class _InitialAvatar extends StatelessWidget {
   const _InitialAvatar({required this.name});
 
@@ -350,8 +574,6 @@ class _TypeBadge extends StatelessWidget {
   }
 }
 
-/// Chip pequeño con icono. Soporta un tono opcional para diferenciar
-/// el chip principal (entrega) del secundario (subgrupo).
 class _ChipPill extends StatelessWidget {
   const _ChipPill({
     required this.icon,
@@ -404,8 +626,6 @@ class _ChipPill extends StatelessWidget {
   }
 }
 
-/// Footer de privacidad. Aparece **una sola vez al final del listado**,
-/// no por cada card, para evitar la sensación de reporte repetitivo.
 class _PrivacyFooterNote extends StatelessWidget {
   const _PrivacyFooterNote({required this.text});
 
@@ -457,7 +677,11 @@ String _deliveryModeLabel(BuildContext context, String raw) {
     case 'verbal':
       return context.l10n.groupManagedDialogDeliveryVerbal;
     case 'printed':
-      return context.l10n.groupManagedDialogDeliveryPrinted;
+      return context.l10n.managedDeliveryModePdf;
+    case 'whatsapp':
+      return context.l10n.managedDeliveryModeWhatsapp;
+    case 'email':
+      return context.l10n.managedDeliveryModeEmail;
     case 'ownerDelegated':
       return context.l10n.managedDeliveryOwnerDelegated;
     default:
@@ -468,7 +692,11 @@ String _deliveryModeLabel(BuildContext context, String raw) {
 IconData _deliveryIcon(String raw) {
   switch (raw) {
     case 'printed':
-      return Icons.print_outlined;
+      return Icons.picture_as_pdf_outlined;
+    case 'whatsapp':
+      return Icons.chat_bubble_outline;
+    case 'email':
+      return Icons.mail_outline;
     case 'ownerDelegated':
       return Icons.shield_outlined;
     case 'verbal':

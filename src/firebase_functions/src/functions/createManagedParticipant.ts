@@ -68,18 +68,6 @@ export const createManagedParticipant = onCall(
         });
       }
 
-      if (
-        body.deliveryMode !== "verbal" &&
-        body.deliveryMode !== "printed" &&
-        body.deliveryMode !== "ownerDelegated"
-      ) {
-        throw new AppError({
-          code: "VALIDATION_ERROR",
-          reasonCode: "INVALID_DELIVERY_MODE",
-          message: "Invalid deliveryMode"
-        });
-      }
-
       const db = getDb();
       const groupRef = db.doc(groupPaths.groupDoc(body.groupId));
       const groupSnap = await groupRef.get();

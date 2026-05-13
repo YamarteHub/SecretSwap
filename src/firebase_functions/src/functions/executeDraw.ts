@@ -40,7 +40,7 @@ function normalizeSubgroupMode(raw: unknown): SubgroupModeNorm {
 }
 
 type ParticipantType = "app_member" | "managed" | "child_managed";
-type DeliveryMode = "inApp" | "ownerDelegated" | "verbal" | "printed";
+type DeliveryMode = "inApp" | "ownerDelegated" | "verbal" | "printed" | "whatsapp" | "email";
 type RoleInGroup = "owner" | "member";
 type DrawParticipantSource = "member_projection" | "participants_doc";
 
@@ -87,7 +87,15 @@ function parseParticipantType(raw: unknown): ParticipantType | null {
 
 function parseDeliveryMode(raw: unknown, fallback: DeliveryMode): DeliveryMode {
   const s = typeof raw === "string" ? raw.trim() : "";
-  if (s === "inApp" || s === "ownerDelegated" || s === "verbal" || s === "printed") return s;
+  if (
+    s === "inApp" ||
+    s === "ownerDelegated" ||
+    s === "verbal" ||
+    s === "printed" ||
+    s === "whatsapp" ||
+    s === "email"
+  )
+    return s;
   return fallback;
 }
 
