@@ -27,6 +27,7 @@
   "dependencies": {
     "firebase-admin": "^12.3.1",
     "firebase-functions": "^5.0.1",
+    "luxon": "^3.7.2",
     "zod": "^3.25.76"
   },
   "devDependencies": {
@@ -38,4 +39,3 @@
     "typescript-eslint": "^8.41.0"
   }
 }
-
