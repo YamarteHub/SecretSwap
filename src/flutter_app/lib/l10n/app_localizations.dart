@@ -671,7 +671,7 @@ abstract class AppLocalizations {
   /// No description provided for @wishlistGroupMyCardSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Ayuda a quien te toque a acertar con el regalo. Puedes completarla ahora o actualizarla cuando quieras.'**
+  /// **'Complétala tú; solo la verá quien te toque regalar.'**
   String get wishlistGroupMyCardSubtitle;
 
   /// No description provided for @wishlistGroupMyCardCtaFill.
@@ -707,7 +707,7 @@ abstract class AppLocalizations {
   /// No description provided for @wishlistGroupManagedSectionSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Completa sus gustos para ayudar a quien le regale.'**
+  /// **'Ayuda a rellenarlas; quien les regale las verá en su propia pantalla.'**
   String get wishlistGroupManagedSectionSubtitle;
 
   /// No description provided for @wishlistGroupManagedRowCta.
@@ -715,6 +715,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Editar lista'**
   String get wishlistGroupManagedRowCta;
+
+  /// No description provided for @wishlistGroupPostDrawIntro.
+  ///
+  /// In es, this message translates to:
+  /// **'Ahora que el sorteo está hecho, unas pistas claras ayudan a acertar con el regalo.'**
+  String get wishlistGroupPostDrawIntro;
 
   /// No description provided for @wishlistEditorTitle.
   ///
@@ -848,11 +854,23 @@ abstract class AppLocalizations {
   /// **'Como máximo {max} enlaces.'**
   String wishlistLinksMax(int max);
 
-  /// No description provided for @wishlistMyAssignmentSectionTitle.
+  /// No description provided for @wishlistMyAssignmentReceiverWishlistHeading.
   ///
   /// In es, this message translates to:
-  /// **'Ideas para acertar con el regalo'**
-  String get wishlistMyAssignmentSectionTitle;
+  /// **'Qué le gustaría recibir a {receiverName}'**
+  String wishlistMyAssignmentReceiverWishlistHeading(String receiverName);
+
+  /// No description provided for @wishlistMyAssignmentReceiverNameFallback.
+  ///
+  /// In es, this message translates to:
+  /// **'tu destinatario'**
+  String get wishlistMyAssignmentReceiverNameFallback;
+
+  /// No description provided for @wishlistMyAssignmentSectionSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Solo tú ves esto. Sirve para inspirarte al elegir un detalle con cariño.'**
+  String get wishlistMyAssignmentSectionSubtitle;
 
   /// No description provided for @wishlistMyAssignmentViewCta.
   ///
@@ -863,8 +881,14 @@ abstract class AppLocalizations {
   /// No description provided for @wishlistManagedViewReceiverCta.
   ///
   /// In es, this message translates to:
-  /// **'Ver ideas de regalo'**
+  /// **'Ver lista de deseos'**
   String get wishlistManagedViewReceiverCta;
+
+  /// No description provided for @wishlistManagedViewReceiverHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Solo ves las ideas de esta persona para este secreto.'**
+  String get wishlistManagedViewReceiverHint;
 
   /// No description provided for @wishlistEmptyReceiverTitle.
   ///

@@ -178,19 +178,60 @@ class _MyAssignmentScreenState extends ConsumerState<MyAssignmentScreen> {
           subgroupName: hasSubgroup ? subgroup : null,
         ),
         if (showWishlist) ...[
-          const SizedBox(height: 16),
+          const SizedBox(height: 18),
           SecretCard(
-            padding: const EdgeInsets.fromLTRB(18, 18, 18, 18),
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  l10n.wishlistMyAssignmentSectionTitle,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w800,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: AppTheme.mutedGold.withValues(alpha: 0.2),
+                        borderRadius: BorderRadius.circular(12),
                       ),
+                      child: const Icon(
+                        Icons.card_giftcard_rounded,
+                        size: 22,
+                        color: AppTheme.deepPlum,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            l10n.wishlistMyAssignmentReceiverWishlistHeading(
+                              a.receiverNickname.trim().isNotEmpty
+                                  ? a.receiverNickname.trim()
+                                  : l10n.wishlistMyAssignmentReceiverNameFallback,
+                            ),
+                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.w800,
+                                  height: 1.2,
+                                  color: AppTheme.deepPlum,
+                                ),
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            l10n.wishlistMyAssignmentSectionSubtitle,
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSurfaceVariant,
+                                  height: 1.4,
+                                ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 16),
                 if (_wishlistLoadFailed)
                   Text(
                     l10n.genericLoadErrorMessage,

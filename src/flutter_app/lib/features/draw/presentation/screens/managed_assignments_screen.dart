@@ -388,21 +388,41 @@ class _GuardianAssignmentCard extends ConsumerWidget {
           ),
           const SizedBox(height: 16),
           if (receiverPid.isNotEmpty) ...[
+            Divider(
+              color: theme.colorScheme.outlineVariant,
+              height: 1,
+            ),
+            const SizedBox(height: 12),
             Align(
               alignment: Alignment.centerLeft,
-              child: TextButton.icon(
-                onPressed: () => _showManagedReceiverWishlistSheet(
-                  context: context,
-                  ref: ref,
-                  l10n: l10n,
-                  groupId: groupId,
-                  assignment: assignment,
-                ),
-                icon: const Icon(Icons.auto_awesome_outlined, size: 20),
-                label: Text(l10n.wishlistManagedViewReceiverCta),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  OutlinedButton.icon(
+                    onPressed: () => _showManagedReceiverWishlistSheet(
+                      context: context,
+                      ref: ref,
+                      l10n: l10n,
+                      groupId: groupId,
+                      assignment: assignment,
+                    ),
+                    icon: const Icon(Icons.card_giftcard_outlined, size: 20),
+                    label: Text(l10n.wishlistManagedViewReceiverCta),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 6, left: 2),
+                    child: Text(
+                      l10n.wishlistManagedViewReceiverHint,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                        height: 1.35,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 12),
           ],
           _ManagedDeliveryActions(
             assignment: assignment,

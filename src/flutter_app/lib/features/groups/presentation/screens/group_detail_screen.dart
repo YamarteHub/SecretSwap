@@ -1416,11 +1416,14 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
               ? l10n.groupWarningMissingSubgroupCombined
               : null,
         ),
-        GroupWishlistSummarySection(
-          detail: d,
-          groupId: widget.groupId,
-          currentUid: widget.currentUid,
-        ),
+        if (isCompleted) ...[
+          const SizedBox(height: 16),
+          GroupWishlistSummarySection(
+            detail: d,
+            groupId: widget.groupId,
+            currentUid: widget.currentUid,
+          ),
+        ],
         if (!isCompleted && _isOwner) ...[
           const SizedBox(height: 16),
           _PreparationChecklist(

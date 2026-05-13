@@ -110,14 +110,15 @@
   "managedHeroTitle": "Secrets in your care",
   "managedHeroSubtitle": "You deliver these results privately, without anyone else finding out.",
   "wishlistGroupMyCardTitle": "Your wish list",
-  "wishlistGroupMyCardSubtitle": "Help the person who draws you pick the right gift. You can fill it in now or update it anytime.",
+  "wishlistGroupMyCardSubtitle": "Fill it in yourself; only the person who drew you will see it.",
   "wishlistGroupMyCardCtaFill": "Fill in my list",
   "wishlistGroupMyCardCtaEdit": "Edit my list",
   "wishlistGroupMyEmptyHint": "You have not added ideas yet.",
   "wishlistGroupMyReadyChip": "List ready",
   "wishlistGroupManagedSectionTitle": "Lists you manage",
-  "wishlistGroupManagedSectionSubtitle": "Fill in their tastes to help whoever gives them a gift.",
+  "wishlistGroupManagedSectionSubtitle": "You can help fill them in; their gift givers will see them on their own screens.",
   "wishlistGroupManagedRowCta": "Edit list",
+  "wishlistGroupPostDrawIntro": "Now that the draw is done, a few clear hints make it easier to pick the right gift.",
   "wishlistEditorTitle": "Wish list",
   "wishlistViewTitle": "Gift ideas",
   "wishlistEditorIntro": "Write lovingly what you would like to receive. Only your Secret Santa (and you) will see it.",
@@ -155,9 +156,17 @@
       "max": { "type": "int" }
     }
   },
-  "wishlistMyAssignmentSectionTitle": "Ideas to get the gift right",
+  "wishlistMyAssignmentReceiverWishlistHeading": "What {receiverName} would love to receive",
+  "@wishlistMyAssignmentReceiverWishlistHeading": {
+    "placeholders": {
+      "receiverName": { "type": "String" }
+    }
+  },
+  "wishlistMyAssignmentReceiverNameFallback": "your recipient",
+  "wishlistMyAssignmentSectionSubtitle": "Only you see this. Use it as inspiration for a thoughtful gift.",
   "wishlistMyAssignmentViewCta": "View gift ideas",
-  "wishlistManagedViewReceiverCta": "View gift ideas",
+  "wishlistManagedViewReceiverCta": "View wish list",
+  "wishlistManagedViewReceiverHint": "You only see this person's ideas for this secret.",
   "wishlistEmptyReceiverTitle": "No gift ideas yet",
   "wishlistEmptyReceiverBody": "They might add them later. A thoughtful little gift always counts!",
   "wishlistLinkOpenError": "Could not open the link.",

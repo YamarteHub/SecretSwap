@@ -74,6 +74,17 @@ class GroupWishlistSummarySection extends ConsumerWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(2, 0, 2, 12),
+              child: Text(
+                l10n.wishlistGroupPostDrawIntro,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.82),
+                  height: 1.35,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
             if (myPid != null) ...[
               SecretCard(
                 padding: const EdgeInsets.fromLTRB(18, 18, 18, 18),

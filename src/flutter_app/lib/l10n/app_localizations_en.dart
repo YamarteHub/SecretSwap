@@ -320,7 +320,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get wishlistGroupMyCardSubtitle =>
-      'Help the person who draws you pick the right gift. You can fill it in now or update it anytime.';
+      'Fill it in yourself; only the person who drew you will see it.';
 
   @override
   String get wishlistGroupMyCardCtaFill => 'Fill in my list';
@@ -339,10 +339,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get wishlistGroupManagedSectionSubtitle =>
-      'Fill in their tastes to help whoever gives them a gift.';
+      'You can help fill them in; their gift givers will see them on their own screens.';
 
   @override
   String get wishlistGroupManagedRowCta => 'Edit list';
+
+  @override
+  String get wishlistGroupPostDrawIntro =>
+      'Now that the draw is done, a few clear hints make it easier to pick the right gift.';
 
   @override
   String get wishlistEditorTitle => 'Wish list';
@@ -423,13 +427,26 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get wishlistMyAssignmentSectionTitle => 'Ideas to get the gift right';
+  String wishlistMyAssignmentReceiverWishlistHeading(String receiverName) {
+    return 'What $receiverName would love to receive';
+  }
+
+  @override
+  String get wishlistMyAssignmentReceiverNameFallback => 'your recipient';
+
+  @override
+  String get wishlistMyAssignmentSectionSubtitle =>
+      'Only you see this. Use it as inspiration for a thoughtful gift.';
 
   @override
   String get wishlistMyAssignmentViewCta => 'View gift ideas';
 
   @override
-  String get wishlistManagedViewReceiverCta => 'View gift ideas';
+  String get wishlistManagedViewReceiverCta => 'View wish list';
+
+  @override
+  String get wishlistManagedViewReceiverHint =>
+      'You only see this person\'s ideas for this secret.';
 
   @override
   String get wishlistEmptyReceiverTitle => 'No gift ideas yet';

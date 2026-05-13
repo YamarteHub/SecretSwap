@@ -110,14 +110,15 @@
   "managedHeroTitle": "Secretos a tu cargo",
   "managedHeroSubtitle": "Tú entregas estos resultados en privado, sin que nadie más se entere.",
   "wishlistGroupMyCardTitle": "Tu lista de deseos",
-  "wishlistGroupMyCardSubtitle": "Ayuda a quien te toque a acertar con el regalo. Puedes completarla ahora o actualizarla cuando quieras.",
+  "wishlistGroupMyCardSubtitle": "Complétala tú; solo la verá quien te toque regalar.",
   "wishlistGroupMyCardCtaFill": "Completar mi lista",
   "wishlistGroupMyCardCtaEdit": "Editar mi lista",
   "wishlistGroupMyEmptyHint": "Aún no has añadido ideas.",
   "wishlistGroupMyReadyChip": "Lista preparada",
   "wishlistGroupManagedSectionTitle": "Listas que gestionas",
-  "wishlistGroupManagedSectionSubtitle": "Completa sus gustos para ayudar a quien le regale.",
+  "wishlistGroupManagedSectionSubtitle": "Ayuda a rellenarlas; quien les regale las verá en su propia pantalla.",
   "wishlistGroupManagedRowCta": "Editar lista",
+  "wishlistGroupPostDrawIntro": "Ahora que el sorteo está hecho, unas pistas claras ayudan a acertar con el regalo.",
   "wishlistEditorTitle": "Lista de deseos",
   "wishlistViewTitle": "Ideas para el regalo",
   "wishlistEditorIntro": "Escribe con cariño lo que te haría ilusión recibir. Solo lo verá quien te toque regalar (y tú).",
@@ -155,9 +156,17 @@
       "max": { "type": "int" }
     }
   },
-  "wishlistMyAssignmentSectionTitle": "Ideas para acertar con el regalo",
+  "wishlistMyAssignmentReceiverWishlistHeading": "Qué le gustaría recibir a {receiverName}",
+  "@wishlistMyAssignmentReceiverWishlistHeading": {
+    "placeholders": {
+      "receiverName": { "type": "String" }
+    }
+  },
+  "wishlistMyAssignmentReceiverNameFallback": "tu destinatario",
+  "wishlistMyAssignmentSectionSubtitle": "Solo tú ves esto. Sirve para inspirarte al elegir un detalle con cariño.",
   "wishlistMyAssignmentViewCta": "Ver ideas de regalo",
-  "wishlistManagedViewReceiverCta": "Ver ideas de regalo",
+  "wishlistManagedViewReceiverCta": "Ver lista de deseos",
+  "wishlistManagedViewReceiverHint": "Solo ves las ideas de esta persona para este secreto.",
   "wishlistEmptyReceiverTitle": "Aún no ha dejado ideas de regalo",
   "wishlistEmptyReceiverBody": "Quizá las añada más adelante. ¡Un detalle hecho con cariño siempre cuenta!",
   "wishlistLinkOpenError": "No se pudo abrir el enlace.",
