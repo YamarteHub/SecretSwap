@@ -109,6 +109,59 @@
   "managedDeliverInPrivate": "Deliver this result privately",
   "managedHeroTitle": "Secrets in your care",
   "managedHeroSubtitle": "You deliver these results privately, without anyone else finding out.",
+  "wishlistGroupMyCardTitle": "Your wish list",
+  "wishlistGroupMyCardSubtitle": "Help the person who draws you pick the right gift. You can fill it in now or update it anytime.",
+  "wishlistGroupMyCardCtaFill": "Fill in my list",
+  "wishlistGroupMyCardCtaEdit": "Edit my list",
+  "wishlistGroupMyEmptyHint": "You have not added ideas yet.",
+  "wishlistGroupMyReadyChip": "List ready",
+  "wishlistGroupManagedSectionTitle": "Lists you manage",
+  "wishlistGroupManagedSectionSubtitle": "Fill in their tastes to help whoever gives them a gift.",
+  "wishlistGroupManagedRowCta": "Edit list",
+  "wishlistEditorTitle": "Wish list",
+  "wishlistViewTitle": "Gift ideas",
+  "wishlistEditorIntro": "Write lovingly what you would like to receive. Only your Secret Santa (and you) will see it.",
+  "wishlistViewIntro": "These ideas are only to help with the gift. Keep the draw secret.",
+  "wishlistFieldWishTitle": "I would love…",
+  "wishlistFieldWishHint": "Concrete gift ideas, sizes, or details you would like.",
+  "wishlistFieldLikesTitle": "I like…",
+  "wishlistFieldLikesHint": "Hobbies, colors, styles, or things you love.",
+  "wishlistFieldAvoidTitle": "Please avoid…",
+  "wishlistFieldAvoidHint": "Things you prefer not to receive or already have.",
+  "wishlistFieldLinksTitle": "Inspiration links",
+  "wishlistLinksHelp": "Up to {max} links using http or https.",
+  "@wishlistLinksHelp": {
+    "placeholders": {
+      "max": { "type": "int" }
+    }
+  },
+  "wishlistAddLinkCta": "Add link",
+  "wishlistLinkLabelOptional": "Label (optional)",
+  "wishlistLinkUrlLabel": "URL",
+  "wishlistUrlHint": "https://…",
+  "wishlistLinkRowTitle": "Link {index}",
+  "@wishlistLinkRowTitle": {
+    "placeholders": {
+      "index": { "type": "int" }
+    }
+  },
+  "wishlistSaveCta": "Save",
+  "wishlistCancelCta": "Go back",
+  "wishlistSaveSuccess": "List saved.",
+  "wishlistUrlInvalid": "Check the URLs: they must start with http:// or https://",
+  "wishlistLinksMax": "At most {max} links.",
+  "@wishlistLinksMax": {
+    "placeholders": {
+      "max": { "type": "int" }
+    }
+  },
+  "wishlistMyAssignmentSectionTitle": "Ideas to get the gift right",
+  "wishlistMyAssignmentViewCta": "View gift ideas",
+  "wishlistManagedViewReceiverCta": "View gift ideas",
+  "wishlistEmptyReceiverTitle": "No gift ideas yet",
+  "wishlistEmptyReceiverBody": "They might add them later. A thoughtful little gift always counts!",
+  "wishlistLinkOpenError": "Could not open the link.",
+  "wishlistReadonlySheetTitle": "Gift ideas",
   "managedRevealLabel": "Their secret friend is",
   "managedDeliveryChipLabel": "Delivery",
   "managedFooterPrivacyNote": "Every secret is private. Only you see it, and only you deliver it.",

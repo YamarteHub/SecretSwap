@@ -319,6 +319,136 @@ class AppLocalizationsEs extends AppLocalizations {
       'Tú entregas estos resultados en privado, sin que nadie más se entere.';
 
   @override
+  String get wishlistGroupMyCardTitle => 'Tu lista de deseos';
+
+  @override
+  String get wishlistGroupMyCardSubtitle =>
+      'Ayuda a quien te toque a acertar con el regalo. Puedes completarla ahora o actualizarla cuando quieras.';
+
+  @override
+  String get wishlistGroupMyCardCtaFill => 'Completar mi lista';
+
+  @override
+  String get wishlistGroupMyCardCtaEdit => 'Editar mi lista';
+
+  @override
+  String get wishlistGroupMyEmptyHint => 'Aún no has añadido ideas.';
+
+  @override
+  String get wishlistGroupMyReadyChip => 'Lista preparada';
+
+  @override
+  String get wishlistGroupManagedSectionTitle => 'Listas que gestionas';
+
+  @override
+  String get wishlistGroupManagedSectionSubtitle =>
+      'Completa sus gustos para ayudar a quien le regale.';
+
+  @override
+  String get wishlistGroupManagedRowCta => 'Editar lista';
+
+  @override
+  String get wishlistEditorTitle => 'Lista de deseos';
+
+  @override
+  String get wishlistViewTitle => 'Ideas para el regalo';
+
+  @override
+  String get wishlistEditorIntro =>
+      'Escribe con cariño lo que te haría ilusión recibir. Solo lo verá quien te toque regalar (y tú).';
+
+  @override
+  String get wishlistViewIntro =>
+      'Estas ideas son solo para ayudar con el regalo. Respeta el secreto del sorteo.';
+
+  @override
+  String get wishlistFieldWishTitle => 'Me haría ilusión…';
+
+  @override
+  String get wishlistFieldWishHint =>
+      'Ideas concretas de regalo, tallas o detalles que te gustarían.';
+
+  @override
+  String get wishlistFieldLikesTitle => 'Me gusta…';
+
+  @override
+  String get wishlistFieldLikesHint =>
+      'Hobbies, colores, estilos o cosas que te encantan.';
+
+  @override
+  String get wishlistFieldAvoidTitle => 'Mejor evita…';
+
+  @override
+  String get wishlistFieldAvoidHint =>
+      'Cosas que prefieres no recibir o que ya tienes.';
+
+  @override
+  String get wishlistFieldLinksTitle => 'Enlaces de inspiración';
+
+  @override
+  String wishlistLinksHelp(int max) {
+    return 'Hasta $max enlaces con http o https.';
+  }
+
+  @override
+  String get wishlistAddLinkCta => 'Añadir enlace';
+
+  @override
+  String get wishlistLinkLabelOptional => 'Etiqueta (opcional)';
+
+  @override
+  String get wishlistLinkUrlLabel => 'URL';
+
+  @override
+  String get wishlistUrlHint => 'https://…';
+
+  @override
+  String wishlistLinkRowTitle(int index) {
+    return 'Enlace $index';
+  }
+
+  @override
+  String get wishlistSaveCta => 'Guardar';
+
+  @override
+  String get wishlistCancelCta => 'Volver';
+
+  @override
+  String get wishlistSaveSuccess => 'Lista guardada.';
+
+  @override
+  String get wishlistUrlInvalid =>
+      'Revisa las URLs: deben empezar por http:// o https://';
+
+  @override
+  String wishlistLinksMax(int max) {
+    return 'Como máximo $max enlaces.';
+  }
+
+  @override
+  String get wishlistMyAssignmentSectionTitle =>
+      'Ideas para acertar con el regalo';
+
+  @override
+  String get wishlistMyAssignmentViewCta => 'Ver ideas de regalo';
+
+  @override
+  String get wishlistManagedViewReceiverCta => 'Ver ideas de regalo';
+
+  @override
+  String get wishlistEmptyReceiverTitle => 'Aún no ha dejado ideas de regalo';
+
+  @override
+  String get wishlistEmptyReceiverBody =>
+      'Quizá las añada más adelante. ¡Un detalle hecho con cariño siempre cuenta!';
+
+  @override
+  String get wishlistLinkOpenError => 'No se pudo abrir el enlace.';
+
+  @override
+  String get wishlistReadonlySheetTitle => 'Ideas de regalo';
+
+  @override
   String get managedRevealLabel => 'Su amigo secreto es';
 
   @override

@@ -109,6 +109,59 @@
   "managedDeliverInPrivate": "Entrega este resultado en privado",
   "managedHeroTitle": "Secretos a tu cargo",
   "managedHeroSubtitle": "Tú entregas estos resultados en privado, sin que nadie más se entere.",
+  "wishlistGroupMyCardTitle": "Tu lista de deseos",
+  "wishlistGroupMyCardSubtitle": "Ayuda a quien te toque a acertar con el regalo. Puedes completarla ahora o actualizarla cuando quieras.",
+  "wishlistGroupMyCardCtaFill": "Completar mi lista",
+  "wishlistGroupMyCardCtaEdit": "Editar mi lista",
+  "wishlistGroupMyEmptyHint": "Aún no has añadido ideas.",
+  "wishlistGroupMyReadyChip": "Lista preparada",
+  "wishlistGroupManagedSectionTitle": "Listas que gestionas",
+  "wishlistGroupManagedSectionSubtitle": "Completa sus gustos para ayudar a quien le regale.",
+  "wishlistGroupManagedRowCta": "Editar lista",
+  "wishlistEditorTitle": "Lista de deseos",
+  "wishlistViewTitle": "Ideas para el regalo",
+  "wishlistEditorIntro": "Escribe con cariño lo que te haría ilusión recibir. Solo lo verá quien te toque regalar (y tú).",
+  "wishlistViewIntro": "Estas ideas son solo para ayudar con el regalo. Respeta el secreto del sorteo.",
+  "wishlistFieldWishTitle": "Me haría ilusión…",
+  "wishlistFieldWishHint": "Ideas concretas de regalo, tallas o detalles que te gustarían.",
+  "wishlistFieldLikesTitle": "Me gusta…",
+  "wishlistFieldLikesHint": "Hobbies, colores, estilos o cosas que te encantan.",
+  "wishlistFieldAvoidTitle": "Mejor evita…",
+  "wishlistFieldAvoidHint": "Cosas que prefieres no recibir o que ya tienes.",
+  "wishlistFieldLinksTitle": "Enlaces de inspiración",
+  "wishlistLinksHelp": "Hasta {max} enlaces con http o https.",
+  "@wishlistLinksHelp": {
+    "placeholders": {
+      "max": { "type": "int" }
+    }
+  },
+  "wishlistAddLinkCta": "Añadir enlace",
+  "wishlistLinkLabelOptional": "Etiqueta (opcional)",
+  "wishlistLinkUrlLabel": "URL",
+  "wishlistUrlHint": "https://…",
+  "wishlistLinkRowTitle": "Enlace {index}",
+  "@wishlistLinkRowTitle": {
+    "placeholders": {
+      "index": { "type": "int" }
+    }
+  },
+  "wishlistSaveCta": "Guardar",
+  "wishlistCancelCta": "Volver",
+  "wishlistSaveSuccess": "Lista guardada.",
+  "wishlistUrlInvalid": "Revisa las URLs: deben empezar por http:// o https://",
+  "wishlistLinksMax": "Como máximo {max} enlaces.",
+  "@wishlistLinksMax": {
+    "placeholders": {
+      "max": { "type": "int" }
+    }
+  },
+  "wishlistMyAssignmentSectionTitle": "Ideas para acertar con el regalo",
+  "wishlistMyAssignmentViewCta": "Ver ideas de regalo",
+  "wishlistManagedViewReceiverCta": "Ver ideas de regalo",
+  "wishlistEmptyReceiverTitle": "Aún no ha dejado ideas de regalo",
+  "wishlistEmptyReceiverBody": "Quizá las añada más adelante. ¡Un detalle hecho con cariño siempre cuenta!",
+  "wishlistLinkOpenError": "No se pudo abrir el enlace.",
+  "wishlistReadonlySheetTitle": "Ideas de regalo",
   "managedRevealLabel": "Su amigo secreto es",
   "managedDeliveryChipLabel": "Entrega",
   "managedFooterPrivacyNote": "Cada secreto es privado. Solo tú puedes verlo y solo tú lo entregas.",

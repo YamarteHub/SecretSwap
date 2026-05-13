@@ -8,6 +8,7 @@ import '../../features/groups/presentation/screens/group_detail_screen.dart';
 import '../../features/groups/presentation/screens/groups_home_screen.dart';
 import '../../features/groups/presentation/screens/join_by_code_screen.dart';
 import '../../features/auth/presentation/splash_screen.dart';
+import '../../features/wishlist/presentation/screens/wishlist_edit_screen.dart';
 
 class AppRoutes {
   static const splash = '/';
@@ -17,6 +18,7 @@ class AppRoutes {
   static const groupDetail = '/groups/:groupId';
   static const myAssignment = '/groups/:groupId/executions/:executionId/my-assignment';
   static const managedAssignments = '/groups/:groupId/executions/:executionId/managed-assignments';
+  static const wishlistEdit = '/groups/:groupId/wishlist/:participantId/edit';
 }
 
 GoRouter buildRouter() {
@@ -60,6 +62,20 @@ GoRouter buildRouter() {
           final groupId = state.pathParameters['groupId']!;
           final executionId = state.pathParameters['executionId']!;
           return ManagedAssignmentsScreen(groupId: groupId, executionId: executionId);
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.wishlistEdit,
+        builder: (context, state) {
+          final groupId = state.pathParameters['groupId']!;
+          final participantId = state.pathParameters['participantId']!;
+          final extra = state.extra as WishlistRouteExtra?;
+          return WishlistEditScreen(
+            groupId: groupId,
+            participantId: participantId,
+            subjectDisplayName: extra?.subjectDisplayName,
+            readOnly: extra?.readOnly ?? false,
+          );
         },
       ),
     ],

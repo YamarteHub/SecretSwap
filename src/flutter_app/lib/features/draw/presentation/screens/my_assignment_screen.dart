@@ -7,6 +7,9 @@ import '../../../../core/messaging/functions_user_message.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/theme/premium_ui.dart';
 import '../../domain/draw_models.dart';
+import '../../../wishlist/domain/wishlist_models.dart';
+import '../../../wishlist/presentation/providers.dart';
+import '../../../wishlist/presentation/widgets/wishlist_read_body.dart';
 import '../providers.dart';
 
 /// Pantalla "Mi amigo secreto".
@@ -47,6 +50,8 @@ class MyAssignmentScreen extends ConsumerStatefulWidget {
 
 class _MyAssignmentScreenState extends ConsumerState<MyAssignmentScreen> {
   MyAssignment? _assignment;
+  WishlistData? _receiverWishlist;
+  bool _wishlistLoadFailed = false;
   String? _errorMessage;
   bool _loading = true;
 
@@ -63,9 +68,24 @@ class _MyAssignmentScreenState extends ConsumerState<MyAssignmentScreen> {
         groupId: widget.groupId,
         executionId: widget.executionId,
       );
+      WishlistData? wl;
+      var wishlistFailed = false;
+      final rid = a.receiverParticipantId?.trim();
+      if (rid != null && rid.isNotEmpty) {
+        try {
+          wl = await ref.read(wishlistRepositoryProvider).getWishlist(
+                groupId: widget.groupId,
+                participantId: rid,
+              );
+        } catch (_) {
+          wishlistFailed = true;
+        }
+      }
       if (!mounted) return;
       setState(() {
         _assignment = a;
+        _receiverWishlist = wl;
+        _wishlistLoadFailed = wishlistFailed;
         _errorMessage = null;
         _loading = false;
       });
@@ -78,6 +98,8 @@ class _MyAssignmentScreenState extends ConsumerState<MyAssignmentScreen> {
         } else {
           _errorMessage = context.l10n.genericLoadErrorMessage;
         }
+        _receiverWishlist = null;
+        _wishlistLoadFailed = false;
         _loading = false;
       });
     }
@@ -145,6 +167,9 @@ class _MyAssignmentScreenState extends ConsumerState<MyAssignmentScreen> {
     final subgroup = a.receiverSubgroupName?.trim();
     final hasSubgroup = subgroup != null && subgroup.isNotEmpty;
 
+    final rid = a.receiverParticipantId?.trim();
+    final showWishlist = rid != null && rid.isNotEmpty;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -152,6 +177,37 @@ class _MyAssignmentScreenState extends ConsumerState<MyAssignmentScreen> {
           receiverName: a.receiverNickname,
           subgroupName: hasSubgroup ? subgroup : null,
         ),
+        if (showWishlist) ...[
+          const SizedBox(height: 16),
+          SecretCard(
+            padding: const EdgeInsets.fromLTRB(18, 18, 18, 18),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l10n.wishlistMyAssignmentSectionTitle,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w800,
+                      ),
+                ),
+                const SizedBox(height: 12),
+                if (_wishlistLoadFailed)
+                  Text(
+                    l10n.genericLoadErrorMessage,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.error,
+                          height: 1.4,
+                        ),
+                  )
+                else if (_receiverWishlist != null)
+                  WishlistReadBody(
+                    data: _receiverWishlist!,
+                    padding: EdgeInsets.zero,
+                  ),
+              ],
+            ),
+          ),
+        ],
         const SizedBox(height: 16),
         _PrivacyReminderCard(
           title: l10n.myAssignmentPrivacyTitle,

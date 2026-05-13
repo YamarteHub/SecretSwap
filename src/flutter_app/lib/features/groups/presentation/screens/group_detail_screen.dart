@@ -14,6 +14,7 @@ import '../../../../core/theme/app_theme.dart';
 import '../../../../core/theme/premium_ui.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../draw/presentation/providers.dart';
+import '../../../wishlist/presentation/widgets/group_wishlist_summary_section.dart';
 import '../../domain/group_models.dart';
 import '../providers.dart';
 
@@ -1369,6 +1370,11 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
                   missingSubgroupCount > 0
               ? l10n.groupWarningMissingSubgroupCombined
               : null,
+        ),
+        GroupWishlistSummarySection(
+          detail: d,
+          groupId: widget.groupId,
+          currentUid: widget.currentUid,
         ),
         if (!isCompleted && _isOwner) ...[
           const SizedBox(height: 16),

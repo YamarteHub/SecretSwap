@@ -164,6 +164,7 @@ export const ManagedAssignmentItemSchema = z.object({
   giverParticipantId: z.string().min(1),
   giverDisplayName: z.string().min(1),
   giverType: ManagedParticipantTypeSchema,
+  receiverParticipantId: z.string().min(1),
   receiverDisplayName: z.string().min(1),
   receiverType: z.enum(["app_member", "managed", "child_managed"]),
   receiverSubgroupName: z.string().nullable(),
@@ -177,3 +178,49 @@ export const GetManagedAssignmentsResponseSchema = z.object({
 });
 export type GetManagedAssignmentsResponse = z.infer<typeof GetManagedAssignmentsResponseSchema>;
 
+const WishlistLinkInputSchema = z.object({
+  label: z.union([z.string().max(80), z.null()]).optional(),
+  url: z
+    .string()
+    .min(1)
+    .max(2048)
+    .regex(/^https?:\/\//i, "URL must start with http:// or https://")
+});
+
+export const GetWishlistRequestSchema = z.object({
+  groupId: z.string().min(1),
+  participantId: z.string().min(1)
+});
+export type GetWishlistRequest = z.infer<typeof GetWishlistRequestSchema>;
+
+export const WishlistLinkDtoSchema = z.object({
+  label: z.string().nullable().optional(),
+  url: z.string().min(1).max(2048)
+});
+export type WishlistLinkDto = z.infer<typeof WishlistLinkDtoSchema>;
+
+export const GetWishlistResponseSchema = z.object({
+  groupId: z.string().min(1),
+  participantId: z.string().min(1),
+  wishText: z.string().nullable(),
+  likesText: z.string().nullable(),
+  avoidText: z.string().nullable(),
+  links: z.array(WishlistLinkDtoSchema),
+  updatedAtMillis: z.number().nullable().optional()
+});
+export type GetWishlistResponse = z.infer<typeof GetWishlistResponseSchema>;
+
+export const SetWishlistRequestSchema = z.object({
+  groupId: z.string().min(1),
+  participantId: z.string().min(1),
+  wishText: z.union([z.string().max(500), z.null()]),
+  likesText: z.union([z.string().max(500), z.null()]),
+  avoidText: z.union([z.string().max(500), z.null()]),
+  links: z.array(WishlistLinkInputSchema).max(3)
+});
+export type SetWishlistRequest = z.infer<typeof SetWishlistRequestSchema>;
+
+export const SetWishlistResponseSchema = z.object({
+  ok: z.literal(true)
+});
+export type SetWishlistResponse = z.infer<typeof SetWishlistResponseSchema>;

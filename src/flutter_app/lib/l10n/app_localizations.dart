@@ -662,6 +662,234 @@ abstract class AppLocalizations {
   /// **'Tú entregas estos resultados en privado, sin que nadie más se entere.'**
   String get managedHeroSubtitle;
 
+  /// No description provided for @wishlistGroupMyCardTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu lista de deseos'**
+  String get wishlistGroupMyCardTitle;
+
+  /// No description provided for @wishlistGroupMyCardSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Ayuda a quien te toque a acertar con el regalo. Puedes completarla ahora o actualizarla cuando quieras.'**
+  String get wishlistGroupMyCardSubtitle;
+
+  /// No description provided for @wishlistGroupMyCardCtaFill.
+  ///
+  /// In es, this message translates to:
+  /// **'Completar mi lista'**
+  String get wishlistGroupMyCardCtaFill;
+
+  /// No description provided for @wishlistGroupMyCardCtaEdit.
+  ///
+  /// In es, this message translates to:
+  /// **'Editar mi lista'**
+  String get wishlistGroupMyCardCtaEdit;
+
+  /// No description provided for @wishlistGroupMyEmptyHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Aún no has añadido ideas.'**
+  String get wishlistGroupMyEmptyHint;
+
+  /// No description provided for @wishlistGroupMyReadyChip.
+  ///
+  /// In es, this message translates to:
+  /// **'Lista preparada'**
+  String get wishlistGroupMyReadyChip;
+
+  /// No description provided for @wishlistGroupManagedSectionTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Listas que gestionas'**
+  String get wishlistGroupManagedSectionTitle;
+
+  /// No description provided for @wishlistGroupManagedSectionSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Completa sus gustos para ayudar a quien le regale.'**
+  String get wishlistGroupManagedSectionSubtitle;
+
+  /// No description provided for @wishlistGroupManagedRowCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Editar lista'**
+  String get wishlistGroupManagedRowCta;
+
+  /// No description provided for @wishlistEditorTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Lista de deseos'**
+  String get wishlistEditorTitle;
+
+  /// No description provided for @wishlistViewTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Ideas para el regalo'**
+  String get wishlistViewTitle;
+
+  /// No description provided for @wishlistEditorIntro.
+  ///
+  /// In es, this message translates to:
+  /// **'Escribe con cariño lo que te haría ilusión recibir. Solo lo verá quien te toque regalar (y tú).'**
+  String get wishlistEditorIntro;
+
+  /// No description provided for @wishlistViewIntro.
+  ///
+  /// In es, this message translates to:
+  /// **'Estas ideas son solo para ayudar con el regalo. Respeta el secreto del sorteo.'**
+  String get wishlistViewIntro;
+
+  /// No description provided for @wishlistFieldWishTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Me haría ilusión…'**
+  String get wishlistFieldWishTitle;
+
+  /// No description provided for @wishlistFieldWishHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Ideas concretas de regalo, tallas o detalles que te gustarían.'**
+  String get wishlistFieldWishHint;
+
+  /// No description provided for @wishlistFieldLikesTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Me gusta…'**
+  String get wishlistFieldLikesTitle;
+
+  /// No description provided for @wishlistFieldLikesHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Hobbies, colores, estilos o cosas que te encantan.'**
+  String get wishlistFieldLikesHint;
+
+  /// No description provided for @wishlistFieldAvoidTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Mejor evita…'**
+  String get wishlistFieldAvoidTitle;
+
+  /// No description provided for @wishlistFieldAvoidHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Cosas que prefieres no recibir o que ya tienes.'**
+  String get wishlistFieldAvoidHint;
+
+  /// No description provided for @wishlistFieldLinksTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Enlaces de inspiración'**
+  String get wishlistFieldLinksTitle;
+
+  /// No description provided for @wishlistLinksHelp.
+  ///
+  /// In es, this message translates to:
+  /// **'Hasta {max} enlaces con http o https.'**
+  String wishlistLinksHelp(int max);
+
+  /// No description provided for @wishlistAddLinkCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Añadir enlace'**
+  String get wishlistAddLinkCta;
+
+  /// No description provided for @wishlistLinkLabelOptional.
+  ///
+  /// In es, this message translates to:
+  /// **'Etiqueta (opcional)'**
+  String get wishlistLinkLabelOptional;
+
+  /// No description provided for @wishlistLinkUrlLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'URL'**
+  String get wishlistLinkUrlLabel;
+
+  /// No description provided for @wishlistUrlHint.
+  ///
+  /// In es, this message translates to:
+  /// **'https://…'**
+  String get wishlistUrlHint;
+
+  /// No description provided for @wishlistLinkRowTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Enlace {index}'**
+  String wishlistLinkRowTitle(int index);
+
+  /// No description provided for @wishlistSaveCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Guardar'**
+  String get wishlistSaveCta;
+
+  /// No description provided for @wishlistCancelCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Volver'**
+  String get wishlistCancelCta;
+
+  /// No description provided for @wishlistSaveSuccess.
+  ///
+  /// In es, this message translates to:
+  /// **'Lista guardada.'**
+  String get wishlistSaveSuccess;
+
+  /// No description provided for @wishlistUrlInvalid.
+  ///
+  /// In es, this message translates to:
+  /// **'Revisa las URLs: deben empezar por http:// o https://'**
+  String get wishlistUrlInvalid;
+
+  /// No description provided for @wishlistLinksMax.
+  ///
+  /// In es, this message translates to:
+  /// **'Como máximo {max} enlaces.'**
+  String wishlistLinksMax(int max);
+
+  /// No description provided for @wishlistMyAssignmentSectionTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Ideas para acertar con el regalo'**
+  String get wishlistMyAssignmentSectionTitle;
+
+  /// No description provided for @wishlistMyAssignmentViewCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Ver ideas de regalo'**
+  String get wishlistMyAssignmentViewCta;
+
+  /// No description provided for @wishlistManagedViewReceiverCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Ver ideas de regalo'**
+  String get wishlistManagedViewReceiverCta;
+
+  /// No description provided for @wishlistEmptyReceiverTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Aún no ha dejado ideas de regalo'**
+  String get wishlistEmptyReceiverTitle;
+
+  /// No description provided for @wishlistEmptyReceiverBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Quizá las añada más adelante. ¡Un detalle hecho con cariño siempre cuenta!'**
+  String get wishlistEmptyReceiverBody;
+
+  /// No description provided for @wishlistLinkOpenError.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo abrir el enlace.'**
+  String get wishlistLinkOpenError;
+
+  /// No description provided for @wishlistReadonlySheetTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Ideas de regalo'**
+  String get wishlistReadonlySheetTitle;
+
   /// No description provided for @managedRevealLabel.
   ///
   /// In es, this message translates to:

@@ -148,10 +148,14 @@ export const getManagedAssignments = onCall(
         const receiverType =
           receiverTypeRaw === "managed" || receiverTypeRaw === "child_managed" ? receiverTypeRaw : "app_member";
 
+        const receiverParticipantId = parseStringOrNull(a.receiverParticipantId);
+        if (!receiverParticipantId) continue;
+
         assignments.push({
           giverParticipantId,
           giverDisplayName: giverMeta.displayName,
           giverType: giverMeta.giverType,
+          receiverParticipantId,
           receiverDisplayName,
           receiverType,
           receiverSubgroupName: parseStringOrNull(a.receiverSubgroupNameSnapshot),

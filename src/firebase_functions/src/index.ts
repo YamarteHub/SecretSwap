@@ -1,5 +1,7 @@
 import { createGroup } from "./functions/createGroup";
 import { getManagedAssignments } from "./functions/getManagedAssignments";
+import { getWishlist } from "./functions/getWishlist";
+import { setWishlist } from "./functions/setWishlist";
 import { createManagedParticipant } from "./functions/createManagedParticipant";
 import { updateManagedParticipant } from "./functions/updateManagedParticipant";
 import { removeManagedParticipant } from "./functions/removeManagedParticipant";
@@ -17,6 +19,8 @@ export {
   joinGroupByCode,
   rotateInviteCode,
   executeDraw,
-  getManagedAssignments
+  getManagedAssignments,
+  getWishlist,
+  setWishlist
 };
 

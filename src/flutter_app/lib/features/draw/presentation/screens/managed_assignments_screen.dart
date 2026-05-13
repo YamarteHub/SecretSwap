@@ -12,6 +12,93 @@ import '../../services/managed_assignment_pdf.dart';
 import '../../services/managed_delivery_launcher.dart';
 import '../../services/managed_delivery_text.dart';
 import '../providers.dart';
+import '../../../wishlist/domain/wishlist_models.dart';
+import '../../../wishlist/presentation/providers.dart';
+import '../../../wishlist/presentation/widgets/wishlist_read_body.dart';
+
+Future<void> _showManagedReceiverWishlistSheet({
+  required BuildContext context,
+  required WidgetRef ref,
+  required AppLocalizations l10n,
+  required String groupId,
+  required ManagedAssignment assignment,
+}) async {
+  final pid = assignment.receiverParticipantId.trim();
+  if (pid.isEmpty) return;
+  final repo = ref.read(wishlistRepositoryProvider);
+  await showModalBottomSheet<void>(
+    context: context,
+    isScrollControlled: true,
+    showDragHandle: true,
+    backgroundColor: Theme.of(context).colorScheme.surface,
+    builder: (ctx) {
+      return SafeArea(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(
+            20,
+            4,
+            20,
+            MediaQuery.paddingOf(ctx).bottom + 16,
+          ),
+          child: FutureBuilder<WishlistData>(
+            future: repo.getWishlist(
+              groupId: groupId,
+              participantId: pid,
+            ),
+            builder: (context, snap) {
+              if (snap.connectionState == ConnectionState.waiting) {
+                return const SizedBox(
+                  height: 220,
+                  child: Center(child: CircularProgressIndicator()),
+                );
+              }
+              if (snap.hasError) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 32),
+                  child: Text(
+                    l10n.genericLoadErrorMessage,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                );
+              }
+              return SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      assignment.receiverDisplayName,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.w800,
+                            color: AppTheme.deepPlum,
+                          ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      l10n.wishlistReadonlySheetTitle,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onSurfaceVariant,
+                          ),
+                    ),
+                    const SizedBox(height: 16),
+                    WishlistReadBody(
+                      data: snap.data!,
+                      padding: EdgeInsets.zero,
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
+      );
+    },
+  );
+}
 
 /// Pantalla "Secretos que gestionas".
 class ManagedAssignmentsScreen extends ConsumerWidget {
@@ -50,6 +137,7 @@ class ManagedAssignmentsScreen extends ConsumerWidget {
         top: false,
         child: _ManagedAssignmentsBody(
           l10n: l10n,
+          groupId: groupId,
           groupAsync: groupAsync,
           assignmentsAsync: assignmentsAsync,
         ),
@@ -61,11 +149,13 @@ class ManagedAssignmentsScreen extends ConsumerWidget {
 class _ManagedAssignmentsBody extends StatelessWidget {
   const _ManagedAssignmentsBody({
     required this.l10n,
+    required this.groupId,
     required this.groupAsync,
     required this.assignmentsAsync,
   });
 
   final AppLocalizations l10n;
+  final String groupId;
   final AsyncValue<GroupDetail> groupAsync;
   final AsyncValue<List<ManagedAssignment>> assignmentsAsync;
 
@@ -111,6 +201,7 @@ class _ManagedAssignmentsBody extends StatelessWidget {
             (a) => Padding(
               padding: const EdgeInsets.only(bottom: 12),
               child: _GuardianAssignmentCard(
+                groupId: groupId,
                 assignment: a,
                 groupDisplayName: groupDisplayName,
               ),
@@ -187,21 +278,24 @@ class _ManagedHero extends StatelessWidget {
   }
 }
 
-class _GuardianAssignmentCard extends StatelessWidget {
+class _GuardianAssignmentCard extends ConsumerWidget {
   const _GuardianAssignmentCard({
+    required this.groupId,
     required this.assignment,
     required this.groupDisplayName,
   });
 
+  final String groupId;
   final ManagedAssignment assignment;
   final String groupDisplayName;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final l10n = context.l10n;
     final subName = assignment.receiverSubgroupName?.trim();
     final hasSubgroup = subName != null && subName.isNotEmpty;
+    final receiverPid = assignment.receiverParticipantId.trim();
     return SecretCard(
       padding: const EdgeInsets.fromLTRB(18, 18, 18, 18),
       child: Column(
@@ -293,6 +387,23 @@ class _GuardianAssignmentCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
+          if (receiverPid.isNotEmpty) ...[
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton.icon(
+                onPressed: () => _showManagedReceiverWishlistSheet(
+                  context: context,
+                  ref: ref,
+                  l10n: l10n,
+                  groupId: groupId,
+                  assignment: assignment,
+                ),
+                icon: const Icon(Icons.auto_awesome_outlined, size: 20),
+                label: Text(l10n.wishlistManagedViewReceiverCta),
+              ),
+            ),
+            const SizedBox(height: 4),
+          ],
           _ManagedDeliveryActions(
             assignment: assignment,
             groupDisplayName: groupDisplayName,
