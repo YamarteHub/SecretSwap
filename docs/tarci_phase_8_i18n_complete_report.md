@@ -4,7 +4,7 @@
 
 Commit `29b3d3d` — `checkpoint antes de cerrar fase 8 selector errores y auditoria i18n`: creado con `--allow-empty` porque el árbol estaba **limpio** antes de aplicar los cambios de esta subfase.
 
-**Commit de implementación:** `0122753` — `feat(8b): selector 5 idiomas, Functions en l10n y excepcion asignacion estable`.
+**Commit de implementación:** `2dbef00` — `feat(8b): selector 5 idiomas, Functions en l10n y excepcion asignacion estable`.
 
 ## Objetivo
 
