@@ -1,0 +1,890 @@
+{
+  "@@locale": "pt",
+  "appName": "Tarci Secret",
+  "retry": "Tentar novamente",
+  "back": "Voltar",
+  "next": "Seguindo",
+  "create": "Criar",
+  "close": "Fechar",
+  "save": "Manter",
+  "goToGroup": "Ir para o grupo",
+  "copyCode": "Copiar código",
+  "codeCopied": "Código copiado",
+  "joinWithCode": "Junte-se com código",
+  "joinScreenTitle": "Junte-se com código",
+  "joinScreenHeroTitle": "Cole seu código de convite",
+  "joinScreenHeroSubtitle": "Seu organizador compartilhou com você por mensagem. Quando você entrar, nos juntaremos a você no grupo deles.",
+  "joinScreenCodeLabel": "código de convite",
+  "joinScreenCodeHint": "Por exemplo, AB12CD",
+  "joinScreenCodeHelper": "A capitalização não importa, nós consertaremos para você.",
+  "joinScreenCodeRequired": "Cole ou digite o código que você recebeu.",
+  "joinScreenCodeTooShort": "Esse código parece incompleto. Verifique e tente novamente.",
+  "joinScreenNicknameLabel": "seu nome",
+  "joinScreenNicknameHelper": "É assim que o grupo verá você.",
+  "joinScreenNicknameRequired": "Diga-nos o seu nome para se apresentar ao grupo.",
+  "joinScreenNicknameTooShort": "Digite pelo menos 3 letras para que o grupo reconheça você.",
+  "joinScreenCta": "Junte-se ao grupo",
+  "joinScreenCtaLoading": "Juntando-se a você…",
+  "joinScreenSuccessSnackbar": "Você está dentro!",
+  "joinSuccessTitle": "Você já está dentro!",
+  "joinSuccessSubtitle": "você se juntou{groupName}. Em um momento você poderá ver o resto do grupo.",
+  "@joinSuccessSubtitle": {
+    "placeholders": {
+      "groupName": {
+        "type": "String"
+      }
+    }
+  },
+  "joinSuccessChooseSubgroupTitle": "Escolha sua casa ou equipe",
+  "joinSuccessChooseSubgroupHelp": "O organizador criou casas ou equipes. Escolha o seu para que o sorteio te posicione bem.",
+  "joinSuccessSubgroupLabel": "Sua casa ou equipe",
+  "joinSuccessNoSubgroupsTitle": "Ainda não há casas ou equipes",
+  "joinSuccessNoSubgroupsHelp": "O organizador ainda não os criou. Você pode ir em frente e esperar; Você não precisa fazer mais nada por enquanto.",
+  "joinSuccessChooseRequired": "Escolha uma opção para continuar.",
+  "joinSuccessPrimaryCta": "Ir para o grupo",
+  "joinSuccessSecondaryCta": "fique aqui",
+  "createSecretFriend": "Criar amigo secreto",
+  "comingSoonMoreDynamics": "Em breve: sorteios, times, duelos e pareamentos.",
+  "mySecretFriend": "meu amigo secreto",
+  "yourSecretFriendIs": "Seu amigo secreto é…",
+  "onlyYouCanSeeAssignment": "Somente você pode ver esta tarefa.",
+  "keepSecretUntilExchangeDay": "Guarde o segredo até o dia da troca.",
+  "managedSecrets": "Segredos que você gerencia",
+  "guardianOfSecret": "Guardião do segredo",
+  "privateResult": "Resultado privado",
+  "splashTagline": "Tarci Secret organiza dinâmicas de grupo privadas com pessoas reais.",
+  "splashLoadingHint": "Preparando tudo para você…",
+  "splashBootBrandedHint": "A preparar o teu espaço…",
+  "productAuthorshipLine": "Tarci Secret · © 2026 Stalin Yamarte",
+  "aboutScreenTitle": "Sobre o Tarci Secret",
+  "aboutTooltip": "Sobre o Tarci Secret",
+  "aboutTagline": "Dinâmicas de grupo, sorteios e experiências sociais com privacidade, emoção e pessoas reais.",
+  "aboutSectionWhatTitle": "O que é o Tarci Secret",
+  "aboutSectionWhatBody": "O Tarci Secret é uma app criada para organizar amigo secreto, sorteios e dinâmicas de grupo de forma simples, privada e divertida. Inclui pessoas reais: crianças, familiares sem telemóvel ou participantes geridos por um adulto.\n\nO Tarci Secret nasce com o amigo secreto como primeira experiência e está pensado para crescer para novas dinâmicas sociais, sorteios, equipas, duelos e emparelhamentos.",
+  "aboutSectionHowTitle": "Como funciona",
+  "aboutStep1Title": "Cria ou entra num grupo",
+  "aboutStep1Body": "Começa uma dinâmica ou entra com um código de convite.",
+  "aboutStep2Title": "Organiza participantes e regras",
+  "aboutStep2Body": "Adiciona pessoas com app ou geridas e ajusta o tipo de sorteio.",
+  "aboutStep3Title": "Lança a dinâmica ou o sorteio",
+  "aboutStep3Body": "Quando o grupo estiver pronto, o organizador executa o sorteio em privado.",
+  "aboutStep4Title": "Descobre, conversa e diverte-te",
+  "aboutStep4Body": "Cada pessoa vê o seu resultado em privado e o grupo pode continuar a experiência.",
+  "aboutSectionPrivacyTitle": "Privacidade por desenho",
+  "aboutSectionPrivacyBody": "Cada pessoa vê apenas o que precisa de ver. Num amigo secreto, as atribuições são protegidas para que o resultado continue privado.",
+  "aboutSectionPrivacyTrust": "A app prioriza a clareza, a confiança e o respeito pela experiência do grupo.",
+  "aboutSectionCreatorTitle": "Criado por Stalin Yamarte",
+  "aboutSectionCreatorSubtitle": "Especialista em Sistemas e desenvolvedor de aplicações.",
+  "aboutLinkedInCta": "Ver perfil no LinkedIn",
+  "aboutLinkedInError": "Não foi possível abrir o LinkedIn. Tenta no navegador.",
+  "aboutAppInfoTitle": "Informações da app",
+  "aboutCopyrightLine": "© 2026 Stalin Yamarte",
+  "aboutPackageInfoError": "Não foi possível ler a versão da app.",
+  "aboutBuildLine": "Compilação interna {buildNumber}",
+  "@aboutBuildLine": {
+    "placeholders": {
+      "buildNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "quickModeTitle": "Modo rápido",
+  "quickModeDescription": "Você pode começar sem se registrar. Para manter seus grupos em vários dispositivos, você pode criar uma conta posteriormente.",
+  "homeHeaderSubtitle": "Organize amigos secretos e brindes com quem você quiser. Privado por padrão.",
+  "homeHeroHeadline": "Brindes para amigos secretos e grupos",
+  "homeGroupDrawStatePreparing": "Preparando",
+  "homeGroupDrawStateReady": "Pronto para desenhar",
+  "homeGroupDrawStateDrawing": "Sorteio em andamento",
+  "homeGroupDrawStateCompleted": "Retirou",
+  "homeGroupDrawStateFailed": "Revise o sorteio",
+  "wizardCreateTitle": "Criar amigo secreto",
+  "wizardStepOf": "Aprovado{current}de{total}",
+  "@wizardStepOf": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "wizardStepNameTitle": "Qual é o nome desse amigo secreto?",
+  "wizardStepGroupTypeTitle": "Que tipo de grupo é?",
+  "wizardStepModeTitle": "Como será organizado?",
+  "wizardStepRuleTitle": "Escolha a regra do sorteio",
+  "wizardStepSubgroupsTitle": "Subgrupos",
+  "wizardStepParticipantsTitle": "Participantes",
+  "wizardStepEventDateTitle": "Quando é a troca?",
+  "wizardStepEventDateHelp": "É opcional. Isso nos ajudará a lembrar a entrega e a levar o grupo à história quando ela acontecer.",
+  "wizardSummaryEventDate": "Data do evento",
+  "wizardEventDateNotSet": "Indefinido",
+  "wizardEventDateClear": "Remover data",
+  "wizardStepReviewTitle": "Revisão final",
+  "wizardGroupNameLabel": "Nome do grupo",
+  "wizardGroupNameHint": "Natal em Família 2026",
+  "wizardNicknameLabel": "Como você aparece?",
+  "wizardRuleIgnore": "Ignorar subgrupos",
+  "wizardRulePrefer": "Prefira subgrupo diferente",
+  "wizardRuleRequire": "Exigir subgrupo diferente",
+  "wizardRuleIgnoreDesc": "Sorteio normal.",
+  "wizardRulePreferDesc": "Tente atravessar casas, apartamentos ou grupos.",
+  "wizardRuleRequireDesc": "Permitir apenas pessoas de subgrupos diferentes.",
+  "wizardReviewSaveNotice": "Você pode ajustar participantes e subgrupos posteriormente.",
+  "wizardReviewSummaryHelp": "Verifique se tudo está correto antes de continuar.",
+  "wizardCreateButton": "Criar amigo secreto",
+  "wizardCreatedTitle": "Amigo secreto criado",
+  "wizardInviteCodeLabel": "código de convite",
+  "wizardInviteCodeDescription": "Compartilhe este código para que outras pessoas possam participar.",
+  "managedSubtitle": "Esses resultados são de pessoas que dependem de você. Entregue-os a eles em particular.",
+  "managedEmptyTitle": "Você não tem segredos gerenciados",
+  "managedEmptyMessage": "Ao gerenciar uma criança ou pessoa sem um aplicativo, você verá os resultados aqui.",
+  "managedLoadErrorTitle": "Não foi possível carregar seus segredos gerenciados",
+  "managedLoadErrorMessage": "Tente novamente em alguns minutos. Você verá apenas os resultados das pessoas que você gerencia.",
+  "managedAssignedTo": "É a sua vez de dar...",
+  "managedDeliverInPrivate": "Entregue este resultado de forma privada",
+  "managedHeroTitle": "Segredos à sua disposição",
+  "managedHeroSubtitle": "Você entrega esses resultados de forma privada, sem que ninguém descubra.",
+  "wishlistGroupMyCardTitle": "Sua lista de desejos",
+  "wishlistGroupMyCardSubtitle": "Você completa; Somente quem for sua vez de dar verá.",
+  "wishlistGroupMyCardCtaFill": "Completar minha lista",
+  "wishlistGroupMyCardCtaEdit": "Editar minha lista",
+  "wishlistGroupMyEmptyHint": "Você ainda não adicionou ideias.",
+  "wishlistGroupMyReadyChip": "Lista pronta",
+  "wishlistGroupManagedSectionTitle": "Listas que você gerencia",
+  "wishlistGroupManagedSectionSubtitle": "Ajude a preenchê-los; Quem os der os verá em sua própria tela.",
+  "wishlistGroupManagedRowCta": "Editar lista",
+  "wishlistGroupPostDrawIntro": "Agora que o sorteio terminou, algumas dicas claras ajudam você a acertar o presente.",
+  "wishlistEditorTitle": "Lista de desejos",
+  "wishlistViewTitle": "Ideias para presentes",
+  "wishlistEditorIntro": "Escreva com carinho o que você gostaria de receber. Somente quem for sua vez de dar (e você) verá.",
+  "wishlistViewIntro": "Essas ideias são apenas para ajudar no presente. Respeite o segredo do sorteio.",
+  "wishlistFieldWishTitle": "eu ficaria animado...",
+  "wishlistFieldWishHint": "Idéias, tamanhos ou detalhes específicos para presentes que você gostaria.",
+  "wishlistFieldLikesTitle": "Eu gosto disso…",
+  "wishlistFieldLikesHint": "Hobbies, cores, estilos ou coisas que você ama.",
+  "wishlistFieldAvoidTitle": "Melhor evitar…",
+  "wishlistFieldAvoidHint": "Coisas que você prefere não receber ou que já possui.",
+  "wishlistFieldLinksTitle": "Links de inspiração",
+  "wishlistLinksHelp": "Até{max}links com http ou https.",
+  "@wishlistLinksHelp": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "wishlistAddLinkCta": "Adicionar link",
+  "wishlistLinkLabelOptional": "Etiqueta (opcional)",
+  "wishlistLinkUrlLabel": "URL",
+  "wishlistUrlHint": "https://…",
+  "wishlistLinkRowTitle": "Link{index}",
+  "@wishlistLinkRowTitle": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "wishlistSaveCta": "Manter",
+  "wishlistCancelCta": "Retornar",
+  "wishlistSaveSuccess": "Lista salva.",
+  "wishlistUrlInvalid": "Verifique os URLs: eles devem começar com http:// ou https://",
+  "wishlistLinksMax": "No máximo{max}links.",
+  "@wishlistLinksMax": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "wishlistMyAssignmentReceiverWishlistHeading": "O que você gostaria de receber?{receiverName}",
+  "@wishlistMyAssignmentReceiverWishlistHeading": {
+    "placeholders": {
+      "receiverName": {
+        "type": "String"
+      }
+    }
+  },
+  "wishlistMyAssignmentReceiverNameFallback": "seu destinatário",
+  "wishlistMyAssignmentSectionSubtitle": "Só você vê isso. Serve para inspirar você na hora de escolher um detalhe com amor.",
+  "wishlistMyAssignmentViewCta": "Veja ideias de presentes",
+  "wishlistManagedViewReceiverCta": "Ver lista de desejos",
+  "wishlistManagedViewReceiverHint": "Você só vê as ideias dessa pessoa para esse segredo.",
+  "wishlistEmptyReceiverTitle": "Ainda não há ideias de presentes",
+  "wishlistEmptyReceiverBody": "Talvez eu os adicione mais tarde. Um detalhe feito com amor sempre conta!",
+  "wishlistLinkOpenError": "O link não pôde ser aberto.",
+  "wishlistReadonlySheetTitle": "Ideias para presentes",
+  "managedRevealLabel": "Seu amigo secreto é",
+  "managedDeliveryChipLabel": "Entrega",
+  "managedFooterPrivacyNote": "Todo segredo é privado. Só você pode ver e só você entregá-lo.",
+  "myAssignmentNotAvailableTitle": "Você ainda não consegue ver seu amigo secreto",
+  "myAssignmentNotAvailableMessage": "Sua tarefa ainda não está disponível. Quando o sorteio estiver concluído, você poderá vê-lo aqui.",
+  "genericLoadErrorMessage": "Não foi possível carregar essas informações neste momento.",
+  "backToGroup": "Voltar ao grupo",
+  "groupDetailTitle": "Detalhe do grupo",
+  "groupRoleLabel": "Papel",
+  "groupStatusLabel": "Estado",
+  "groupLastExecution": "Durar",
+  "groupSectionStatus": "Status do grupo",
+  "groupSectionPrimaryAction": "ação principal",
+  "groupSectionDrawRule": "Regra de sorteio",
+  "groupSectionSubgroups": "Subgrupos",
+  "groupSectionParticipants": "Participantes",
+  "groupSectionManagedParticipants": "Participantes sem aplicativo",
+  "groupSectionInvitations": "Convites",
+  "groupSectionAdvanced": "Configurações avançadas",
+  "groupStatusPreparing": "Acompanhe o preparo",
+  "groupStatusReadyToDraw": "Pronto para desenhar",
+  "groupStatusCompleted": "Seus amigos secretos já foram escolhidos!",
+  "groupStatusMissingSubgroups": "Você precisa colocar alguém em seu grupo",
+  "groupActionRunDraw": "Faça o sorteio agora",
+  "groupActionViewMySecretFriend": "Veja meu amigo secreto",
+  "groupActionManagedSecrets": "Segredos que você gerencia",
+  "groupActionCreateSubgroup": "Criar subgrupo",
+  "groupActionEmptySubgroup": "Subgrupo vazio",
+  "groupActionDeleteSubgroup": "Excluir subgrupo",
+  "groupActionGenerateNewCode": "Gerar novo código",
+  "groupActionCopyCode": "Copiar código",
+  "groupActionRename": "Renomear",
+  "groupActionEdit": "Editar",
+  "groupRoleOrganizer": "Organizador",
+  "groupRoleParticipant": "Participante",
+  "groupTypeAdultNoApp": "Adulto sem aplicativo",
+  "groupTypeChildManaged": "filho gerenciado",
+  "groupNoSubgroupAssigned": "Nenhum subgrupo atribuído",
+  "groupGuardianOfSecret": "Guardião do segredo",
+  "groupPrivateResult": "Resultado privado",
+  "groupWarningMissingSubgroupTitle": "Faltam pessoas para atribuir a um subgrupo.",
+  "groupWarningMissingSubgroupRule": "Para exigir um subgrupo diferente, todos devem ter um.",
+  "groupWarningMissingSubgroupCombined": "Faltam pessoas para atribuir a um subgrupo. Para exigir um subgrupo diferente, todos devem ter um.",
+  "groupDialogDeleteSubgroupTitle": "Excluir subgrupo",
+  "groupDialogDeleteSubgroupBody": "Tem certeza de que deseja excluir \"{name}\"? Só será excluído se você não tiver participantes atribuídos.",
+  "@groupDialogDeleteSubgroupBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "groupDialogEmptySubgroupTitle": "Vazio \"{name}\"",
+  "@groupDialogEmptySubgroupTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "groupDialogCancel": "Cancelar",
+  "groupDialogDelete": "Eliminar",
+  "groupDialogEmpty": "Vazio",
+  "groupDialogMoveAndDelete": "Mover e excluir",
+  "groupDialogMoveToSubgroup": "Mover para outro subgrupo",
+  "groupDialogBeforeDeleteMoveTo": "Antes de excluir, vá para",
+  "groupDialogLeaveWithoutSubgroup": "Sair sem subgrupo",
+  "groupDialogNoAlternativeSubgroup": "Nenhum outro subgrupo disponível. Eles ficarão sem um subgrupo.",
+  "groupManagedDialogAddTitle": "Adicionar participante sem aplicativo",
+  "groupManagedDialogEditTitle": "Editar participante sem aplicativo",
+  "groupManagedDialogNameLabel": "Nome",
+  "groupManagedDialogTypeLabel": "Cara",
+  "groupManagedDialogTypeAdultNoApp": "Adulto sem aplicativo",
+  "groupManagedDialogTypeChild": "filho gerenciado",
+  "groupManagedDialogSubgroupOptionalLabel": "Subgrupo (opcional)",
+  "groupManagedDialogNoSubgroup": "Nenhum subgrupo",
+  "groupManagedDialogDeliveryLabel": "Método de entrega",
+  "groupManagedDialogDeliveryVerbal": "Verbal",
+  "groupManagedDialogDeliveryEmail": "Correspondência",
+  "groupManagedDialogDeliveryWhatsapp": "WhatsApp",
+  "groupManagedDialogDeliveryPrinted": "Impresso/PDF",
+  "groupManagedDialogWhoManagesTitle": "Quem administrará seu resultado?",
+  "groupManagedDialogWhoManagesDesc": "Escolha quem verá o resultado no aplicativo para que você possa entregá-lo de forma privada.",
+  "groupManagedDialogWhoManagesHelp": "Ao participar do sorteio, essa pessoa não verá o resultado no aplicativo. Você pode entregá-lo verbalmente ou por escrito.",
+  "groupManagedDialogManagedBy": "Gerenciado por:{name}",
+  "@groupManagedDialogManagedBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "groupAssignDialogSelfTitle": "Seu subgrupo",
+  "groupAssignDialogTitle": "Atribuir subgrupo",
+  "groupAssignDialogSelfDesc": "Escolha sua casa, apartamento, turma ou equipe.",
+  "groupAssignDialogDesc": "Selecione o subgrupo para este membro.",
+  "groupAssignDialogSubgroupLabel": "Subgrupo",
+  "groupSnackbarWriteName": "Escreva um nome",
+  "groupSnackbarDrawCompleted": "Sorteio concluído",
+  "groupSnackbarSubgroupUpdated": "Subgrupo atualizado",
+  "groupSnackbarGroupNameUpdated": "Nome do grupo atualizado",
+  "groupSnackbarRuleUpdated": "Regra de sorteio atualizada",
+  "groupSnackbarNewCodeGenerated": "Novo código gerado",
+  "groupSnackbarManagedAdded": "Participante sem aplicativo adicionado",
+  "groupSnackbarManagedUpdated": "Participante sem app atualizado",
+  "groupSnackbarManagedDeleted": "Participante sem app eliminado",
+  "groupDialogEditGroupNameTitle": "Editar nome do grupo",
+  "groupDialogGroupNameLabel": "Nome do grupo",
+  "groupDialogRenameSubgroupTitle": "Renomear subgrupo",
+  "groupDialogSubgroupNameLabel": "Nome do subgrupo",
+  "groupDialogDeleteParticipantTitle": "Excluir participante",
+  "groupDialogDeleteParticipantBody": "Tem certeza de que deseja eliminar \"{name}\"?",
+  "@groupDialogDeleteParticipantBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "groupDialogSubgroupAssignedCount": "Há{count}participantes atribuídos a este subgrupo.",
+  "@groupDialogSubgroupAssignedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "groupDialogSubgroupAssignedCountDelete": "Este subgrupo tem{count}participantes designados.",
+  "@groupDialogSubgroupAssignedCountDelete": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "languageSystem": "Sistema",
+  "languageSpanish": "Espanhol",
+  "languageEnglish": "Inglês",
+  "languageSelectorTitle": "Linguagem",
+  "languageSelectorSubtitle": "Escolha como você deseja visualizar o aplicativo",
+  "languagePortuguese": "Português",
+  "languageItalian": "italiano",
+  "languageFrench": "Francês",
+  "functionsErrorAlreadyMember": "Você já pertence a este grupo.",
+  "functionsErrorCodeNotFound": "Não encontramos um grupo com esse código.",
+  "functionsErrorCodeExpired": "Este código expirou.",
+  "functionsErrorGroupArchived": "Este grupo está fechado.",
+  "functionsErrorUserRemoved": "Você não pode ingressar neste grupo novamente.",
+  "functionsErrorDrawInProgress": "O sorteio está em andamento. Por favor, tente novamente mais tarde.",
+  "functionsErrorDrawAlreadyCompleted": "Este sorteio já havia sido concluído.",
+  "functionsErrorDrawCompletedInvitesClosed": "Este sorteio já foi realizado e não aceita mais novos participantes.",
+  "functionsErrorSubgroupInUse": "Antes de excluir este subgrupo, mova ou deixe seus participantes sem subgrupo.",
+  "functionsErrorSubgroupNotFound": "O subgrupo não existe mais ou foi excluído.",
+  "functionsErrorNotOwner": "Somente o organizador pode realizar esta ação.",
+  "functionsErrorGroupDeleteForbidden": "Somente o organizador pode excluir este grupo.",
+  "functionsErrorGroupDeleteFailed": "Não conseguimos eliminar o grupo completamente. Tente novamente ou verifique sua conexão.",
+  "functionsErrorDrawLocked": "Você não pode modificar subgrupos ou participantes enquanto o sorteio estiver em andamento ou concluído.",
+  "functionsErrorGenericAction": "A ação não pôde ser concluída. Por favor, tente novamente em alguns instantes.",
+  "functionsErrorPermissionDeniedDrawRule": "A regra do sorteio não pôde ser alterada. Verifique se o sorteio não está em andamento ou concluído.",
+  "functionsErrorUnknown": "Algo deu errado. Por favor, tente novamente em alguns instantes.",
+  "functionsErrorDebugSession": "A ação não pôde ser concluída. Verifique se você está usando emuladores ou Firebase real, se as Functions estão implantadas e se a sessão está ativa.",
+  "homePrimaryActionsTitle": "Principais ações",
+  "homeComingSoonDescription": "Em breve: sorteios, times, duelos e pareamentos.",
+  "homeChipDraws": "Brindes",
+  "homeChipTeams": "Equipes",
+  "homeChipPairings": "Emparelhamentos",
+  "homeActiveGroupsTitle": "Em andamento",
+  "homeActiveGroupsSubtitle": "Pendente de preparação ou sorteio; ou sorteio realizado com entrega hoje ou futura, ou sem data de entrega definida.",
+  "homeActiveGroupsEmpty": "Você não tem grupos nesta seção.",
+  "homeDeliveryDateLine": "Entrega:{date}",
+  "@homeDeliveryDateLine": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "homeDrawDateLine": "Loteria:{date}",
+  "@homeDrawDateLine": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "homeEmptyGroupsTitle": "Você ainda não tem grupos",
+  "homeEmptyGroupsMessage": "Crie seu primeiro amigo secreto ou cadastre-se com um código.",
+  "homeStatusActive": "Ativo",
+  "homeStatusInactive": "Parado",
+  "homeCompletedGroupsTitle": "Sorteios finalizados",
+  "homeCompletedGroupsSubtitle": "Sorteio realizado e data de entrega já passada.",
+  "homePastGroupsTitle": "Grupos anteriores",
+  "homePastGroupsSubtitle": "Você não está mais ativamente envolvido nesses grupos.",
+  "homeCompletedArchivedLabel": "Concluído/arquivado",
+  "homeDebugToolsTitle": "Ferramentas de desenvolvimento",
+  "homeDebugUid": "UID de teste:{uid}",
+  "@homeDebugUid": {
+    "placeholders": {
+      "uid": {
+        "type": "String"
+      }
+    }
+  },
+  "homeDebugUserSwitchHint": "A alteração dos usuários de teste fará com que você veja outros grupos, pois cada usuário tem sua própria lista.",
+  "homeDebugResetUser": "Sair e criar novo usuário de teste",
+  "homeEnvironmentEmulator": "Ambiente: emulador local",
+  "homeEnvironmentFirebase": "Ambiente: Firebase real dev",
+  "homePrivacyFooter": "Sua tarefa e resultados são mantidos privados por padrão.",
+  "wizardTypeFamily": "Família",
+  "wizardTypeFriends": "Amigos",
+  "wizardTypeCompany": "Empresa",
+  "wizardTypeClass": "Aula",
+  "wizardTypeOther": "Outro",
+  "wizardModeInPerson": "Pessoalmente",
+  "wizardModeRemote": "Remoto",
+  "wizardModeMixed": "Misturado",
+  "wizardCreateFunctionsError": "Não foi possível criar o grupo. Verifique se você está usando emuladores ou Firebase real e se o Functions está implantado.",
+  "wizardNameHelp": "Dê um nome que identifique o grupo.",
+  "wizardGroupTypeHelp": "Essas informações orientam a experiência. Por enquanto não está salvo.",
+  "wizardModeHelp": "Defina como o grupo será organizado. Por enquanto é preparação para UX.",
+  "wizardRuleHelp": "Esta configuração é salva no grupo.",
+  "wizardSubgroupsHelpIgnore": "Com esta regra você não precisa de subgrupos agora.",
+  "wizardSubgroupsHelpEnabled": "Você poderá criar e atribuir subgrupos a partir dos detalhes do grupo.",
+  "wizardParticipantsHelp": "Depois você pode convidar por código e adicionar pessoas sem aplicativo.",
+  "wizardSummaryName": "Nome",
+  "wizardSummaryGroupType": "Tipo de grupo",
+  "wizardSummaryMode": "Modo",
+  "wizardSummaryRule": "Regra de sorteio",
+  "groupRoleAdmin": "Administrador",
+  "groupRoleMember": "Membro",
+  "groupRuleIgnoreTitle": "Ignorar subgrupos",
+  "groupRulePreferTitle": "Prefira subgrupo diferente",
+  "groupRuleRequireTitle": "Exigir subgrupo diferente",
+  "groupRuleIgnoreDescription": "Sorteio normal. Não leva em conta casas, apartamentos ou classes.",
+  "groupRulePreferDescription": "Tarci Secret tentará combinar presentes entre diferentes subgrupos, mas não bloqueará o sorteio se isso não for possível.",
+  "groupRuleRequireDescription": "Ninguém poderá dar de presente alguém do mesmo subgrupo. Poderá falhar se o grupo não permitir uma adesão válida.",
+  "groupSnackNeedThreeParticipants": "Você precisa de pelo menos 3 participantes eficazes para ter um sorteio divertido.",
+  "groupSnackDrawAlreadyRunningOrDone": "Um novo sorteio não pode ser realizado enquanto estiver em andamento ou concluído.",
+  "groupSnackCannotAddAfterDraw": "Você não pode adicionar participantes após realizar o sorteio.",
+  "groupDeleteOwnerSectionTitle": "Opções do grupo",
+  "groupDeleteOwnerSectionHint": "Só o organizador pode encerrar esta dinâmica e apagar todos os dados do grupo.",
+  "groupDeleteEntryCta": "Eliminar grupo",
+  "groupDeleteDialogPreTitle": "Eliminar este grupo?",
+  "groupDeleteDialogPreBody": "Serão apagadas a configuração, participantes, convites e dados associados. Esta ação não pode ser desfeita.",
+  "groupDeleteDialogPreConfirm": "Eliminar grupo",
+  "groupDeleteDialogPostTitle": "Eliminar este amigo secreto?",
+  "groupDeleteDialogPostBody": "O sorteio já foi feito. Se continuar, todos perdem acesso aos resultados, listas de desejos, conversa do grupo e dados associados. Esta ação não pode ser desfeita.",
+  "groupDeleteDialogPostConfirm": "Eliminar definitivamente",
+  "groupDeleteSuccessSnackbar": "Grupo eliminado",
+  "groupDetailMissingMessage": "Este grupo já não existe ou foi removido pelo organizador.",
+  "groupTooltipEditGroupName": "Editar nome do grupo",
+  "groupStatusCompletedInfo": "Cada pessoa agora pode ver quem é sua vez de dar.",
+  "groupStatusReadyInfo": "Ao iniciá-lo, todos verão suas tarefas de forma privada.",
+  "groupStatusPendingInfo": "Revise os participantes ou subgrupos pendentes.",
+  "groupEffectiveParticipants": "Ter{count}de 3 pessoas no mínimo",
+  "@groupEffectiveParticipants": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "groupOwnerCanRunHint": "Quando tudo estiver pronto, o organizador lança o sorteio.",
+  "groupPendingSubgroupHint": "Atribua cada pessoa ao seu grupo e pronto.",
+  "groupPendingGeneralHint": "Você está quase lá para poder fazer o sorteio.",
+  "groupRuleConfigVersion": "Configuração v{version}",
+  "@groupRuleConfigVersion": {
+    "placeholders": {
+      "version": {
+        "type": "int"
+      }
+    }
+  },
+  "groupRuleLockedHint": "A regra não pode ser alterada enquanto o sorteio estiver em andamento ou já concluído.",
+  "groupSubgroupSectionHelp": "Organize casas, apartamentos, turmas ou equipes para melhorar o sorteio.",
+  "groupSubgroupEmptyHelp": "Ainda não há subgrupos. Você pode criar um para organizar melhor o grupo.",
+  "groupSubgroupAssignedOne": "1 participante designado",
+  "groupSubgroupAssignedMany": "{count}participantes designados",
+  "@groupSubgroupAssignedMany": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "groupSubgroupLockedHint": "Você não pode modificar subgrupos após executar o sorteio.",
+  "groupSubgroupDisabledHint": "Subgrupos desativados para este sorteio. Você pode ativá-los alterando a regra.",
+  "groupParticipantSubgroupLockedHint": "O subgrupo não poderá ser alterado enquanto o sorteio estiver em andamento ou já concluído.",
+  "groupManagedSectionHelp": "Esses participantes não utilizam o aplicativo e seu resultado é entregue de forma privada.",
+  "groupManagedEmptyHelp": "Ainda não há participantes gerenciados.",
+  "groupManagedGuardianSelf": "você",
+  "groupManagedGuardianOther": "outro responsável",
+  "groupManagedPrivateDeliveryHint": "Eles participam sem aplicativo e seus resultados são entregues de forma privada.",
+  "groupInvitationsHelp": "Gere um código e compartilhe-o para que os participantes participem.",
+  "groupInvitationCodeTapHint": "Toque no código para copiá-lo",
+  "groupInvitationsClosedHint": "Os convites estão encerrados porque o sorteio já foi realizado.",
+  "groupAdvancedHelp": "Os detalhes secundários do grupo são exibidos aqui.",
+  "groupAdvancedLastExecution": "Última execução:{id}",
+  "@groupAdvancedLastExecution": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "groupAdvancedInternalStatus": "Situação interna do sorteio:{status}",
+  "@groupAdvancedInternalStatus": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "groupCreateSubgroupHint": "Ex. Stan House, Vendas, Classe 3A",
+  "groupHeaderSubtitle": "Prepare seu sorteio com privacidade e clareza.",
+  "groupDetailTaglinePostDraw": "Resultados em privado: cada um vê os seus.",
+  "groupMemberPreDrawSubtitle": "Você já está dentro. Quando o organizador lançar o sorteio, você poderá ver sua alocação de forma privada.",
+  "groupMemberYourHouseTitle": "Sua casa ou equipe",
+  "groupMemberYourHousePickHint": "O organizador definiu equipes ou casas. Escolha o seu para se colocar bem no sorteio.",
+  "groupMemberYourHouseAssigned": "Nós localizamos você em:{name}",
+  "@groupMemberYourHouseAssigned": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "groupMemberYourHouseChooseCta": "Escolha minha casa ou time",
+  "groupMemberYourHouseChangeCta": "Mudar minha casa ou equipamento",
+  "groupMemberManagedByYouTitle": "Pessoas que você gerencia aqui",
+  "groupMemberManagedByYouSubtitle": "Você verá apenas aqueles que o organizador atribuiu a você como responsável.",
+  "groupMemberHeroTitlePreDraw": "Você já está dentro",
+  "groupMemberHeroSubtitlePreDraw": "Quando o organizador lançar o sorteio, você verá sua alocação de forma privada.",
+  "groupMemberHeroTaglinePreDraw": "Seu grupo, seu espaço. Ninguém vê os resultados dos outros.",
+  "groupMemberHeroTaglinePostDraw": "Sorteio pronto. Só você vê o que você tem.",
+  "groupMemberPostDrawHeroSubtitle": "Abra seu resultado quando quiser; É privado.",
+  "groupMemberHeroSubtitleDrawing": "Estamos sorteando. Em um momento você poderá ver seu resultado.",
+  "groupBackToDashboard": "Retornar ao painel",
+  "groupLoadingDetail": "Carregando grupo...",
+  "groupErrorTitle": "Não foi possível abrir este grupo",
+  "groupErrorNotFound": "Este grupo não está mais disponível ou você não tem acesso.",
+  "groupPreparationTitle": "Status do grupo",
+  "groupPreparationQuickSummary": "{total}pessoas no sorteio{withoutApp}sem aplicativo ·{subgroups}subgrupos",
+  "@groupPreparationQuickSummary": {
+    "placeholders": {
+      "total": {
+        "type": "int"
+      },
+      "withoutApp": {
+        "type": "int"
+      },
+      "subgroups": {
+        "type": "int"
+      }
+    }
+  },
+  "groupPostDrawHeroTitle": "Sorteio realizado",
+  "groupPostDrawHeroSubtitle": "Agora você pode ver o que lhe pertence, em particular.",
+  "groupChecklistEnoughPeopleDone": "Você já tem gente suficiente",
+  "groupChecklistEnoughPeopleMissing": "Você precisa de pelo menos 3 pessoas",
+  "groupChecklistAllInSubgroupDone": "Todos estão em seu subgrupo",
+  "groupChecklistMissingSubgroupOne": "Você precisa colocar 1 pessoa em seu subgrupo",
+  "groupChecklistMissingSubgroupMany": "Eles estão faltando{count}pessoas para colocar em seu subgrupo",
+  "@groupChecklistMissingSubgroupMany": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "groupChecklistPendingMembers": "{count}pessoa(s) saiu(s) ou foi removida(s)",
+  "@groupChecklistPendingMembers": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "groupPreparationRegistered": "Registrado:{count}",
+  "@groupPreparationRegistered": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "groupPreparationManaged": "Gerenciou:{count}",
+  "@groupPreparationManaged": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "groupPreparationPending": "Brincos:{count}",
+  "@groupPreparationPending": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "groupPreparationMissingSubgroup": "Sem subgrupo:{count}",
+  "@groupPreparationMissingSubgroup": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "groupRuleCurrentLabel": "Regra atual",
+  "groupRuleChangeCta": "Alterar regra",
+  "groupSectionExpandHint": "Toque para expandir",
+  "groupSectionCollapseHint": "Toque para fechar",
+  "groupSectionItemsCount": "{count}no total",
+  "@groupSectionItemsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "groupManagedDialogGuardianSectionTitle": "Quem entregará o resultado?",
+  "groupManagedDialogGuardianMe": "EU",
+  "groupManagedDialogGuardianMeHint": "Vou compartilhar o resultado em particular",
+  "groupManagedDialogGuardianOther": "outro membro",
+  "groupManagedDialogGuardianSpecific": "Responsável específico",
+  "groupManagedDialogGuardianComingSoon": "Breve",
+  "groupManagedDialogDeliverySectionTitle": "Como você vai entregar isso a eles?",
+  "groupManagedResponsibleUnavailable": "Gerente não disponível",
+  "groupManagedDeliversResponsible": "Gerencia:{name}",
+  "@groupManagedDeliversResponsible": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "groupManagedDialogPickGuardianTitle": "Quem irá entregá-lo?",
+  "groupManagedDialogGuardianOtherSubtitle": "Este membro verá o resultado e poderá entregá-lo a você em particular.",
+  "groupManagedDialogGuardianNoEligibleMembers": "Quando outro membro com um aplicativo ingressa, você pode atribuí-lo a ele.",
+  "groupManagedDialogPickMemberCta": "Escolha membro",
+  "groupManagedDialogSelectOtherFirst": "Escolha um membro do grupo primeiro.",
+  "groupManagedDialogGuardianMustReassign": "Esse membro não está mais ativo no grupo. Escolha outro responsável ou “eu”.",
+  "groupManagedDialogDeliversSummary": "Ele oferece:{name}",
+  "@groupManagedDialogDeliversSummary": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "groupParticipantsRegisteredTitle": "Participantes registrados",
+  "groupParticipantsPendingTitle": "Participantes pendentes",
+  "groupParticipantsPendingEmpty": "Não há participantes pendentes.",
+  "groupPendingStatusLeft": "saiu do grupo",
+  "groupPendingStatusRemoved": "Removido do grupo",
+  "myAssignmentSubgroupLabel": "Subgrupo:{name}",
+  "@myAssignmentSubgroupLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "managedSubgroupLabel": "Subgrupo:{name}",
+  "@managedSubgroupLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "managedYouManageIt": "você gerencia isso",
+  "managedDeliveryRecommendation": "Entrega recomendada:{mode}",
+  "@managedDeliveryRecommendation": {
+    "placeholders": {
+      "mode": {
+        "type": "String"
+      }
+    }
+  },
+  "managedTypeManagedParticipant": "Participante Gerenciado",
+  "managedDeliveryOwnerDelegated": "Gerenciado pelo responsável",
+  "managedDeliveryModeWhatsapp": "WhatsApp",
+  "managedDeliveryModeEmail": "Correspondência",
+  "managedDeliveryModePdf": "Impresso/PDF",
+  "managedDeliveryCtaWhatsapp": "Compartilhe no WhatsApp",
+  "managedDeliveryCtaEmail": "Preparar correspondência",
+  "managedDeliveryCtaPdf": "Gerar PDF",
+  "managedDeliveryVerbalBadge": "entrega verbal",
+  "managedDeliveryPdfGenerating": "Gerando PDF…",
+  "managedDeliveryWhatsappBrand": "🎁 Segredo de Tarci",
+  "managedDeliveryWhatsappHello": "Olá,{name}.",
+  "@managedDeliveryWhatsappHello": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "managedDeliveryWhatsappDrawLine": "O amigo secreto de «{groupName}».",
+  "@managedDeliveryWhatsappDrawLine": {
+    "placeholders": {
+      "groupName": {
+        "type": "String"
+      }
+    }
+  },
+  "managedDeliveryWhatsappGiftIntro": "É a sua vez de doar para:",
+  "managedDeliveryWhatsappReceiverLine": "✨ {receiverName}",
+  "@managedDeliveryWhatsappReceiverLine": {
+    "placeholders": {
+      "receiverName": {
+        "type": "String"
+      }
+    }
+  },
+  "managedDeliverySubgroupBelongsTo": "Pertence a:{subgroup}",
+  "@managedDeliverySubgroupBelongsTo": {
+    "placeholders": {
+      "subgroup": {
+        "type": "String"
+      }
+    }
+  },
+  "managedDeliveryClosingSecret": "Guarde o segredo 🤫",
+  "managedDeliveryEmailSubject": "Seu amigo secreto{groupName}está pronto 🎁",
+  "@managedDeliveryEmailSubject": {
+    "placeholders": {
+      "groupName": {
+        "type": "String"
+      }
+    }
+  },
+  "managedDeliveryEmailGreeting": "Olá,{name}:",
+  "@managedDeliveryEmailGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "managedDeliveryEmailLead": "Escrevemos para você com o resultado privado do amigo secreto do grupo «{groupName}».",
+  "@managedDeliveryEmailLead": {
+    "placeholders": {
+      "groupName": {
+        "type": "String"
+      }
+    }
+  },
+  "managedDeliveryEmailGiftLabel": "Quem você tem que dar é:",
+  "managedDeliveryEmailReceiverLine": "{receiverName}",
+  "@managedDeliveryEmailReceiverLine": {
+    "placeholders": {
+      "receiverName": {
+        "type": "String"
+      }
+    }
+  },
+  "managedDeliveryEmailSubgroupLine": "Casa ou equipe:{subgroup}",
+  "@managedDeliveryEmailSubgroupLine": {
+    "placeholders": {
+      "subgroup": {
+        "type": "String"
+      }
+    }
+  },
+  "managedDeliveryEmailClosing": "Por favor, guarde este resultado apenas para você. Ninguém mais deve ver isso.",
+  "managedDeliveryEmailSignoff": "um abraço,\nSegredo de Tarci",
+  "managedPdfDocTitle": "amigo secreto",
+  "managedPdfHeadline": "Seu amigo secreto está pronto",
+  "managedPdfForLabel": "Para",
+  "managedPdfGroupLabel": "Conjunto",
+  "managedPdfGiftHeading": "Você tem que dar para…",
+  "managedPdfFooterKeepSecret": "Mantenha o segredo. Ninguém mais deve ver isso.",
+  "managedPdfFooterBrand": "Gerado com Tarci Secret",
+  "managedDeliveryFallbackGroupName": "seu grupo",
+  "managedDeliveryErrorMissingData": "Não há dados suficientes para preparar a mensagem.",
+  "managedDeliveryErrorWhatsapp": "Não conseguimos abrir o WhatsApp. Você pode compartilhar o texto com outro aplicativo.",
+  "managedDeliveryErrorEmail": "Não encontramos um aplicativo de e-mail neste dispositivo.",
+  "managedDeliveryErrorPdf": "Não foi possível gerar o PDF. Tente novamente.",
+  "managedDeliveryErrorShare": "Não foi possível compartilhar. Tente novamente.",
+  "managedDeliveryErrorGeneric": "Algo deu errado. Tente novamente.",
+  "myAssignmentPrivateBadge": "Privado · só para você",
+  "myAssignmentRevealLabel": "Você tem que dar para",
+  "myAssignmentEmotionalCopy": "Faça-o se sentir especial.",
+  "myAssignmentPrivacyTitle": "Só você vê isso",
+  "myAssignmentPrivacyBody": "Guarde o segredo até o dia da troca. Ninguém mais no grupo pode ver de quem é a vez.",
+  "myAssignmentNoSubgroupChip": "Nenhum subgrupo",
+  "groupCompletedHeroSubtitle": "Cada pessoa já descobriu a quem é a sua vez de dar.",
+  "groupCompletedPrivacyNote": "Cada resultado é privado. Somente cada pessoa vê a sua.",
+  "groupCompletedManagedHint": "Você entrega de forma privada os resultados das pessoas que gerencia.",
+  "chatGroupSectionTitle": "Conversa do grupo",
+  "chatGroupSectionSubtitle": "Brinca, partilha pistas e mantém o clima aceso.",
+  "chatGroupEnterCta": "Entrar no chat",
+  "chatGroupEventLine": "Entrega:{date}",
+  "@chatGroupEventLine": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "chatDrawCompletedChip": "Sorteio realizado",
+  "chatInputHint": "Escreve algo para o grupo…",
+  "chatSendCta": "Enviar",
+  "chatTarciLabel": "Tárci",
+  "chatEmptyTitle": "Ainda não há mensagens",
+  "chatEmptyBody": "Quando alguém escrever ou Tarci relatar algo importante, você verá aqui.",
+  "chatLoadError": "Não foi possível carregar o chat. Verifique sua conexão ou tente novamente.",
+  "chatSendError": "A mensagem não pôde ser enviada. Tente novamente.",
+  "chatSystemGroupCreatedV1": "🎁 O grupo já está em andamento. Dê dicas, conte tudo e deixe a fofoca saudável rolar.",
+  "chatSystemDrawCompletedV1": "🤫 Sorteio realizado. De agora em diante, cada pergunta estranha conta como prova.",
+  "chatSystemUnknownTemplate": "Mensagem do sistema ({templateKey})",
+  "@chatSystemUnknownTemplate": {
+    "placeholders": {
+      "templateKey": {
+        "type": "String"
+      }
+    }
+  },
+  "chatSystemAutoPlayful001V1": "Já há cheiro de suspeitas por aqui… e ninguém confessou nada ainda.",
+  "chatSystemAutoPlayful002V1": "Desde que houve sorteio, toda pergunta inocente parece estratégica.",
+  "chatSystemAutoPlayful003V1": "Dica da Tarci: investigue com sutileza, não como num interrogatório.",
+  "chatSystemAutoPlayful004V1": "Há quem já tenha presente. E há quem tenha fé.",
+  "chatSystemAutoPlayful005V1": "Se alguém perguntar por tamanhos, cores e hobbies de uma vez, fique atento.",
+  "chatSystemAutoPlayful006V1": "Um bom presente surpreende. Um grande presente vira história.",
+  "chatSystemAutoPlayful007V1": "Sorrisos suspeitos contam como pistas.",
+  "chatSystemAutoPlayful008V1": "Despistar é permitido. Exagerar, nem tanto.",
+  "chatSystemAutoPlayful009V1": "O silêncio de algumas pessoas já parece planejamento.",
+  "chatSystemAutoPlayful010V1": "Se for improvisar, pelo menos improvise com carinho.",
+  "chatSystemAutoPlayful011V1": "A Tarci percebe energia de presente épico… e de pânico elegante.",
+  "chatSystemAutoPlayful012V1": "Quem diz “já resolvi” sem provas levanta suspeitas.",
+  "chatSystemAutoPlayful013V1": "Lembrete carinhoso: o mistério também faz parte da graça.",
+  "chatSystemAutoPlayful014V1": "Todo grupo tem um detetive. Já sabem quem é?",
+  "chatSystemAutoPlayful015V1": "Um detalhe com intenção vale mais do que um presente sem alma.",
+  "chatSystemAutoPlayful016V1": "Este chat está oficialmente em modo suspeita.",
+  "chatSystemAutoPlayful017V1": "Se você acabou de procurar ideias em segredo, ninguém vai julgar.",
+  "chatSystemAutoPlayful018V1": "Alguns olhares na vida real agora significam coisa demais.",
+  "chatSystemAutoPlayful019V1": "A missão não é gastar mais. É acertar melhor.",
+  "chatSystemAutoPlayful020V1": "Disfarçar bem também faz parte do jogo.",
+  "chatSystemAutoPlayful021V1": "A Tarci aposta que alguém aqui já tem um plano brilhante.",
+  "chatSystemAutoDebate001V1": "Debate rápido: presente útil ou presente que faça rir?",
+  "chatSystemAutoDebate002V1": "Melhor surpresa total ou pista bem aproveitada?",
+  "chatSystemAutoDebate003V1": "O que ganha: criatividade ou precisão?",
+  "chatSystemAutoDebate004V1": "Debate aberto: uma embalagem caprichada faz diferença?",
+  "chatSystemAutoDebate005V1": "Investigação discreta ou lista de desejos para salvar?",
+  "chatSystemAutoDebate006V1": "Sem citar nomes: quem deste grupo improvisa no final?",
+  "chatSystemAutoDebate007V1": "Presente pequeno com história ou grande sem história?",
+  "chatSystemAutoDebate008V1": "Despistar no chat vale ou já é jogo sujo?",
+  "chatSystemAutoDebate009V1": "O que emociona mais: acertar ou surpreender?",
+  "chatSystemAutoDebate010V1": "Se tivesse de escolher: prático, divertido ou sentimental?",
+  "chatSystemAutoWishlist001V1": "Algumas listas de desejos ainda estão vazias. Uma pista na hora certa pode salvar um presente.",
+  "chatSystemAutoWishlist002V1": "Sua lista de desejos não tira a magia; evita tentar adivinhar no escuro.",
+  "chatSystemAutoWishlist003V1": "Se quiser que acertem com você, deixe algumas ideias.",
+  "chatSystemAutoWishlist004V1": "Tem alguém preparando presente com pouquíssimas pistas. Cof cof.",
+  "chatSystemAutoWishlist005V1": "Completar a lista ajuda sem revelar demais.",
+  "chatSystemAutoWishlist006V1": "Um link, um gosto, uma pista: tudo ajuda.",
+  "chatSystemAutoWishlist007V1": "Até as melhores surpresas agradecem um pouco de orientação.",
+  "chatSystemAutoWishlist008V1": "Se sua lista está vazia, seu amigo secreto está jogando no modo difícil.",
+  "chatSystemAutoQuiet001V1": "Muito silêncio por aqui… comprando ou escondendo provas?",
+  "chatSystemAutoQuiet002V1": "Este grupo está quieto demais. Alguém precisa quebrar o gelo.",
+  "chatSystemAutoQuiet003V1": "A Tarci está fazendo chamada: a brincadeira continua viva?",
+  "chatSystemAutoQuiet004V1": "Pergunta para reanimar: quem parece mais suspeito hoje?",
+  "chatSystemAutoQuiet005V1": "Se ninguém escrever, a Tarci vai começar a inventar teorias.",
+  "chatSystemAutoQuiet006V1": "Chat dormindo, mistério bem acordado. Digam alguma coisa.",
+  "chatSystemAutoCountdown014V1": "Faltam 14 dias. Ainda há tempo, mas as desculpas estão acabando.",
+  "chatSystemAutoCountdown007V1": "Faltam 7 dias. Quem ainda não tem ideia entrou oficialmente em busca séria.",
+  "chatSystemAutoCountdown003V1": "Faltam 3 dias. Já não é planejamento: é operação resgate.",
+  "chatSystemAutoCountdown001V1": "Falta 1 dia. Embrulhe, respire e finja naturalidade.",
+  "chatSystemAutoCountdown000V1": "Hoje é o dia da troca. Que haja surpresas, risadas e nenhuma confissão antes da hora."
+}

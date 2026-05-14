@@ -879,6 +879,84 @@ class AppLocalizationsEs extends AppLocalizations {
   String get languageSelectorSubtitle => 'Elige cómo quieres ver la app';
 
   @override
+  String get languagePortuguese => 'Português';
+
+  @override
+  String get languageItalian => 'Italiano';
+
+  @override
+  String get languageFrench => 'Français';
+
+  @override
+  String get functionsErrorAlreadyMember => 'Ya perteneces a este grupo.';
+
+  @override
+  String get functionsErrorCodeNotFound =>
+      'No encontramos un grupo con ese código.';
+
+  @override
+  String get functionsErrorCodeExpired => 'Este código ha expirado.';
+
+  @override
+  String get functionsErrorGroupArchived => 'Este grupo ya está cerrado.';
+
+  @override
+  String get functionsErrorUserRemoved =>
+      'No puedes volver a unirte a este grupo.';
+
+  @override
+  String get functionsErrorDrawInProgress =>
+      'El sorteo está en curso. Inténtalo más tarde.';
+
+  @override
+  String get functionsErrorDrawAlreadyCompleted =>
+      'Este sorteo ya se había completado.';
+
+  @override
+  String get functionsErrorDrawCompletedInvitesClosed =>
+      'Este sorteo ya fue realizado y ya no admite nuevos participantes.';
+
+  @override
+  String get functionsErrorSubgroupInUse =>
+      'Antes de eliminar este subgrupo, mueve o deja sin subgrupo a sus participantes.';
+
+  @override
+  String get functionsErrorSubgroupNotFound =>
+      'El subgrupo ya no existe o fue eliminado.';
+
+  @override
+  String get functionsErrorNotOwner =>
+      'Solo el organizador puede realizar esta acción.';
+
+  @override
+  String get functionsErrorGroupDeleteForbidden =>
+      'Solo el organizador puede eliminar este grupo.';
+
+  @override
+  String get functionsErrorGroupDeleteFailed =>
+      'No pudimos eliminar el grupo por completo. Inténtalo otra vez o revisa tu conexión.';
+
+  @override
+  String get functionsErrorDrawLocked =>
+      'No puedes modificar subgrupos o participantes cuando el sorteo está en curso o completado.';
+
+  @override
+  String get functionsErrorGenericAction =>
+      'No se pudo completar la acción. Inténtalo de nuevo en un momento.';
+
+  @override
+  String get functionsErrorPermissionDeniedDrawRule =>
+      'No se pudo cambiar la regla del sorteo. Revisa que el sorteo no esté en curso ni finalizado.';
+
+  @override
+  String get functionsErrorUnknown =>
+      'Algo salió mal. Inténtalo de nuevo en unos momentos.';
+
+  @override
+  String get functionsErrorDebugSession =>
+      'No se pudo completar la acción. Revisa si estás usando emuladores o Firebase real, si las Functions están desplegadas y si la sesión está activa.';
+
+  @override
   String get homePrimaryActionsTitle => 'Acciones principales';
 
   @override

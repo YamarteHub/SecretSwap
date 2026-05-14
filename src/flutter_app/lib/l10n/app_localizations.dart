@@ -7,6 +7,9 @@ import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_en.dart';
 import 'app_localizations_es.dart';
+import 'app_localizations_fr.dart';
+import 'app_localizations_it.dart';
+import 'app_localizations_pt.dart';
 
 // ignore_for_file: type=lint
 
@@ -96,6 +99,9 @@ abstract class AppLocalizations {
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
     Locale('es'),
+    Locale('fr'),
+    Locale('it'),
+    Locale('pt'),
   ];
 
   /// No description provided for @appName.
@@ -1663,6 +1669,132 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Elige cómo quieres ver la app'**
   String get languageSelectorSubtitle;
+
+  /// No description provided for @languagePortuguese.
+  ///
+  /// In es, this message translates to:
+  /// **'Português'**
+  String get languagePortuguese;
+
+  /// No description provided for @languageItalian.
+  ///
+  /// In es, this message translates to:
+  /// **'Italiano'**
+  String get languageItalian;
+
+  /// No description provided for @languageFrench.
+  ///
+  /// In es, this message translates to:
+  /// **'Français'**
+  String get languageFrench;
+
+  /// No description provided for @functionsErrorAlreadyMember.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya perteneces a este grupo.'**
+  String get functionsErrorAlreadyMember;
+
+  /// No description provided for @functionsErrorCodeNotFound.
+  ///
+  /// In es, this message translates to:
+  /// **'No encontramos un grupo con ese código.'**
+  String get functionsErrorCodeNotFound;
+
+  /// No description provided for @functionsErrorCodeExpired.
+  ///
+  /// In es, this message translates to:
+  /// **'Este código ha expirado.'**
+  String get functionsErrorCodeExpired;
+
+  /// No description provided for @functionsErrorGroupArchived.
+  ///
+  /// In es, this message translates to:
+  /// **'Este grupo ya está cerrado.'**
+  String get functionsErrorGroupArchived;
+
+  /// No description provided for @functionsErrorUserRemoved.
+  ///
+  /// In es, this message translates to:
+  /// **'No puedes volver a unirte a este grupo.'**
+  String get functionsErrorUserRemoved;
+
+  /// No description provided for @functionsErrorDrawInProgress.
+  ///
+  /// In es, this message translates to:
+  /// **'El sorteo está en curso. Inténtalo más tarde.'**
+  String get functionsErrorDrawInProgress;
+
+  /// No description provided for @functionsErrorDrawAlreadyCompleted.
+  ///
+  /// In es, this message translates to:
+  /// **'Este sorteo ya se había completado.'**
+  String get functionsErrorDrawAlreadyCompleted;
+
+  /// No description provided for @functionsErrorDrawCompletedInvitesClosed.
+  ///
+  /// In es, this message translates to:
+  /// **'Este sorteo ya fue realizado y ya no admite nuevos participantes.'**
+  String get functionsErrorDrawCompletedInvitesClosed;
+
+  /// No description provided for @functionsErrorSubgroupInUse.
+  ///
+  /// In es, this message translates to:
+  /// **'Antes de eliminar este subgrupo, mueve o deja sin subgrupo a sus participantes.'**
+  String get functionsErrorSubgroupInUse;
+
+  /// No description provided for @functionsErrorSubgroupNotFound.
+  ///
+  /// In es, this message translates to:
+  /// **'El subgrupo ya no existe o fue eliminado.'**
+  String get functionsErrorSubgroupNotFound;
+
+  /// No description provided for @functionsErrorNotOwner.
+  ///
+  /// In es, this message translates to:
+  /// **'Solo el organizador puede realizar esta acción.'**
+  String get functionsErrorNotOwner;
+
+  /// No description provided for @functionsErrorGroupDeleteForbidden.
+  ///
+  /// In es, this message translates to:
+  /// **'Solo el organizador puede eliminar este grupo.'**
+  String get functionsErrorGroupDeleteForbidden;
+
+  /// No description provided for @functionsErrorGroupDeleteFailed.
+  ///
+  /// In es, this message translates to:
+  /// **'No pudimos eliminar el grupo por completo. Inténtalo otra vez o revisa tu conexión.'**
+  String get functionsErrorGroupDeleteFailed;
+
+  /// No description provided for @functionsErrorDrawLocked.
+  ///
+  /// In es, this message translates to:
+  /// **'No puedes modificar subgrupos o participantes cuando el sorteo está en curso o completado.'**
+  String get functionsErrorDrawLocked;
+
+  /// No description provided for @functionsErrorGenericAction.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo completar la acción. Inténtalo de nuevo en un momento.'**
+  String get functionsErrorGenericAction;
+
+  /// No description provided for @functionsErrorPermissionDeniedDrawRule.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo cambiar la regla del sorteo. Revisa que el sorteo no esté en curso ni finalizado.'**
+  String get functionsErrorPermissionDeniedDrawRule;
+
+  /// No description provided for @functionsErrorUnknown.
+  ///
+  /// In es, this message translates to:
+  /// **'Algo salió mal. Inténtalo de nuevo en unos momentos.'**
+  String get functionsErrorUnknown;
+
+  /// No description provided for @functionsErrorDebugSession.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo completar la acción. Revisa si estás usando emuladores o Firebase real, si las Functions están desplegadas y si la sesión está activa.'**
+  String get functionsErrorDebugSession;
 
   /// No description provided for @homePrimaryActionsTitle.
   ///
@@ -3320,7 +3452,7 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) =>
-      <String>['en', 'es'].contains(locale.languageCode);
+      <String>['en', 'es', 'fr', 'it', 'pt'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -3333,6 +3465,12 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsEn();
     case 'es':
       return AppLocalizationsEs();
+    case 'fr':
+      return AppLocalizationsFr();
+    case 'it':
+      return AppLocalizationsIt();
+    case 'pt':
+      return AppLocalizationsPt();
   }
 
   throw FlutterError(

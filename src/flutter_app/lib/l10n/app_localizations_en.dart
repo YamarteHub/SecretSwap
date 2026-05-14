@@ -872,6 +872,82 @@ class AppLocalizationsEn extends AppLocalizations {
   String get languageSelectorSubtitle => 'Choose how you want to see the app';
 
   @override
+  String get languagePortuguese => 'Português';
+
+  @override
+  String get languageItalian => 'Italiano';
+
+  @override
+  String get languageFrench => 'Français';
+
+  @override
+  String get functionsErrorAlreadyMember => 'You’re already in this group.';
+
+  @override
+  String get functionsErrorCodeNotFound =>
+      'We couldn’t find a group with that code.';
+
+  @override
+  String get functionsErrorCodeExpired => 'This code has expired.';
+
+  @override
+  String get functionsErrorGroupArchived => 'This group is already closed.';
+
+  @override
+  String get functionsErrorUserRemoved => 'You can’t join this group again.';
+
+  @override
+  String get functionsErrorDrawInProgress =>
+      'The draw is in progress. Try again later.';
+
+  @override
+  String get functionsErrorDrawAlreadyCompleted =>
+      'This draw was already completed.';
+
+  @override
+  String get functionsErrorDrawCompletedInvitesClosed =>
+      'This draw is done and no longer accepts new participants.';
+
+  @override
+  String get functionsErrorSubgroupInUse =>
+      'Before deleting this subgroup, move or clear subgroup assignments for its participants.';
+
+  @override
+  String get functionsErrorSubgroupNotFound =>
+      'The subgroup no longer exists or was removed.';
+
+  @override
+  String get functionsErrorNotOwner => 'Only the organizer can do this.';
+
+  @override
+  String get functionsErrorGroupDeleteForbidden =>
+      'Only the organizer can delete this group.';
+
+  @override
+  String get functionsErrorGroupDeleteFailed =>
+      'We couldn’t fully delete the group. Try again or check your connection.';
+
+  @override
+  String get functionsErrorDrawLocked =>
+      'You can’t change subgroups or participants while the draw is running or completed.';
+
+  @override
+  String get functionsErrorGenericAction =>
+      'We couldn’t complete the action. Please try again in a moment.';
+
+  @override
+  String get functionsErrorPermissionDeniedDrawRule =>
+      'We couldn’t change the draw rule. Check that the draw isn’t running or finished.';
+
+  @override
+  String get functionsErrorUnknown =>
+      'Something went wrong. Please try again shortly.';
+
+  @override
+  String get functionsErrorDebugSession =>
+      'We couldn’t complete the action. Check whether you’re on emulators vs real Firebase, whether Functions are deployed, and whether your session is active.';
+
+  @override
   String get homePrimaryActionsTitle => 'Primary actions';
 
   @override
