@@ -8,6 +8,7 @@ export const groupPaths = {
   groupDoc: (groupId: string) => `groups/${groupId}`,
   membersCol: (groupId: string) => `groups/${groupId}/members`,
   memberDoc: (groupId: string, uid: string) => `groups/${groupId}/members/${uid}`,
+  participantsCol: (groupId: string) => `groups/${groupId}/participants`,
   invitesCurrentDoc: (groupId: string) => `groups/${groupId}/invites/current`,
   rulesCol: (groupId: string) => `groups/${groupId}/rules`,
   ruleDoc: (groupId: string, version: number) => `groups/${groupId}/rules/${version}`,
@@ -19,7 +20,10 @@ export const groupPaths = {
     `groups/${groupId}/executions/${executionId}/assignments/${giverUid}`,
   chatMessagesCol: (groupId: string) => `groups/${groupId}/chatMessages`,
   chatMessageDoc: (groupId: string, messageId: string) => `groups/${groupId}/chatMessages/${messageId}`,
-  chatAutomationTarciStateDoc: (groupId: string) => `groups/${groupId}/chatAutomation/tarciState`
+  chatAutomationTarciStateDoc: (groupId: string) => `groups/${groupId}/chatAutomation/tarciState`,
+  raffleExecutionsCol: (groupId: string) => `groups/${groupId}/raffleExecutions`,
+  raffleExecutionDoc: (groupId: string, executionId: string) =>
+    `groups/${groupId}/raffleExecutions/${executionId}`
 };
 
 export const userGroupPaths = {

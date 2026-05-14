@@ -886,5 +886,81 @@
   "chatSystemAutoCountdown007V1": "7 days left. Anyone without an idea has officially entered serious search mode.",
   "chatSystemAutoCountdown003V1": "3 days left. This is no longer planning; it is a rescue operation.",
   "chatSystemAutoCountdown001V1": "1 day left. Wrap it, breathe, and act natural.",
-  "chatSystemAutoCountdown000V1": "Today is the exchange. May there be surprises, laughs, and zero early confessions."
+  "chatSystemAutoCountdown000V1": "Today is the exchange. May there be surprises, laughs, and zero early confessions.",
+  "dynamicsHomePrimaryCta": "Create a dynamic",
+  "dynamicsSelectTitle": "Choose a dynamic",
+  "dynamicsSelectSubtitle": "Start with an experience that is ready today. More modes are coming soon.",
+  "dynamicsCardSecretSantaTitle": "Secret Santa",
+  "dynamicsCardSecretSantaBody": "Private assignments, wish lists and group chat.",
+  "dynamicsCardRaffleTitle": "Raffle",
+  "dynamicsCardRaffleBody": "Winners visible to the whole group. No secrets or managed deliveries.",
+  "dynamicsCardTeamsTitle": "Teams",
+  "dynamicsCardPairingsTitle": "Pairings",
+  "dynamicsCardDuelsTitle": "Duels",
+  "dynamicsComingSoonBadge": "Coming soon",
+  "homeDynamicTypeSecretSanta": "Secret Santa",
+  "homeDynamicTypeRaffle": "Raffle",
+  "homeRaffleStatePreparing": "Getting ready",
+  "homeRaffleStateCompleted": "Raffle completed",
+  "raffleWizardTitle": "New raffle",
+  "raffleWizardNameLabel": "Raffle name",
+  "raffleWizardWinnersLabel": "Number of winners",
+  "raffleWizardOwnerParticipatesTitle": "Are you taking part?",
+  "raffleWizardOwnerParticipatesYes": "Yes, include me",
+  "raffleWizardOwnerParticipatesNo": "No, I am only organizing",
+  "raffleWizardEventOptional": "Event date (optional)",
+  "raffleWizardReviewTitle": "Review",
+  "raffleWizardReviewWinners": "{count} winner(s)",
+  "@raffleWizardReviewWinners": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "raffleWizardCreateCta": "Create raffle",
+  "raffleDetailInviteSection": "Invitation",
+  "raffleDetailAppMembersTitle": "Participants with the app",
+  "raffleDetailManualTitle": "Participants without the app",
+  "raffleDetailAddManualCta": "Add person",
+  "raffleDetailRunRaffleCta": "Run raffle",
+  "raffleDetailWinnersTitle": "Winners",
+  "raffleDetailShareCta": "Share results",
+  "raffleDetailCompletedHint": "This raffle is closed: you cannot change participants or draw again.",
+  "raffleManualEditTitle": "Edit participant",
+  "raffleManualDisplayNameLabel": "Visible name",
+  "raffleShareBody": "We have winners for \"{raffleName}\":\n{winners}\n\nMade with Tarci Secret.",
+  "@raffleShareBody": {
+    "placeholders": {
+      "raffleName": {
+        "type": "String"
+      },
+      "winners": {
+        "type": "String"
+      }
+    }
+  },
+  "functionsErrorRaffleResolvedInvitesClosed": "This raffle has already taken place and no longer accepts new participants.",
+  "functionsErrorRaffleInProgress": "The raffle is in progress. Please try again in a few seconds.",
+  "functionsErrorRaffleRotateLocked": "You cannot rotate the invite code once this raffle no longer accepts changes.",
+  "functionsErrorRaffleAlreadyCompleted": "This raffle has already been completed.",
+  "functionsErrorRaffleTooManyWinners": "There are more winners than eligible participants.",
+  "functionsErrorRaffleInsufficientParticipants": "There are not enough participants for this raffle.",
+  "functionsErrorRaffleInvalidDynamic": "This action is not available for this group type.",
+  "functionsErrorChatNotAvailableForRaffle": "Group chat is not available for public raffles.",
+  "functionsErrorWishlistNotAvailableForRaffle": "Wish lists are not available for raffles.",
+  "functionsErrorManagedParticipantsNotForRaffle": "Managed Secret Santa participants do not apply to raffles.",
+  "functionsErrorDrawNotForRaffle": "Secret Santa draw is not available for raffle groups.",
+  "functionsErrorAssignmentsNotForRaffle": "Secret assignments do not apply to this group.",
+  "raffleDetailEligibleCount": "Eligible participants: {count}",
+  "@raffleDetailEligibleCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "raffleWizardPickEventDate": "Pick date",
+  "functionsErrorDrawNotSupportedForDynamic": "Secret Santa draw is not available for this group type.",
+  "functionsErrorRaffleEditLocked": "This raffle no longer allows participant changes."
 }

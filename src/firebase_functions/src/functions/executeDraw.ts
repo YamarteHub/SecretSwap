@@ -325,7 +325,19 @@ export const executeDraw = onCall(async (req: CallableRequest<unknown>): Promise
       lifecycleStatus?: string;
       rulesVersionCurrent: number;
       drawStatus?: string;
+      dynamicType?: string;
     };
+    const dynamicType =
+      typeof group.dynamicType === "string" && group.dynamicType.trim() !== ""
+        ? group.dynamicType.trim()
+        : "secret_santa";
+    if (dynamicType === "simple_raffle") {
+      throw new AppError({
+        code: "FORBIDDEN",
+        reasonCode: "DRAW_NOT_SUPPORTED_FOR_DYNAMIC",
+        message: "Secret Santa draw is not available for raffle groups"
+      });
+    }
     if (group.ownerUid !== uid) {
       throw new AppError({ code: "FORBIDDEN", message: "Only owner can execute draw in MVP" });
     }

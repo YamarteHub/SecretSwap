@@ -1982,4 +1982,184 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get chatSystemAutoCountdown000V1 =>
       'Oggi è il giorno dello scambio. Che ci siano sorprese, risate e zero confessioni in anticipo.';
+
+  @override
+  String get dynamicsHomePrimaryCta => 'Crea una dinamica';
+
+  @override
+  String get dynamicsSelectTitle => 'Scegli una dinamica';
+
+  @override
+  String get dynamicsSelectSubtitle =>
+      'Inizia con un\'esperienza pronta oggi. Arriveranno presto altre modalità.';
+
+  @override
+  String get dynamicsCardSecretSantaTitle => 'Amico segreto';
+
+  @override
+  String get dynamicsCardSecretSantaBody =>
+      'Assegnazioni private, liste dei desideri e chat di gruppo.';
+
+  @override
+  String get dynamicsCardRaffleTitle => 'Sorteggio';
+
+  @override
+  String get dynamicsCardRaffleBody =>
+      'Vincitori visibili a tutto il gruppo. Niente segreti né consegne gestite.';
+
+  @override
+  String get dynamicsCardTeamsTitle => 'Squadre';
+
+  @override
+  String get dynamicsCardPairingsTitle => 'Abbinamenti';
+
+  @override
+  String get dynamicsCardDuelsTitle => 'Duelli';
+
+  @override
+  String get dynamicsComingSoonBadge => 'Prossimamente';
+
+  @override
+  String get homeDynamicTypeSecretSanta => 'Amico segreto';
+
+  @override
+  String get homeDynamicTypeRaffle => 'Sorteggio';
+
+  @override
+  String get homeRaffleStatePreparing => 'In preparazione';
+
+  @override
+  String get homeRaffleStateCompleted => 'Sorteggio completato';
+
+  @override
+  String get raffleWizardTitle => 'Nuovo sorteggio';
+
+  @override
+  String get raffleWizardNameLabel => 'Nome del sorteggio';
+
+  @override
+  String get raffleWizardWinnersLabel => 'Numero di vincitori';
+
+  @override
+  String get raffleWizardOwnerParticipatesTitle => 'Partecipi anche tu?';
+
+  @override
+  String get raffleWizardOwnerParticipatesYes => 'Sì, entro nell\'estrazione';
+
+  @override
+  String get raffleWizardOwnerParticipatesNo => 'No, organizzo soltanto';
+
+  @override
+  String get raffleWizardEventOptional => 'Data dell\'evento (opzionale)';
+
+  @override
+  String get raffleWizardReviewTitle => 'Revisione';
+
+  @override
+  String raffleWizardReviewWinners(int count) {
+    return '$count vincitori';
+  }
+
+  @override
+  String get raffleWizardCreateCta => 'Crea sorteggio';
+
+  @override
+  String get raffleDetailInviteSection => 'Invito';
+
+  @override
+  String get raffleDetailAppMembersTitle => 'Partecipanti con app';
+
+  @override
+  String get raffleDetailManualTitle => 'Partecipanti senza app';
+
+  @override
+  String get raffleDetailAddManualCta => 'Aggiungi persona';
+
+  @override
+  String get raffleDetailRunRaffleCta => 'Esegui sorteggio';
+
+  @override
+  String get raffleDetailWinnersTitle => 'Vincitori';
+
+  @override
+  String get raffleDetailShareCta => 'Condividi risultato';
+
+  @override
+  String get raffleDetailCompletedHint =>
+      'Questo sorteggio è chiuso: non puoi modificare i partecipanti né ripetere l\'estrazione.';
+
+  @override
+  String get raffleManualEditTitle => 'Modifica partecipante';
+
+  @override
+  String get raffleManualDisplayNameLabel => 'Nome visibile';
+
+  @override
+  String raffleShareBody(String raffleName, String winners) {
+    return 'Abbiamo i vincitori di «$raffleName»:\n$winners\n\nRealizzato con Tarci Secret.';
+  }
+
+  @override
+  String get functionsErrorRaffleResolvedInvitesClosed =>
+      'Questo sorteggio è già stato effettuato e non accetta nuovi partecipanti.';
+
+  @override
+  String get functionsErrorRaffleInProgress =>
+      'Il sorteggio è in corso. Riprova tra qualche secondo.';
+
+  @override
+  String get functionsErrorRaffleRotateLocked =>
+      'Non puoi ruotare il codice quando il sorteggio non accetta più modifiche.';
+
+  @override
+  String get functionsErrorRaffleAlreadyCompleted =>
+      'Questo sorteggio è già stato completato.';
+
+  @override
+  String get functionsErrorRaffleTooManyWinners =>
+      'Ci sono più vincitori dei partecipanti eleggibili.';
+
+  @override
+  String get functionsErrorRaffleInsufficientParticipants =>
+      'Non ci sono abbastanza partecipanti per questo sorteggio.';
+
+  @override
+  String get functionsErrorRaffleInvalidDynamic =>
+      'Questa azione non è disponibile per questo tipo di gruppo.';
+
+  @override
+  String get functionsErrorChatNotAvailableForRaffle =>
+      'La chat di gruppo non è disponibile per i sorteggi pubblici.';
+
+  @override
+  String get functionsErrorWishlistNotAvailableForRaffle =>
+      'Le liste dei desideri non sono disponibili nei sorteggi.';
+
+  @override
+  String get functionsErrorManagedParticipantsNotForRaffle =>
+      'I partecipanti gestiti dell\'amico segreto non si applicano ai sorteggi.';
+
+  @override
+  String get functionsErrorDrawNotForRaffle =>
+      'Il sorteggio dell\'amico segreto non è disponibile per i gruppi sorteggio.';
+
+  @override
+  String get functionsErrorAssignmentsNotForRaffle =>
+      'Le assegnazioni segrete non si applicano a questo gruppo.';
+
+  @override
+  String raffleDetailEligibleCount(int count) {
+    return 'Partecipanti eleggibili: $count';
+  }
+
+  @override
+  String get raffleWizardPickEventDate => 'Scegli data';
+
+  @override
+  String get functionsErrorDrawNotSupportedForDynamic =>
+      'Il sorteggio dell\'amico segreto non è disponibile per questo tipo di gruppo.';
+
+  @override
+  String get functionsErrorRaffleEditLocked =>
+      'Questo sorteggio non consente più modifiche ai partecipanti.';
 }

@@ -886,5 +886,81 @@
   "chatSystemAutoCountdown007V1": "Mancano 7 giorni. Chi non ha ancora un'idea entra ufficialmente in fase ricerca seria.",
   "chatSystemAutoCountdown003V1": "Mancano 3 giorni. Non è più pianificazione: è operazione salvataggio.",
   "chatSystemAutoCountdown001V1": "Manca 1 giorno. Incarta, respira e fai finta di niente.",
-  "chatSystemAutoCountdown000V1": "Oggi è il giorno dello scambio. Che ci siano sorprese, risate e zero confessioni in anticipo."
+  "chatSystemAutoCountdown000V1": "Oggi è il giorno dello scambio. Che ci siano sorprese, risate e zero confessioni in anticipo.",
+  "dynamicsHomePrimaryCta": "Crea una dinamica",
+  "dynamicsSelectTitle": "Scegli una dinamica",
+  "dynamicsSelectSubtitle": "Inizia con un'esperienza pronta oggi. Arriveranno presto altre modalità.",
+  "dynamicsCardSecretSantaTitle": "Amico segreto",
+  "dynamicsCardSecretSantaBody": "Assegnazioni private, liste dei desideri e chat di gruppo.",
+  "dynamicsCardRaffleTitle": "Sorteggio",
+  "dynamicsCardRaffleBody": "Vincitori visibili a tutto il gruppo. Niente segreti né consegne gestite.",
+  "dynamicsCardTeamsTitle": "Squadre",
+  "dynamicsCardPairingsTitle": "Abbinamenti",
+  "dynamicsCardDuelsTitle": "Duelli",
+  "dynamicsComingSoonBadge": "Prossimamente",
+  "homeDynamicTypeSecretSanta": "Amico segreto",
+  "homeDynamicTypeRaffle": "Sorteggio",
+  "homeRaffleStatePreparing": "In preparazione",
+  "homeRaffleStateCompleted": "Sorteggio completato",
+  "raffleWizardTitle": "Nuovo sorteggio",
+  "raffleWizardNameLabel": "Nome del sorteggio",
+  "raffleWizardWinnersLabel": "Numero di vincitori",
+  "raffleWizardOwnerParticipatesTitle": "Partecipi anche tu?",
+  "raffleWizardOwnerParticipatesYes": "Sì, entro nell'estrazione",
+  "raffleWizardOwnerParticipatesNo": "No, organizzo soltanto",
+  "raffleWizardEventOptional": "Data dell'evento (opzionale)",
+  "raffleWizardReviewTitle": "Revisione",
+  "raffleWizardReviewWinners": "{count} vincitori",
+  "@raffleWizardReviewWinners": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "raffleWizardCreateCta": "Crea sorteggio",
+  "raffleDetailInviteSection": "Invito",
+  "raffleDetailAppMembersTitle": "Partecipanti con app",
+  "raffleDetailManualTitle": "Partecipanti senza app",
+  "raffleDetailAddManualCta": "Aggiungi persona",
+  "raffleDetailRunRaffleCta": "Esegui sorteggio",
+  "raffleDetailWinnersTitle": "Vincitori",
+  "raffleDetailShareCta": "Condividi risultato",
+  "raffleDetailCompletedHint": "Questo sorteggio è chiuso: non puoi modificare i partecipanti né ripetere l'estrazione.",
+  "raffleManualEditTitle": "Modifica partecipante",
+  "raffleManualDisplayNameLabel": "Nome visibile",
+  "raffleShareBody": "Abbiamo i vincitori di «{raffleName}»:\n{winners}\n\nRealizzato con Tarci Secret.",
+  "@raffleShareBody": {
+    "placeholders": {
+      "raffleName": {
+        "type": "String"
+      },
+      "winners": {
+        "type": "String"
+      }
+    }
+  },
+  "functionsErrorRaffleResolvedInvitesClosed": "Questo sorteggio è già stato effettuato e non accetta nuovi partecipanti.",
+  "functionsErrorRaffleInProgress": "Il sorteggio è in corso. Riprova tra qualche secondo.",
+  "functionsErrorRaffleRotateLocked": "Non puoi ruotare il codice quando il sorteggio non accetta più modifiche.",
+  "functionsErrorRaffleAlreadyCompleted": "Questo sorteggio è già stato completato.",
+  "functionsErrorRaffleTooManyWinners": "Ci sono più vincitori dei partecipanti eleggibili.",
+  "functionsErrorRaffleInsufficientParticipants": "Non ci sono abbastanza partecipanti per questo sorteggio.",
+  "functionsErrorRaffleInvalidDynamic": "Questa azione non è disponibile per questo tipo di gruppo.",
+  "functionsErrorChatNotAvailableForRaffle": "La chat di gruppo non è disponibile per i sorteggi pubblici.",
+  "functionsErrorWishlistNotAvailableForRaffle": "Le liste dei desideri non sono disponibili nei sorteggi.",
+  "functionsErrorManagedParticipantsNotForRaffle": "I partecipanti gestiti dell'amico segreto non si applicano ai sorteggi.",
+  "functionsErrorDrawNotForRaffle": "Il sorteggio dell'amico segreto non è disponibile per i gruppi sorteggio.",
+  "functionsErrorAssignmentsNotForRaffle": "Le assegnazioni segrete non si applicano a questo gruppo.",
+  "raffleDetailEligibleCount": "Partecipanti eleggibili: {count}",
+  "@raffleDetailEligibleCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "raffleWizardPickEventDate": "Scegli data",
+  "functionsErrorDrawNotSupportedForDynamic": "Il sorteggio dell'amico segreto non è disponibile per questo tipo di gruppo.",
+  "functionsErrorRaffleEditLocked": "Questo sorteggio non consente più modifiche ai partecipanti."
 }

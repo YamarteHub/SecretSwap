@@ -55,6 +55,14 @@ export const getManagedAssignments = onCall(
       if (!groupSnap.exists) {
         throw new AppError({ code: "NOT_FOUND", reasonCode: "GROUP_NOT_FOUND", message: "Group not found" });
       }
+      const gdt = (groupSnap.data() as { dynamicType?: string }).dynamicType ?? "secret_santa";
+      if (gdt === "simple_raffle") {
+        throw new AppError({
+          code: "FORBIDDEN",
+          reasonCode: "ASSIGNMENTS_NOT_AVAILABLE_FOR_RAFFLE",
+          message: "Managed assignments are not available for raffle groups"
+        });
+      }
       if (!executionSnap.exists) {
         throw new AppError({
           code: "NOT_FOUND",

@@ -45,7 +45,22 @@ export const getWishlist = onCall(async (req: CallableRequest<unknown>): Promise
     if (!groupSnap.exists) {
       throw new AppError({ code: "NOT_FOUND", reasonCode: "GROUP_NOT_FOUND", message: "Group not found" });
     }
-    const groupData = groupSnap.data() as { ownerUid?: unknown; drawStatus?: unknown; lastExecutionId?: unknown };
+    const groupData = groupSnap.data() as {
+      ownerUid?: unknown;
+      drawStatus?: unknown;
+      lastExecutionId?: unknown;
+      dynamicType?: unknown;
+    };
+    const dynRaw = groupData.dynamicType;
+    const dyn =
+      typeof dynRaw === "string" && dynRaw.trim() !== "" ? dynRaw.trim() : "secret_santa";
+    if (dyn === "simple_raffle") {
+      throw new AppError({
+        code: "FORBIDDEN",
+        reasonCode: "WISHLIST_NOT_AVAILABLE_FOR_RAFFLE",
+        message: "Wishlists are not available for raffle groups"
+      });
+    }
     const ownerUid = parseStringOrNull(groupData.ownerUid);
     if (!ownerUid) {
       throw new AppError({ code: "INTERNAL", message: "Group owner is missing" });

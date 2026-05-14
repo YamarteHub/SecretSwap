@@ -23,3 +23,8 @@ final groupDrawStatusStreamProvider =
     StreamProvider.autoDispose.family<DrawStatus, String>((ref, groupId) {
   return ref.watch(groupsRepositoryProvider).watchGroupDrawStatus(groupId);
 });
+
+final groupRaffleStatusStreamProvider =
+    StreamProvider.autoDispose.family<RaffleStatus, String>((ref, groupId) {
+  return ref.watch(groupsRepositoryProvider).watchGroupRaffleStatus(groupId);
+});

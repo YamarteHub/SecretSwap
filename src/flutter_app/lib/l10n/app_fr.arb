@@ -886,5 +886,81 @@
   "chatSystemAutoCountdown007V1": "Il reste 7 jours. Ceux qui n'ont pas encore d'idée passent officiellement en mode recherche sérieuse.",
   "chatSystemAutoCountdown003V1": "Il reste 3 jours. Ce n'est plus de l'organisation : c'est une opération sauvetage.",
   "chatSystemAutoCountdown001V1": "Il reste 1 jour. Emballe, respire et fais comme si de rien n'était.",
-  "chatSystemAutoCountdown000V1": "Aujourd'hui, c'est le jour de l'échange. Place aux surprises, aux rires et à zéro aveu prématuré."
+  "chatSystemAutoCountdown000V1": "Aujourd'hui, c'est le jour de l'échange. Place aux surprises, aux rires et à zéro aveu prématuré.",
+  "dynamicsHomePrimaryCta": "Créer une dynamique",
+  "dynamicsSelectTitle": "Choisissez une dynamique",
+  "dynamicsSelectSubtitle": "Commencez avec une expérience prête aujourd'hui. D'autres modes arrivent bientôt.",
+  "dynamicsCardSecretSantaTitle": "Secret Santa",
+  "dynamicsCardSecretSantaBody": "Tirages privés, listes de souhaits et chat de groupe.",
+  "dynamicsCardRaffleTitle": "Tirage au sort",
+  "dynamicsCardRaffleBody": "Gagnants visibles pour tout le groupe. Pas de secrets ni de remises gérées.",
+  "dynamicsCardTeamsTitle": "Équipes",
+  "dynamicsCardPairingsTitle": "Appariements",
+  "dynamicsCardDuelsTitle": "Duels",
+  "dynamicsComingSoonBadge": "Bientôt",
+  "homeDynamicTypeSecretSanta": "Secret Santa",
+  "homeDynamicTypeRaffle": "Tirage au sort",
+  "homeRaffleStatePreparing": "En préparation",
+  "homeRaffleStateCompleted": "Tirage effectué",
+  "raffleWizardTitle": "Nouveau tirage",
+  "raffleWizardNameLabel": "Nom du tirage",
+  "raffleWizardWinnersLabel": "Nombre de gagnants",
+  "raffleWizardOwnerParticipatesTitle": "Vous participez ?",
+  "raffleWizardOwnerParticipatesYes": "Oui, je suis dans le tirage",
+  "raffleWizardOwnerParticipatesNo": "Non, j'organise seulement",
+  "raffleWizardEventOptional": "Date de l'événement (facultatif)",
+  "raffleWizardReviewTitle": "Vérification",
+  "raffleWizardReviewWinners": "{count} gagnant(s)",
+  "@raffleWizardReviewWinners": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "raffleWizardCreateCta": "Créer le tirage",
+  "raffleDetailInviteSection": "Invitation",
+  "raffleDetailAppMembersTitle": "Participants avec l'application",
+  "raffleDetailManualTitle": "Participants sans application",
+  "raffleDetailAddManualCta": "Ajouter une personne",
+  "raffleDetailRunRaffleCta": "Lancer le tirage",
+  "raffleDetailWinnersTitle": "Gagnants",
+  "raffleDetailShareCta": "Partager le résultat",
+  "raffleDetailCompletedHint": "Ce tirage est clos : vous ne pouvez pas modifier les participants ni relancer le tirage.",
+  "raffleManualEditTitle": "Modifier le participant",
+  "raffleManualDisplayNameLabel": "Nom affiché",
+  "raffleShareBody": "Nous avons des gagnants pour « {raffleName} » :\n{winners}\n\nRéalisé avec Tarci Secret.",
+  "@raffleShareBody": {
+    "placeholders": {
+      "raffleName": {
+        "type": "String"
+      },
+      "winners": {
+        "type": "String"
+      }
+    }
+  },
+  "functionsErrorRaffleResolvedInvitesClosed": "Ce tirage a déjà eu lieu et n'accepte plus de nouveaux participants.",
+  "functionsErrorRaffleInProgress": "Le tirage est en cours. Réessayez dans quelques secondes.",
+  "functionsErrorRaffleRotateLocked": "Impossible de faire tourner le code lorsque le tirage n'accepte plus de modifications.",
+  "functionsErrorRaffleAlreadyCompleted": "Ce tirage est déjà terminé.",
+  "functionsErrorRaffleTooManyWinners": "Il y a plus de gagnants que de participants éligibles.",
+  "functionsErrorRaffleInsufficientParticipants": "Il n'y a pas assez de participants pour ce tirage.",
+  "functionsErrorRaffleInvalidDynamic": "Cette action n'est pas disponible pour ce type de groupe.",
+  "functionsErrorChatNotAvailableForRaffle": "Le chat de groupe n'est pas disponible pour les tirages publics.",
+  "functionsErrorWishlistNotAvailableForRaffle": "Les listes de souhaits ne sont pas disponibles pour les tirages.",
+  "functionsErrorManagedParticipantsNotForRaffle": "Les participants gérés du Secret Santa ne s'appliquent pas aux tirages.",
+  "functionsErrorDrawNotForRaffle": "Le tirage Secret Santa n'est pas disponible pour les groupes de type tirage au sort.",
+  "functionsErrorAssignmentsNotForRaffle": "Les attributions secrètes ne s'appliquent pas à ce groupe.",
+  "raffleDetailEligibleCount": "Participants éligibles : {count}",
+  "@raffleDetailEligibleCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "raffleWizardPickEventDate": "Choisir la date",
+  "functionsErrorDrawNotSupportedForDynamic": "Le tirage Secret Santa n'est pas disponible pour ce type de groupe.",
+  "functionsErrorRaffleEditLocked": "Ce tirage ne permet plus de modifier les participants."
 }

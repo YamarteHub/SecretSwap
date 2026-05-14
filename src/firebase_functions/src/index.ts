@@ -1,4 +1,11 @@
 import { createGroup } from "./functions/createGroup";
+import { createRaffleGroup } from "./functions/createRaffleGroup";
+import { executeRaffle } from "./functions/executeRaffle";
+import {
+  createRaffleManualParticipant,
+  removeRaffleManualParticipant,
+  updateRaffleManualParticipant
+} from "./functions/raffleManualParticipants";
 import { getManagedAssignments } from "./functions/getManagedAssignments";
 import { getWishlist } from "./functions/getWishlist";
 import { setWishlist } from "./functions/setWishlist";
@@ -16,6 +23,11 @@ import { devRunTarciChatAutomation } from "./functions/devRunTarciChatAutomation
 
 export {
   createGroup,
+  createRaffleGroup,
+  executeRaffle,
+  createRaffleManualParticipant,
+  updateRaffleManualParticipant,
+  removeRaffleManualParticipant,
   createManagedParticipant,
   updateManagedParticipant,
   removeManagedParticipant,

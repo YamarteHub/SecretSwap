@@ -78,7 +78,14 @@ export const joinGroupByCode = onCall(
           name: string;
           lifecycleStatus?: "active" | "archived";
           drawStatus?: string;
+          dynamicType?: string;
+          raffleStatus?: string;
         };
+
+        const dynamicType =
+          typeof group.dynamicType === "string" && group.dynamicType.trim() !== ""
+            ? group.dynamicType.trim()
+            : "secret_santa";
 
         if (group.lifecycleStatus === "archived") {
           throw new AppError({
@@ -87,12 +94,23 @@ export const joinGroupByCode = onCall(
             message: "Group archived"
           });
         }
-        if (group.drawStatus === "drawing") {
-          throw new AppError({
-            code: "INVITE_ERROR",
-            reasonCode: "DRAW_IN_PROGRESS",
-            message: "Draw in progress"
-          });
+
+        if (dynamicType === "simple_raffle") {
+          if (group.raffleStatus === "drawing") {
+            throw new AppError({
+              code: "INVITE_ERROR",
+              reasonCode: "RAFFLE_IN_PROGRESS",
+              message: "Raffle in progress"
+            });
+          }
+        } else {
+          if (group.drawStatus === "drawing") {
+            throw new AppError({
+              code: "INVITE_ERROR",
+              reasonCode: "DRAW_IN_PROGRESS",
+              message: "Draw in progress"
+            });
+          }
         }
 
         const memberRef = db.doc(groupPaths.memberDoc(invite.groupId, uid));
@@ -116,7 +134,25 @@ export const joinGroupByCode = onCall(
           }
         }
 
-        if (group.drawStatus === "completed") {
+        if (dynamicType === "simple_raffle") {
+          if (group.raffleStatus === "completed") {
+            if (!memberSnap.exists) {
+              throw new AppError({
+                code: "FORBIDDEN",
+                reasonCode: "RAFFLE_RESOLVED_INVITES_CLOSED",
+                message: "Raffle completed; this group no longer accepts new participants via invite code"
+              });
+            }
+            const memberAfterChecks = memberSnap.data() as { memberState?: "active" | "left" | "removed" };
+            if (memberAfterChecks.memberState !== "active") {
+              throw new AppError({
+                code: "FORBIDDEN",
+                reasonCode: "RAFFLE_RESOLVED_INVITES_CLOSED",
+                message: "Raffle completed; this group no longer accepts new participants via invite code"
+              });
+            }
+          }
+        } else if (group.drawStatus === "completed") {
           if (!memberSnap.exists) {
             throw new AppError({
               code: "FORBIDDEN",

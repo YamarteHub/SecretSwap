@@ -23,11 +23,21 @@ bool _isEventCalendarDateBeforeToday(DateTime eventDate) {
   return e.isBefore(today);
 }
 
-/// Historial: sorteo completado, `eventDate` definida y ya pasada (solo día civil local).
+/// Historial: dinámica completada, `eventDate` definida y ya pasada (solo día civil local).
 bool _isHistoryFinishedByEventDate(GroupSummary g) {
-  return g.drawStatus == DrawStatus.completed &&
+  final completed = g.dynamicType == TarciDynamicType.simpleRaffle
+      ? g.raffleStatus == RaffleStatus.completed
+      : g.drawStatus == DrawStatus.completed;
+  return completed &&
       g.eventDate != null &&
       _isEventCalendarDateBeforeToday(g.eventDate!);
+}
+
+bool _isDashboardFlowCompleted(GroupSummary g) {
+  if (g.dynamicType == TarciDynamicType.simpleRaffle) {
+    return g.raffleStatus == RaffleStatus.completed;
+  }
+  return g.drawStatus == DrawStatus.completed;
 }
 
 String? _formatGroupDeliveryDateLine(BuildContext context, GroupSummary g) {
@@ -38,8 +48,8 @@ String? _formatGroupDeliveryDateLine(BuildContext context, GroupSummary g) {
 }
 
 int _compareActiveDashboardGroups(GroupSummary a, GroupSummary b) {
-  final ac = a.drawStatus == DrawStatus.completed;
-  final bc = b.drawStatus == DrawStatus.completed;
+  final ac = _isDashboardFlowCompleted(a);
+  final bc = _isDashboardFlowCompleted(b);
   if (ac != bc) return ac ? 1 : -1;
   if (!ac) return a.name.compareTo(b.name);
   final ae = a.eventDate;
@@ -63,6 +73,60 @@ int _compareHistoryDashboardGroups(GroupSummary a, GroupSummary b) {
     if (byEv != 0) return byEv;
   }
   return a.name.compareTo(b.name);
+}
+
+String _homeDynamicStatusChipLabel(BuildContext context, GroupSummary g) {
+  if (g.dynamicType == TarciDynamicType.simpleRaffle) {
+    switch (g.raffleStatus) {
+      case RaffleStatus.completed:
+        return context.l10n.homeRaffleStateCompleted;
+      case RaffleStatus.drawing:
+        return context.l10n.homeGroupDrawStateDrawing;
+      case RaffleStatus.failed:
+        return context.l10n.homeGroupDrawStateFailed;
+      case RaffleStatus.idle:
+        return context.l10n.homeRaffleStatePreparing;
+    }
+  }
+  return _homeDrawStatusChipLabel(context, g.drawStatus);
+}
+
+IconData _homeDynamicStatusChipIcon(GroupSummary g) {
+  if (g.dynamicType == TarciDynamicType.simpleRaffle) {
+    switch (g.raffleStatus) {
+      case RaffleStatus.completed:
+        return Icons.check_circle_outline;
+      case RaffleStatus.drawing:
+        return Icons.hourglass_top_rounded;
+      case RaffleStatus.failed:
+        return Icons.warning_amber_rounded;
+      case RaffleStatus.idle:
+        return Icons.tune_rounded;
+    }
+  }
+  if (g.drawStatus == DrawStatus.completed) return Icons.check_circle_outline;
+  if (g.drawStatus == DrawStatus.drawing) return Icons.hourglass_top_rounded;
+  if (g.drawStatus == DrawStatus.failed) return Icons.warning_amber_rounded;
+  return Icons.tune_rounded;
+}
+
+Color _homeDynamicStatusChipColor(GroupSummary g) {
+  if (g.dynamicType == TarciDynamicType.simpleRaffle) {
+    switch (g.raffleStatus) {
+      case RaffleStatus.completed:
+        return AppTheme.sageGreen;
+      case RaffleStatus.drawing:
+        return AppTheme.mutedGold;
+      case RaffleStatus.failed:
+        return AppTheme.softTerracotta;
+      case RaffleStatus.idle:
+        return AppTheme.deepPlumAlt;
+    }
+  }
+  if (g.drawStatus == DrawStatus.completed) return AppTheme.sageGreen;
+  if (g.drawStatus == DrawStatus.drawing) return AppTheme.mutedGold;
+  if (g.drawStatus == DrawStatus.failed) return AppTheme.softTerracotta;
+  return AppTheme.deepPlumAlt;
 }
 
 String _homeDrawStatusChipLabel(BuildContext context, DrawStatus status) {
@@ -265,7 +329,7 @@ class _GroupsHomeScreenState extends ConsumerState<GroupsHomeScreen> {
                 const SizedBox(height: 10),
                 _HomePrimaryActions(
                   onCreate: () async {
-                    await context.push(AppRoutes.createGroup);
+                    await context.push(AppRoutes.dynamicsSelect);
                     if (context.mounted) {
                       ref.invalidate(myGroupsProvider);
                     }
@@ -341,6 +405,7 @@ class _GroupsHomeScreenState extends ConsumerState<GroupsHomeScreen> {
                   ...historyFinished.map(
                     (g) => _GroupCard(
                       summary: g,
+                      completed: true,
                       eventDateLine: _formatGroupDeliveryDateLine(context, g),
                       onTap: () => context.push('/groups/${g.groupId}'),
                     ),
@@ -428,8 +493,8 @@ class _HomePrimaryActions extends StatelessWidget {
             ),
           ),
           onPressed: onCreate,
-          icon: const Icon(Icons.card_giftcard_rounded),
-          label: Text(l10n.createSecretFriend),
+          icon: const Icon(Icons.auto_awesome_rounded),
+          label: Text(l10n.dynamicsHomePrimaryCta),
         ),
         const SizedBox(height: 12),
         OutlinedButton.icon(
@@ -523,27 +588,22 @@ class _GroupCard extends StatelessWidget {
                           spacing: 6,
                           runSpacing: 6,
                           children: [
-                            if (!completed)
+                            if (!completed) ...[
                               _SoftChip(
-                                label: _homeDrawStatusChipLabel(
-                                  context,
-                                  summary.drawStatus,
-                                ),
-                                icon: summary.drawStatus == DrawStatus.completed
-                                    ? Icons.check_circle_outline
-                                    : summary.drawStatus == DrawStatus.drawing
-                                        ? Icons.hourglass_top_rounded
-                                        : summary.drawStatus == DrawStatus.failed
-                                            ? Icons.warning_amber_rounded
-                                            : Icons.tune_rounded,
-                                color: summary.drawStatus == DrawStatus.completed
-                                    ? AppTheme.sageGreen
-                                    : summary.drawStatus == DrawStatus.drawing
-                                        ? AppTheme.mutedGold
-                                        : summary.drawStatus == DrawStatus.failed
-                                            ? AppTheme.softTerracotta
-                                            : AppTheme.deepPlumAlt,
+                                label: summary.dynamicType == TarciDynamicType.simpleRaffle
+                                    ? l10n.homeDynamicTypeRaffle
+                                    : l10n.homeDynamicTypeSecretSanta,
+                                icon: summary.dynamicType == TarciDynamicType.simpleRaffle
+                                    ? Icons.casino_outlined
+                                    : Icons.card_giftcard_outlined,
+                                color: AppTheme.deepPlumAlt,
                               ),
+                              _SoftChip(
+                                label: _homeDynamicStatusChipLabel(context, summary),
+                                icon: _homeDynamicStatusChipIcon(summary),
+                                color: _homeDynamicStatusChipColor(summary),
+                              ),
+                            ],
                             _SoftChip(
                               label: isOwner
                                   ? l10n.groupRoleAdmin

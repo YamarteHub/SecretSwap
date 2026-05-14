@@ -42,6 +42,8 @@ export const rotateInviteCode = onCall(
               ownerUid: string;
               lifecycleStatus?: "active" | "archived";
               drawStatus?: string;
+              dynamicType?: string;
+              raffleStatus?: string;
             };
 
             if (group.ownerUid != uid) {
@@ -58,7 +60,21 @@ export const rotateInviteCode = onCall(
                 message: "Group archived"
               });
             }
-            if (group.drawStatus == "drawing" || group.drawStatus == "completed") {
+
+            const dynamicType =
+              typeof group.dynamicType === "string" && group.dynamicType.trim() !== ""
+                ? group.dynamicType.trim()
+                : "secret_santa";
+
+            if (dynamicType === "simple_raffle") {
+              if (group.raffleStatus === "drawing" || group.raffleStatus === "completed") {
+                throw new AppError({
+                  code: "INVITE_ERROR",
+                  reasonCode: "RAFFLE_ROTATE_LOCKED",
+                  message: "Cannot rotate invite code after raffle is resolved"
+                });
+              }
+            } else if (group.drawStatus == "drawing" || group.drawStatus == "completed") {
               throw new AppError({
                 code: "INVITE_ERROR",
                 reasonCode: "DRAW_NOT_IDLE",

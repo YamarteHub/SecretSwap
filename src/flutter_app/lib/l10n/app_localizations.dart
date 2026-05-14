@@ -3439,6 +3439,318 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Hoy es el intercambio. Que haya sorpresas, risas y cero confesiones antes de tiempo.'**
   String get chatSystemAutoCountdown000V1;
+
+  /// No description provided for @dynamicsHomePrimaryCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Crear dinámica'**
+  String get dynamicsHomePrimaryCta;
+
+  /// No description provided for @dynamicsSelectTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Elige una dinámica'**
+  String get dynamicsSelectTitle;
+
+  /// No description provided for @dynamicsSelectSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Empieza con una experiencia lista hoy. Más modos llegarán pronto.'**
+  String get dynamicsSelectSubtitle;
+
+  /// No description provided for @dynamicsCardSecretSantaTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Amigo secreto'**
+  String get dynamicsCardSecretSantaTitle;
+
+  /// No description provided for @dynamicsCardSecretSantaBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Asignaciones privadas, listas de deseos y chat de grupo.'**
+  String get dynamicsCardSecretSantaBody;
+
+  /// No description provided for @dynamicsCardRaffleTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Sorteo'**
+  String get dynamicsCardRaffleTitle;
+
+  /// No description provided for @dynamicsCardRaffleBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Ganadores públicos para todo el grupo. Sin secretos ni entregas gestionadas.'**
+  String get dynamicsCardRaffleBody;
+
+  /// No description provided for @dynamicsCardTeamsTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Equipos'**
+  String get dynamicsCardTeamsTitle;
+
+  /// No description provided for @dynamicsCardPairingsTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Emparejamientos'**
+  String get dynamicsCardPairingsTitle;
+
+  /// No description provided for @dynamicsCardDuelsTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Duelos'**
+  String get dynamicsCardDuelsTitle;
+
+  /// No description provided for @dynamicsComingSoonBadge.
+  ///
+  /// In es, this message translates to:
+  /// **'Próximamente'**
+  String get dynamicsComingSoonBadge;
+
+  /// No description provided for @homeDynamicTypeSecretSanta.
+  ///
+  /// In es, this message translates to:
+  /// **'Amigo secreto'**
+  String get homeDynamicTypeSecretSanta;
+
+  /// No description provided for @homeDynamicTypeRaffle.
+  ///
+  /// In es, this message translates to:
+  /// **'Sorteo'**
+  String get homeDynamicTypeRaffle;
+
+  /// No description provided for @homeRaffleStatePreparing.
+  ///
+  /// In es, this message translates to:
+  /// **'Preparando'**
+  String get homeRaffleStatePreparing;
+
+  /// No description provided for @homeRaffleStateCompleted.
+  ///
+  /// In es, this message translates to:
+  /// **'Sorteo realizado'**
+  String get homeRaffleStateCompleted;
+
+  /// No description provided for @raffleWizardTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Nuevo sorteo'**
+  String get raffleWizardTitle;
+
+  /// No description provided for @raffleWizardNameLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre del sorteo'**
+  String get raffleWizardNameLabel;
+
+  /// No description provided for @raffleWizardWinnersLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Número de ganadores'**
+  String get raffleWizardWinnersLabel;
+
+  /// No description provided for @raffleWizardOwnerParticipatesTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Participas tú?'**
+  String get raffleWizardOwnerParticipatesTitle;
+
+  /// No description provided for @raffleWizardOwnerParticipatesYes.
+  ///
+  /// In es, this message translates to:
+  /// **'Sí, entro en el bombo'**
+  String get raffleWizardOwnerParticipatesYes;
+
+  /// No description provided for @raffleWizardOwnerParticipatesNo.
+  ///
+  /// In es, this message translates to:
+  /// **'No, solo organizo'**
+  String get raffleWizardOwnerParticipatesNo;
+
+  /// No description provided for @raffleWizardEventOptional.
+  ///
+  /// In es, this message translates to:
+  /// **'Fecha del evento (opcional)'**
+  String get raffleWizardEventOptional;
+
+  /// No description provided for @raffleWizardReviewTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Revisión'**
+  String get raffleWizardReviewTitle;
+
+  /// No description provided for @raffleWizardReviewWinners.
+  ///
+  /// In es, this message translates to:
+  /// **'{count} ganador(es)'**
+  String raffleWizardReviewWinners(int count);
+
+  /// No description provided for @raffleWizardCreateCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Crear sorteo'**
+  String get raffleWizardCreateCta;
+
+  /// No description provided for @raffleDetailInviteSection.
+  ///
+  /// In es, this message translates to:
+  /// **'Invitación'**
+  String get raffleDetailInviteSection;
+
+  /// No description provided for @raffleDetailAppMembersTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Participantes con app'**
+  String get raffleDetailAppMembersTitle;
+
+  /// No description provided for @raffleDetailManualTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Participantes sin app'**
+  String get raffleDetailManualTitle;
+
+  /// No description provided for @raffleDetailAddManualCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Añadir persona'**
+  String get raffleDetailAddManualCta;
+
+  /// No description provided for @raffleDetailRunRaffleCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Realizar sorteo'**
+  String get raffleDetailRunRaffleCta;
+
+  /// No description provided for @raffleDetailWinnersTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Ganadores'**
+  String get raffleDetailWinnersTitle;
+
+  /// No description provided for @raffleDetailShareCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Compartir resultado'**
+  String get raffleDetailShareCta;
+
+  /// No description provided for @raffleDetailCompletedHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Este sorteo ya está cerrado: no se pueden cambiar participantes ni volver a sortear.'**
+  String get raffleDetailCompletedHint;
+
+  /// No description provided for @raffleManualEditTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Editar participante'**
+  String get raffleManualEditTitle;
+
+  /// No description provided for @raffleManualDisplayNameLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre visible'**
+  String get raffleManualDisplayNameLabel;
+
+  /// No description provided for @raffleShareBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya tenemos ganadores de «{raffleName}»:\n{winners}\n\nHecho con Tarci Secret.'**
+  String raffleShareBody(String raffleName, String winners);
+
+  /// No description provided for @functionsErrorRaffleResolvedInvitesClosed.
+  ///
+  /// In es, this message translates to:
+  /// **'Este sorteo ya se realizó y ya no admite nuevos participantes.'**
+  String get functionsErrorRaffleResolvedInvitesClosed;
+
+  /// No description provided for @functionsErrorRaffleInProgress.
+  ///
+  /// In es, this message translates to:
+  /// **'El sorteo está en curso. Inténtalo en unos segundos.'**
+  String get functionsErrorRaffleInProgress;
+
+  /// No description provided for @functionsErrorRaffleRotateLocked.
+  ///
+  /// In es, this message translates to:
+  /// **'No se puede rotar el código cuando el sorteo ya no admite cambios.'**
+  String get functionsErrorRaffleRotateLocked;
+
+  /// No description provided for @functionsErrorRaffleAlreadyCompleted.
+  ///
+  /// In es, this message translates to:
+  /// **'Este sorteo ya se completó.'**
+  String get functionsErrorRaffleAlreadyCompleted;
+
+  /// No description provided for @functionsErrorRaffleTooManyWinners.
+  ///
+  /// In es, this message translates to:
+  /// **'Hay más ganadores que participantes elegibles.'**
+  String get functionsErrorRaffleTooManyWinners;
+
+  /// No description provided for @functionsErrorRaffleInsufficientParticipants.
+  ///
+  /// In es, this message translates to:
+  /// **'No hay participantes suficientes para este sorteo.'**
+  String get functionsErrorRaffleInsufficientParticipants;
+
+  /// No description provided for @functionsErrorRaffleInvalidDynamic.
+  ///
+  /// In es, this message translates to:
+  /// **'Esta acción no está disponible para este tipo de grupo.'**
+  String get functionsErrorRaffleInvalidDynamic;
+
+  /// No description provided for @functionsErrorChatNotAvailableForRaffle.
+  ///
+  /// In es, this message translates to:
+  /// **'El chat de grupo no está disponible en sorteos públicos.'**
+  String get functionsErrorChatNotAvailableForRaffle;
+
+  /// No description provided for @functionsErrorWishlistNotAvailableForRaffle.
+  ///
+  /// In es, this message translates to:
+  /// **'La lista de deseos no está disponible en sorteos.'**
+  String get functionsErrorWishlistNotAvailableForRaffle;
+
+  /// No description provided for @functionsErrorManagedParticipantsNotForRaffle.
+  ///
+  /// In es, this message translates to:
+  /// **'Los participantes gestionados de amigo secreto no aplican a sorteos.'**
+  String get functionsErrorManagedParticipantsNotForRaffle;
+
+  /// No description provided for @functionsErrorDrawNotForRaffle.
+  ///
+  /// In es, this message translates to:
+  /// **'El sorteo de amigo secreto no está disponible en grupos de tipo sorteo.'**
+  String get functionsErrorDrawNotForRaffle;
+
+  /// No description provided for @functionsErrorAssignmentsNotForRaffle.
+  ///
+  /// In es, this message translates to:
+  /// **'Las asignaciones secretas no aplican a este grupo.'**
+  String get functionsErrorAssignmentsNotForRaffle;
+
+  /// No description provided for @raffleDetailEligibleCount.
+  ///
+  /// In es, this message translates to:
+  /// **'Participantes en el bombo: {count}'**
+  String raffleDetailEligibleCount(int count);
+
+  /// No description provided for @raffleWizardPickEventDate.
+  ///
+  /// In es, this message translates to:
+  /// **'Seleccionar fecha'**
+  String get raffleWizardPickEventDate;
+
+  /// No description provided for @functionsErrorDrawNotSupportedForDynamic.
+  ///
+  /// In es, this message translates to:
+  /// **'El sorteo de amigo secreto no está disponible para este tipo de grupo.'**
+  String get functionsErrorDrawNotSupportedForDynamic;
+
+  /// No description provided for @functionsErrorRaffleEditLocked.
+  ///
+  /// In es, this message translates to:
+  /// **'Este sorteo ya no admite cambios en participantes.'**
+  String get functionsErrorRaffleEditLocked;
 }
 
 class _AppLocalizationsDelegate

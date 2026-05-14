@@ -38,6 +38,18 @@ export const sendGroupChatMessage = onCall(
       if (!groupSnap.exists) {
         throw new AppError({ code: "NOT_FOUND", reasonCode: "GROUP_NOT_FOUND", message: "Group not found" });
       }
+      const gDyn = groupSnap.data() as { dynamicType?: string };
+      const dyn =
+        typeof gDyn.dynamicType === "string" && gDyn.dynamicType.trim() !== ""
+          ? gDyn.dynamicType.trim()
+          : "secret_santa";
+      if (dyn === "simple_raffle") {
+        throw new AppError({
+          code: "FORBIDDEN",
+          reasonCode: "CHAT_NOT_AVAILABLE_FOR_RAFFLE",
+          message: "Group chat is disabled for raffle groups"
+        });
+      }
       if (!memberSnap.exists) {
         throw new AppError({
           code: "FORBIDDEN",

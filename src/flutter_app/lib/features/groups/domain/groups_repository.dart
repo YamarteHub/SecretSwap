@@ -19,6 +19,38 @@ abstract interface class GroupsRepository {
   /// Emite el estado de sorteo de `groups/{groupId}` (misma lectura que en `getGroupDetail`).
   Stream<DrawStatus> watchGroupDrawStatus(String groupId);
 
+  /// Estado del sorteo público (`raffleStatus`) para grupos `simple_raffle`.
+  Stream<RaffleStatus> watchGroupRaffleStatus(String groupId);
+
+  Future<CreatedGroup> createRaffleGroup({
+    required String name,
+    required String nickname,
+    required int raffleWinnerCount,
+    required bool ownerParticipatesInRaffle,
+    DateTime? eventDate,
+  });
+
+  Future<RaffleExecuteResult> executeRaffle({
+    required String groupId,
+    required String idempotencyKey,
+  });
+
+  Future<String> createRaffleManualParticipant({
+    required String groupId,
+    required String displayName,
+  });
+
+  Future<void> updateRaffleManualParticipant({
+    required String groupId,
+    required String participantId,
+    required String displayName,
+  });
+
+  Future<void> removeRaffleManualParticipant({
+    required String groupId,
+    required String participantId,
+  });
+
   /// Crea un subgrupo (Firestore: `groups/{groupId}/subgroups/{id}`).
   Future<Subgroup> createSubgroup({
     required String groupId,

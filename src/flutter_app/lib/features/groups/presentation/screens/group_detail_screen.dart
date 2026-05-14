@@ -17,6 +17,7 @@ import '../../../../l10n/app_localizations.dart';
 import '../../../chat/presentation/providers.dart';
 import '../../../chat/presentation/screens/group_chat_screen.dart';
 import '../../../draw/presentation/providers.dart';
+import '../../../raffle/presentation/screens/raffle_group_detail_screen.dart';
 import '../../../wishlist/presentation/widgets/group_wishlist_summary_section.dart';
 import '../../../wishlist/presentation/providers.dart';
 import '../../domain/group_exceptions.dart';
@@ -227,8 +228,13 @@ String _shortNamesList(List<String> names, {int maxVisible = 4}) {
 
 class GroupDetailScreen extends ConsumerWidget {
   final String groupId;
+  final String? initialInviteCode;
 
-  const GroupDetailScreen({super.key, required this.groupId});
+  const GroupDetailScreen({
+    super.key,
+    required this.groupId,
+    this.initialInviteCode,
+  });
 
   void _goBack(BuildContext context) {
     if (context.canPop()) {
@@ -270,37 +276,74 @@ class GroupDetailScreen extends ConsumerWidget {
       });
     });
 
+    ref.listen(groupRaffleStatusStreamProvider(groupId), (previous, next) {
+      next.whenData((status) {
+        if (status != RaffleStatus.completed) return;
+        final prevStatus = previous?.asData?.value;
+        if (prevStatus == RaffleStatus.completed) return;
+        ref.invalidate(groupDetailProvider(groupId));
+        ref.invalidate(myGroupsProvider);
+      });
+    });
+
     return Scaffold(
       backgroundColor: AppTheme.warmIvory,
       appBar: _buildAppBar(context, l10n),
       body: detailAsync.when(
-        data: (detail) => _GroupDetailBody(
-          detail: detail,
-          currentUid: uid,
-          groupId: groupId,
-          onAfterDraw: () {
-            ref.invalidate(groupDetailProvider(groupId));
-            ref.invalidate(myGroupsProvider);
-            ref.invalidate(myParticipantIdForWishlistProvider(groupId));
-          },
-          onReload: () {
-            ref.invalidate(groupDetailProvider(groupId));
-            ref.invalidate(myGroupsProvider);
-            ref.invalidate(myParticipantIdForWishlistProvider(groupId));
-          },
-          onGroupDeletedSuccess: () {
-            ref.invalidate(myGroupsProvider);
-            ref.invalidate(groupDetailProvider(groupId));
-            ref.invalidate(myParticipantIdForWishlistProvider(groupId));
-            ref.invalidate(groupDrawStatusStreamProvider(groupId));
-            ref.invalidate(groupChatMessagesProvider(groupId));
-            if (!context.mounted) return;
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(context.l10n.groupDeleteSuccessSnackbar)),
+        data: (detail) {
+          if (detail.dynamicType == TarciDynamicType.simpleRaffle) {
+            return RaffleGroupDetailScreen(
+              detail: detail,
+              groupId: groupId,
+              currentUid: uid,
+              initialInviteCode: initialInviteCode,
+              onReload: () {
+                ref.invalidate(groupDetailProvider(groupId));
+                ref.invalidate(myGroupsProvider);
+              },
+              onGroupDeletedSuccess: () {
+                ref.invalidate(myGroupsProvider);
+                ref.invalidate(groupDetailProvider(groupId));
+                ref.invalidate(groupDrawStatusStreamProvider(groupId));
+                ref.invalidate(groupRaffleStatusStreamProvider(groupId));
+                ref.invalidate(groupChatMessagesProvider(groupId));
+                if (!context.mounted) return;
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(context.l10n.groupDeleteSuccessSnackbar)),
+                );
+                context.go(AppRoutes.groupsHome);
+              },
             );
-            context.go(AppRoutes.groupsHome);
-          },
-        ),
+          }
+          return _GroupDetailBody(
+            detail: detail,
+            currentUid: uid,
+            groupId: groupId,
+            onAfterDraw: () {
+              ref.invalidate(groupDetailProvider(groupId));
+              ref.invalidate(myGroupsProvider);
+              ref.invalidate(myParticipantIdForWishlistProvider(groupId));
+            },
+            onReload: () {
+              ref.invalidate(groupDetailProvider(groupId));
+              ref.invalidate(myGroupsProvider);
+              ref.invalidate(myParticipantIdForWishlistProvider(groupId));
+            },
+            onGroupDeletedSuccess: () {
+              ref.invalidate(myGroupsProvider);
+              ref.invalidate(groupDetailProvider(groupId));
+              ref.invalidate(myParticipantIdForWishlistProvider(groupId));
+              ref.invalidate(groupDrawStatusStreamProvider(groupId));
+              ref.invalidate(groupRaffleStatusStreamProvider(groupId));
+              ref.invalidate(groupChatMessagesProvider(groupId));
+              if (!context.mounted) return;
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(context.l10n.groupDeleteSuccessSnackbar)),
+              );
+              context.go(AppRoutes.groupsHome);
+            },
+          );
+        },
         loading: () => const _DetailLoadingState(),
         error: (e, _) => _DetailErrorState(
           message: e is GroupDocumentMissingException

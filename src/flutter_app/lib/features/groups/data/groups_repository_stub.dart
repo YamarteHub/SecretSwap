@@ -45,6 +45,55 @@ class GroupsRepositoryStub implements GroupsRepository {
   }
 
   @override
+  Stream<RaffleStatus> watchGroupRaffleStatus(String groupId) {
+    return Stream.value(RaffleStatus.idle);
+  }
+
+  @override
+  Future<CreatedGroup> createRaffleGroup({
+    required String name,
+    required String nickname,
+    required int raffleWinnerCount,
+    required bool ownerParticipatesInRaffle,
+    DateTime? eventDate,
+  }) async {
+    throw UnimplementedError('createRaffleGroup not wired');
+  }
+
+  @override
+  Future<RaffleExecuteResult> executeRaffle({
+    required String groupId,
+    required String idempotencyKey,
+  }) async {
+    throw UnimplementedError('executeRaffle not wired');
+  }
+
+  @override
+  Future<String> createRaffleManualParticipant({
+    required String groupId,
+    required String displayName,
+  }) async {
+    throw UnimplementedError('createRaffleManualParticipant not wired');
+  }
+
+  @override
+  Future<void> updateRaffleManualParticipant({
+    required String groupId,
+    required String participantId,
+    required String displayName,
+  }) async {
+    throw UnimplementedError('updateRaffleManualParticipant not wired');
+  }
+
+  @override
+  Future<void> removeRaffleManualParticipant({
+    required String groupId,
+    required String participantId,
+  }) async {
+    throw UnimplementedError('removeRaffleManualParticipant not wired');
+  }
+
+  @override
   Future<Subgroup> createSubgroup({
     required String groupId,
     required String name,

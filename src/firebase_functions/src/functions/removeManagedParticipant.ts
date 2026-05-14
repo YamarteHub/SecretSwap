@@ -27,7 +27,18 @@ export const removeManagedParticipant = onCall(
           message: "Group not found"
         });
       }
-      const group = groupSnap.data() as { ownerUid?: string; drawStatus?: string };
+      const group = groupSnap.data() as { ownerUid?: string; drawStatus?: string; dynamicType?: string };
+      const dt =
+        typeof group.dynamicType === "string" && group.dynamicType.trim() !== ""
+          ? group.dynamicType.trim()
+          : "secret_santa";
+      if (dt === "simple_raffle") {
+        throw new AppError({
+          code: "VALIDATION_ERROR",
+          reasonCode: "MANAGED_PARTICIPANTS_NOT_FOR_RAFFLE",
+          message: "Managed participants are not used for raffle groups"
+        });
+      }
       if (group.ownerUid !== uid) {
         throw new AppError({
           code: "FORBIDDEN",

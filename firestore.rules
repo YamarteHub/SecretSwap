@@ -182,6 +182,11 @@ service cloud.firestore {
         }
       }
 
+      match /raffleExecutions/{executionId} {
+        allow read: if isActiveMember(groupId);
+        allow write: if false;
+      }
+
       // Incluye invites/current — MVP sin lectura desde cliente
       match /invites/{inviteId} {
         allow read, write: if false;

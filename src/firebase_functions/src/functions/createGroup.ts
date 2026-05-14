@@ -60,6 +60,8 @@ export const createGroup = onCall(async (req: CallableRequest<unknown>): Promise
             name: body.name,
             ownerUid: uid,
             lifecycleStatus: "active",
+            dynamicType: "secret_santa",
+            resultVisibility: "private_per_participant",
             drawStatus: DrawStatusSchema.enum.idle,
             rulesVersionCurrent,
             drawingLock: null,

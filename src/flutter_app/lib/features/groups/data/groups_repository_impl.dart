@@ -142,6 +142,9 @@ class GroupsRepositoryImpl implements GroupsRepository {
     final drawById = <String, DrawStatus>{};
     final lastDrawAtById = <String, DateTime?>{};
     final eventDateById = <String, DateTime?>{};
+    final dynamicById = <String, TarciDynamicType>{};
+    final raffleStatusById = <String, RaffleStatus>{};
+    final lastRaffleAtById = <String, DateTime?>{};
     if (ids.isNotEmpty) {
       final groupSnaps = await Future.wait(
         ids.map((id) => _firestore.doc('groups/$id').get()),
@@ -155,6 +158,10 @@ class GroupsRepositoryImpl implements GroupsRepository {
         lastDrawAtById[gid] =
             _readFirestoreOptionalDate(data, 'lastDrawCompletedAt');
         eventDateById[gid] = _readFirestoreOptionalDate(data, 'eventDate');
+        dynamicById[gid] = parseTarciDynamicType(data['dynamicType'] as String?);
+        raffleStatusById[gid] = parseRaffleStatus(data['raffleStatus'] as String?);
+        lastRaffleAtById[gid] =
+            _readFirestoreOptionalDate(data, 'lastRaffleCompletedAt');
       }
     }
     return rows
@@ -167,7 +174,10 @@ class GroupsRepositoryImpl implements GroupsRepository {
             drawStatus: drawById[g.groupId] ??
                 drawFromUserRow[g.groupId] ??
                 DrawStatus.idle,
+            dynamicType: dynamicById[g.groupId] ?? TarciDynamicType.secretSanta,
+            raffleStatus: raffleStatusById[g.groupId] ?? RaffleStatus.idle,
             lastDrawCompletedAt: lastDrawAtById[g.groupId],
+            lastRaffleCompletedAt: lastRaffleAtById[g.groupId],
             eventDate: eventDateById[g.groupId],
           ),
         )
@@ -185,6 +195,16 @@ class GroupsRepositoryImpl implements GroupsRepository {
   }
 
   @override
+  Stream<RaffleStatus> watchGroupRaffleStatus(String groupId) {
+    return _firestore.doc('groups/$groupId').snapshots().map((snap) {
+      if (!snap.exists) return RaffleStatus.idle;
+      final g = snap.data();
+      if (g == null) return RaffleStatus.idle;
+      return parseRaffleStatus(g['raffleStatus'] as String?);
+    });
+  }
+
+  @override
   Future<GroupDetail> getGroupDetail(String groupId) async {
     final gRef = _firestore.doc('groups/$groupId');
     final gSnap = await gRef.get();
@@ -195,13 +215,17 @@ class GroupsRepositoryImpl implements GroupsRepository {
     final rulesVersion = (g['rulesVersionCurrent'] as num?)?.toInt() ?? 1;
     final ownerUid = (g['ownerUid'] as String?) ?? '';
     final isDetailOwner = _uid == ownerUid;
+    final dynamicType = parseTarciDynamicType(g['dynamicType'] as String?);
+    final isRaffle = dynamicType == TarciDynamicType.simpleRaffle;
 
-    final participantsFuture = isDetailOwner
+    final participantsFuture = isRaffle
         ? _firestore.collection('groups/$groupId/participants').get()
-        : _firestore
-            .collection('groups/$groupId/participants')
-            .where('managedByUid', isEqualTo: _uid)
-            .get();
+        : (isDetailOwner
+              ? _firestore.collection('groups/$groupId/participants').get()
+              : _firestore
+                    .collection('groups/$groupId/participants')
+                    .where('managedByUid', isEqualTo: _uid)
+                    .get());
 
     final results = await Future.wait([
       _firestore.doc('groups/$groupId/rules/$rulesVersion').get(),
@@ -243,7 +267,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
     }).toList()
       ..sort((a, b) => a.name.compareTo(b.name));
 
-    final managedParticipants =
+    final allParticipants =
         participantsSnap.docs
             .map((doc) {
               final p = doc.data();
@@ -274,17 +298,61 @@ class GroupsRepositoryImpl implements GroupsRepository {
             .toList()
           ..sort((a, b) => a.displayName.compareTo(b.displayName));
 
+    final raffleManualParticipants =
+        allParticipants
+            .where((p) => p.participantType == GroupParticipantType.raffleManual)
+            .map(
+              (p) => RaffleManualParticipant(
+                participantId: p.participantId,
+                displayName: p.displayName,
+              ),
+            )
+            .toList()
+          ..sort((a, b) => a.displayName.compareTo(b.displayName));
+
+    final managedParticipants =
+        allParticipants
+            .where((p) => p.participantType != GroupParticipantType.raffleManual)
+            .toList();
+
+    final lastRaffleIdRaw = g['lastRaffleExecutionId'] as String?;
+    final lastRaffleId =
+        lastRaffleIdRaw != null && lastRaffleIdRaw.trim().isNotEmpty
+        ? lastRaffleIdRaw.trim()
+        : null;
+    final lastRaffleExecution = lastRaffleId != null
+        ? await _fetchRaffleExecutionSummary(groupId, lastRaffleId)
+        : null;
+
+    final resultVisibility = parseResultVisibility(
+      g['resultVisibility'] as String?,
+      fallbackDynamic: dynamicType,
+    );
+    final raffleWinnerCount = (g['raffleWinnerCount'] as num?)?.toInt() ?? 1;
+    final ownerParticipatesInRaffle =
+        g['ownerParticipatesInRaffle'] as bool? ?? true;
+
     return GroupDetail(
       groupId: g['groupId'] as String? ?? groupId,
       name: g['name'] as String? ?? '',
       ownerUid: g['ownerUid'] as String? ?? '',
+      dynamicType: dynamicType,
+      resultVisibility: resultVisibility,
       drawStatus: _drawStatusFromGroupMap(g),
+      raffleStatus: parseRaffleStatus(g['raffleStatus'] as String?),
+      raffleWinnerCount: raffleWinnerCount,
+      ownerParticipatesInRaffle: ownerParticipatesInRaffle,
+      lastRaffleExecutionId: lastRaffleId,
+      lastRaffleExecution: lastRaffleExecution,
+      raffleManualParticipants: raffleManualParticipants,
       rulesVersionCurrent: rulesVersion,
       drawSubgroupRule: drawSubgroupRule,
       currentExecutionId: g['currentExecutionId'] as String?,
       lastExecutionId: g['lastExecutionId'] as String?,
       lastDrawCompletedAt:
           _readFirestoreOptionalDate(g, 'lastDrawCompletedAt'),
+      lastRaffleCompletedAt:
+          _readFirestoreOptionalDate(g, 'lastRaffleCompletedAt'),
       eventDate: _readFirestoreOptionalDate(g, 'eventDate'),
       subgroups: subgroups,
       members: members,
@@ -495,9 +563,172 @@ class GroupsRepositoryImpl implements GroupsRepository {
   }
 
   @override
+  Future<CreatedGroup> createRaffleGroup({
+    required String name,
+    required String nickname,
+    required int raffleWinnerCount,
+    required bool ownerParticipatesInRaffle,
+    DateTime? eventDate,
+  }) async {
+    final callable = _functions.httpsCallable('createRaffleGroup');
+    final payload = <String, dynamic>{
+      'name': name,
+      'nickname': nickname,
+      'raffleWinnerCount': raffleWinnerCount,
+      'ownerParticipatesInRaffle': ownerParticipatesInRaffle,
+    };
+    if (eventDate != null) {
+      final day = DateTime(
+        eventDate.year,
+        eventDate.month,
+        eventDate.day,
+      );
+      payload['eventDateEpochMs'] = day.millisecondsSinceEpoch;
+      payload['eventDateDayKey'] = DateFormat('yyyy-MM-dd').format(day);
+      try {
+        final tz = await FlutterTimezone.getLocalTimezone();
+        if (tz.isNotEmpty) {
+          payload['eventTimeZone'] = tz;
+        }
+      } catch (_) {}
+    }
+    final result = await callable.call(payload);
+    final data = _asStringKeyMap(result.data);
+    final gid = data['groupId'] as String?;
+    final inviteCode = data['inviteCode'] as String?;
+    if (gid == null || inviteCode == null) {
+      throw StateError('createRaffleGroup: faltan groupId o inviteCode');
+    }
+    return CreatedGroup(groupId: gid, inviteCode: inviteCode);
+  }
+
+  @override
+  Future<RaffleExecuteResult> executeRaffle({
+    required String groupId,
+    required String idempotencyKey,
+  }) async {
+    final callable = _functions.httpsCallable('executeRaffle');
+    final result = await callable.call(<String, dynamic>{
+      'groupId': groupId,
+      'idempotencyKey': idempotencyKey,
+    });
+    final data = _asStringKeyMap(result.data);
+    final executionId = data['executionId'] as String?;
+    final winnersRaw = data['winnersSnapshot'];
+    final winners = <RaffleWinnerSnapshot>[];
+    if (winnersRaw is List) {
+      for (final item in winnersRaw) {
+        if (item is! Map) continue;
+        final m = Map<String, dynamic>.from(item);
+        final pid = m['participantId'] as String?;
+        final dn = m['displayName'] as String?;
+        final st = m['sourceType'] as String?;
+        if (pid == null || pid.isEmpty || dn == null) continue;
+        winners.add(
+          RaffleWinnerSnapshot(
+            participantId: pid,
+            displayName: dn,
+            sourceType: st ?? 'app_member',
+            memberUid: m['memberUid'] as String?,
+          ),
+        );
+      }
+    }
+    if (executionId == null || executionId.isEmpty) {
+      throw StateError('executeRaffle: falta executionId');
+    }
+    return RaffleExecuteResult(
+      executionId: executionId,
+      winnersSnapshot: winners,
+    );
+  }
+
+  @override
+  Future<String> createRaffleManualParticipant({
+    required String groupId,
+    required String displayName,
+  }) async {
+    final callable = _functions.httpsCallable('createRaffleManualParticipant');
+    final result = await callable.call(<String, dynamic>{
+      'groupId': groupId,
+      'displayName': displayName.trim(),
+    });
+    final data = _asStringKeyMap(result.data);
+    final id = data['participantId'] as String?;
+    if (id == null || id.isEmpty) {
+      throw StateError('createRaffleManualParticipant: falta participantId');
+    }
+    return id;
+  }
+
+  @override
+  Future<void> updateRaffleManualParticipant({
+    required String groupId,
+    required String participantId,
+    required String displayName,
+  }) async {
+    final callable = _functions.httpsCallable('updateRaffleManualParticipant');
+    await callable.call(<String, dynamic>{
+      'groupId': groupId,
+      'participantId': participantId,
+      'displayName': displayName.trim(),
+    });
+  }
+
+  @override
+  Future<void> removeRaffleManualParticipant({
+    required String groupId,
+    required String participantId,
+  }) async {
+    final callable = _functions.httpsCallable('removeRaffleManualParticipant');
+    await callable.call(<String, dynamic>{
+      'groupId': groupId,
+      'participantId': participantId,
+    });
+  }
+
+  @override
   Future<void> deleteGroup(String groupId) async {
     final callable = _functions.httpsCallable('deleteGroup');
     await callable.call(<String, dynamic>{'groupId': groupId});
+  }
+
+  Future<RaffleExecutionSummary?> _fetchRaffleExecutionSummary(
+    String groupId,
+    String executionId,
+  ) async {
+    final exSnap =
+        await _firestore.doc('groups/$groupId/raffleExecutions/$executionId').get();
+    if (!exSnap.exists) return null;
+    final e = exSnap.data()!;
+    final winnersRaw = e['winnersSnapshot'];
+    final list = <RaffleWinnerSnapshot>[];
+    if (winnersRaw is List) {
+      for (final item in winnersRaw) {
+        if (item is! Map) continue;
+        final m = Map<String, dynamic>.from(item);
+        final pid = m['participantId'] as String?;
+        final dn = m['displayName'] as String?;
+        final st = m['sourceType'] as String?;
+        if (pid == null || pid.isEmpty || dn == null) continue;
+        list.add(
+          RaffleWinnerSnapshot(
+            participantId: pid,
+            displayName: dn,
+            sourceType: st ?? 'app_member',
+            memberUid: m['memberUid'] as String?,
+          ),
+        );
+      }
+    }
+    return RaffleExecutionSummary(
+      executionId: executionId,
+      winnerCount: (e['winnerCount'] as num?)?.toInt() ?? 0,
+      eligibleParticipantCount:
+          (e['eligibleParticipantCount'] as num?)?.toInt() ?? 0,
+      winnersSnapshot: list,
+      createdAt: _readFirestoreOptionalDate(e, 'createdAt'),
+    );
   }
 
   MemberRole _parseRole(String s) {
@@ -563,6 +794,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
   GroupParticipantType _parseParticipantType(String s) {
     if (s == 'child_managed') return GroupParticipantType.childManaged;
     if (s == 'app_member') return GroupParticipantType.appMember;
+    if (s == 'raffle_manual') return GroupParticipantType.raffleManual;
     return GroupParticipantType.managed;
   }
 

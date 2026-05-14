@@ -276,3 +276,121 @@ export const DevRunTarciChatAutomationRequestSchema = z.object({
   maxGroups: z.number().int().positive().max(500).optional()
 });
 export type DevRunTarciChatAutomationRequest = z.infer<typeof DevRunTarciChatAutomationRequestSchema>;
+
+export const TarciDynamicTypeSchema = z.enum(["secret_santa", "simple_raffle"]);
+export type TarciDynamicType = z.infer<typeof TarciDynamicTypeSchema>;
+
+export const ResultVisibilitySchema = z.enum(["private_per_participant", "public_to_group"]);
+export type ResultVisibility = z.infer<typeof ResultVisibilitySchema>;
+
+export const RaffleStatusSchema = z.enum(["idle", "drawing", "completed", "failed"]);
+export type RaffleStatus = z.infer<typeof RaffleStatusSchema>;
+
+export const CreateRaffleGroupRequestSchema = z
+  .object({
+    name: z.string().min(1),
+    nickname: z.string().min(1),
+    raffleWinnerCount: z.number().int().min(1).max(500),
+    ownerParticipatesInRaffle: z.boolean(),
+    eventDateEpochMs: z.number().int().finite().positive().optional(),
+    eventDateDayKey: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+    eventTimeZone: z.string().min(1).max(80).optional()
+  })
+  .superRefine((d, ctx) => {
+    if (d.eventDateEpochMs !== undefined && !d.eventDateDayKey) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["eventDateDayKey"],
+        message: "eventDateDayKey is required when eventDateEpochMs is set"
+      });
+    }
+    if (d.eventDateDayKey !== undefined && d.eventDateEpochMs === undefined) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["eventDateEpochMs"],
+        message: "eventDateEpochMs is required when eventDateDayKey is set"
+      });
+    }
+  });
+export type CreateRaffleGroupRequest = z.infer<typeof CreateRaffleGroupRequestSchema>;
+
+export const CreateRaffleGroupResponseSchema = z.object({
+  groupId: z.string().min(1),
+  inviteCode: z.string().min(8).max(8),
+  group: z.object({
+    groupId: z.string().min(1),
+    name: z.string().min(1),
+    ownerUid: z.string().min(1),
+    lifecycleStatus: z.enum(["active", "archived"]),
+    dynamicType: TarciDynamicTypeSchema,
+    resultVisibility: ResultVisibilitySchema,
+    raffleStatus: RaffleStatusSchema,
+    raffleWinnerCount: z.number().int().positive(),
+    rulesVersionCurrent: z.number().int().positive()
+  })
+});
+export type CreateRaffleGroupResponse = z.infer<typeof CreateRaffleGroupResponseSchema>;
+
+export const ExecuteRaffleRequestSchema = z.object({
+  groupId: z.string().min(1),
+  idempotencyKey: z.string().min(1)
+});
+export type ExecuteRaffleRequest = z.infer<typeof ExecuteRaffleRequestSchema>;
+
+export const RaffleWinnerSnapshotSchema = z.object({
+  participantId: z.string().min(1),
+  displayName: z.string().min(1),
+  sourceType: z.enum(["app_member", "raffle_manual"]),
+  memberUid: z.string().min(1).optional()
+});
+export type RaffleWinnerSnapshot = z.infer<typeof RaffleWinnerSnapshotSchema>;
+
+export const ExecuteRaffleResponseSchema = z.object({
+  executionId: z.string().min(1),
+  winnerCount: z.number().int().positive(),
+  eligibleParticipantCount: z.number().int().nonnegative(),
+  winnerParticipantIds: z.array(z.string().min(1)),
+  winnersSnapshot: z.array(RaffleWinnerSnapshotSchema)
+});
+export type ExecuteRaffleResponse = z.infer<typeof ExecuteRaffleResponseSchema>;
+
+export const CreateRaffleManualParticipantRequestSchema = z.object({
+  groupId: z.string().min(1),
+  displayName: z.string().min(1).max(80)
+});
+export type CreateRaffleManualParticipantRequest = z.infer<typeof CreateRaffleManualParticipantRequestSchema>;
+
+export const CreateRaffleManualParticipantResponseSchema = z.object({
+  participantId: z.string().min(1)
+});
+export type CreateRaffleManualParticipantResponse = z.infer<
+  typeof CreateRaffleManualParticipantResponseSchema
+>;
+
+export const UpdateRaffleManualParticipantRequestSchema = z.object({
+  groupId: z.string().min(1),
+  participantId: z.string().min(1),
+  displayName: z.string().min(1).max(80)
+});
+export type UpdateRaffleManualParticipantRequest = z.infer<typeof UpdateRaffleManualParticipantRequestSchema>;
+
+export const UpdateRaffleManualParticipantResponseSchema = z.object({
+  participantId: z.string().min(1)
+});
+export type UpdateRaffleManualParticipantResponse = z.infer<
+  typeof UpdateRaffleManualParticipantResponseSchema
+>;
+
+export const RemoveRaffleManualParticipantRequestSchema = z.object({
+  groupId: z.string().min(1),
+  participantId: z.string().min(1)
+});
+export type RemoveRaffleManualParticipantRequest = z.infer<typeof RemoveRaffleManualParticipantRequestSchema>;
+
+export const RemoveRaffleManualParticipantResponseSchema = z.object({
+  participantId: z.string().min(1),
+  state: z.literal("removed")
+});
+export type RemoveRaffleManualParticipantResponse = z.infer<
+  typeof RemoveRaffleManualParticipantResponseSchema
+>;

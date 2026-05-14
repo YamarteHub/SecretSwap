@@ -39,6 +39,34 @@ String userVisibleErrorMessage(Object error, AppLocalizations l10n) {
         return l10n.functionsErrorGroupDeleteFailed;
       case 'DRAW_LOCKED':
         return l10n.functionsErrorDrawLocked;
+      case 'RAFFLE_RESOLVED_INVITES_CLOSED':
+        return l10n.functionsErrorRaffleResolvedInvitesClosed;
+      case 'RAFFLE_IN_PROGRESS':
+        return l10n.functionsErrorRaffleInProgress;
+      case 'RAFFLE_ROTATE_LOCKED':
+        return l10n.functionsErrorRaffleRotateLocked;
+      case 'RAFFLE_ALREADY_COMPLETED':
+        return l10n.functionsErrorRaffleAlreadyCompleted;
+      case 'RAFFLE_TOO_MANY_WINNERS':
+        return l10n.functionsErrorRaffleTooManyWinners;
+      case 'RAFFLE_INSUFFICIENT_PARTICIPANTS':
+        return l10n.functionsErrorRaffleInsufficientParticipants;
+      case 'RAFFLE_INVALID_DYNAMIC':
+      case 'RAFFLE_INVALID_STATE':
+        return l10n.functionsErrorRaffleInvalidDynamic;
+      case 'CHAT_NOT_AVAILABLE_FOR_RAFFLE':
+        return l10n.functionsErrorChatNotAvailableForRaffle;
+      case 'WISHLIST_NOT_AVAILABLE_FOR_RAFFLE':
+        return l10n.functionsErrorWishlistNotAvailableForRaffle;
+      case 'MANAGED_PARTICIPANTS_NOT_FOR_RAFFLE':
+        return l10n.functionsErrorManagedParticipantsNotForRaffle;
+      case 'DRAW_NOT_SUPPORTED_FOR_DYNAMIC':
+        return l10n.functionsErrorDrawNotSupportedForDynamic;
+      case 'ASSIGNMENTS_NOT_AVAILABLE_FOR_RAFFLE':
+      case 'ASSIGNMENTS_NOT_FOR_RAFFLE':
+        return l10n.functionsErrorAssignmentsNotForRaffle;
+      case 'RAFFLE_EDIT_LOCKED':
+        return l10n.functionsErrorRaffleEditLocked;
     }
 
     if (msg.contains('user already member') || msg.contains('already member')) {
@@ -91,6 +119,17 @@ String? _reasonCodeFromDetails(Object? details) {
     }
   }
   return null;
+}
+
+/// `executeRaffle` devolvió que el sorteo público ya estaba completado (p. ej. doble tap).
+bool executeRaffleErrorIsAlreadyCompleted(Object error) {
+  if (error is FirebaseFunctionsException) {
+    final reason = _reasonCodeFromDetails(error.details);
+    if (reason == 'RAFFLE_ALREADY_COMPLETED') return true;
+    final msg = (error.message ?? '').toLowerCase();
+    if (msg.contains('raffle') && msg.contains('completed')) return true;
+  }
+  return false;
 }
 
 /// `executeDraw` devolvió que el grupo ya estaba en estado completado (p. ej. doble tap).
