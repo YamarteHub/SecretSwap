@@ -151,7 +151,7 @@ class _JoinByCodeScreenState extends ConsumerState<JoinByCodeScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(userVisibleActionErrorMessage(e))),
+          SnackBar(content: Text(userVisibleActionErrorMessage(e, context.l10n))),
         );
       }
     } finally {

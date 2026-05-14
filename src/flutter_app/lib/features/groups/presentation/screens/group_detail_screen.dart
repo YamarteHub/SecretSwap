@@ -305,7 +305,7 @@ class GroupDetailScreen extends ConsumerWidget {
         error: (e, _) => _DetailErrorState(
           message: e is GroupDocumentMissingException
               ? l10n.groupDetailMissingMessage
-              : userVisibleActionErrorMessage(e),
+              : userVisibleActionErrorMessage(e, context.l10n),
           onRetry: () => ref.invalidate(groupDetailProvider(groupId)),
           onBack: () => _goBack(context),
         ),
@@ -661,7 +661,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
           debugPrint('[runDraw] error groupId=${widget.groupId} e=$e');
         }
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(userVisibleActionErrorMessage(e))),
+          SnackBar(content: Text(userVisibleActionErrorMessage(e, context.l10n))),
         );
       }
     } finally {
@@ -741,7 +741,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(userVisibleActionErrorMessage(e))),
+        SnackBar(content: Text(userVisibleActionErrorMessage(e, context.l10n))),
       );
     } finally {
       if (mounted) {
@@ -769,7 +769,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(userVisibleErrorMessage(e))),
+          SnackBar(content: Text(userVisibleErrorMessage(e, context.l10n))),
         );
       }
     }
@@ -802,7 +802,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(userVisibleErrorMessage(e))),
+          SnackBar(content: Text(userVisibleErrorMessage(e, context.l10n))),
         );
       }
     }
@@ -835,7 +835,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(userVisibleActionErrorMessage(e))),
+          SnackBar(content: Text(userVisibleActionErrorMessage(e, context.l10n))),
         );
       }
     } finally {
@@ -858,7 +858,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(userVisibleErrorMessage(e))),
+          SnackBar(content: Text(userVisibleErrorMessage(e, context.l10n))),
         );
       }
     } finally {
@@ -916,7 +916,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(userVisibleActionErrorMessage(e))),
+          SnackBar(content: Text(userVisibleActionErrorMessage(e, context.l10n))),
         );
       }
     }
@@ -965,7 +965,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(userVisibleActionErrorMessage(e))),
+          SnackBar(content: Text(userVisibleActionErrorMessage(e, context.l10n))),
         );
       }
     }
@@ -1018,7 +1018,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(userVisibleActionErrorMessage(e))),
+          SnackBar(content: Text(userVisibleActionErrorMessage(e, context.l10n))),
         );
       }
     }
@@ -1062,7 +1062,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(userVisibleActionErrorMessage(e))),
+          SnackBar(content: Text(userVisibleActionErrorMessage(e, context.l10n))),
         );
       }
     }
@@ -1198,7 +1198,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(userVisibleActionErrorMessage(e))),
+          SnackBar(content: Text(userVisibleActionErrorMessage(e, context.l10n))),
         );
       }
     }
@@ -1292,7 +1292,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(userVisibleActionErrorMessage(e))),
+          SnackBar(content: Text(userVisibleActionErrorMessage(e, context.l10n))),
         );
       }
     }
@@ -1337,7 +1337,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(userVisibleActionErrorMessage(e))),
+          SnackBar(content: Text(userVisibleActionErrorMessage(e, context.l10n))),
         );
       }
     }
@@ -1383,7 +1383,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(userVisibleActionErrorMessage(e))),
+          SnackBar(content: Text(userVisibleActionErrorMessage(e, context.l10n))),
         );
       }
     }

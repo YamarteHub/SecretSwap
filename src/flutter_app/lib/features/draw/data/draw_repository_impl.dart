@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../domain/draw_exceptions.dart';
 import '../domain/draw_models.dart';
 import '../domain/draw_repository.dart';
 
@@ -56,7 +57,7 @@ class DrawRepositoryImpl implements DrawRepository {
         .doc('groups/$groupId/executions/$executionId/assignments/$_uid')
         .get();
     if (!doc.exists) {
-      throw StateError('No hay asignación para este usuario');
+      throw const MyAssignmentNotFoundException();
     }
     final m = doc.data()!;
     return MyAssignment(

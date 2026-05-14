@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/l10n/l10n.dart';
 import '../../../../core/messaging/functions_user_message.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../domain/draw_exceptions.dart';
 import '../../../../core/theme/premium_ui.dart';
 import '../../domain/draw_models.dart';
 import '../../../wishlist/domain/wishlist_models.dart';
@@ -92,11 +93,10 @@ class _MyAssignmentScreenState extends ConsumerState<MyAssignmentScreen> {
     } catch (e) {
       if (!mounted) return;
       setState(() {
-        final msg = userVisibleErrorMessage(e).toLowerCase();
-        if (msg.contains('asignación') || msg.contains('asignacion')) {
+        if (e is MyAssignmentNotFoundException) {
           _errorMessage = context.l10n.myAssignmentNotAvailableMessage;
         } else {
-          _errorMessage = context.l10n.genericLoadErrorMessage;
+          _errorMessage = userVisibleErrorMessage(e, context.l10n);
         }
         _receiverWishlist = null;
         _wishlistLoadFailed = false;

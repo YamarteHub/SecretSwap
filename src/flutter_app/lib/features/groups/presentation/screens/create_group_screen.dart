@@ -240,7 +240,7 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
             content: Text(
               isDebugFunctionsError
                   ? context.l10n.wizardCreateFunctionsError
-                  : userVisibleErrorMessage(e),
+                  : userVisibleErrorMessage(e, context.l10n),
             ),
           ),
         );

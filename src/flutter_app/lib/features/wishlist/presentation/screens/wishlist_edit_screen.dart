@@ -109,7 +109,7 @@ class _WishlistEditScreenState extends ConsumerState<WishlistEditScreen> {
       if (!mounted) return;
       setState(() {
         _loading = false;
-        _error = userVisibleErrorMessage(e);
+        _error = userVisibleErrorMessage(e, context.l10n);
       });
     }
   }
@@ -183,7 +183,7 @@ class _WishlistEditScreenState extends ConsumerState<WishlistEditScreen> {
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(userVisibleErrorMessage(e))),
+        SnackBar(content: Text(userVisibleErrorMessage(e, context.l10n))),
       );
     } finally {
       if (mounted) setState(() => _saving = false);

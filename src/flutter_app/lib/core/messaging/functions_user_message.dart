@@ -2,80 +2,82 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 
+import '../../l10n/app_localizations.dart';
+
 /// Convierte errores de Functions / Firebase en textos legibles (sin stacktraces).
-String userVisibleErrorMessage(Object error) {
+String userVisibleErrorMessage(Object error, AppLocalizations l10n) {
   if (error is FirebaseFunctionsException) {
     final reason = _reasonCodeFromDetails(error.details);
     final msg = (error.message ?? '').toLowerCase();
 
     switch (reason) {
       case 'ALREADY_MEMBER':
-        return 'Ya perteneces a este grupo.';
+        return l10n.functionsErrorAlreadyMember;
       case 'CODE_NOT_FOUND':
-        return 'No encontramos un grupo con ese código.';
+        return l10n.functionsErrorCodeNotFound;
       case 'CODE_EXPIRED':
-        return 'Este código ha expirado.';
+        return l10n.functionsErrorCodeExpired;
       case 'GROUP_ARCHIVED':
-        return 'Este grupo ya está cerrado.';
+        return l10n.functionsErrorGroupArchived;
       case 'USER_REMOVED':
-        return 'No puedes volver a unirte a este grupo.';
+        return l10n.functionsErrorUserRemoved;
       case 'DRAW_IN_PROGRESS':
-        return 'El sorteo está en curso. Inténtalo más tarde.';
+        return l10n.functionsErrorDrawInProgress;
       case 'DRAW_ALREADY_COMPLETED':
-        return 'Este sorteo ya se había completado.';
+        return l10n.functionsErrorDrawAlreadyCompleted;
       case 'DRAW_COMPLETED_INVITES_CLOSED':
-        return 'Este sorteo ya fue realizado y ya no admite nuevos participantes.';
+        return l10n.functionsErrorDrawCompletedInvitesClosed;
       case 'SUBGROUP_IN_USE':
-        return 'Antes de eliminar este subgrupo, mueve o deja sin subgrupo a sus participantes.';
+        return l10n.functionsErrorSubgroupInUse;
       case 'SUBGROUP_NOT_FOUND':
-        return 'El subgrupo ya no existe o fue eliminado.';
+        return l10n.functionsErrorSubgroupNotFound;
       case 'NOT_OWNER':
-        return 'Solo el organizador puede realizar esta acción.';
+        return l10n.functionsErrorNotOwner;
       case 'GROUP_DELETE_FORBIDDEN':
-        return 'Solo el organizador puede eliminar este grupo.';
+        return l10n.functionsErrorGroupDeleteForbidden;
       case 'GROUP_DELETE_FAILED':
-        return 'No pudimos eliminar el grupo por completo. Inténtalo otra vez o revisa tu conexión.';
+        return l10n.functionsErrorGroupDeleteFailed;
       case 'DRAW_LOCKED':
-        return 'No puedes modificar subgrupos o participantes cuando el sorteo está en curso o completado.';
+        return l10n.functionsErrorDrawLocked;
     }
 
     if (msg.contains('user already member') || msg.contains('already member')) {
-      return 'Ya perteneces a este grupo.';
+      return l10n.functionsErrorAlreadyMember;
     }
     if (msg.contains('not found') && (msg.contains('invite') || msg.contains('code'))) {
-      return 'No encontramos un grupo con ese código.';
+      return l10n.functionsErrorCodeNotFound;
     }
     if (msg.contains('expired')) {
-      return 'Este código ha expirado.';
+      return l10n.functionsErrorCodeExpired;
     }
     if (msg.contains('archived')) {
-      return 'Este grupo ya está cerrado.';
+      return l10n.functionsErrorGroupArchived;
     }
     if (msg.contains('removed')) {
-      return 'No puedes volver a unirte a este grupo.';
+      return l10n.functionsErrorUserRemoved;
     }
     if (msg.contains('draw') && msg.contains('progress')) {
-      return 'El sorteo está en curso. Inténtalo más tarde.';
+      return l10n.functionsErrorDrawInProgress;
     }
 
-    return 'No se pudo completar la acción. Inténtalo de nuevo en un momento.';
+    return l10n.functionsErrorGenericAction;
   }
 
   if (error is FirebaseException) {
     if (error.code == 'permission-denied') {
-      return 'No se pudo cambiar la regla del sorteo. Revisa que el sorteo no esté en curso ni finalizado.';
+      return l10n.functionsErrorPermissionDeniedDrawRule;
     }
   }
 
-  return 'Algo salió mal. Inténtalo de nuevo en unos momentos.';
+  return l10n.functionsErrorUnknown;
 }
 
 /// Mensaje guiado para debug cuando el error sugiere entorno/Functions/sesión.
-String userVisibleActionErrorMessage(Object error) {
+String userVisibleActionErrorMessage(Object error, AppLocalizations l10n) {
   if (kDebugMode && _isLikelyEnvironmentOrSessionIssue(error)) {
-    return 'No se pudo completar la acción. Revisa si estás usando emuladores o Firebase real, si las Functions están desplegadas y si la sesión está activa.';
+    return l10n.functionsErrorDebugSession;
   }
-  return userVisibleErrorMessage(error);
+  return userVisibleErrorMessage(error, l10n);
 }
 
 String? _reasonCodeFromDetails(Object? details) {

@@ -135,18 +135,39 @@ class _GroupsHomeScreenState extends ConsumerState<GroupsHomeScreen> {
                           .useSystemLocale(),
                     ),
                     _LangRadio(
-                      label: l10n.languageSpanish,
+                      label: 'Español',
                       selected: current?.languageCode == 'es',
                       onTap: () => innerRef
                           .read(localeControllerProvider.notifier)
                           .setLocale(const Locale('es')),
                     ),
                     _LangRadio(
-                      label: l10n.languageEnglish,
+                      label: 'English',
                       selected: current?.languageCode == 'en',
                       onTap: () => innerRef
                           .read(localeControllerProvider.notifier)
                           .setLocale(const Locale('en')),
+                    ),
+                    _LangRadio(
+                      label: 'Português',
+                      selected: current?.languageCode == 'pt',
+                      onTap: () => innerRef
+                          .read(localeControllerProvider.notifier)
+                          .setLocale(const Locale('pt')),
+                    ),
+                    _LangRadio(
+                      label: 'Italiano',
+                      selected: current?.languageCode == 'it',
+                      onTap: () => innerRef
+                          .read(localeControllerProvider.notifier)
+                          .setLocale(const Locale('it')),
+                    ),
+                    _LangRadio(
+                      label: 'Français',
+                      selected: current?.languageCode == 'fr',
+                      onTap: () => innerRef
+                          .read(localeControllerProvider.notifier)
+                          .setLocale(const Locale('fr')),
                     ),
                   ],
                 );
@@ -378,7 +399,9 @@ class _GroupsHomeScreenState extends ConsumerState<GroupsHomeScreen> {
           );
         },
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) => Center(child: Text(userVisibleErrorMessage(e))),
+        error: (e, _) => Center(
+          child: Text(userVisibleErrorMessage(e, context.l10n)),
+        ),
       ),
     );
   }
