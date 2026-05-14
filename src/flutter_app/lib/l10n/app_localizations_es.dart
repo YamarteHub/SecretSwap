@@ -163,6 +163,95 @@ class AppLocalizationsEs extends AppLocalizations {
   String get splashLoadingHint => 'Preparando todo para ti…';
 
   @override
+  String get productAuthorshipLine => 'Tarci Secret · © 2026 Stalin Yamarte';
+
+  @override
+  String get aboutScreenTitle => 'Acerca de Tarci Secret';
+
+  @override
+  String get aboutTooltip => 'Acerca de Tarci Secret';
+
+  @override
+  String get aboutTagline =>
+      'Dinámicas de grupo, sorteos y experiencias sociales con privacidad, emoción y personas reales.';
+
+  @override
+  String get aboutSectionWhatTitle => 'Qué es Tarci Secret';
+
+  @override
+  String get aboutSectionWhatBody =>
+      'Tarci Secret es una app creada para organizar amigos secretos, sorteos y dinámicas de grupo de forma sencilla, privada y divertida. Permite incluir a personas reales: niños, familiares sin móvil o participantes gestionados por un adulto.\n\nTarci Secret nace con el amigo secreto como primera experiencia y está pensada para crecer hacia nuevas dinámicas sociales, sorteos, equipos, duelos y emparejamientos.';
+
+  @override
+  String get aboutSectionHowTitle => 'Cómo funciona';
+
+  @override
+  String get aboutStep1Title => 'Crea o únete a un grupo';
+
+  @override
+  String get aboutStep1Body =>
+      'Empieza una dinámica o entra con un código de invitación.';
+
+  @override
+  String get aboutStep2Title => 'Organiza participantes y reglas';
+
+  @override
+  String get aboutStep2Body =>
+      'Añade personas con app o gestionadas y ajusta el tipo de sorteo.';
+
+  @override
+  String get aboutStep3Title => 'Lanza la dinámica o sorteo';
+
+  @override
+  String get aboutStep3Body =>
+      'Cuando el grupo esté listo, el organizador ejecuta el sorteo en privado.';
+
+  @override
+  String get aboutStep4Title => 'Descubre, conversa y disfruta';
+
+  @override
+  String get aboutStep4Body =>
+      'Cada quien ve su resultado de forma privada y el grupo puede seguir la experiencia.';
+
+  @override
+  String get aboutSectionPrivacyTitle => 'Privacidad por diseño';
+
+  @override
+  String get aboutSectionPrivacyBody =>
+      'Cada persona ve solo lo que necesita ver. En un amigo secreto, las asignaciones se protegen para que el resultado siga siendo privado.';
+
+  @override
+  String get aboutSectionPrivacyTrust =>
+      'La app prioriza la claridad, la confianza y el respeto por la experiencia del grupo.';
+
+  @override
+  String get aboutSectionCreatorTitle => 'Creado por Stalin Yamarte';
+
+  @override
+  String get aboutSectionCreatorSubtitle =>
+      'Ingeniero en Informática y desarrollador de aplicaciones.';
+
+  @override
+  String get aboutLinkedInCta => 'Ver perfil en LinkedIn';
+
+  @override
+  String get aboutLinkedInError =>
+      'No pudimos abrir LinkedIn. Inténtalo desde el navegador.';
+
+  @override
+  String get aboutVersionTitle => 'Versión';
+
+  @override
+  String aboutVersionLine(String version) {
+    return 'Versión $version';
+  }
+
+  @override
+  String aboutBuildLine(String buildNumber) {
+    return 'Compilación $buildNumber';
+  }
+
+  @override
   String get quickModeTitle => 'Modo rápido';
 
   @override

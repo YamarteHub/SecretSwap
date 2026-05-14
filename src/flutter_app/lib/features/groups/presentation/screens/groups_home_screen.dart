@@ -191,6 +191,11 @@ class _GroupsHomeScreenState extends ConsumerState<GroupsHomeScreen> {
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
+            tooltip: context.l10n.aboutTooltip,
+            onPressed: () => context.push(AppRoutes.about),
+            icon: const Icon(Icons.info_outline_rounded),
+          ),
+          IconButton(
             tooltip: context.l10n.languageSelectorTitle,
             onPressed: () => _openLanguageSelector(context, ref),
             icon: const Icon(Icons.language_outlined),

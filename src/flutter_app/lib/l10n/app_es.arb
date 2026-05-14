@@ -54,6 +54,45 @@
   "privateResult": "Resultado privado",
   "splashTagline": "Tarci Secret organiza dinámicas privadas de grupo con personas reales.",
   "splashLoadingHint": "Preparando todo para ti…",
+  "productAuthorshipLine": "Tarci Secret · © 2026 Stalin Yamarte",
+  "aboutScreenTitle": "Acerca de Tarci Secret",
+  "aboutTooltip": "Acerca de Tarci Secret",
+  "aboutTagline": "Dinámicas de grupo, sorteos y experiencias sociales con privacidad, emoción y personas reales.",
+  "aboutSectionWhatTitle": "Qué es Tarci Secret",
+  "aboutSectionWhatBody": "Tarci Secret es una app creada para organizar amigos secretos, sorteos y dinámicas de grupo de forma sencilla, privada y divertida. Permite incluir a personas reales: niños, familiares sin móvil o participantes gestionados por un adulto.\n\nTarci Secret nace con el amigo secreto como primera experiencia y está pensada para crecer hacia nuevas dinámicas sociales, sorteos, equipos, duelos y emparejamientos.",
+  "aboutSectionHowTitle": "Cómo funciona",
+  "aboutStep1Title": "Crea o únete a un grupo",
+  "aboutStep1Body": "Empieza una dinámica o entra con un código de invitación.",
+  "aboutStep2Title": "Organiza participantes y reglas",
+  "aboutStep2Body": "Añade personas con app o gestionadas y ajusta el tipo de sorteo.",
+  "aboutStep3Title": "Lanza la dinámica o sorteo",
+  "aboutStep3Body": "Cuando el grupo esté listo, el organizador ejecuta el sorteo en privado.",
+  "aboutStep4Title": "Descubre, conversa y disfruta",
+  "aboutStep4Body": "Cada quien ve su resultado de forma privada y el grupo puede seguir la experiencia.",
+  "aboutSectionPrivacyTitle": "Privacidad por diseño",
+  "aboutSectionPrivacyBody": "Cada persona ve solo lo que necesita ver. En un amigo secreto, las asignaciones se protegen para que el resultado siga siendo privado.",
+  "aboutSectionPrivacyTrust": "La app prioriza la claridad, la confianza y el respeto por la experiencia del grupo.",
+  "aboutSectionCreatorTitle": "Creado por Stalin Yamarte",
+  "aboutSectionCreatorSubtitle": "Ingeniero en Informática y desarrollador de aplicaciones.",
+  "aboutLinkedInCta": "Ver perfil en LinkedIn",
+  "aboutLinkedInError": "No pudimos abrir LinkedIn. Inténtalo desde el navegador.",
+  "aboutVersionTitle": "Versión",
+  "aboutVersionLine": "Versión {version}",
+  "@aboutVersionLine": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "aboutBuildLine": "Compilación {buildNumber}",
+  "@aboutBuildLine": {
+    "placeholders": {
+      "buildNumber": {
+        "type": "String"
+      }
+    }
+  },
   "quickModeTitle": "Modo rápido",
   "quickModeDescription": "Puedes empezar sin registrarte. Para conservar tus grupos en varios dispositivos, más adelante podrás crear una cuenta.",
   "homeHeaderSubtitle": "Organiza amigo secreto y sorteos con quien quieras. Privado por defecto.",

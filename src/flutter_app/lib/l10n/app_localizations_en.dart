@@ -161,6 +161,94 @@ class AppLocalizationsEn extends AppLocalizations {
   String get splashLoadingHint => 'Getting things ready for you…';
 
   @override
+  String get productAuthorshipLine => 'Tarci Secret · © 2026 Stalin Yamarte';
+
+  @override
+  String get aboutScreenTitle => 'About Tarci Secret';
+
+  @override
+  String get aboutTooltip => 'About Tarci Secret';
+
+  @override
+  String get aboutTagline =>
+      'Group dynamics, draws, and social experiences with privacy, emotion, and real people.';
+
+  @override
+  String get aboutSectionWhatTitle => 'What is Tarci Secret';
+
+  @override
+  String get aboutSectionWhatBody =>
+      'Tarci Secret is an app built to organize Secret Santa, draws, and group dynamics in a simple, private, and fun way. It includes real people: children, relatives without a phone, or participants managed by an adult.\n\nTarci Secret starts with Secret Santa as its first experience and is designed to grow into new social dynamics, draws, teams, duels, and matchups.';
+
+  @override
+  String get aboutSectionHowTitle => 'How it works';
+
+  @override
+  String get aboutStep1Title => 'Create or join a group';
+
+  @override
+  String get aboutStep1Body => 'Start a dynamic or enter with an invite code.';
+
+  @override
+  String get aboutStep2Title => 'Organize participants and rules';
+
+  @override
+  String get aboutStep2Body =>
+      'Add people with the app or managed participants and tune the draw style.';
+
+  @override
+  String get aboutStep3Title => 'Launch the dynamic or draw';
+
+  @override
+  String get aboutStep3Body =>
+      'When the group is ready, the organizer runs the draw privately.';
+
+  @override
+  String get aboutStep4Title => 'Discover, chat, and enjoy';
+
+  @override
+  String get aboutStep4Body =>
+      'Everyone sees their own result privately and the group can keep the experience going.';
+
+  @override
+  String get aboutSectionPrivacyTitle => 'Privacy by design';
+
+  @override
+  String get aboutSectionPrivacyBody =>
+      'Each person only sees what they need to see. In Secret Santa, assignments are protected so the outcome stays private.';
+
+  @override
+  String get aboutSectionPrivacyTrust =>
+      'The app prioritizes clarity, trust, and respect for the group’s experience.';
+
+  @override
+  String get aboutSectionCreatorTitle => 'Created by Stalin Yamarte';
+
+  @override
+  String get aboutSectionCreatorSubtitle =>
+      'Computer engineer and application developer.';
+
+  @override
+  String get aboutLinkedInCta => 'View LinkedIn profile';
+
+  @override
+  String get aboutLinkedInError =>
+      'We couldn’t open LinkedIn. Try again from your browser.';
+
+  @override
+  String get aboutVersionTitle => 'Version';
+
+  @override
+  String aboutVersionLine(String version) {
+    return 'Version $version';
+  }
+
+  @override
+  String aboutBuildLine(String buildNumber) {
+    return 'Build $buildNumber';
+  }
+
+  @override
   String get quickModeTitle => 'Quick mode';
 
   @override

@@ -170,7 +170,21 @@ class _SplashScreenState extends State<SplashScreen>
                   ),
                 ] else
                   const SizedBox.shrink(),
-                const SizedBox(height: 14),
+                const SizedBox(height: 16),
+                FadeTransition(
+                  opacity: _fade,
+                  child: Text(
+                    l10n.productAuthorshipLine,
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.labelSmall?.copyWith(
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.4),
+                      letterSpacing: 0.12,
+                      height: 1.25,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
               ],
             ),
           ),

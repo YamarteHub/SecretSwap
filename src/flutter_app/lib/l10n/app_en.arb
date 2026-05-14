@@ -54,6 +54,45 @@
   "privateResult": "Private result",
   "splashTagline": "Tarci Secret hosts private group dynamics with real people.",
   "splashLoadingHint": "Getting things ready for you…",
+  "productAuthorshipLine": "Tarci Secret · © 2026 Stalin Yamarte",
+  "aboutScreenTitle": "About Tarci Secret",
+  "aboutTooltip": "About Tarci Secret",
+  "aboutTagline": "Group dynamics, draws, and social experiences with privacy, emotion, and real people.",
+  "aboutSectionWhatTitle": "What is Tarci Secret",
+  "aboutSectionWhatBody": "Tarci Secret is an app built to organize Secret Santa, draws, and group dynamics in a simple, private, and fun way. It includes real people: children, relatives without a phone, or participants managed by an adult.\n\nTarci Secret starts with Secret Santa as its first experience and is designed to grow into new social dynamics, draws, teams, duels, and matchups.",
+  "aboutSectionHowTitle": "How it works",
+  "aboutStep1Title": "Create or join a group",
+  "aboutStep1Body": "Start a dynamic or enter with an invite code.",
+  "aboutStep2Title": "Organize participants and rules",
+  "aboutStep2Body": "Add people with the app or managed participants and tune the draw style.",
+  "aboutStep3Title": "Launch the dynamic or draw",
+  "aboutStep3Body": "When the group is ready, the organizer runs the draw privately.",
+  "aboutStep4Title": "Discover, chat, and enjoy",
+  "aboutStep4Body": "Everyone sees their own result privately and the group can keep the experience going.",
+  "aboutSectionPrivacyTitle": "Privacy by design",
+  "aboutSectionPrivacyBody": "Each person only sees what they need to see. In Secret Santa, assignments are protected so the outcome stays private.",
+  "aboutSectionPrivacyTrust": "The app prioritizes clarity, trust, and respect for the group’s experience.",
+  "aboutSectionCreatorTitle": "Created by Stalin Yamarte",
+  "aboutSectionCreatorSubtitle": "Computer engineer and application developer.",
+  "aboutLinkedInCta": "View LinkedIn profile",
+  "aboutLinkedInError": "We couldn’t open LinkedIn. Try again from your browser.",
+  "aboutVersionTitle": "Version",
+  "aboutVersionLine": "Version {version}",
+  "@aboutVersionLine": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "aboutBuildLine": "Build {buildNumber}",
+  "@aboutBuildLine": {
+    "placeholders": {
+      "buildNumber": {
+        "type": "String"
+      }
+    }
+  },
   "quickModeTitle": "Quick mode",
   "quickModeDescription": "You can start without registering. To keep your groups across devices, you will be able to create an account later.",
   "homeHeaderSubtitle": "Organize Secret Santa and private draws with anyone. Private by default.",

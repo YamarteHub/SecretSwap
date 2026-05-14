@@ -8,12 +8,14 @@ import '../../features/groups/presentation/screens/create_group_screen.dart';
 import '../../features/groups/presentation/screens/group_detail_screen.dart';
 import '../../features/groups/presentation/screens/groups_home_screen.dart';
 import '../../features/groups/presentation/screens/join_by_code_screen.dart';
+import '../../features/about/presentation/about_tarci_screen.dart';
 import '../../features/auth/presentation/splash_screen.dart';
 import '../../features/wishlist/presentation/screens/wishlist_edit_screen.dart';
 
 class AppRoutes {
   static const splash = '/';
   static const groupsHome = '/groups';
+  static const about = '/about';
   static const createGroup = '/groups/create';
   static const joinByCode = '/groups/join';
   static const groupDetail = '/groups/:groupId';
@@ -36,6 +38,10 @@ GoRouter buildRouter() {
       GoRoute(
         path: AppRoutes.groupsHome,
         builder: (context, state) => const GroupsHomeScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.about,
+        builder: (context, state) => const AboutTarciScreen(),
       ),
       GoRoute(
         path: AppRoutes.createGroup,

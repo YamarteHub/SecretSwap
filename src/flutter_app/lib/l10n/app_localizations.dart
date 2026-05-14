@@ -380,6 +380,156 @@ abstract class AppLocalizations {
   /// **'Preparando todo para ti…'**
   String get splashLoadingHint;
 
+  /// No description provided for @productAuthorshipLine.
+  ///
+  /// In es, this message translates to:
+  /// **'Tarci Secret · © 2026 Stalin Yamarte'**
+  String get productAuthorshipLine;
+
+  /// No description provided for @aboutScreenTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Acerca de Tarci Secret'**
+  String get aboutScreenTitle;
+
+  /// No description provided for @aboutTooltip.
+  ///
+  /// In es, this message translates to:
+  /// **'Acerca de Tarci Secret'**
+  String get aboutTooltip;
+
+  /// No description provided for @aboutTagline.
+  ///
+  /// In es, this message translates to:
+  /// **'Dinámicas de grupo, sorteos y experiencias sociales con privacidad, emoción y personas reales.'**
+  String get aboutTagline;
+
+  /// No description provided for @aboutSectionWhatTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Qué es Tarci Secret'**
+  String get aboutSectionWhatTitle;
+
+  /// No description provided for @aboutSectionWhatBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Tarci Secret es una app creada para organizar amigos secretos, sorteos y dinámicas de grupo de forma sencilla, privada y divertida. Permite incluir a personas reales: niños, familiares sin móvil o participantes gestionados por un adulto.\n\nTarci Secret nace con el amigo secreto como primera experiencia y está pensada para crecer hacia nuevas dinámicas sociales, sorteos, equipos, duelos y emparejamientos.'**
+  String get aboutSectionWhatBody;
+
+  /// No description provided for @aboutSectionHowTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Cómo funciona'**
+  String get aboutSectionHowTitle;
+
+  /// No description provided for @aboutStep1Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Crea o únete a un grupo'**
+  String get aboutStep1Title;
+
+  /// No description provided for @aboutStep1Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Empieza una dinámica o entra con un código de invitación.'**
+  String get aboutStep1Body;
+
+  /// No description provided for @aboutStep2Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Organiza participantes y reglas'**
+  String get aboutStep2Title;
+
+  /// No description provided for @aboutStep2Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Añade personas con app o gestionadas y ajusta el tipo de sorteo.'**
+  String get aboutStep2Body;
+
+  /// No description provided for @aboutStep3Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Lanza la dinámica o sorteo'**
+  String get aboutStep3Title;
+
+  /// No description provided for @aboutStep3Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Cuando el grupo esté listo, el organizador ejecuta el sorteo en privado.'**
+  String get aboutStep3Body;
+
+  /// No description provided for @aboutStep4Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Descubre, conversa y disfruta'**
+  String get aboutStep4Title;
+
+  /// No description provided for @aboutStep4Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Cada quien ve su resultado de forma privada y el grupo puede seguir la experiencia.'**
+  String get aboutStep4Body;
+
+  /// No description provided for @aboutSectionPrivacyTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Privacidad por diseño'**
+  String get aboutSectionPrivacyTitle;
+
+  /// No description provided for @aboutSectionPrivacyBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Cada persona ve solo lo que necesita ver. En un amigo secreto, las asignaciones se protegen para que el resultado siga siendo privado.'**
+  String get aboutSectionPrivacyBody;
+
+  /// No description provided for @aboutSectionPrivacyTrust.
+  ///
+  /// In es, this message translates to:
+  /// **'La app prioriza la claridad, la confianza y el respeto por la experiencia del grupo.'**
+  String get aboutSectionPrivacyTrust;
+
+  /// No description provided for @aboutSectionCreatorTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Creado por Stalin Yamarte'**
+  String get aboutSectionCreatorTitle;
+
+  /// No description provided for @aboutSectionCreatorSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Ingeniero en Informática y desarrollador de aplicaciones.'**
+  String get aboutSectionCreatorSubtitle;
+
+  /// No description provided for @aboutLinkedInCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Ver perfil en LinkedIn'**
+  String get aboutLinkedInCta;
+
+  /// No description provided for @aboutLinkedInError.
+  ///
+  /// In es, this message translates to:
+  /// **'No pudimos abrir LinkedIn. Inténtalo desde el navegador.'**
+  String get aboutLinkedInError;
+
+  /// No description provided for @aboutVersionTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Versión'**
+  String get aboutVersionTitle;
+
+  /// No description provided for @aboutVersionLine.
+  ///
+  /// In es, this message translates to:
+  /// **'Versión {version}'**
+  String aboutVersionLine(String version);
+
+  /// No description provided for @aboutBuildLine.
+  ///
+  /// In es, this message translates to:
+  /// **'Compilación {buildNumber}'**
+  String aboutBuildLine(String buildNumber);
+
   /// No description provided for @quickModeTitle.
   ///
   /// In es, this message translates to:
