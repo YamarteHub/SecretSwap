@@ -2,6 +2,7 @@
 
 **Tipo:** análisis y diseño arquitectónico / producto — **sin cambios de runtime** (solo documentación).  
 **Checkpoint Git:** `fc57b4c` — `checkpoint antes de arquitectura multidinamica Tarci Secret` (árbol limpio en el momento del checkpoint; commit creado con `--allow-empty`).  
+**Commit documentación 9A:** `593852c` — `docs(9a): arquitectura multidinamica y plan expansion Tarci Secret`.  
 **Documento:** `docs/tarci_phase_9a_multi_dynamics_architecture.md` (este archivo).
 
 ---
