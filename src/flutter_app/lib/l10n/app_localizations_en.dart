@@ -976,6 +976,43 @@ class AppLocalizationsEn extends AppLocalizations {
       'You can\'t add participants after running the draw.';
 
   @override
+  String get groupDeleteOwnerSectionTitle => 'Group options';
+
+  @override
+  String get groupDeleteOwnerSectionHint =>
+      'Only the organizer can end this group dynamic and delete all of its data.';
+
+  @override
+  String get groupDeleteEntryCta => 'Delete group';
+
+  @override
+  String get groupDeleteDialogPreTitle => 'Delete this group?';
+
+  @override
+  String get groupDeleteDialogPreBody =>
+      'This will remove the setup, participants, invitations, and related data. This action cannot be undone.';
+
+  @override
+  String get groupDeleteDialogPreConfirm => 'Delete group';
+
+  @override
+  String get groupDeleteDialogPostTitle => 'Delete this Secret Santa?';
+
+  @override
+  String get groupDeleteDialogPostBody =>
+      'The draw has already been run. If you continue, everyone will lose access to their results, wishlists, group chat, and related data. This action cannot be undone.';
+
+  @override
+  String get groupDeleteDialogPostConfirm => 'Delete permanently';
+
+  @override
+  String get groupDeleteSuccessSnackbar => 'Group deleted';
+
+  @override
+  String get groupDetailMissingMessage =>
+      'This group no longer exists or was removed by the organizer.';
+
+  @override
   String get groupTooltipEditGroupName => 'Edit group name';
 
   @override

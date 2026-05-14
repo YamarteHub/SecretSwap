@@ -1,0 +1,43 @@
+{
+  "phase": "7A",
+  "description": "Eliminación manual de grupo por el organizador — textos para PT/IT/FR cuando haya runtime completo.",
+  "locale_pt": {
+    "groupDeleteOwnerSectionTitle": "Opções do grupo",
+    "groupDeleteOwnerSectionHint": "Só o organizador pode encerrar esta dinâmica e apagar todos os dados do grupo.",
+    "groupDeleteEntryCta": "Eliminar grupo",
+    "groupDeleteDialogPreTitle": "Eliminar este grupo?",
+    "groupDeleteDialogPreBody": "Serão apagadas a configuração, participantes, convites e dados associados. Esta ação não pode ser desfeita.",
+    "groupDeleteDialogPreConfirm": "Eliminar grupo",
+    "groupDeleteDialogPostTitle": "Eliminar este amigo secreto?",
+    "groupDeleteDialogPostBody": "O sorteio já foi feito. Se continuar, todos perdem acesso aos resultados, listas de desejos, conversa do grupo e dados associados. Esta ação não pode ser desfeita.",
+    "groupDeleteDialogPostConfirm": "Eliminar definitivamente",
+    "groupDeleteSuccessSnackbar": "Grupo eliminado",
+    "groupDetailMissingMessage": "Este grupo já não existe ou foi removido pelo organizador."
+  },
+  "locale_it": {
+    "groupDeleteOwnerSectionTitle": "Opzioni del gruppo",
+    "groupDeleteOwnerSectionHint": "Solo l’organizzatore può chiudere questa dinamica ed eliminare tutti i dati del gruppo.",
+    "groupDeleteEntryCta": "Elimina gruppo",
+    "groupDeleteDialogPreTitle": "Eliminare questo gruppo?",
+    "groupDeleteDialogPreBody": "Verranno eliminati configurazione, partecipanti, inviti e dati collegati. L’azione non può essere annullata.",
+    "groupDeleteDialogPreConfirm": "Elimina gruppo",
+    "groupDeleteDialogPostTitle": "Eliminare questo amico segreto?",
+    "groupDeleteDialogPostBody": "L’estrazione è già stata eseguita. Se continui, tutti perderanno l’accesso ai risultati, alle wishlist, alla chat di gruppo e ai dati collegati. L’azione non può essere annullata.",
+    "groupDeleteDialogPostConfirm": "Elimina definitivamente",
+    "groupDeleteSuccessSnackbar": "Gruppo eliminato",
+    "groupDetailMissingMessage": "Questo gruppo non esiste più o è stato rimosso dall’organizzatore."
+  },
+  "locale_fr": {
+    "groupDeleteOwnerSectionTitle": "Options du groupe",
+    "groupDeleteOwnerSectionHint": "Seul l’organisateur peut clore cette dynamique et supprimer toutes les données du groupe.",
+    "groupDeleteEntryCta": "Supprimer le groupe",
+    "groupDeleteDialogPreTitle": "Supprimer ce groupe ?",
+    "groupDeleteDialogPreBody": "La configuration, les participants, les invitations et les données associées seront supprimés. Cette action est irréversible.",
+    "groupDeleteDialogPreConfirm": "Supprimer le groupe",
+    "groupDeleteDialogPostTitle": "Supprimer ce Secret Santa ?",
+    "groupDeleteDialogPostBody": "Le tirage a déjà été effectué. Si vous continuez, tout le monde perdra l’accès aux résultats, aux listes de souhaits, au chat du groupe et aux données associées. Cette action est irréversible.",
+    "groupDeleteDialogPostConfirm": "Supprimer définitivement",
+    "groupDeleteSuccessSnackbar": "Groupe supprimé",
+    "groupDetailMissingMessage": "Ce groupe n’existe plus ou a été supprimé par l’organisateur."
+  }
+}

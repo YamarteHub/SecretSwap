@@ -983,6 +983,43 @@ class AppLocalizationsEs extends AppLocalizations {
       'No puedes añadir participantes después de ejecutar el sorteo.';
 
   @override
+  String get groupDeleteOwnerSectionTitle => 'Opciones del grupo';
+
+  @override
+  String get groupDeleteOwnerSectionHint =>
+      'Solo el organizador puede cerrar esta dinámica y borrar todos los datos del grupo.';
+
+  @override
+  String get groupDeleteEntryCta => 'Eliminar grupo';
+
+  @override
+  String get groupDeleteDialogPreTitle => '¿Eliminar este grupo?';
+
+  @override
+  String get groupDeleteDialogPreBody =>
+      'Se borrarán la configuración, participantes, invitaciones y datos asociados. Esta acción no se puede deshacer.';
+
+  @override
+  String get groupDeleteDialogPreConfirm => 'Eliminar grupo';
+
+  @override
+  String get groupDeleteDialogPostTitle => '¿Eliminar este amigo secreto?';
+
+  @override
+  String get groupDeleteDialogPostBody =>
+      'El sorteo ya fue realizado. Si continúas, todos perderán acceso a sus resultados, listas de deseos, conversación del grupo y datos asociados. Esta acción no se puede deshacer.';
+
+  @override
+  String get groupDeleteDialogPostConfirm => 'Eliminar definitivamente';
+
+  @override
+  String get groupDeleteSuccessSnackbar => 'Grupo eliminado';
+
+  @override
+  String get groupDetailMissingMessage =>
+      'Este grupo ya no existe o fue eliminado por el organizador.';
+
+  @override
   String get groupTooltipEditGroupName => 'Editar nombre del grupo';
 
   @override

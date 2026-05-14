@@ -5,6 +5,7 @@ import { setWishlist } from "./functions/setWishlist";
 import { createManagedParticipant } from "./functions/createManagedParticipant";
 import { updateManagedParticipant } from "./functions/updateManagedParticipant";
 import { removeManagedParticipant } from "./functions/removeManagedParticipant";
+import { deleteGroup } from "./functions/deleteGroup";
 import { deleteSubgroup } from "./functions/deleteSubgroup";
 import { executeDraw } from "./functions/executeDraw";
 import { joinGroupByCode } from "./functions/joinGroupByCode";
@@ -18,6 +19,7 @@ export {
   createManagedParticipant,
   updateManagedParticipant,
   removeManagedParticipant,
+  deleteGroup,
   deleteSubgroup,
   joinGroupByCode,
   rotateInviteCode,

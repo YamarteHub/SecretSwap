@@ -31,6 +31,10 @@ String userVisibleErrorMessage(Object error) {
         return 'El subgrupo ya no existe o fue eliminado.';
       case 'NOT_OWNER':
         return 'Solo el organizador puede realizar esta acción.';
+      case 'GROUP_DELETE_FORBIDDEN':
+        return 'Solo el organizador puede eliminar este grupo.';
+      case 'GROUP_DELETE_FAILED':
+        return 'No pudimos eliminar el grupo por completo. Inténtalo otra vez o revisa tu conexión.';
       case 'DRAW_LOCKED':
         return 'No puedes modificar subgrupos o participantes cuando el sorteo está en curso o completado.';
     }

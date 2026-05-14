@@ -78,4 +78,7 @@ abstract interface class GroupsRepository {
     required String groupId,
     required String participantId,
   });
+
+  /// Elimina el grupo y datos asociados (solo backend; debe ser el owner).
+  Future<void> deleteGroup(String groupId);
 }

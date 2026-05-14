@@ -124,4 +124,9 @@ class GroupsRepositoryStub implements GroupsRepository {
   }) async {
     throw UnimplementedError('removeManagedParticipant not wired');
   }
+
+  @override
+  Future<void> deleteGroup(String groupId) async {
+    throw UnimplementedError('deleteGroup not wired');
+  }
 }

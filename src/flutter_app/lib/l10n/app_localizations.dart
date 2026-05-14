@@ -1844,6 +1844,72 @@ abstract class AppLocalizations {
   /// **'No puedes añadir participantes después de ejecutar el sorteo.'**
   String get groupSnackCannotAddAfterDraw;
 
+  /// No description provided for @groupDeleteOwnerSectionTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Opciones del grupo'**
+  String get groupDeleteOwnerSectionTitle;
+
+  /// No description provided for @groupDeleteOwnerSectionHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Solo el organizador puede cerrar esta dinámica y borrar todos los datos del grupo.'**
+  String get groupDeleteOwnerSectionHint;
+
+  /// No description provided for @groupDeleteEntryCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Eliminar grupo'**
+  String get groupDeleteEntryCta;
+
+  /// No description provided for @groupDeleteDialogPreTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Eliminar este grupo?'**
+  String get groupDeleteDialogPreTitle;
+
+  /// No description provided for @groupDeleteDialogPreBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Se borrarán la configuración, participantes, invitaciones y datos asociados. Esta acción no se puede deshacer.'**
+  String get groupDeleteDialogPreBody;
+
+  /// No description provided for @groupDeleteDialogPreConfirm.
+  ///
+  /// In es, this message translates to:
+  /// **'Eliminar grupo'**
+  String get groupDeleteDialogPreConfirm;
+
+  /// No description provided for @groupDeleteDialogPostTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Eliminar este amigo secreto?'**
+  String get groupDeleteDialogPostTitle;
+
+  /// No description provided for @groupDeleteDialogPostBody.
+  ///
+  /// In es, this message translates to:
+  /// **'El sorteo ya fue realizado. Si continúas, todos perderán acceso a sus resultados, listas de deseos, conversación del grupo y datos asociados. Esta acción no se puede deshacer.'**
+  String get groupDeleteDialogPostBody;
+
+  /// No description provided for @groupDeleteDialogPostConfirm.
+  ///
+  /// In es, this message translates to:
+  /// **'Eliminar definitivamente'**
+  String get groupDeleteDialogPostConfirm;
+
+  /// No description provided for @groupDeleteSuccessSnackbar.
+  ///
+  /// In es, this message translates to:
+  /// **'Grupo eliminado'**
+  String get groupDeleteSuccessSnackbar;
+
+  /// No description provided for @groupDetailMissingMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Este grupo ya no existe o fue eliminado por el organizador.'**
+  String get groupDetailMissingMessage;
+
   /// No description provided for @groupTooltipEditGroupName.
   ///
   /// In es, this message translates to:

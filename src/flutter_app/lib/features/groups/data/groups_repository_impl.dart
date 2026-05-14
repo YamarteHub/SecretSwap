@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:intl/intl.dart';
 
+import '../domain/group_exceptions.dart';
 import '../domain/group_models.dart';
 import '../domain/groups_repository.dart';
 
@@ -188,7 +189,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
     final gRef = _firestore.doc('groups/$groupId');
     final gSnap = await gRef.get();
     if (!gSnap.exists) {
-      throw StateError('Grupo no encontrado');
+      throw GroupDocumentMissingException();
     }
     final g = gSnap.data()!;
     final rulesVersion = (g['rulesVersionCurrent'] as num?)?.toInt() ?? 1;
@@ -370,7 +371,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
     final gRef = _firestore.doc('groups/$groupId');
     final gSnap = await gRef.get();
     if (!gSnap.exists) {
-      throw StateError('Grupo no encontrado');
+      throw GroupDocumentMissingException();
     }
     final g = gSnap.data()!;
     final drawStatus = g['drawStatus'] as String? ?? 'idle';
@@ -491,6 +492,12 @@ class GroupsRepositoryImpl implements GroupsRepository {
       'groupId': groupId,
       'participantId': participantId,
     });
+  }
+
+  @override
+  Future<void> deleteGroup(String groupId) async {
+    final callable = _functions.httpsCallable('deleteGroup');
+    await callable.call(<String, dynamic>{'groupId': groupId});
   }
 
   MemberRole _parseRole(String s) {

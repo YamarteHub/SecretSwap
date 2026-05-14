@@ -175,6 +175,18 @@ export const DeleteSubgroupResponseSchema = z.object({
 });
 export type DeleteSubgroupResponse = z.infer<typeof DeleteSubgroupResponseSchema>;
 
+export const DeleteGroupRequestSchema = z.object({
+  groupId: z.string().min(1)
+});
+export type DeleteGroupRequest = z.infer<typeof DeleteGroupRequestSchema>;
+
+export const DeleteGroupResponseSchema = z.object({
+  ok: z.literal(true),
+  groupId: z.string().min(1),
+  alreadyDeleted: z.boolean()
+});
+export type DeleteGroupResponse = z.infer<typeof DeleteGroupResponseSchema>;
+
 export const GetManagedAssignmentsRequestSchema = z.object({
   groupId: z.string().min(1),
   executionId: z.string().min(1)

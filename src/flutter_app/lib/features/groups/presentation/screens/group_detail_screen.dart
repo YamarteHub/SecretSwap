@@ -14,10 +14,12 @@ import '../../../../core/routing/app_router.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/theme/premium_ui.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../chat/presentation/providers.dart';
 import '../../../chat/presentation/screens/group_chat_screen.dart';
 import '../../../draw/presentation/providers.dart';
 import '../../../wishlist/presentation/widgets/group_wishlist_summary_section.dart';
 import '../../../wishlist/presentation/providers.dart';
+import '../../domain/group_exceptions.dart';
 import '../../domain/group_models.dart';
 import '../providers.dart';
 
@@ -286,10 +288,24 @@ class GroupDetailScreen extends ConsumerWidget {
             ref.invalidate(myGroupsProvider);
             ref.invalidate(myParticipantIdForWishlistProvider(groupId));
           },
+          onGroupDeletedSuccess: () {
+            ref.invalidate(myGroupsProvider);
+            ref.invalidate(groupDetailProvider(groupId));
+            ref.invalidate(myParticipantIdForWishlistProvider(groupId));
+            ref.invalidate(groupDrawStatusStreamProvider(groupId));
+            ref.invalidate(groupChatMessagesProvider(groupId));
+            if (!context.mounted) return;
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(context.l10n.groupDeleteSuccessSnackbar)),
+            );
+            context.go(AppRoutes.groupsHome);
+          },
         ),
         loading: () => const _DetailLoadingState(),
         error: (e, _) => _DetailErrorState(
-          message: userVisibleActionErrorMessage(e),
+          message: e is GroupDocumentMissingException
+              ? l10n.groupDetailMissingMessage
+              : userVisibleActionErrorMessage(e),
           onRetry: () => ref.invalidate(groupDetailProvider(groupId)),
           onBack: () => _goBack(context),
         ),
@@ -427,6 +443,7 @@ class _GroupDetailBody extends ConsumerStatefulWidget {
   final String groupId;
   final VoidCallback onAfterDraw;
   final VoidCallback onReload;
+  final VoidCallback onGroupDeletedSuccess;
 
   const _GroupDetailBody({
     required this.detail,
@@ -434,6 +451,7 @@ class _GroupDetailBody extends ConsumerStatefulWidget {
     required this.groupId,
     required this.onAfterDraw,
     required this.onReload,
+    required this.onGroupDeletedSuccess,
   });
 
   @override
@@ -452,6 +470,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
   bool _savingRule = false;
   bool _rotatingInviteCode = false;
   String? _lastInviteCode;
+  bool _deleteGroupInFlight = false;
   // Sección actualmente expandida. `null` = todas colapsadas.
   // El usuario abre y cierra manualmente; no expandimos por defecto para
   // que la pantalla quede limpia y los headers se vean como un índice.
@@ -671,6 +690,64 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
 
   void _reloadDetail() {
     ref.invalidate(groupDetailProvider(widget.groupId));
+  }
+
+  Future<void> _confirmAndDeleteGroup() async {
+    if (!_isOwner || _deleteGroupInFlight || !mounted) return;
+    final l10n = context.l10n;
+    final postDraw = widget.detail.drawStatus == DrawStatus.completed;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) {
+        return AlertDialog(
+          title: Text(
+            postDraw
+                ? l10n.groupDeleteDialogPostTitle
+                : l10n.groupDeleteDialogPreTitle,
+          ),
+          content: Text(
+            postDraw
+                ? l10n.groupDeleteDialogPostBody
+                : l10n.groupDeleteDialogPreBody,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: Text(l10n.groupDialogCancel),
+            ),
+            FilledButton(
+              style: FilledButton.styleFrom(
+                backgroundColor: AppTheme.softTerracotta,
+                foregroundColor: Colors.white,
+              ),
+              onPressed: () => Navigator.pop(ctx, true),
+              child: Text(
+                postDraw
+                    ? l10n.groupDeleteDialogPostConfirm
+                    : l10n.groupDeleteDialogPreConfirm,
+              ),
+            ),
+          ],
+        );
+      },
+    );
+    if (!mounted || confirmed != true) return;
+    setState(() => _deleteGroupInFlight = true);
+    try {
+      await ref.read(groupsRepositoryProvider).deleteGroup(widget.groupId);
+      if (!mounted) return;
+      widget.onGroupDeletedSuccess();
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(userVisibleActionErrorMessage(e))),
+      );
+    } finally {
+      if (mounted) {
+        setState(() => _deleteGroupInFlight = false);
+      }
+    }
   }
 
   Future<void> _showCreateSubgroupDialog() async {
@@ -1797,6 +1874,46 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
               inviteCode: _lastInviteCode,
               onGenerate: _rotateInviteCode,
               onCopy: _copyInviteCode,
+            ),
+          ),
+        ],
+        if (_isOwner) ...[
+          const SizedBox(height: 20),
+          SecretCard(
+            padding: const EdgeInsets.fromLTRB(18, 16, 18, 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l10n.groupDeleteOwnerSectionTitle,
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  l10n.groupDeleteOwnerSectionHint,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                    height: 1.35,
+                  ),
+                ),
+                const SizedBox(height: 14),
+                OutlinedButton.icon(
+                  onPressed: _deleteGroupInFlight ? null : _confirmAndDeleteGroup,
+                  icon: Icon(
+                    Icons.delete_outline_rounded,
+                    color: AppTheme.softTerracotta.withValues(alpha: 0.95),
+                  ),
+                  label: Text(l10n.groupDeleteEntryCta),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: AppTheme.softTerracotta,
+                    side: BorderSide(
+                      color: AppTheme.softTerracotta.withValues(alpha: 0.65),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
