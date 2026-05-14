@@ -2,24 +2,27 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/l10n/l10n.dart';
 import '../../../core/routing/app_router.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/premium_ui.dart';
+import '../../groups/presentation/providers.dart';
 
 const Duration _kAuthTimeout = Duration(seconds: 10);
-const Duration _kMinSplashBrandTime = Duration(milliseconds: 1400);
+/// Tiempo mínimo de lectura del splash Flutter (crédito + marca) antes de salir.
+const Duration _kMinSplashBrandTime = Duration(milliseconds: 1350);
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  ConsumerState<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen>
+class _SplashScreenState extends ConsumerState<SplashScreen>
     with SingleTickerProviderStateMixin {
   bool _loading = true;
   String? _error;
@@ -51,6 +54,15 @@ class _SplashScreenState extends State<SplashScreen>
     super.dispose();
   }
 
+  Future<void> _prefetchDashboardData() async {
+    try {
+      await ref.read(myGroupsProvider.future);
+    } catch (e, st) {
+      debugPrint('[TarciSwap] splash: prefetch myGroups failed: $e');
+      debugPrint('$st');
+    }
+  }
+
   Future<void> _boot() async {
     final startedAt = DateTime.now();
     debugPrint('[TarciSwap] splash: inicio init / boot');
@@ -64,7 +76,10 @@ class _SplashScreenState extends State<SplashScreen>
       final existing = FirebaseAuth.instance.currentUser;
       if (existing != null) {
         debugPrint('[TarciSwap] splash: sesión ya activa uid=${existing.uid}');
-        await _ensureMinSplashTime(startedAt);
+        await Future.wait([
+          _ensureMinSplashTime(startedAt),
+          _prefetchDashboardData(),
+        ]);
         if (!mounted) return;
         context.go(AppRoutes.groupsHome);
         return;
@@ -73,7 +88,7 @@ class _SplashScreenState extends State<SplashScreen>
       debugPrint(
         '[TarciSwap] splash: inicio login anónimo (timeout ${_kAuthTimeout.inSeconds}s)',
       );
-      final cred = await FirebaseAuth.instance.signInAnonymously().timeout(
+      await FirebaseAuth.instance.signInAnonymously().timeout(
         _kAuthTimeout,
         onTimeout: () {
           throw TimeoutException(
@@ -82,8 +97,11 @@ class _SplashScreenState extends State<SplashScreen>
           );
         },
       );
-      debugPrint('[TarciSwap] splash: login correcto uid=${cred.user?.uid}');
-      await _ensureMinSplashTime(startedAt);
+      debugPrint('[TarciSwap] splash: login correcto');
+      await Future.wait([
+        _ensureMinSplashTime(startedAt),
+        _prefetchDashboardData(),
+      ]);
       if (!mounted) return;
       context.go(AppRoutes.groupsHome);
     } on TimeoutException catch (e) {
@@ -154,18 +172,22 @@ class _SplashScreenState extends State<SplashScreen>
                     child: Text(l10n.retry),
                   ),
                 ] else if (_loading) ...[
-                  const SizedBox(
-                    width: 28,
-                    height: 28,
-                    child: CircularProgressIndicator(strokeWidth: 2.5),
+                  SizedBox(
+                    width: 32,
+                    height: 32,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2.5,
+                      color: AppTheme.deepPlum.withValues(alpha: 0.55),
+                    ),
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    l10n.splashLoadingHint,
+                    l10n.splashBootBrandedHint,
                     textAlign: TextAlign.center,
                     style: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.colorScheme.onSurfaceVariant,
-                      height: 1.35,
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.72),
+                      height: 1.38,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ] else
@@ -177,10 +199,10 @@ class _SplashScreenState extends State<SplashScreen>
                     l10n.productAuthorshipLine,
                     textAlign: TextAlign.center,
                     style: theme.textTheme.labelSmall?.copyWith(
-                      color: theme.colorScheme.onSurface.withValues(alpha: 0.4),
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.52),
                       letterSpacing: 0.12,
                       height: 1.25,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),

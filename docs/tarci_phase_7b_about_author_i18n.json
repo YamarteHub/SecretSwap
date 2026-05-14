@@ -1,6 +1,7 @@
 {
   "phase": "7B",
-  "description": "Acerca de, autoría, LinkedIn y versión — PT/IT/FR para incorporar en Fase 8.",
+  "phasePatch": "7B.1",
+  "description": "Acerca de, autoría, LinkedIn y versión — PT/IT/FR para Fase 8. Parche 7B.1: subtítulo creador + splash boot.",
   "locale_pt": {
     "productAuthorshipLine": "Tarci Secret · © 2026 Stalin Yamarte",
     "aboutScreenTitle": "Sobre o Tarci Secret",
@@ -21,12 +22,13 @@
     "aboutSectionPrivacyBody": "Cada pessoa vê apenas o que precisa de ver. Num amigo secreto, as atribuições são protegidas para que o resultado continue privado.",
     "aboutSectionPrivacyTrust": "A app prioriza a clareza, a confiança e o respeito pela experiência do grupo.",
     "aboutSectionCreatorTitle": "Criado por Stalin Yamarte",
-    "aboutSectionCreatorSubtitle": "Engenheiro informático e desenvolvedor de aplicações.",
+    "aboutSectionCreatorSubtitle": "Especialista em Sistemas e desenvolvedor de aplicações.",
     "aboutLinkedInCta": "Ver perfil no LinkedIn",
     "aboutLinkedInError": "Não foi possível abrir o LinkedIn. Tenta no navegador.",
     "aboutVersionTitle": "Versão",
     "aboutVersionLine": "Versão {version}",
-    "aboutBuildLine": "Compilação {buildNumber}"
+    "aboutBuildLine": "Compilação {buildNumber}",
+    "splashBootBrandedHint": "A preparar o teu espaço…"
   },
   "locale_it": {
     "productAuthorshipLine": "Tarci Secret · © 2026 Stalin Yamarte",
@@ -48,12 +50,13 @@
     "aboutSectionPrivacyBody": "Ognuno vede solo ciò che deve vedere. Nell’amico segreto, le assegnazioni sono protette perché l’esito resti privato.",
     "aboutSectionPrivacyTrust": "L’app privilegia chiarezza, fiducia e rispetto per l’esperienza del gruppo.",
     "aboutSectionCreatorTitle": "Creato da Stalin Yamarte",
-    "aboutSectionCreatorSubtitle": "Ingegnere informatico e sviluppatore di applicazioni.",
+    "aboutSectionCreatorSubtitle": "Specialista in sistemi e sviluppatore di applicazioni.",
     "aboutLinkedInCta": "Vedi il profilo LinkedIn",
     "aboutLinkedInError": "Non siamo riusciti ad aprire LinkedIn. Riprova dal browser.",
     "aboutVersionTitle": "Versione",
     "aboutVersionLine": "Versione {version}",
-    "aboutBuildLine": "Build {buildNumber}"
+    "aboutBuildLine": "Build {buildNumber}",
+    "splashBootBrandedHint": "Prepariamo il tuo spazio…"
   },
   "locale_fr": {
     "productAuthorshipLine": "Tarci Secret · © 2026 Stalin Yamarte",
@@ -75,11 +78,12 @@
     "aboutSectionPrivacyBody": "Chacun ne voit que ce dont il a besoin. En Secret Santa, les attributions sont protégées pour que le résultat reste privé.",
     "aboutSectionPrivacyTrust": "L’application privilégie la clarté, la confiance et le respect de l’expérience du groupe.",
     "aboutSectionCreatorTitle": "Créé par Stalin Yamarte",
-    "aboutSectionCreatorSubtitle": "Ingénieur en informatique et développeur d’applications.",
+    "aboutSectionCreatorSubtitle": "Spécialiste en systèmes et développeur d’applications.",
     "aboutLinkedInCta": "Voir le profil LinkedIn",
     "aboutLinkedInError": "Impossible d’ouvrir LinkedIn. Réessayez depuis le navigateur.",
     "aboutVersionTitle": "Version",
     "aboutVersionLine": "Version {version}",
-    "aboutBuildLine": "Build {buildNumber}"
+    "aboutBuildLine": "Build {buildNumber}",
+    "splashBootBrandedHint": "Préparation de votre espace…"
   }
 }

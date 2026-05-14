@@ -16,23 +16,14 @@ class AboutTarciScreen extends StatelessWidget {
   const AboutTarciScreen({super.key});
 
   Future<void> _openLinkedIn(BuildContext context) async {
-    final uri = Uri.tryParse(kTarciCreatorLinkedInUrl);
+    final uri = Uri.parse(kTarciCreatorLinkedInUrl);
     final l10n = context.l10n;
-    if (uri == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.aboutLinkedInError)),
-      );
-      return;
-    }
     try {
-      if (await canLaunchUrl(uri)) {
-        final ok = await launchUrl(uri, mode: LaunchMode.externalApplication);
-        if (!ok && context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(l10n.aboutLinkedInError)),
-          );
-        }
-      } else if (context.mounted) {
+      final ok = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
+      if (!ok && context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(l10n.aboutLinkedInError)),
         );

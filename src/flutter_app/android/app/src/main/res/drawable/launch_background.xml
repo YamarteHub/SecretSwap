@@ -6,4 +6,12 @@
     <item>
         <bitmap android:gravity="center" android:src="@drawable/splash"/>
     </item>
+    <item
+        android:bottom="20dp"
+        android:left="16dp"
+        android:right="16dp">
+        <bitmap
+            android:gravity="bottom|center_horizontal"
+            android:src="@drawable/splash_credit" />
+    </item>
 </layer-list>

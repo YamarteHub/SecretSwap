@@ -161,6 +161,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get splashLoadingHint => 'Getting things ready for you…';
 
   @override
+  String get splashBootBrandedHint => 'Getting your space ready…';
+
+  @override
   String get productAuthorshipLine => 'Tarci Secret · © 2026 Stalin Yamarte';
 
   @override
@@ -226,7 +229,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aboutSectionCreatorSubtitle =>
-      'Computer engineer and application developer.';
+      'Systems specialist and application developer.';
 
   @override
   String get aboutLinkedInCta => 'View LinkedIn profile';

@@ -380,6 +380,12 @@ abstract class AppLocalizations {
   /// **'Preparando todo para ti…'**
   String get splashLoadingHint;
 
+  /// No description provided for @splashBootBrandedHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Preparando tu espacio…'**
+  String get splashBootBrandedHint;
+
   /// No description provided for @productAuthorshipLine.
   ///
   /// In es, this message translates to:
@@ -497,7 +503,7 @@ abstract class AppLocalizations {
   /// No description provided for @aboutSectionCreatorSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Ingeniero en Informática y desarrollador de aplicaciones.'**
+  /// **'Especialista en Sistemas y desarrollador de aplicaciones.'**
   String get aboutSectionCreatorSubtitle;
 
   /// No description provided for @aboutLinkedInCta.
