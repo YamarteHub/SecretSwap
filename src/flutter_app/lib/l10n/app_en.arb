@@ -77,15 +77,9 @@
   "aboutSectionCreatorSubtitle": "Systems specialist and application developer.",
   "aboutLinkedInCta": "View LinkedIn profile",
   "aboutLinkedInError": "We couldn’t open LinkedIn. Try again from your browser.",
-  "aboutVersionTitle": "Version",
-  "aboutVersionLine": "Version {version}",
-  "@aboutVersionLine": {
-    "placeholders": {
-      "version": {
-        "type": "String"
-      }
-    }
-  },
+  "aboutAppInfoTitle": "App information",
+  "aboutCopyrightLine": "© 2026 Stalin Yamarte",
+  "aboutPackageInfoError": "We couldn’t read the app version.",
   "aboutBuildLine": "Build {buildNumber}",
   "@aboutBuildLine": {
     "placeholders": {

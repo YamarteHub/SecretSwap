@@ -77,16 +77,10 @@
   "aboutSectionCreatorSubtitle": "Especialista en Sistemas y desarrollador de aplicaciones.",
   "aboutLinkedInCta": "Ver perfil en LinkedIn",
   "aboutLinkedInError": "No pudimos abrir LinkedIn. Inténtalo desde el navegador.",
-  "aboutVersionTitle": "Versión",
-  "aboutVersionLine": "Versión {version}",
-  "@aboutVersionLine": {
-    "placeholders": {
-      "version": {
-        "type": "String"
-      }
-    }
-  },
-  "aboutBuildLine": "Compilación {buildNumber}",
+  "aboutAppInfoTitle": "Información de la app",
+  "aboutCopyrightLine": "© 2026 Stalin Yamarte",
+  "aboutPackageInfoError": "No pudimos leer la versión de la app.",
+  "aboutBuildLine": "Compilación interna {buildNumber}",
   "@aboutBuildLine": {
     "placeholders": {
       "buildNumber": {

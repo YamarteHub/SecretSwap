@@ -20,8 +20,8 @@
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="LaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="YRO-k0-Ey4"></imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tarci Secret · © 2026 Stalin Yamarte" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" translatesAutoresizingMaskIntoConstraints="NO" id="tarci-auth-lbl">
                                 <rect key="frame" x="20" y="0" width="335" height="40"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <color key="textColor" red="0.227" green="0.133" blue="0.247" alpha="0.78" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13.5"/>
+                                <color key="textColor" red="0.227" green="0.133" blue="0.247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -38,7 +38,7 @@
                             <constraint firstItem="tarci-auth-lbl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="20" id="auth-lead"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tarci-auth-lbl" secondAttribute="trailing" constant="20" id="auth-trail"/>
                             <constraint firstItem="tarci-auth-lbl" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="auth-cx"/>
-                            <constraint firstItem="tarci-auth-lbl" firstAttribute="bottom" secondItem="xbc-2k-c8Z" secondAttribute="top" constant="-16" id="auth-bottom"/>
+                            <constraint firstItem="tarci-auth-lbl" firstAttribute="bottom" secondItem="xbc-2k-c8Z" secondAttribute="top" constant="-22" id="auth-bottom"/>
                         </constraints>
                     </view>
                 </viewController>

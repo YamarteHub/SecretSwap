@@ -242,16 +242,17 @@ class AppLocalizationsEs extends AppLocalizations {
       'No pudimos abrir LinkedIn. Inténtalo desde el navegador.';
 
   @override
-  String get aboutVersionTitle => 'Versión';
+  String get aboutAppInfoTitle => 'Información de la app';
 
   @override
-  String aboutVersionLine(String version) {
-    return 'Versión $version';
-  }
+  String get aboutCopyrightLine => '© 2026 Stalin Yamarte';
+
+  @override
+  String get aboutPackageInfoError => 'No pudimos leer la versión de la app.';
 
   @override
   String aboutBuildLine(String buildNumber) {
-    return 'Compilación $buildNumber';
+    return 'Compilación interna $buildNumber';
   }
 
   @override

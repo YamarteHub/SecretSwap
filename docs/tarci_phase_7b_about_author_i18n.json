@@ -1,7 +1,7 @@
 {
   "phase": "7B",
-  "phasePatch": "7B.1",
-  "description": "Acerca de, autoría, LinkedIn y versión — PT/IT/FR para Fase 8. Parche 7B.1: subtítulo creador + splash boot.",
+  "phasePatch": "7B.2",
+  "description": "Acerca de, autoría, LinkedIn y versión — PT/IT/FR para Fase 8. Parche 7B.2: bloque información de app + splash legible.",
   "locale_pt": {
     "productAuthorshipLine": "Tarci Secret · © 2026 Stalin Yamarte",
     "aboutScreenTitle": "Sobre o Tarci Secret",
@@ -25,9 +25,10 @@
     "aboutSectionCreatorSubtitle": "Especialista em Sistemas e desenvolvedor de aplicações.",
     "aboutLinkedInCta": "Ver perfil no LinkedIn",
     "aboutLinkedInError": "Não foi possível abrir o LinkedIn. Tenta no navegador.",
-    "aboutVersionTitle": "Versão",
-    "aboutVersionLine": "Versão {version}",
-    "aboutBuildLine": "Compilação {buildNumber}",
+    "aboutAppInfoTitle": "Informações da app",
+    "aboutCopyrightLine": "© 2026 Stalin Yamarte",
+    "aboutPackageInfoError": "Não foi possível ler a versão da app.",
+    "aboutBuildLine": "Compilação interna {buildNumber}",
     "splashBootBrandedHint": "A preparar o teu espaço…"
   },
   "locale_it": {
@@ -53,9 +54,10 @@
     "aboutSectionCreatorSubtitle": "Specialista in sistemi e sviluppatore di applicazioni.",
     "aboutLinkedInCta": "Vedi il profilo LinkedIn",
     "aboutLinkedInError": "Non siamo riusciti ad aprire LinkedIn. Riprova dal browser.",
-    "aboutVersionTitle": "Versione",
-    "aboutVersionLine": "Versione {version}",
-    "aboutBuildLine": "Build {buildNumber}",
+    "aboutAppInfoTitle": "Informazioni sull'app",
+    "aboutCopyrightLine": "© 2026 Stalin Yamarte",
+    "aboutPackageInfoError": "Impossibile leggere la versione dell'app.",
+    "aboutBuildLine": "Build interno {buildNumber}",
     "splashBootBrandedHint": "Prepariamo il tuo spazio…"
   },
   "locale_fr": {
@@ -81,9 +83,10 @@
     "aboutSectionCreatorSubtitle": "Spécialiste en systèmes et développeur d’applications.",
     "aboutLinkedInCta": "Voir le profil LinkedIn",
     "aboutLinkedInError": "Impossible d’ouvrir LinkedIn. Réessayez depuis le navigateur.",
-    "aboutVersionTitle": "Version",
-    "aboutVersionLine": "Version {version}",
-    "aboutBuildLine": "Build {buildNumber}",
+    "aboutAppInfoTitle": "Informations sur l’app",
+    "aboutCopyrightLine": "© 2026 Stalin Yamarte",
+    "aboutPackageInfoError": "Impossible de lire la version de l’app.",
+    "aboutBuildLine": "Compilation interne {buildNumber}",
     "splashBootBrandedHint": "Préparation de votre espace…"
   }
 }

@@ -518,22 +518,28 @@ abstract class AppLocalizations {
   /// **'No pudimos abrir LinkedIn. Inténtalo desde el navegador.'**
   String get aboutLinkedInError;
 
-  /// No description provided for @aboutVersionTitle.
+  /// No description provided for @aboutAppInfoTitle.
   ///
   /// In es, this message translates to:
-  /// **'Versión'**
-  String get aboutVersionTitle;
+  /// **'Información de la app'**
+  String get aboutAppInfoTitle;
 
-  /// No description provided for @aboutVersionLine.
+  /// No description provided for @aboutCopyrightLine.
   ///
   /// In es, this message translates to:
-  /// **'Versión {version}'**
-  String aboutVersionLine(String version);
+  /// **'© 2026 Stalin Yamarte'**
+  String get aboutCopyrightLine;
+
+  /// No description provided for @aboutPackageInfoError.
+  ///
+  /// In es, this message translates to:
+  /// **'No pudimos leer la versión de la app.'**
+  String get aboutPackageInfoError;
 
   /// No description provided for @aboutBuildLine.
   ///
   /// In es, this message translates to:
-  /// **'Compilación {buildNumber}'**
+  /// **'Compilación interna {buildNumber}'**
   String aboutBuildLine(String buildNumber);
 
   /// No description provided for @quickModeTitle.

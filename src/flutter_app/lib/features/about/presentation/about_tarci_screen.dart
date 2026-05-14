@@ -7,6 +7,7 @@ import '../../../core/l10n/l10n.dart';
 import '../../../core/routing/app_router.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/premium_ui.dart';
+import '../../../core/version/public_marketing_version.dart';
 
 /// Perfil público indicado en la fase 7B.
 const String kTarciCreatorLinkedInUrl =
@@ -208,17 +209,17 @@ class AboutTarciScreen extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           SecretCard(
-            padding: const EdgeInsets.fromLTRB(20, 18, 20, 18),
+            padding: const EdgeInsets.fromLTRB(20, 18, 20, 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  l10n.aboutVersionTitle,
+                  l10n.aboutAppInfoTitle,
                   style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w800,
                   ),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 14),
                 FutureBuilder<PackageInfo>(
                   future: PackageInfo.fromPlatform(),
                   builder: (context, snap) {
@@ -231,36 +232,58 @@ class AboutTarciScreen extends StatelessWidget {
                     }
                     if (snap.hasError || !snap.hasData) {
                       return Text(
-                        l10n.aboutVersionLine('—'),
-                        style: theme.textTheme.bodyMedium,
+                        l10n.aboutPackageInfoError,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                          height: 1.35,
+                        ),
                       );
                     }
                     final p = snap.data!;
                     final build = p.buildNumber.trim();
+                    final publicVer = formatPublicMarketingVersion(p.version);
+                    final onVar = theme.colorScheme.onSurfaceVariant;
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          l10n.aboutVersionLine(p.version),
-                          style: theme.textTheme.bodyLarge?.copyWith(
+                          l10n.appName,
+                          style: theme.textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: -0.2,
+                            height: 1.15,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          publicVer,
+                          style: theme.textTheme.headlineSmall?.copyWith(
                             fontWeight: FontWeight.w700,
+                            letterSpacing: 0.2,
+                            color: AppTheme.deepPlum,
+                            height: 1.1,
                           ),
                         ),
                         if (build.isNotEmpty) ...[
-                          const SizedBox(height: 4),
+                          const SizedBox(height: 6),
                           Text(
                             l10n.aboutBuildLine(build),
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                              color: theme.colorScheme.onSurfaceVariant,
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: onVar.withValues(alpha: 0.88),
+                              height: 1.3,
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: 0.15,
                             ),
                           ),
                         ],
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 14),
                         Text(
-                          l10n.productAuthorshipLine,
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.9),
+                          l10n.aboutCopyrightLine,
+                          style: theme.textTheme.labelSmall?.copyWith(
+                            color: onVar.withValues(alpha: 0.72),
                             fontWeight: FontWeight.w600,
+                            letterSpacing: 0.12,
+                            height: 1.25,
                           ),
                         ),
                       ],
