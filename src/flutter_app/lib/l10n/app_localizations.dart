@@ -2699,7 +2699,7 @@ abstract class AppLocalizations {
   /// No description provided for @chatGroupSectionSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Bromea, suelta pistas y mantén vivo el ambiente.'**
+  /// **'Bromea, comparte pistas y mantén vivo el ambiente.'**
   String get chatGroupSectionSubtitle;
 
   /// No description provided for @chatGroupEnterCta.

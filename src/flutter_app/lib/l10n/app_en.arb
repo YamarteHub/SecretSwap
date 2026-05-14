@@ -743,7 +743,7 @@
   "groupCompletedPrivacyNote": "Each result is private. Only that person sees their own.",
   "groupCompletedManagedHint": "You privately deliver the results of the people you manage.",
   "chatGroupSectionTitle": "Group conversation",
-  "chatGroupSectionSubtitle": "Joke around, drop hints, and keep the vibe alive.",
+  "chatGroupSectionSubtitle": "Joke around, share clues, and keep the vibe alive.",
   "chatGroupEnterCta": "Open chat",
   "chatGroupEventLine": "Exchange: {date}",
   "@chatGroupEventLine": {

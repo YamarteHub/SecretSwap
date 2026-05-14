@@ -1,0 +1,25 @@
+{
+  "phase": "6C",
+  "description": "Cadenas de la fase 6C (chat post-sorteo, botón enviar, refresco) para incorporar cuando se activen locales PT/IT/FR en runtime.",
+  "locale_pt": {
+    "chatGroupSectionTitle": "Conversa do grupo",
+    "chatGroupSectionSubtitle": "Brinca, partilha pistas e mantém o clima aceso.",
+    "chatGroupEnterCta": "Entrar no chat",
+    "chatSendCta": "Enviar",
+    "chatInputHint": "Escreve algo para o grupo…"
+  },
+  "locale_it": {
+    "chatGroupSectionTitle": "Conversazione di gruppo",
+    "chatGroupSectionSubtitle": "Scherza, lascia indizi e tieni viva l’atmosfera.",
+    "chatGroupEnterCta": "Apri la chat",
+    "chatSendCta": "Invia",
+    "chatInputHint": "Scrivi qualcosa per il gruppo…"
+  },
+  "locale_fr": {
+    "chatGroupSectionTitle": "Conversation du groupe",
+    "chatGroupSectionSubtitle": "Plaisante, partage des indices et garde l’ambiance vivante.",
+    "chatGroupEnterCta": "Ouvrir le chat",
+    "chatSendCta": "Envoyer",
+    "chatInputHint": "Écris un message pour le groupe…"
+  }
+}

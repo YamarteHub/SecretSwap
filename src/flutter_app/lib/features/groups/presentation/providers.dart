@@ -17,3 +17,9 @@ final groupDetailProvider = FutureProvider.autoDispose.family<GroupDetail, Strin
   ref.keepAlive();
   return ref.watch(groupsRepositoryProvider).getGroupDetail(groupId);
 });
+
+/// Escucha `groups/{groupId}` para detectar cierre de sorteo sin depender de quien invoque el callable.
+final groupDrawStatusStreamProvider =
+    StreamProvider.autoDispose.family<DrawStatus, String>((ref, groupId) {
+  return ref.watch(groupsRepositoryProvider).watchGroupDrawStatus(groupId);
+});

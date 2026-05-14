@@ -743,7 +743,7 @@
   "groupCompletedPrivacyNote": "Cada resultado es privado. Solo cada persona ve el suyo.",
   "groupCompletedManagedHint": "Tú entregas en privado los resultados de las personas que gestionas.",
   "chatGroupSectionTitle": "Conversación del grupo",
-  "chatGroupSectionSubtitle": "Bromea, suelta pistas y mantén vivo el ambiente.",
+  "chatGroupSectionSubtitle": "Bromea, comparte pistas y mantén vivo el ambiente.",
   "chatGroupEnterCta": "Entrar al chat",
   "chatGroupEventLine": "Entrega: {date}",
   "@chatGroupEventLine": {

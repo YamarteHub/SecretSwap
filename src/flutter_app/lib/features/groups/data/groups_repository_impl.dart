@@ -174,6 +174,16 @@ class GroupsRepositoryImpl implements GroupsRepository {
   }
 
   @override
+  Stream<DrawStatus> watchGroupDrawStatus(String groupId) {
+    return _firestore.doc('groups/$groupId').snapshots().map((snap) {
+      if (!snap.exists) return DrawStatus.idle;
+      final g = snap.data();
+      if (g == null) return DrawStatus.idle;
+      return _drawStatusFromGroupMap(g);
+    });
+  }
+
+  @override
   Future<GroupDetail> getGroupDetail(String groupId) async {
     final gRef = _firestore.doc('groups/$groupId');
     final gSnap = await gRef.get();

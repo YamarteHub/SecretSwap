@@ -17,6 +17,7 @@ import '../../../../l10n/app_localizations.dart';
 import '../../../chat/presentation/screens/group_chat_screen.dart';
 import '../../../draw/presentation/providers.dart';
 import '../../../wishlist/presentation/widgets/group_wishlist_summary_section.dart';
+import '../../../wishlist/presentation/providers.dart';
 import '../../domain/group_models.dart';
 import '../providers.dart';
 
@@ -256,6 +257,17 @@ class GroupDetailScreen extends ConsumerWidget {
 
     final detailAsync = ref.watch(groupDetailProvider(groupId));
 
+    ref.listen(groupDrawStatusStreamProvider(groupId), (previous, next) {
+      next.whenData((status) {
+        if (status != DrawStatus.completed) return;
+        final prevStatus = previous?.asData?.value;
+        if (prevStatus == DrawStatus.completed) return;
+        ref.invalidate(groupDetailProvider(groupId));
+        ref.invalidate(myGroupsProvider);
+        ref.invalidate(myParticipantIdForWishlistProvider(groupId));
+      });
+    });
+
     return Scaffold(
       backgroundColor: AppTheme.warmIvory,
       appBar: _buildAppBar(context, l10n),
@@ -266,8 +278,14 @@ class GroupDetailScreen extends ConsumerWidget {
           groupId: groupId,
           onAfterDraw: () {
             ref.invalidate(groupDetailProvider(groupId));
+            ref.invalidate(myGroupsProvider);
+            ref.invalidate(myParticipantIdForWishlistProvider(groupId));
           },
-          onReload: () => ref.invalidate(groupDetailProvider(groupId)),
+          onReload: () {
+            ref.invalidate(groupDetailProvider(groupId));
+            ref.invalidate(myGroupsProvider);
+            ref.invalidate(myParticipantIdForWishlistProvider(groupId));
+          },
         ),
         loading: () => const _DetailLoadingState(),
         error: (e, _) => _DetailErrorState(
@@ -1425,7 +1443,7 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
               ? l10n.groupWarningMissingSubgroupCombined
               : null,
         ),
-        if (_isActiveAppMember(d, widget.currentUid)) ...[
+        if (_isActiveAppMember(d, widget.currentUid) && isCompleted) ...[
           const SizedBox(height: 16),
           _GroupChatAccessCard(
             groupId: widget.groupId,

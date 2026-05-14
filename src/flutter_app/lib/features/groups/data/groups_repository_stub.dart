@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import '../domain/group_models.dart';
 import '../domain/groups_repository.dart';
 
@@ -35,6 +37,11 @@ class GroupsRepositoryStub implements GroupsRepository {
   @override
   Future<GroupDetail> getGroupDetail(String groupId) async {
     throw UnimplementedError('getGroupDetail not wired');
+  }
+
+  @override
+  Stream<DrawStatus> watchGroupDrawStatus(String groupId) {
+    return Stream.value(DrawStatus.idle);
   }
 
   @override

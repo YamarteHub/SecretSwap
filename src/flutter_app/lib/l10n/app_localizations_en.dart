@@ -1510,7 +1510,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatGroupSectionSubtitle =>
-      'Joke around, drop hints, and keep the vibe alive.';
+      'Joke around, share clues, and keep the vibe alive.';
 
   @override
   String get chatGroupEnterCta => 'Open chat';

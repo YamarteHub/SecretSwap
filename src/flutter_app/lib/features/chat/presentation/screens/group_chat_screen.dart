@@ -350,16 +350,43 @@ class _GroupChatScreenState extends ConsumerState<GroupChatScreen> {
                       ),
                     ),
                     const SizedBox(width: 8),
-                    IconButton.filled(
-                      tooltip: l10n.chatSendCta,
-                      onPressed: _sending || _textController.text.trim().isEmpty ? null : _send,
-                      icon: _sending
-                          ? const SizedBox(
-                              width: 22,
-                              height: 22,
-                              child: CircularProgressIndicator(strokeWidth: 2),
-                            )
-                          : const Icon(Icons.send_rounded),
+                    Builder(
+                      builder: (context) {
+                        final theme = Theme.of(context);
+                        final canSend =
+                            !_sending && _textController.text.trim().isNotEmpty;
+                        return IconButton.filled(
+                          tooltip: l10n.chatSendCta,
+                          style: IconButton.styleFrom(
+                            elevation: canSend ? 2.5 : 0,
+                            shadowColor: canSend
+                                ? AppTheme.deepPlum.withValues(alpha: 0.38)
+                                : Colors.transparent,
+                            backgroundColor: canSend
+                                ? AppTheme.deepPlum
+                                : theme.colorScheme.surfaceContainerHighest,
+                            foregroundColor: canSend
+                                ? Colors.white
+                                : theme.colorScheme.onSurfaceVariant
+                                    .withValues(alpha: 0.48),
+                            disabledBackgroundColor:
+                                theme.colorScheme.surfaceContainerHighest,
+                            disabledForegroundColor: theme
+                                .colorScheme.onSurfaceVariant
+                                .withValues(alpha: 0.42),
+                            shape: const CircleBorder(),
+                            fixedSize: const Size(48, 48),
+                          ),
+                          onPressed: canSend ? _send : null,
+                          icon: _sending
+                              ? const SizedBox(
+                                  width: 22,
+                                  height: 22,
+                                  child: CircularProgressIndicator(strokeWidth: 2),
+                                )
+                              : const Icon(Icons.send_rounded, size: 22),
+                        );
+                      },
                     ),
                   ],
                 ),

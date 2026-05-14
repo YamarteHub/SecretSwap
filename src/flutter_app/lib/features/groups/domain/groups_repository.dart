@@ -16,6 +16,9 @@ abstract interface class GroupsRepository {
 
   Future<GroupDetail> getGroupDetail(String groupId);
 
+  /// Emite el estado de sorteo de `groups/{groupId}` (misma lectura que en `getGroupDetail`).
+  Stream<DrawStatus> watchGroupDrawStatus(String groupId);
+
   /// Crea un subgrupo (Firestore: `groups/{groupId}/subgroups/{id}`).
   Future<Subgroup> createSubgroup({
     required String groupId,

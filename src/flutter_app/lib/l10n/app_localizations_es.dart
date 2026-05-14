@@ -1521,7 +1521,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get chatGroupSectionSubtitle =>
-      'Bromea, suelta pistas y mantén vivo el ambiente.';
+      'Bromea, comparte pistas y mantén vivo el ambiente.';
 
   @override
   String get chatGroupEnterCta => 'Entrar al chat';
