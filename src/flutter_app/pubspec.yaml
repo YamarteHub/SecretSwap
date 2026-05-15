@@ -73,15 +73,18 @@ flutter_launcher_icons:
 
 flutter_native_splash:
   color: "#FAF7F1"
-  # Marca vertical con transparencia y margen: evita recorte en Android 12+ (máscara circular).
+  # Pre-Android 12 e iOS: wordmark vertical (sin máscara circular).
   image: assets/brand/TarciSecret_Vertical_Transparent.png
+  image_android: assets/brand/TarciSecret_Vertical_Transparent.png
+  image_ios: assets/brand/TarciSecret_Vertical_Transparent.png
   android_gravity: center
   ios_content_mode: scaleAspectFit
   android: true
   ios: true
+  # Android 12+: solo isotipo (Tarci + regalo), sin wordmark; máscara circular.
   android_12:
     color: "#FAF7F1"
-    image: assets/brand/TarciSecret_Vertical_Transparent.png
+    image: assets/brand/TarciSecret_Icono_Splash_Android12.png
     icon_background_color: "#FAF7F1"
 
 # For information on the generic Dart part of this file, see the
@@ -101,6 +104,7 @@ flutter:
     - assets/brand/TarciSecret_Horizontal.png
     - assets/brand/TarciSecret_Principal.png
     - assets/brand/TarciSecret_Icono_Transparent.png
+    - assets/brand/TarciSecret_Icono_Splash_Android12.png
     - assets/brand/TarciSecret_Vertical_Transparent.png
     - assets/brand/TarciSecret_Horizontal_Transparent.png
     - assets/brand/TarciSecret_Principal_Transparent.png

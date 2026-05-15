@@ -33,18 +33,20 @@ Reducir ruido en la UX eliminando SnackBars de éxito cuando el resultado ya es 
 
 ## Splash nativo
 
-**Problema:** `TarciSecret_Icono.png` (formato ancho / ornamento lateral) sufre recorte con la máscara circular de Android 12+.
+**Problema (12.1):** usar `TarciSecret_Vertical_Transparent.png` en `android_12.image` recorta el wordmark por la máscara circular de Android 12+.
 
-**Solución** (`pubspec.yaml` → `flutter_native_splash`):
+**Hotfix 12.1.1:**
 
-- `image` / `android_12.image`: `assets/brand/TarciSecret_Vertical_Transparent.png`
-- `android_gravity: center`
-- `ios_content_mode: scaleAspectFit`
-- `android_12.icon_background_color: "#FAF7F1"` (mismo fondo que `color`)
+| Plataforma | Asset |
+|------------|--------|
+| Android 12+ (`android_12.image`) | `TarciSecret_Icono_Splash_Android12.png` — isotipo centrado, 1152×1152, contenido ≤640 px |
+| Android &lt; 12, iOS (`image` / `image_android` / `image_ios`) | `TarciSecret_Vertical_Transparent.png` |
+| Splash Flutter (`splash_screen.dart`) | `BrandAsset.vertical` (marca completa) |
 
-Regenerar tras cambiar config:
+Regenerar asset Android 12+:
 
 ```bash
+python scripts/make_android12_splash_icon.py
 cd src/flutter_app && dart run flutter_native_splash:create
 ```
 
