@@ -401,7 +401,7 @@ export type TeamStatus = z.infer<typeof TeamStatusSchema>;
 export const TeamGroupingModeSchema = z.enum(["team_count", "team_size"]);
 export type TeamGroupingMode = z.infer<typeof TeamGroupingModeSchema>;
 
-export const TeamsPresetSchema = z.enum(["standard", "pairings"]);
+export const TeamsPresetSchema = z.enum(["standard", "pairings", "duels"]);
 export type TeamsPreset = z.infer<typeof TeamsPresetSchema>;
 
 export const TEAMS_MAX_ELIGIBLE = 100;
@@ -421,12 +421,12 @@ export const CreateTeamsGroupRequestSchema = z
   })
   .superRefine((d, ctx) => {
     const preset = d.teamsPreset ?? "standard";
-    if (preset === "pairings") {
+    if (preset === "pairings" || preset === "duels") {
       if (d.groupingMode !== "team_size" || d.requestedTeamSize !== 2) {
         ctx.addIssue({
           code: "custom",
           path: ["teamsPreset"],
-          message: "pairings preset requires team_size mode with size 2"
+          message: `${preset} preset requires team_size mode with size 2`
         });
       }
     }

@@ -94,7 +94,8 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
 
   bool get _configValid {
     if (_eligibleCount < 2) return false;
-    if (widget.detail.teamsPreset == TeamsPreset.pairings) {
+    if (widget.detail.teamsPreset == TeamsPreset.pairings ||
+        widget.detail.teamsPreset == TeamsPreset.duels) {
       return _eligibleCount % 2 == 0;
     }
     if (widget.detail.groupingMode == TeamGroupingMode.teamCount) {
@@ -111,7 +112,8 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
 
   int? get _estimatedTeamCount {
     if (!_hasMinPool) return null;
-    if (widget.detail.teamsPreset == TeamsPreset.pairings) {
+    if (widget.detail.teamsPreset == TeamsPreset.pairings ||
+        widget.detail.teamsPreset == TeamsPreset.duels) {
       return _eligibleCount ~/ 2;
     }
     if (widget.detail.groupingMode == TeamGroupingMode.teamCount) {
@@ -517,9 +519,11 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
     final completedChipBg = AppTheme.sageGreen.withValues(alpha: 0.22);
     final completedChipFg = AppTheme.sageGreen;
 
-    final configLine = widget.detail.teamsPreset == TeamsPreset.pairings
-        ? l10n.pairingsWizardReviewSummary
-        : widget.detail.groupingMode == TeamGroupingMode.teamCount
+    final configLine = widget.detail.teamsPreset == TeamsPreset.duels
+        ? l10n.duelsWizardReviewSummary
+        : widget.detail.teamsPreset == TeamsPreset.pairings
+            ? l10n.pairingsWizardReviewSummary
+            : widget.detail.groupingMode == TeamGroupingMode.teamCount
             ? l10n.teamsDetailConfigTeamCount(widget.detail.requestedTeamCount ?? 2)
             : l10n.teamsDetailConfigTeamSize(widget.detail.requestedTeamSize ?? 2);
     final ownerName = _ownerDisplayName(l10n);
@@ -542,9 +546,11 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
                 label: ui.homeDynamicTypeLabel,
                 background: AppTheme.deepPlum.withValues(alpha: 0.10),
                 foreground: AppTheme.deepPlum,
-                icon: widget.detail.teamsPreset == TeamsPreset.pairings
-                    ? Icons.people_alt_outlined
-                    : Icons.groups_outlined,
+                icon: switch (widget.detail.teamsPreset) {
+                  TeamsPreset.duels => Icons.sports_martial_arts_outlined,
+                  TeamsPreset.pairings => Icons.people_alt_outlined,
+                  TeamsPreset.standard => Icons.groups_outlined,
+                },
               ),
               _statusChip(
                 label: _teamsComplete ? ui.homeStateCompleted : ui.homeStatePreparing,
@@ -591,16 +597,36 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
             ..._teams.map(
               (team) => Padding(
                 padding: const EdgeInsets.only(bottom: 12),
-                child: _TeamsResultTeamCard(
-                  team: team,
-                  displayName: TeamResultText.teamDisplayName(l10n, team, preset: preset),
-                  memberNameFor: (m) => _memberSnapshotDisplayName(m, l10n),
-                  youInTeam: _isCurrentUserInTeam(team),
-                  youLabel: l10n.teamsYouInTeam,
-                  canRename: _isOwner,
-                  isRenaming: _renamingTeamIndex == team.teamIndex,
-                  onRename: () => _renameTeam(team, l10n),
-                ),
+                child: widget.detail.teamsPreset == TeamsPreset.duels
+                    ? _DuelsVsMatchCard(
+                        team: team,
+                        displayName: TeamResultText.teamDisplayName(l10n, team, preset: preset),
+                        leftName: team.members.isNotEmpty
+                            ? _memberSnapshotDisplayName(team.members.first, l10n)
+                            : '—',
+                        rightName: team.members.length > 1
+                            ? _memberSnapshotDisplayName(team.members[1], l10n)
+                            : '—',
+                        youOnLeft: team.members.isNotEmpty &&
+                            team.members.first.memberUid == widget.currentUid,
+                        youOnRight: team.members.length > 1 &&
+                            team.members[1].memberUid == widget.currentUid,
+                        vsLabel: ui.vsLabel,
+                        youLabel: l10n.teamsYouInTeam,
+                        canRename: _isOwner,
+                        isRenaming: _renamingTeamIndex == team.teamIndex,
+                        onRename: () => _renameTeam(team, l10n),
+                      )
+                    : _TeamsResultTeamCard(
+                        team: team,
+                        displayName: TeamResultText.teamDisplayName(l10n, team, preset: preset),
+                        memberNameFor: (m) => _memberSnapshotDisplayName(m, l10n),
+                        youInTeam: _isCurrentUserInTeam(team),
+                        youLabel: l10n.teamsYouInTeam,
+                        canRename: _isOwner,
+                        isRenaming: _renamingTeamIndex == team.teamIndex,
+                        onRename: () => _renameTeam(team, l10n),
+                      ),
               ),
             ),
             if (_isOwner) ...[
@@ -805,9 +831,9 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
               const SizedBox(height: 10),
               Text(
                 !_hasMinPool
-                    ? l10n.teamsDetailMinPoolHint
-                    : widget.detail.teamsPreset == TeamsPreset.pairings
-                        ? l10n.pairingsDetailEvenHint
+                    ? (ui.detailMinPoolHint ?? l10n.teamsDetailMinPoolHint)
+                    : ui.detailEvenHint != null
+                        ? ui.detailEvenHint!
                         : l10n.teamsDetailInvalidConfigHint,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodySmall?.copyWith(
@@ -995,6 +1021,167 @@ class _TeamsResultHero extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _DuelsVsMatchCard extends StatelessWidget {
+  const _DuelsVsMatchCard({
+    required this.team,
+    required this.displayName,
+    required this.leftName,
+    required this.rightName,
+    required this.youOnLeft,
+    required this.youOnRight,
+    required this.vsLabel,
+    required this.youLabel,
+    required this.canRename,
+    required this.isRenaming,
+    required this.onRename,
+  });
+
+  final TeamSnapshot team;
+  final String displayName;
+  final String leftName;
+  final String rightName;
+  final bool youOnLeft;
+  final bool youOnRight;
+  final String vsLabel;
+  final String youLabel;
+  final bool canRename;
+  final bool isRenaming;
+  final VoidCallback onRename;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return SecretCard(
+      padding: const EdgeInsets.fromLTRB(18, 16, 14, 18),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  displayName,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w900,
+                    color: AppTheme.deepPlum,
+                  ),
+                ),
+              ),
+              if (canRename)
+                IconButton(
+                  onPressed: isRenaming ? null : onRename,
+                  icon: isRenaming
+                      ? const SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : Icon(
+                          Icons.edit_outlined,
+                          color: AppTheme.deepPlum.withValues(alpha: 0.75),
+                        ),
+                ),
+            ],
+          ),
+          const SizedBox(height: 14),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: _DuelCompetitorName(
+                  name: leftName,
+                  highlight: youOnLeft,
+                  youLabel: youLabel,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: AppTheme.softTerracotta.withValues(alpha: 0.22),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: AppTheme.softTerracotta.withValues(alpha: 0.45),
+                    ),
+                  ),
+                  child: Text(
+                    vsLabel,
+                    style: theme.textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.w900,
+                      color: AppTheme.deepPlum,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: _DuelCompetitorName(
+                  name: rightName,
+                  highlight: youOnRight,
+                  youLabel: youLabel,
+                  alignEnd: true,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DuelCompetitorName extends StatelessWidget {
+  const _DuelCompetitorName({
+    required this.name,
+    required this.highlight,
+    required this.youLabel,
+    this.alignEnd = false,
+  });
+
+  final String name;
+  final bool highlight;
+  final String youLabel;
+  final bool alignEnd;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Column(
+      crossAxisAlignment:
+          alignEnd ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      children: [
+        Text(
+          name,
+          textAlign: alignEnd ? TextAlign.end : TextAlign.start,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: theme.textTheme.titleSmall?.copyWith(
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+        if (highlight) ...[
+          const SizedBox(height: 4),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+            decoration: BoxDecoration(
+              color: AppTheme.sageGreen.withValues(alpha: 0.22),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              youLabel,
+              style: theme.textTheme.labelSmall?.copyWith(
+                fontWeight: FontWeight.w800,
+                color: AppTheme.deepPlum,
+              ),
+            ),
+          ),
+        ],
+      ],
     );
   }
 }

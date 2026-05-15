@@ -106,6 +106,39 @@ class TeamResultPdf {
                   pw.SizedBox(height: 20),
                   ...teams.map((team) {
                     final label = TeamResultText.teamDisplayName(l10n, team, preset: teamsPreset);
+                    if (teamsPreset == TeamsPreset.duels) {
+                      final names = team.members.map(displayNameFor).toList();
+                      final left = names.isNotEmpty ? names[0] : '—';
+                      final right = names.length > 1 ? names[1] : '—';
+                      return pw.Padding(
+                        padding: const pw.EdgeInsets.only(bottom: 14),
+                        child: pw.Container(
+                          padding: const pw.EdgeInsets.all(12),
+                          decoration: pw.BoxDecoration(
+                            color: const PdfColor(1, 1, 1, 0.7),
+                            borderRadius: pw.BorderRadius.circular(12),
+                          ),
+                          child: pw.Column(
+                            crossAxisAlignment: pw.CrossAxisAlignment.start,
+                            children: [
+                              pw.Text(
+                                label,
+                                style: pw.TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: pw.FontWeight.bold,
+                                  color: plum,
+                                ),
+                              ),
+                              pw.SizedBox(height: 6),
+                              pw.Text(
+                                '$left ${l10n.duelsVsLabel} $right',
+                                style: pw.TextStyle(fontSize: 12, color: plum),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }
                     return pw.Padding(
                       padding: const pw.EdgeInsets.only(bottom: 14),
                       child: pw.Container(

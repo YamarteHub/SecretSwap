@@ -828,6 +828,8 @@ class GroupsRepositoryImpl implements GroupsRepository {
     };
     if (teamsPreset == TeamsPreset.pairings) {
       payload['teamsPreset'] = 'pairings';
+    } else if (teamsPreset == TeamsPreset.duels) {
+      payload['teamsPreset'] = 'duels';
     }
     if (groupingMode == TeamGroupingMode.teamCount && requestedTeamCount != null) {
       payload['requestedTeamCount'] = requestedTeamCount;

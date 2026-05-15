@@ -378,12 +378,38 @@ class _JoinSuccessDialogState extends State<_JoinSuccessDialog> {
       return _buildRaffleSuccessDialog(context);
     }
     if (widget.detail.dynamicType == TarciDynamicType.teams) {
+      if (widget.detail.teamsPreset == TeamsPreset.duels) {
+        return _buildDuelsSuccessDialog(context);
+      }
       if (widget.detail.teamsPreset == TeamsPreset.pairings) {
         return _buildPairingsSuccessDialog(context);
       }
       return _buildTeamsSuccessDialog(context);
     }
     return _buildSecretSantaSuccessDialog(context);
+  }
+
+  Widget _buildDuelsSuccessDialog(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = context.l10n;
+    final ui = TeamsUiCopy.of(l10n, TeamsPreset.duels);
+
+    return PremiumDialog(
+      icon: Icons.celebration_outlined,
+      title: l10n.joinSuccessTitle,
+      subtitle: ui.joinSuccessSubtitle(widget.detail.name),
+      content: Text(
+        ui.joinSuccessBody,
+        style: theme.textTheme.bodyMedium?.copyWith(
+          color: theme.colorScheme.onSurfaceVariant,
+          height: 1.45,
+        ),
+      ),
+      primaryLabel: ui.joinSuccessPrimaryCta,
+      onPrimary: () => Navigator.pop(context, const _JoinSuccessResult()),
+      secondaryLabel: l10n.joinSuccessSecondaryCta,
+      onSecondary: () => Navigator.pop(context),
+    );
   }
 
   Widget _buildPairingsSuccessDialog(BuildContext context) {

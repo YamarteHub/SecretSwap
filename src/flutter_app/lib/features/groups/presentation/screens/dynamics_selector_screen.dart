@@ -65,16 +65,14 @@ class DynamicsSelectorScreen extends StatelessWidget {
             accent: AppTheme.deepPlumAlt,
             onTap: () => context.push(AppRoutes.createPairings),
           ),
-          const SizedBox(height: 22),
-          Text(
-            l10n.dynamicsComingSoonBadge,
-            style: theme.textTheme.labelLarge?.copyWith(
-              fontWeight: FontWeight.w800,
-              color: theme.colorScheme.onSurface.withValues(alpha: 0.55),
-            ),
+          const SizedBox(height: 14),
+          _DynamicCard(
+            icon: Icons.sports_martial_arts_rounded,
+            title: l10n.dynamicsCardDuelsTitle,
+            subtitle: l10n.dynamicsCardDuelsBody,
+            accent: AppTheme.softTerracotta,
+            onTap: () => context.push(AppRoutes.createDuels),
           ),
-          const SizedBox(height: 10),
-          _ComingSoonCard(title: l10n.dynamicsCardDuelsTitle),
         ],
       ),
     );
@@ -155,45 +153,3 @@ class _DynamicCard extends StatelessWidget {
   }
 }
 
-class _ComingSoonCard extends StatelessWidget {
-  const _ComingSoonCard({required this.title});
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final l10n = context.l10n;
-    return Opacity(
-      opacity: 0.55,
-      child: Material(
-        color: AppTheme.softCream,
-        borderRadius: BorderRadius.circular(18),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          child: Row(
-            children: [
-              Expanded(
-                child: Text(
-                  title,
-                  style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.surfaceContainerHighest,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(
-                  l10n.dynamicsComingSoonBadge,
-                  style: theme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w800),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}

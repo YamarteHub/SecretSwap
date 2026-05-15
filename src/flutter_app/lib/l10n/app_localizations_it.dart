@@ -191,7 +191,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get aboutSectionWhatBody =>
-      'Tarci Secret è un’app social per organizzare dinamiche di gruppo in modo semplice, privato e divertente. Permette di creare amico segreto, fare estrazioni, formare squadre e includere persone con app, senza app o gestite da un altro partecipante.\n\nNasce intorno all’amico segreto come esperienza fondativa, ma evolve come spazio per creare incontri, sfide e dinamiche sociali con emozione, chiarezza e persone reali.';
+      'Tarci Secret è un’app social per organizzare dinamiche di gruppo in modo semplice, privato e divertente. Permette di creare amico segreto, fare estrazioni, formare squadre, generare coppie e preparare duelli, includendo persone con app, senza app o gestite da un altro partecipante.\n\nNasce intorno all’amico segreto come esperienza fondativa, ma evolve come spazio per creare incontri, sfide e dinamiche sociali con emozione, chiarezza e persone reali.';
 
   @override
   String get aboutSectionHowTitle => 'Come funziona';
@@ -3071,4 +3071,360 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get chatSystemAutoPairingsCountdownExtra005V1 =>
       'È il momento. Che vinca il migliore… o chi lo nasconde meglio.';
+
+  @override
+  String get chatSystemAutoDuelsPlayful001V1 =>
+      'Duelli pronte. Potete iniziare a incolpare l\'algoritmo.';
+
+  @override
+  String get chatSystemAutoDuelsPlayful002V1 =>
+      'Quale squadra viene per vincere e quale per la merenda?';
+
+  @override
+  String get chatSystemAutoDuelsPlayful003V1 =>
+      'C\'è talento… e tanta fiducia. Vedremo cosa pesa di più.';
+
+  @override
+  String get chatSystemAutoDuelsPlayful004V1 =>
+      'Si accettano pronostici, scuse e teorie del complotto.';
+
+  @override
+  String get chatSystemAutoDuelsPlayful005V1 =>
+      'Un sorteggio equo. Anche le lamentele creative contano come partecipazione.';
+
+  @override
+  String get chatSystemAutoDuelsPlayful006V1 =>
+      'Non importa con chi finisci. Importa chi chiede la rivincita.';
+
+  @override
+  String get chatSystemAutoDuelsPlayful007V1 =>
+      'Tarci ha sorteggiato. Ora dimostrate che non era fortuna.';
+
+  @override
+  String get chatSystemAutoDuelsPlayful008V1 =>
+      'Ci sono duelli che ispirano rispetto e altre che ispirano meme.';
+
+  @override
+  String get chatSystemAutoDuelsPlayful009V1 =>
+      'Il caso ha parlato. La dignità si risolve il giorno dell\'incontro.';
+
+  @override
+  String get chatSystemAutoDuelsPlayful010V1 =>
+      'Non sottovalutate una squadra silenziosa.';
+
+  @override
+  String get chatSystemAutoDuelsPlayful011V1 =>
+      'Alcuni festeggiano già. Altri calcolano come cambiare squadra senza farsi notare.';
+
+  @override
+  String get chatSystemAutoDuelsPlayful012V1 =>
+      'Risultato pubblicato. Il dramma ufficiale inizia ora.';
+
+  @override
+  String get chatSystemAutoDuelsPlayful013V1 =>
+      'C\'è chimica di squadra… o almeno dice la statistica emotiva.';
+
+  @override
+  String get chatSystemAutoDuelsPlayful014V1 =>
+      'Una buona squadra si costruisce. Una leggendaria si vanta prima di giocare.';
+
+  @override
+  String get chatSystemAutoDuelsPlayful015V1 =>
+      'Il gruppo ha il sorteggio. Manca l\'epica.';
+
+  @override
+  String get chatSystemAutoDuelsPlayful016V1 =>
+      'Da qui, ogni messaggio può alimentare la rivalità.';
+
+  @override
+  String get chatSystemAutoDuelsPlayful017V1 =>
+      'Duelli formate. L\'orgoglio di gruppo è attivo.';
+
+  @override
+  String get chatSystemAutoDuelsPlayful018V1 =>
+      'Potete inventarvi un nome da guerra, anche se Tarci non lo salva ancora.';
+
+  @override
+  String get chatSystemAutoDuelsPlayful019V1 =>
+      'Inizia la parte migliore: discutere se il sorteggio era giusto.';
+
+  @override
+  String get chatSystemAutoDuelsPlayful020V1 =>
+      'Tarci non prende partito. Ma tiene screenshot mentali dello sfotto.';
+
+  @override
+  String get chatSystemAutoDuelsChallenge001V1 =>
+      'Sfida del giorno: ogni squadra spieghi perché merita di vincere.';
+
+  @override
+  String get chatSystemAutoDuelsChallenge002V1 =>
+      'Chi osa lanciare la prima sfida amichevole?';
+
+  @override
+  String get chatSystemAutoDuelsChallenge003V1 =>
+      'La squadra che non scrive oggi perde a livello di carisma.';
+
+  @override
+  String get chatSystemAutoDuelsChallenge004V1 =>
+      'Regola non ufficiale: chi parla di più poi deve rispondere.';
+
+  @override
+  String get chatSystemAutoDuelsChallenge005V1 =>
+      'C\'è un favorito o fingiamo ancora umiltà?';
+
+  @override
+  String get chatSystemAutoDuelsChallenge006V1 =>
+      'Lasciate il segno: quale squadra si prende la gloria?';
+
+  @override
+  String get chatSystemAutoDuelsChallenge007V1 =>
+      'Sfida leggera: fate la previsione prima dell\'incontro.';
+
+  @override
+  String get chatSystemAutoDuelsChallenge008V1 =>
+      'Se c\'è fiducia, che ci siano scommesse simboliche.';
+
+  @override
+  String get chatSystemAutoDuelsChallenge009V1 =>
+      'Quale squadra porta strategia e quale solo cuore?';
+
+  @override
+  String get chatSystemAutoDuelsChallenge010V1 =>
+      'Momento di dichiarare le intenzioni. Il silenzio non fa punti.';
+
+  @override
+  String get chatSystemAutoDuelsChallenge011V1 =>
+      'Ogni squadra nomini un portavoce spontaneo. Poi negate di averlo scelto.';
+
+  @override
+  String get chatSystemAutoDuelsChallenge012V1 =>
+      'Chi rompe il ghiaccio con la prima provocazione elegante?';
+
+  @override
+  String get chatSystemAutoDuelsQuiet001V1 =>
+      'Molto silenzio per duelli così promettenti.';
+
+  @override
+  String get chatSystemAutoDuelsQuiet002V1 =>
+      'Questa chat è più tranquilla della panchina prima del fischio.';
+
+  @override
+  String get chatSystemAutoDuelsQuiet003V1 =>
+      'Nessuno commenterà il sorteggio? Sospetto.';
+
+  @override
+  String get chatSystemAutoDuelsQuiet004V1 =>
+      'Tarci rileva calma. A volte significa strategia.';
+
+  @override
+  String get chatSystemAutoDuelsQuiet005V1 =>
+      'Le duelli ci sono. La chat aspetta ancora il primo bello sfotto.';
+
+  @override
+  String get chatSystemAutoDuelsQuiet006V1 =>
+      'Un gruppo silenzioso non è pace: è tensione drammatica.';
+
+  @override
+  String get chatSystemAutoDuelsQuiet007V1 =>
+      'Tutti d\'accordo? Quell\'unanimità merita una revisione.';
+
+  @override
+  String get chatSystemAutoDuelsQuiet008V1 =>
+      'Silenzio tattico attivato. Continuate, resta elegante.';
+
+  @override
+  String get chatSystemAutoDuelsCountdown014V1 =>
+      'Mancano 14 giorni. Tempo di organizzarsi… o improvvisare con fiducia.';
+
+  @override
+  String get chatSystemAutoDuelsCountdown007V1 =>
+      'Manca una settimana. Le strategie assurde possono presentarsi ufficialmente.';
+
+  @override
+  String get chatSystemAutoDuelsCountdown003V1 =>
+      'Restano 3 giorni. A questo punto l\'epica è permessa.';
+
+  @override
+  String get chatSystemAutoDuelsCountdown001V1 =>
+      'Domani è il giorno. Ultima chance di vantarsi senza conseguenze.';
+
+  @override
+  String get chatSystemAutoDuelsCountdown000V1 =>
+      'Oggi si gioca. Duelli pronte, nervi opzionali.';
+
+  @override
+  String get chatSystemAutoDuelsCountdownExtra001V1 =>
+      'Due settimane sembrano tante finché qualcuno ricorda di non aver preparato nulla.';
+
+  @override
+  String get chatSystemAutoDuelsCountdownExtra002V1 =>
+      'Sette giorni. Abbastanza per allenarsi o perfezionare una scusa.';
+
+  @override
+  String get chatSystemAutoDuelsCountdownExtra003V1 =>
+      'Tre giorni. La chat può passare da battute a dichiarazioni ufficiali.';
+
+  @override
+  String get chatSystemAutoDuelsCountdownExtra004V1 =>
+      'Resta un giorno. Se c\'era un piano segreto, è il momento di fingere che esista.';
+
+  @override
+  String get chatSystemAutoDuelsCountdownExtra005V1 =>
+      'È il momento. Che vinca il migliore… o chi lo nasconde meglio.';
+
+  @override
+  String get dynamicsCardDuelsBody =>
+      'Crea scontri uno contro uno per sfide, giochi e dinamiche con più grinta.';
+
+  @override
+  String get homeDynamicTypeDuels => 'Duelli';
+
+  @override
+  String get homeDuelsStateCompleted => 'Duelli pronti';
+
+  @override
+  String get homeDuelsStatePreparing => 'Preparazione duelli';
+
+  @override
+  String get duelsWizardTitle => 'Crea duelli';
+
+  @override
+  String get duelsWizardCreateCta => 'Crea duelli';
+
+  @override
+  String get duelsWizardNameLabel => 'Nome della dinamica';
+
+  @override
+  String get duelsWizardOwnerNicknameLabel => 'Il tuo nome nei duelli';
+
+  @override
+  String get duelsWizardOwnerNicknameHelper =>
+      'Come ti vedranno gli altri negli scontri.';
+
+  @override
+  String get duelsWizardEventOptional => 'Data evento (opzionale)';
+
+  @override
+  String get duelsWizardPickEventDate => 'Scegli data';
+
+  @override
+  String get duelsWizardOwnerParticipatesTitle => 'Partecipi?';
+
+  @override
+  String get duelsWizardOwnerParticipatesYes =>
+      'Sì, voglio essere in un duello';
+
+  @override
+  String get duelsWizardOwnerParticipatesNo => 'No, organizzo solo';
+
+  @override
+  String get duelsWizardReviewTitle => 'Revisione';
+
+  @override
+  String get duelsWizardReviewSummary =>
+      'Scontri 1 vs 1 · numero pari necessario';
+
+  @override
+  String duelsUnitLabel(Object index) {
+    return 'Duello $index';
+  }
+
+  @override
+  String get duelsVsLabel => 'vs';
+
+  @override
+  String get duelsResultHeroTitle => 'Duelli pronti!';
+
+  @override
+  String get duelsResultHeroSubtitle => 'Sapete chi affronta chi.';
+
+  @override
+  String duelsResultSummary(Object count, Object eligible) {
+    return '$count duelli · $eligible partecipanti';
+  }
+
+  @override
+  String get duelsDetailListTitle => 'Duelli';
+
+  @override
+  String get duelsDetailFormCta => 'Genera duelli';
+
+  @override
+  String get duelsDetailConfigTitle => 'Configurazione';
+
+  @override
+  String duelsDetailConfigSummary(Object count) {
+    return 'Circa $count duelli';
+  }
+
+  @override
+  String get duelsRenameDialogTitle => 'Rinomina duello';
+
+  @override
+  String get duelsRenameDialogFieldLabel => 'Nome del duello';
+
+  @override
+  String get duelsRenameSuccess => 'Nome del duello aggiornato';
+
+  @override
+  String duelsShareBody(Object blocks, Object groupName) {
+    return '⚔️ Duelli generati per «$groupName»:\n\n$blocks\n\nCreato con Tarci Secret.';
+  }
+
+  @override
+  String duelsEmailSubject(Object groupName) {
+    return 'Duelli generati — $groupName';
+  }
+
+  @override
+  String duelsEmailBody(Object blocks, Object groupName) {
+    return 'Ciao,\n\nI duelli di «$groupName» sono pronti:\n\n$blocks\n\nGenerato con Tarci Secret.';
+  }
+
+  @override
+  String get duelsPdfHeadline => 'Duelli generati';
+
+  @override
+  String get duelsChatSectionTitle => 'Conversazione di gruppo';
+
+  @override
+  String get duelsChatSectionSubtitle =>
+      'Lancia sfide, scherza e scalda l\'ambiente prima dei duelli.';
+
+  @override
+  String get duelsChatEnterCta => 'Apri chat';
+
+  @override
+  String get chatDuelsCompletedChip => 'Duelli pronti';
+
+  @override
+  String get chatSystemDuelsCompletedV1 =>
+      'I duelli sono pronti. Ora sì: che inizi il pique.';
+
+  @override
+  String get duelsMemberWaitingTitle => 'Duelli in preparazione';
+
+  @override
+  String get duelsMemberWaitingBody =>
+      'Quando l\'organizzatore formerà i duelli, vedrai chi affronta chi.';
+
+  @override
+  String joinSuccessDuelsSubtitle(Object groupName) {
+    return 'Sei entrato in «$groupName».';
+  }
+
+  @override
+  String get joinSuccessDuelsBody =>
+      'Quando l\'organizzatore formerà i duelli, vedrai chi affronta chi.';
+
+  @override
+  String get joinSuccessDuelsPrimaryCta => 'Vai ai duelli';
+
+  @override
+  String get duelsDetailMinPoolHint =>
+      'Servono almeno 2 partecipanti per generare i duelli.';
+
+  @override
+  String get duelsDetailEvenHint =>
+      'Serve un numero pari di partecipanti per generare i duelli.';
 }

@@ -17,6 +17,19 @@ import { parseOrThrow } from "../shared/validation";
 import { appendGroupChatSystemMessageIfNew } from "../shared/groupChat";
 import { notifyGroupDynamicCompleted } from "../shared/groupNotifications";
 
+type TeamsPresetRun = "standard" | "pairings" | "duels";
+
+function parseTeamsPresetRun(raw?: string): TeamsPresetRun {
+  const s = typeof raw === "string" ? raw.trim() : "";
+  if (s === "pairings") return "pairings";
+  if (s === "duels") return "duels";
+  return "standard";
+}
+
+function isSizedPairPreset(preset: TeamsPresetRun): boolean {
+  return preset === "pairings" || preset === "duels";
+}
+
 type Eligible = {
   participantId: string;
   displayName: string;
@@ -116,10 +129,7 @@ export const executeTeams = onCall(async (req: CallableRequest<unknown>): Promis
         requestedTeamSize?: number;
         ownerParticipatesInTeams?: boolean;
       };
-      const teamsPreset =
-        typeof group.teamsPreset === "string" && group.teamsPreset.trim() === "pairings"
-          ? "pairings"
-          : "standard";
+      const teamsPreset = parseTeamsPresetRun(group.teamsPreset);
 
       if (group.ownerUid !== uid) {
         throw new AppError({
@@ -247,11 +257,14 @@ export const executeTeams = onCall(async (req: CallableRequest<unknown>): Promis
           message: "Not enough eligible participants (minimum 2)"
         });
       }
-      if (teamsPreset === "pairings" && pool.length % 2 !== 0) {
+      if (isSizedPairPreset(teamsPreset) && pool.length % 2 !== 0) {
         throw new AppError({
           code: "VALIDATION_ERROR",
-          reasonCode: "PAIRINGS_REQUIRES_EVEN_PARTICIPANTS",
-          message: "Pairings require an even number of eligible participants"
+          reasonCode:
+            teamsPreset === "duels"
+              ? "DUELS_REQUIRES_EVEN_PARTICIPANTS"
+              : "PAIRINGS_REQUIRES_EVEN_PARTICIPANTS",
+          message: "Requires an even number of eligible participants"
         });
       }
       if (pool.length > TEAMS_MAX_ELIGIBLE) {
@@ -264,7 +277,7 @@ export const executeTeams = onCall(async (req: CallableRequest<unknown>): Promis
 
       const numTeams = resolveNumTeams(pool.length, groupingMode, requestedTeamCount, requestedTeamSize);
 
-      if (teamsPreset !== "pairings" && numTeams < 2) {
+      if (!isSizedPairPreset(teamsPreset) && numTeams < 2) {
         throw new AppError({
           code: "VALIDATION_ERROR",
           reasonCode: "TEAMS_INVALID_CONFIGURATION",
@@ -329,10 +342,7 @@ export const executeTeams = onCall(async (req: CallableRequest<unknown>): Promis
         ? ((groupSnapAfter.data() as { name?: string }).name ?? "").trim()
         : "";
     const groupDataAfter = groupSnapAfter.data() as { teamsPreset?: string };
-    const teamsPresetAfter =
-      typeof groupDataAfter.teamsPreset === "string" && groupDataAfter.teamsPreset.trim() === "pairings"
-        ? "pairings"
-        : "standard";
+    const teamsPresetAfter = parseTeamsPresetRun(groupDataAfter.teamsPreset);
 
     await notifyGroupDynamicCompleted(db, {
       groupId: body.groupId,
@@ -344,13 +354,17 @@ export const executeTeams = onCall(async (req: CallableRequest<unknown>): Promis
 
     try {
       const chatTemplateKey =
-        teamsPresetAfter === "pairings"
-          ? "chat.system.pairingsCompleted.v1"
-          : "chat.system.teamsCompleted.v1";
+        teamsPresetAfter === "duels"
+          ? "chat.system.duelsCompleted.v1"
+          : teamsPresetAfter === "pairings"
+            ? "chat.system.pairingsCompleted.v1"
+            : "chat.system.teamsCompleted.v1";
       const chatDocId =
-        teamsPresetAfter === "pairings"
-          ? `system_pairingsCompleted_${result.executionId}`
-          : `system_teamsCompleted_${result.executionId}`;
+        teamsPresetAfter === "duels"
+          ? `system_duelsCompleted_${result.executionId}`
+          : teamsPresetAfter === "pairings"
+            ? `system_pairingsCompleted_${result.executionId}`
+            : `system_teamsCompleted_${result.executionId}`;
       await appendGroupChatSystemMessageIfNew(db, body.groupId, chatDocId, chatTemplateKey);
     } catch (e) {
       logger.warn("executeTeams: teamsCompleted chat message failed", {

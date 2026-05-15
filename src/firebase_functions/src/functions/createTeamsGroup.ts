@@ -29,10 +29,10 @@ export const createTeamsGroup = onCall(
       const uid = requireAuthUid(req.auth?.uid);
       const body = parseOrThrow(CreateTeamsGroupRequestSchema, req.data);
       const teamsPreset = body.teamsPreset ?? "standard";
-      const groupingMode = teamsPreset === "pairings" ? "team_size" : body.groupingMode;
-      const requestedTeamCount =
-        teamsPreset === "pairings" ? undefined : body.requestedTeamCount;
-      const requestedTeamSize = teamsPreset === "pairings" ? 2 : body.requestedTeamSize;
+      const sizedPairPreset = teamsPreset === "pairings" || teamsPreset === "duels";
+      const groupingMode = sizedPairPreset ? "team_size" : body.groupingMode;
+      const requestedTeamCount = sizedPairPreset ? undefined : body.requestedTeamCount;
+      const requestedTeamSize = sizedPairPreset ? 2 : body.requestedTeamSize;
       const eventDateTs = optionalEventTimestamp(body.eventDateEpochMs);
 
       const db = getDb();

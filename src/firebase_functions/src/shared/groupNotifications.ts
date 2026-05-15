@@ -6,7 +6,7 @@ import { groupPaths } from "./firestorePaths";
 import { userPaths } from "./userPaths";
 
 export type DynamicTypeForPush = "secret_santa" | "simple_raffle" | "teams";
-export type TeamsPresetForPush = "standard" | "pairings";
+export type TeamsPresetForPush = "standard" | "pairings" | "duels";
 
 type SupportedLocale = "es" | "en" | "pt" | "it" | "fr";
 
@@ -23,6 +23,8 @@ const COPY: Record<
     teamsBody: (groupName: string) => string;
     pairingsTitle: string;
     pairingsBody: (groupName: string) => string;
+    duelsTitle: string;
+    duelsBody: (groupName: string) => string;
   }
 > = {
   es: {
@@ -33,7 +35,9 @@ const COPY: Record<
     teamsTitle: "¡Los equipos ya están listos!",
     teamsBody: (n) => `«${n}» ya tiene reparto. Entra para ver cómo quedaron los equipos.`,
     pairingsTitle: "¡Las parejas ya están listas!",
-    pairingsBody: (n) => `«${n}» ya tiene emparejamientos. Entra para ver el resultado.`
+    pairingsBody: (n) => `«${n}» ya tiene emparejamientos. Entra para ver el resultado.`,
+    duelsTitle: "¡Los duelos ya están listos!",
+    duelsBody: (n) => `«${n}» ya tiene enfrentamientos. Entra para ver quién va contra quién.`
   },
   en: {
     secretSantaTitle: "Your Secret Santa is ready",
@@ -43,7 +47,9 @@ const COPY: Record<
     teamsTitle: "Your teams are ready!",
     teamsBody: (n) => `“${n}” has been arranged. Open Tarci Secret to see the teams.`,
     pairingsTitle: "Your pairings are ready!",
-    pairingsBody: (n) => `“${n}” has pairings. Open the app to see the result.`
+    pairingsBody: (n) => `“${n}” has pairings. Open the app to see the result.`,
+    duelsTitle: "Your duels are ready!",
+    duelsBody: (n) => `“${n}” has matchups. Open the app to see who faces whom.`
   },
   pt: {
     secretSantaTitle: "O teu amigo secreto está pronto",
@@ -53,7 +59,9 @@ const COPY: Record<
     teamsTitle: "As equipas já estão prontas!",
     teamsBody: (n) => `«${n}» já tem reparto. Entra para ver como ficaram as equipas.`,
     pairingsTitle: "As parejas já estão prontas!",
-    pairingsBody: (n) => `«${n}» já tem emparelhamentos. Entra para ver o resultado.`
+    pairingsBody: (n) => `«${n}» já tem emparelhamentos. Entra para ver o resultado.`,
+    duelsTitle: "Os duelos já estão prontos!",
+    duelsBody: (n) => `«${n}» já tem confrontos. Entra para ver quem enfrenta quem.`
   },
   it: {
     secretSantaTitle: "Il tuo amico segreto è pronto",
@@ -63,7 +71,9 @@ const COPY: Record<
     teamsTitle: "Le squadre sono pronte!",
     teamsBody: (n) => `«${n}» è stato ripartito. Apri Tarci Secret per vedere le squadre.`,
     pairingsTitle: "Le coppie sono pronte!",
-    pairingsBody: (n) => `«${n}» ha gli abbinamenti. Apri l'app per vedere il risultato.`
+    pairingsBody: (n) => `«${n}» ha gli abbinamenti. Apri l'app per vedere il risultato.`,
+    duelsTitle: "I duelli sono pronti!",
+    duelsBody: (n) => `«${n}» ha gli scontri. Apri l'app per vedere chi affronta chi.`
   },
   fr: {
     secretSantaTitle: "Ton Secret Santa est prêt",
@@ -73,7 +83,9 @@ const COPY: Record<
     teamsTitle: "Les équipes sont prêtes !",
     teamsBody: (n) => `« ${n} » a été réparti. Ouvre Tarci Secret pour voir les équipes.`,
     pairingsTitle: "Les paires sont prêtes !",
-    pairingsBody: (n) => `« ${n} » a ses paires. Ouvre l'app pour voir le résultat.`
+    pairingsBody: (n) => `« ${n} » a ses paires. Ouvre l'app pour voir le résultat.`,
+    duelsTitle: "Les duels sont prêts !",
+    duelsBody: (n) => `« ${n} » a ses affrontements. Ouvre l'app pour voir qui affronte qui.`
   }
 };
 
@@ -98,6 +110,9 @@ function copyFor(
     return { title: pack.raffleTitle, body: pack.raffleBody(name) };
   }
   if (dynamicType === "teams") {
+    if (teamsPreset === "duels") {
+      return { title: pack.duelsTitle, body: pack.duelsBody(name) };
+    }
     if (teamsPreset === "pairings") {
       return { title: pack.pairingsTitle, body: pack.pairingsBody(name) };
     }
@@ -108,6 +123,7 @@ function copyFor(
 
 function eventKindFor(dynamicType: DynamicTypeForPush, teamsPreset?: TeamsPresetForPush): string {
   if (dynamicType === "simple_raffle") return "raffle_completed";
+  if (dynamicType === "teams" && teamsPreset === "duels") return "duels_completed";
   if (dynamicType === "teams" && teamsPreset === "pairings") return "pairings_completed";
   if (dynamicType === "teams") return "teams_completed";
   return "secret_santa_completed";

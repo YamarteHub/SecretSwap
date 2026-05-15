@@ -24,10 +24,17 @@ class TeamResultText {
     if (t.isEmpty) return true;
     final n = teamIndex + 1;
     if (t == 'Team $n') return true;
-    final patterns = preset == TeamsPreset.pairings
+    final patterns = preset == TeamsPreset.duels
+        ? [
+            RegExp(r'^Duel\s+$n$', caseSensitive: false),
+            RegExp(r'^Duelo\s+$n$', caseSensitive: false),
+            RegExp(r'^Duelo\s+$n$', caseSensitive: false),
+            RegExp(r'^Duello\s+$n$', caseSensitive: false),
+            RegExp(r'^Duel\s+$n$', caseSensitive: false),
+          ]
+        : preset == TeamsPreset.pairings
         ? [
             RegExp(r'^Pair\s+$n$', caseSensitive: false),
-            RegExp(r'^Pareja\s+$n$', caseSensitive: false),
             RegExp(r'^Pareja\s+$n$', caseSensitive: false),
             RegExp(r'^Coppia\s+$n$', caseSensitive: false),
             RegExp(r'^Paire\s+$n$', caseSensitive: false),
@@ -56,6 +63,19 @@ class TeamResultText {
 
   static String memberLine(String name) => '• $name';
 
+  static String _duelsMatchLine(
+    AppLocalizations l10n,
+    TeamSnapshot team,
+    String Function(TeamMemberSnapshot member) displayNameFor, {
+    required TeamsPreset preset,
+  }) {
+    final label = teamDisplayName(l10n, team, preset: preset);
+    final names = team.members.map(displayNameFor).toList();
+    final left = names.isNotEmpty ? names[0] : '—';
+    final right = names.length > 1 ? names[1] : '—';
+    return '$label\n$left ${l10n.duelsVsLabel} $right';
+  }
+
   static String buildShareBody({
     required AppLocalizations l10n,
     required String groupName,
@@ -64,6 +84,12 @@ class TeamResultText {
     TeamsPreset preset = TeamsPreset.standard,
   }) {
     final ui = TeamsUiCopy.of(l10n, preset);
+    if (preset == TeamsPreset.duels) {
+      final blocks = teams
+          .map((t) => _duelsMatchLine(l10n, t, displayNameFor, preset: preset))
+          .join('\n\n');
+      return ui.shareBody(groupName, blocks);
+    }
     final blocks = <String>[];
     for (final team in teams) {
       final label = teamDisplayName(l10n, team, preset: preset);
@@ -89,6 +115,12 @@ class TeamResultText {
     TeamsPreset preset = TeamsPreset.standard,
   }) {
     final ui = TeamsUiCopy.of(l10n, preset);
+    if (preset == TeamsPreset.duels) {
+      final blocks = teams
+          .map((t) => _duelsMatchLine(l10n, t, displayNameFor, preset: preset))
+          .join('\n\n');
+      return ui.emailBody(groupName, blocks);
+    }
     final blocks = <String>[];
     for (final team in teams) {
       final label = teamDisplayName(l10n, team, preset: preset);

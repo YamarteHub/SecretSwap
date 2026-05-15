@@ -7,6 +7,11 @@ import { buildParticipantsMapForWishlist } from "./wishlistAccess";
 import { groupPaths } from "./firestorePaths";
 import { COUNTDOWN_TEMPLATE_BY_DAYS, TARCI_AUTO_CATALOG, type TarciCatalogEntry } from "./tarciAutoCatalog";
 import {
+  DUELS_COUNTDOWN_TEMPLATE_BY_DAYS,
+  TARCI_DUELS_AUTO_CATALOG,
+  type DuelsCatalogEntry
+} from "./tarciAutoCatalogDuels";
+import {
   PAIRINGS_COUNTDOWN_TEMPLATE_BY_DAYS,
   TARCI_PAIRINGS_AUTO_CATALOG,
   type PairingsCatalogEntry
@@ -86,7 +91,17 @@ function isPairingsGroup(g: GroupAutoFields): boolean {
   return isTeamsGroup(g) && g.teamsPreset === "pairings";
 }
 
-type TeamsLikeCatalogEntry = TeamsCatalogEntry | PairingsCatalogEntry;
+function isDuelsGroup(g: GroupAutoFields): boolean {
+  return isTeamsGroup(g) && g.teamsPreset === "duels";
+}
+
+type TeamsLikeCatalogEntry = TeamsCatalogEntry | PairingsCatalogEntry | DuelsCatalogEntry;
+
+function teamsPresetForAutomation(g: GroupAutoFields): "standard" | "pairings" | "duels" {
+  if (g.teamsPreset === "pairings") return "pairings";
+  if (g.teamsPreset === "duels") return "duels";
+  return "standard";
+}
 
 function normalizeTarciState(raw: Record<string, unknown> | undefined): TarciStateFields {
   const sk = raw?.sentTemplateKeys;
@@ -330,17 +345,27 @@ function decideTarciAutomationMessageTeams(input: {
   now: Date;
 }): AutomationDecision | null {
   const { group, state, now } = input;
-  const pairings = isPairingsGroup(group);
-  const catalog: TeamsLikeCatalogEntry[] = pairings
-    ? TARCI_PAIRINGS_AUTO_CATALOG
-    : TARCI_TEAMS_AUTO_CATALOG;
-  const countdownByDays = pairings
-    ? PAIRINGS_COUNTDOWN_TEMPLATE_BY_DAYS
-    : TEAMS_COUNTDOWN_TEMPLATE_BY_DAYS;
-  const playfulCat = pairings ? "pairingsPlayful" : "teamsPlayful";
-  const challengeCat = pairings ? "pairingsChallenge" : "teamsChallenge";
-  const quietCat = pairings ? "pairingsQuietNudge" : "teamsQuietNudge";
-  const countdownCat = pairings ? "pairingsCountdown" : "teamsCountdown";
+  const preset = teamsPresetForAutomation(group);
+  const catalog: TeamsLikeCatalogEntry[] =
+    preset === "duels"
+      ? TARCI_DUELS_AUTO_CATALOG
+      : preset === "pairings"
+        ? TARCI_PAIRINGS_AUTO_CATALOG
+        : TARCI_TEAMS_AUTO_CATALOG;
+  const countdownByDays =
+    preset === "duels"
+      ? DUELS_COUNTDOWN_TEMPLATE_BY_DAYS
+      : preset === "pairings"
+        ? PAIRINGS_COUNTDOWN_TEMPLATE_BY_DAYS
+        : TEAMS_COUNTDOWN_TEMPLATE_BY_DAYS;
+  const playfulCat =
+    preset === "duels" ? "duelsPlayful" : preset === "pairings" ? "pairingsPlayful" : "teamsPlayful";
+  const challengeCat =
+    preset === "duels" ? "duelsChallenge" : preset === "pairings" ? "pairingsChallenge" : "teamsChallenge";
+  const quietCat =
+    preset === "duels" ? "duelsQuietNudge" : preset === "pairings" ? "pairingsQuietNudge" : "teamsQuietNudge";
+  const countdownCat =
+    preset === "duels" ? "duelsCountdown" : preset === "pairings" ? "pairingsCountdown" : "teamsCountdown";
 
   const sent = new Set(state.sentTemplateKeys);
   const milestones = new Set(state.sentCountdownMilestones);

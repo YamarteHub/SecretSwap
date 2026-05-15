@@ -84,6 +84,8 @@ class _GroupChatScreenState extends ConsumerState<GroupChatScreen> {
         return l10n.chatSystemTeamsCompletedV1;
       case 'chat.system.pairingsCompleted.v1':
         return l10n.chatSystemPairingsCompletedV1;
+      case 'chat.system.duelsCompleted.v1':
+        return l10n.chatSystemDuelsCompletedV1;
       default:
         return l10n.chatSystemUnknownTemplate(templateKey);
     }

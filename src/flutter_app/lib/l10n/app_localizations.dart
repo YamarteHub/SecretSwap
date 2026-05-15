@@ -437,7 +437,7 @@ abstract class AppLocalizations {
   /// No description provided for @aboutSectionWhatBody.
   ///
   /// In es, this message translates to:
-  /// **'Tarci Secret es una app social para organizar dinámicas de grupo de forma sencilla, privada y divertida. Permite crear amigos secretos, realizar sorteos, formar equipos e incluir a personas con app, sin app o gestionadas por otro participante.\n\nNace alrededor del amigo secreto como experiencia fundacional, pero evoluciona como un espacio para crear encuentros, retos y dinámicas sociales con emoción, claridad y personas reales.'**
+  /// **'Tarci Secret es una app social para organizar dinámicas de grupo de forma sencilla, privada y divertida. Permite crear amigos secretos, realizar sorteos, formar equipos, generar parejas y preparar duelos, incluyendo personas con app, sin app o gestionadas por otro participante.\n\nNace alrededor del amigo secreto como experiencia fundacional, pero evoluciona como un espacio para crear encuentros, retos y dinámicas sociales con emoción, claridad y personas reales.'**
   String get aboutSectionWhatBody;
 
   /// No description provided for @aboutSectionHowTitle.
@@ -5203,6 +5203,570 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Llegó el momento. Que gane el mejor… o el que mejor lo disimule.'**
   String get chatSystemAutoPairingsCountdownExtra005V1;
+
+  /// No description provided for @chatSystemAutoDuelsPlayful001V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Duelos listos. Ya podéis empezar a culpar al algoritmo.'**
+  String get chatSystemAutoDuelsPlayful001V1;
+
+  /// No description provided for @chatSystemAutoDuelsPlayful002V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué duelo viene a ganar y cuál viene por la merienda?'**
+  String get chatSystemAutoDuelsPlayful002V1;
+
+  /// No description provided for @chatSystemAutoDuelsPlayful003V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Aquí hay talento… y también mucha confianza. Veremos cuál pesa más.'**
+  String get chatSystemAutoDuelsPlayful003V1;
+
+  /// No description provided for @chatSystemAutoDuelsPlayful004V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Se aceptan pronósticos, excusas y teorías conspirativas.'**
+  String get chatSystemAutoDuelsPlayful004V1;
+
+  /// No description provided for @chatSystemAutoDuelsPlayful005V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Un enfrentamiento justo. Las quejas creativas también cuentan como participación.'**
+  String get chatSystemAutoDuelsPlayful005V1;
+
+  /// No description provided for @chatSystemAutoDuelsPlayful006V1.
+  ///
+  /// In es, this message translates to:
+  /// **'No importa quién quede contigo. Importa quién termina pidiendo revancha.'**
+  String get chatSystemAutoDuelsPlayful006V1;
+
+  /// No description provided for @chatSystemAutoDuelsPlayful007V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Tarci repartió. Ahora os toca demostrar que no era suerte.'**
+  String get chatSystemAutoDuelsPlayful007V1;
+
+  /// No description provided for @chatSystemAutoDuelsPlayful008V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Hay duelos que inspiran respeto y otros que inspiran memes.'**
+  String get chatSystemAutoDuelsPlayful008V1;
+
+  /// No description provided for @chatSystemAutoDuelsPlayful009V1.
+  ///
+  /// In es, this message translates to:
+  /// **'El azar habló. La dignidad se resuelve el día del encuentro.'**
+  String get chatSystemAutoDuelsPlayful009V1;
+
+  /// No description provided for @chatSystemAutoDuelsPlayful010V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Que nadie subestime a un duelo silencioso.'**
+  String get chatSystemAutoDuelsPlayful010V1;
+
+  /// No description provided for @chatSystemAutoDuelsPlayful011V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Algunos ya celebran. Otros están calculando cómo cambiar de duelo sin que se note.'**
+  String get chatSystemAutoDuelsPlayful011V1;
+
+  /// No description provided for @chatSystemAutoDuelsPlayful012V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Resultado publicado. Empieza oficialmente el salseo.'**
+  String get chatSystemAutoDuelsPlayful012V1;
+
+  /// No description provided for @chatSystemAutoDuelsPlayful013V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Hay química de duelo… o al menos eso dice la estadística emocional.'**
+  String get chatSystemAutoDuelsPlayful013V1;
+
+  /// No description provided for @chatSystemAutoDuelsPlayful014V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Un buen duelo se construye. Uno legendario se presume antes de jugar.'**
+  String get chatSystemAutoDuelsPlayful014V1;
+
+  /// No description provided for @chatSystemAutoDuelsPlayful015V1.
+  ///
+  /// In es, this message translates to:
+  /// **'El grupo ya tiene enfrentamiento. Ahora falta la épica.'**
+  String get chatSystemAutoDuelsPlayful015V1;
+
+  /// No description provided for @chatSystemAutoDuelsPlayful016V1.
+  ///
+  /// In es, this message translates to:
+  /// **'A partir de aquí, cada mensaje puede convertirse en motivación para el rival.'**
+  String get chatSystemAutoDuelsPlayful016V1;
+
+  /// No description provided for @chatSystemAutoDuelsPlayful017V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Duelos formados. El orgullo grupal queda activado.'**
+  String get chatSystemAutoDuelsPlayful017V1;
+
+  /// No description provided for @chatSystemAutoDuelsPlayful018V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya podéis inventar nombre de guerra, aunque Tarci aún no lo guarde.'**
+  String get chatSystemAutoDuelsPlayful018V1;
+
+  /// No description provided for @chatSystemAutoDuelsPlayful019V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Que empiece la parte favorita: opinar sobre si el enfrentamiento fue justo.'**
+  String get chatSystemAutoDuelsPlayful019V1;
+
+  /// No description provided for @chatSystemAutoDuelsPlayful020V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Tarci no toma partido. Pero sí guarda capturas mentales del pique.'**
+  String get chatSystemAutoDuelsPlayful020V1;
+
+  /// No description provided for @chatSystemAutoDuelsChallenge001V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Reto del día: cada duelo debe explicar por qué merece ganar.'**
+  String get chatSystemAutoDuelsChallenge001V1;
+
+  /// No description provided for @chatSystemAutoDuelsChallenge002V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Quién se atreve a lanzar el primer desafío amistoso?'**
+  String get chatSystemAutoDuelsChallenge002V1;
+
+  /// No description provided for @chatSystemAutoDuelsChallenge003V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Duelo que no escriba hoy, empieza perdiendo en carisma.'**
+  String get chatSystemAutoDuelsChallenge003V1;
+
+  /// No description provided for @chatSystemAutoDuelsChallenge004V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Propongo una norma no oficial: quien más hable, luego tiene que responder.'**
+  String get chatSystemAutoDuelsChallenge004V1;
+
+  /// No description provided for @chatSystemAutoDuelsChallenge005V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Hay favorito o todavía fingimos humildad?'**
+  String get chatSystemAutoDuelsChallenge005V1;
+
+  /// No description provided for @chatSystemAutoDuelsChallenge006V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Dejad constancia aquí: ¿qué duelo se lleva la gloria?'**
+  String get chatSystemAutoDuelsChallenge006V1;
+
+  /// No description provided for @chatSystemAutoDuelsChallenge007V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Un reto suave: haced vuestra predicción antes del encuentro.'**
+  String get chatSystemAutoDuelsChallenge007V1;
+
+  /// No description provided for @chatSystemAutoDuelsChallenge008V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Si hay confianza, que haya apuestas simbólicas.'**
+  String get chatSystemAutoDuelsChallenge008V1;
+
+  /// No description provided for @chatSystemAutoDuelsChallenge009V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué duelo trae estrategia y cuál trae puro corazón?'**
+  String get chatSystemAutoDuelsChallenge009V1;
+
+  /// No description provided for @chatSystemAutoDuelsChallenge010V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Momento de declarar intenciones. El silencio no puntúa.'**
+  String get chatSystemAutoDuelsChallenge010V1;
+
+  /// No description provided for @chatSystemAutoDuelsChallenge011V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Que cada duelo nombre a su portavoz espontáneo. Luego negáis haberlo elegido.'**
+  String get chatSystemAutoDuelsChallenge011V1;
+
+  /// No description provided for @chatSystemAutoDuelsChallenge012V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Quién rompe el hielo con la primera provocación elegante?'**
+  String get chatSystemAutoDuelsChallenge012V1;
+
+  /// No description provided for @chatSystemAutoDuelsQuiet001V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Mucho silencio para unos duelos tan prometedores.'**
+  String get chatSystemAutoDuelsQuiet001V1;
+
+  /// No description provided for @chatSystemAutoDuelsQuiet002V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Este chat está más tranquilo que un banquillo antes del pitido inicial.'**
+  String get chatSystemAutoDuelsQuiet002V1;
+
+  /// No description provided for @chatSystemAutoDuelsQuiet003V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Nadie va a comentar el enfrentamiento? Sospechoso.'**
+  String get chatSystemAutoDuelsQuiet003V1;
+
+  /// No description provided for @chatSystemAutoDuelsQuiet004V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Tarci detecta calma. A veces eso significa estrategia.'**
+  String get chatSystemAutoDuelsQuiet004V1;
+
+  /// No description provided for @chatSystemAutoDuelsQuiet005V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Los duelos están hechos. El chat aún espera su primer buen pique.'**
+  String get chatSystemAutoDuelsQuiet005V1;
+
+  /// No description provided for @chatSystemAutoDuelsQuiet006V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Un grupo en silencio no es paz: es tensión dramática.'**
+  String get chatSystemAutoDuelsQuiet006V1;
+
+  /// No description provided for @chatSystemAutoDuelsQuiet007V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Todo el mundo conforme? Esa unanimidad merece revisión.'**
+  String get chatSystemAutoDuelsQuiet007V1;
+
+  /// No description provided for @chatSystemAutoDuelsQuiet008V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Silencio táctico activado. Continuad, que queda elegante.'**
+  String get chatSystemAutoDuelsQuiet008V1;
+
+  /// No description provided for @chatSystemAutoDuelsCountdown014V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Faltan 14 días. Tiempo de organizarse… o de improvisar con confianza.'**
+  String get chatSystemAutoDuelsCountdown014V1;
+
+  /// No description provided for @chatSystemAutoDuelsCountdown007V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Falta una semana. Las estrategias absurdas ya pueden presentarse oficialmente.'**
+  String get chatSystemAutoDuelsCountdown007V1;
+
+  /// No description provided for @chatSystemAutoDuelsCountdown003V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Quedan 3 días. A estas alturas la épica está permitida.'**
+  String get chatSystemAutoDuelsCountdown003V1;
+
+  /// No description provided for @chatSystemAutoDuelsCountdown001V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Mañana es el día. Última oportunidad para presumir sin consecuencias.'**
+  String get chatSystemAutoDuelsCountdown001V1;
+
+  /// No description provided for @chatSystemAutoDuelsCountdown000V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Hoy toca. Duelos listos, nervios opcionales.'**
+  String get chatSystemAutoDuelsCountdown000V1;
+
+  /// No description provided for @chatSystemAutoDuelsCountdownExtra001V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Dos semanas parecen mucho hasta que alguien recuerda que no ha preparado nada.'**
+  String get chatSystemAutoDuelsCountdownExtra001V1;
+
+  /// No description provided for @chatSystemAutoDuelsCountdownExtra002V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Siete días. Lo suficiente para entrenar o para perfeccionar una buena excusa.'**
+  String get chatSystemAutoDuelsCountdownExtra002V1;
+
+  /// No description provided for @chatSystemAutoDuelsCountdownExtra003V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Tres días. El chat puede pasar de bromas a declaraciones oficiales.'**
+  String get chatSystemAutoDuelsCountdownExtra003V1;
+
+  /// No description provided for @chatSystemAutoDuelsCountdownExtra004V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Queda un día. Si había un plan secreto, es buen momento para fingir que existe.'**
+  String get chatSystemAutoDuelsCountdownExtra004V1;
+
+  /// No description provided for @chatSystemAutoDuelsCountdownExtra005V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Llegó el momento. Que gane el mejor… o el que mejor lo disimule.'**
+  String get chatSystemAutoDuelsCountdownExtra005V1;
+
+  /// No description provided for @dynamicsCardDuelsBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Crea enfrentamientos uno contra uno para retos, juegos y dinámicas con más pique.'**
+  String get dynamicsCardDuelsBody;
+
+  /// No description provided for @homeDynamicTypeDuels.
+  ///
+  /// In es, this message translates to:
+  /// **'Duelos'**
+  String get homeDynamicTypeDuels;
+
+  /// No description provided for @homeDuelsStateCompleted.
+  ///
+  /// In es, this message translates to:
+  /// **'Duelos listos'**
+  String get homeDuelsStateCompleted;
+
+  /// No description provided for @homeDuelsStatePreparing.
+  ///
+  /// In es, this message translates to:
+  /// **'Preparando duelos'**
+  String get homeDuelsStatePreparing;
+
+  /// No description provided for @duelsWizardTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Crear duelos'**
+  String get duelsWizardTitle;
+
+  /// No description provided for @duelsWizardCreateCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Crear duelos'**
+  String get duelsWizardCreateCta;
+
+  /// No description provided for @duelsWizardNameLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre de la dinámica'**
+  String get duelsWizardNameLabel;
+
+  /// No description provided for @duelsWizardOwnerNicknameLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu nombre en los duelos'**
+  String get duelsWizardOwnerNicknameLabel;
+
+  /// No description provided for @duelsWizardOwnerNicknameHelper.
+  ///
+  /// In es, this message translates to:
+  /// **'Así te verán los demás en los enfrentamientos.'**
+  String get duelsWizardOwnerNicknameHelper;
+
+  /// No description provided for @duelsWizardEventOptional.
+  ///
+  /// In es, this message translates to:
+  /// **'Fecha del evento (opcional)'**
+  String get duelsWizardEventOptional;
+
+  /// No description provided for @duelsWizardPickEventDate.
+  ///
+  /// In es, this message translates to:
+  /// **'Elegir fecha'**
+  String get duelsWizardPickEventDate;
+
+  /// No description provided for @duelsWizardOwnerParticipatesTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Participas tú?'**
+  String get duelsWizardOwnerParticipatesTitle;
+
+  /// No description provided for @duelsWizardOwnerParticipatesYes.
+  ///
+  /// In es, this message translates to:
+  /// **'Sí, quiero estar en un duelo'**
+  String get duelsWizardOwnerParticipatesYes;
+
+  /// No description provided for @duelsWizardOwnerParticipatesNo.
+  ///
+  /// In es, this message translates to:
+  /// **'No, solo organizo'**
+  String get duelsWizardOwnerParticipatesNo;
+
+  /// No description provided for @duelsWizardReviewTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Revisión'**
+  String get duelsWizardReviewTitle;
+
+  /// No description provided for @duelsWizardReviewSummary.
+  ///
+  /// In es, this message translates to:
+  /// **'Enfrentamientos 1 vs 1 · número par necesario'**
+  String get duelsWizardReviewSummary;
+
+  /// No description provided for @duelsUnitLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Duelo {index}'**
+  String duelsUnitLabel(Object index);
+
+  /// No description provided for @duelsVsLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'vs'**
+  String get duelsVsLabel;
+
+  /// No description provided for @duelsResultHeroTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¡Duelos listos!'**
+  String get duelsResultHeroTitle;
+
+  /// No description provided for @duelsResultHeroSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya sabéis quién se enfrenta a quién.'**
+  String get duelsResultHeroSubtitle;
+
+  /// No description provided for @duelsResultSummary.
+  ///
+  /// In es, this message translates to:
+  /// **'{count} duelos · {eligible} participantes'**
+  String duelsResultSummary(Object count, Object eligible);
+
+  /// No description provided for @duelsDetailListTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Duelos'**
+  String get duelsDetailListTitle;
+
+  /// No description provided for @duelsDetailFormCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Generar duelos'**
+  String get duelsDetailFormCta;
+
+  /// No description provided for @duelsDetailConfigTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Configuración'**
+  String get duelsDetailConfigTitle;
+
+  /// No description provided for @duelsDetailConfigSummary.
+  ///
+  /// In es, this message translates to:
+  /// **'Aproximadamente {count} duelos'**
+  String duelsDetailConfigSummary(Object count);
+
+  /// No description provided for @duelsRenameDialogTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Renombrar duelo'**
+  String get duelsRenameDialogTitle;
+
+  /// No description provided for @duelsRenameDialogFieldLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre del duelo'**
+  String get duelsRenameDialogFieldLabel;
+
+  /// No description provided for @duelsRenameSuccess.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre del duelo actualizado'**
+  String get duelsRenameSuccess;
+
+  /// No description provided for @duelsShareBody.
+  ///
+  /// In es, this message translates to:
+  /// **'⚔️ Duelos generados en «{groupName}»:\n\n{blocks}\n\nHecho con Tarci Secret.'**
+  String duelsShareBody(Object blocks, Object groupName);
+
+  /// No description provided for @duelsEmailSubject.
+  ///
+  /// In es, this message translates to:
+  /// **'Duelos generados — {groupName}'**
+  String duelsEmailSubject(Object groupName);
+
+  /// No description provided for @duelsEmailBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Hola,\n\nYa están listos los duelos de «{groupName}»:\n\n{blocks}\n\nGenerado con Tarci Secret.'**
+  String duelsEmailBody(Object blocks, Object groupName);
+
+  /// No description provided for @duelsPdfHeadline.
+  ///
+  /// In es, this message translates to:
+  /// **'Duelos generados'**
+  String get duelsPdfHeadline;
+
+  /// No description provided for @duelsChatSectionTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Conversación del grupo'**
+  String get duelsChatSectionTitle;
+
+  /// No description provided for @duelsChatSectionSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Lanza retos, bromea y calienta el ambiente antes de los duelos.'**
+  String get duelsChatSectionSubtitle;
+
+  /// No description provided for @duelsChatEnterCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Abrir chat'**
+  String get duelsChatEnterCta;
+
+  /// No description provided for @chatDuelsCompletedChip.
+  ///
+  /// In es, this message translates to:
+  /// **'Duelos listos'**
+  String get chatDuelsCompletedChip;
+
+  /// No description provided for @chatSystemDuelsCompletedV1.
+  ///
+  /// In es, this message translates to:
+  /// **'Los duelos ya están listos. Ahora sí: que empiece el pique.'**
+  String get chatSystemDuelsCompletedV1;
+
+  /// No description provided for @duelsMemberWaitingTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Duelos en preparación'**
+  String get duelsMemberWaitingTitle;
+
+  /// No description provided for @duelsMemberWaitingBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Cuando el organizador genere los duelos, podrás ver quién se enfrenta a quién.'**
+  String get duelsMemberWaitingBody;
+
+  /// No description provided for @joinSuccessDuelsSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Te uniste a «{groupName}».'**
+  String joinSuccessDuelsSubtitle(Object groupName);
+
+  /// No description provided for @joinSuccessDuelsBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Cuando el organizador genere los duelos, podrás ver quién se enfrenta a quién.'**
+  String get joinSuccessDuelsBody;
+
+  /// No description provided for @joinSuccessDuelsPrimaryCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Ir a duelos'**
+  String get joinSuccessDuelsPrimaryCta;
+
+  /// No description provided for @duelsDetailMinPoolHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Necesitas al menos 2 participantes para generar duelos.'**
+  String get duelsDetailMinPoolHint;
+
+  /// No description provided for @duelsDetailEvenHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Necesitas un número par de participantes para generar duelos.'**
+  String get duelsDetailEvenHint;
 }
 
 class _AppLocalizationsDelegate

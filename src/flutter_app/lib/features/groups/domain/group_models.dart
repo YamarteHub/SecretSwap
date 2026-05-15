@@ -10,10 +10,12 @@ enum TeamStatus { idle, generating, completed, failed }
 
 enum TeamGroupingMode { teamCount, teamSize }
 
-enum TeamsPreset { standard, pairings }
+enum TeamsPreset { standard, pairings, duels }
 
 TeamsPreset parseTeamsPreset(String? raw) {
-  if (raw?.trim() == 'pairings') return TeamsPreset.pairings;
+  final s = raw?.trim() ?? '';
+  if (s == 'pairings') return TeamsPreset.pairings;
+  if (s == 'duels') return TeamsPreset.duels;
   return TeamsPreset.standard;
 }
 

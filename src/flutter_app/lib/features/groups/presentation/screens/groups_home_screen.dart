@@ -661,10 +661,11 @@ class _GroupCard extends StatelessWidget {
                                 icon: switch (summary.dynamicType) {
                                   TarciDynamicType.simpleRaffle =>
                                     Icons.casino_outlined,
-                                  TarciDynamicType.teams =>
-                                    summary.teamsPreset == TeamsPreset.pairings
-                                        ? Icons.people_alt_outlined
-                                        : Icons.groups_outlined,
+                                  TarciDynamicType.teams => switch (summary.teamsPreset) {
+                                    TeamsPreset.duels => Icons.sports_martial_arts_outlined,
+                                    TeamsPreset.pairings => Icons.people_alt_outlined,
+                                    TeamsPreset.standard => Icons.groups_outlined,
+                                  },
                                   TarciDynamicType.secretSanta =>
                                     Icons.card_giftcard_outlined,
                                 },
