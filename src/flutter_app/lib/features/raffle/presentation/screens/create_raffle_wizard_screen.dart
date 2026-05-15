@@ -138,38 +138,43 @@ class _CreateRaffleWizardScreenState extends ConsumerState<CreateRaffleWizardScr
               padding: const EdgeInsets.fromLTRB(20, 8, 20, 16),
               child: Row(
                 children: [
-                  if (_page > 0)
-                    OutlinedButton(
-                      onPressed: () {
-                        _pageController.previousPage(
-                          duration: const Duration(milliseconds: 280),
-                          curve: Curves.easeOutCubic,
-                        );
-                        setState(() => _page--);
-                      },
+                  Expanded(
+                    flex: 2,
+                    child: OutlinedButton(
+                      onPressed: _page > 0
+                          ? () {
+                              _pageController.previousPage(
+                                duration: const Duration(milliseconds: 280),
+                                curve: Curves.easeOutCubic,
+                              );
+                              setState(() => _page--);
+                            }
+                          : null,
                       child: Text(l10n.back),
                     ),
-                  const Spacer(),
-                  if (_page < 3)
-                    FilledButton(
-                      onPressed: () {
-                        if (_page == 0 && _nameCtrl.text.trim().isEmpty) {
-                          HapticFeedback.lightImpact();
-                          return;
-                        }
-                        _pageController.nextPage(
-                          duration: const Duration(milliseconds: 280),
-                          curve: Curves.easeOutCubic,
-                        );
-                        setState(() => _page++);
-                      },
-                      child: Text(l10n.next),
-                    )
-                  else
-                    FilledButton(
-                      onPressed: _submit,
-                      child: Text(l10n.raffleWizardCreateCta),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    flex: 3,
+                    child: FilledButton(
+                      onPressed: _page < 3
+                          ? () {
+                              if (_page == 0 && _nameCtrl.text.trim().isEmpty) {
+                                HapticFeedback.lightImpact();
+                                return;
+                              }
+                              _pageController.nextPage(
+                                duration: const Duration(milliseconds: 280),
+                                curve: Curves.easeOutCubic,
+                              );
+                              setState(() => _page++);
+                            }
+                          : _submit,
+                      child: Text(
+                        _page < 3 ? l10n.next : l10n.raffleWizardCreateCta,
+                      ),
                     ),
+                  ),
                 ],
               ),
             ),
