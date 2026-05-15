@@ -142,10 +142,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get createSecretFriend => 'Crear amigo secreto';
 
   @override
-  String get comingSoonMoreDynamics =>
-      'Próximamente: sorteos, equipos, duelos y emparejamientos.';
-
-  @override
   String get mySecretFriend => 'Mi amigo secreto';
 
   @override
@@ -195,7 +191,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get aboutSectionWhatBody =>
-      'Tarci Secret es una app creada para organizar amigos secretos, sorteos y dinámicas de grupo de forma sencilla, privada y divertida. Permite incluir a personas reales: niños, familiares sin móvil o participantes gestionados por un adulto.\n\nTarci Secret nace con el amigo secreto como primera experiencia y está pensada para crecer hacia nuevas dinámicas sociales, sorteos, equipos, duelos y emparejamientos.';
+      'Tarci Secret es una app social para organizar dinámicas de grupo de forma sencilla, privada y divertida. Permite crear amigos secretos, realizar sorteos, formar equipos e incluir a personas con app, sin app o gestionadas por otro participante.\n\nNace alrededor del amigo secreto como experiencia fundacional, pero evoluciona como un espacio para crear encuentros, retos y dinámicas sociales con emoción, claridad y personas reales.';
 
   @override
   String get aboutSectionHowTitle => 'Cómo funciona';
@@ -212,32 +208,32 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get aboutStep2Body =>
-      'Añade personas con app o gestionadas y ajusta el tipo de sorteo.';
+      'Añade personas con app o gestionadas y ajusta el flujo necesario.';
 
   @override
-  String get aboutStep3Title => 'Lanza la dinámica o sorteo';
+  String get aboutStep3Title => 'Lanza la dinámica';
 
   @override
   String get aboutStep3Body =>
-      'Cuando el grupo esté listo, el organizador ejecuta el sorteo en privado.';
+      'Ejecuta el sorteo, forma los equipos o completa la experiencia cuando todo esté listo.';
 
   @override
   String get aboutStep4Title => 'Descubre, conversa y disfruta';
 
   @override
   String get aboutStep4Body =>
-      'Cada quien ve su resultado de forma privada y el grupo puede seguir la experiencia.';
+      'Cada dinámica muestra el resultado de forma clara y permite vivir mejor la experiencia del grupo.';
 
   @override
   String get aboutSectionPrivacyTitle => 'Privacidad por diseño';
 
   @override
   String get aboutSectionPrivacyBody =>
-      'Cada persona ve solo lo que necesita ver. En un amigo secreto, las asignaciones se protegen para que el resultado siga siendo privado.';
+      'Cada dinámica muestra solo lo que corresponde. Las asignaciones privadas se protegen, los resultados públicos se comparten únicamente con el grupo y Tarci evita exponer información innecesaria.';
 
   @override
   String get aboutSectionPrivacyTrust =>
-      'La app prioriza la claridad, la confianza y el respeto por la experiencia del grupo.';
+      'La privacidad no es un añadido: es parte del diseño de la experiencia.';
 
   @override
   String get aboutSectionCreatorTitle => 'Creado por Stalin Yamarte';
@@ -276,10 +272,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get homeHeaderSubtitle =>
-      'Organiza amigo secreto y sorteos con quien quieras. Privado por defecto.';
+      'Organiza amigos secretos, sorteos y equipos con privacidad, emoción y facilidad.';
 
   @override
-  String get homeHeroHeadline => 'Amigo secreto y sorteos de grupo';
+  String get homeHeroHeadline => 'Dinámicas sociales para grupos reales';
 
   @override
   String get homeGroupDrawStatePreparing => 'Preparando';
@@ -970,10 +966,6 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get homePrimaryActionsTitle => 'Acciones principales';
-
-  @override
-  String get homeComingSoonDescription =>
-      'Próximamente: sorteos, equipos, duelos y emparejamientos.';
 
   @override
   String get homeChipDraws => 'Sorteos';

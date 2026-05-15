@@ -344,12 +344,6 @@ abstract class AppLocalizations {
   /// **'Crear amigo secreto'**
   String get createSecretFriend;
 
-  /// No description provided for @comingSoonMoreDynamics.
-  ///
-  /// In es, this message translates to:
-  /// **'Próximamente: sorteos, equipos, duelos y emparejamientos.'**
-  String get comingSoonMoreDynamics;
-
   /// No description provided for @mySecretFriend.
   ///
   /// In es, this message translates to:
@@ -443,7 +437,7 @@ abstract class AppLocalizations {
   /// No description provided for @aboutSectionWhatBody.
   ///
   /// In es, this message translates to:
-  /// **'Tarci Secret es una app creada para organizar amigos secretos, sorteos y dinámicas de grupo de forma sencilla, privada y divertida. Permite incluir a personas reales: niños, familiares sin móvil o participantes gestionados por un adulto.\n\nTarci Secret nace con el amigo secreto como primera experiencia y está pensada para crecer hacia nuevas dinámicas sociales, sorteos, equipos, duelos y emparejamientos.'**
+  /// **'Tarci Secret es una app social para organizar dinámicas de grupo de forma sencilla, privada y divertida. Permite crear amigos secretos, realizar sorteos, formar equipos e incluir a personas con app, sin app o gestionadas por otro participante.\n\nNace alrededor del amigo secreto como experiencia fundacional, pero evoluciona como un espacio para crear encuentros, retos y dinámicas sociales con emoción, claridad y personas reales.'**
   String get aboutSectionWhatBody;
 
   /// No description provided for @aboutSectionHowTitle.
@@ -473,19 +467,19 @@ abstract class AppLocalizations {
   /// No description provided for @aboutStep2Body.
   ///
   /// In es, this message translates to:
-  /// **'Añade personas con app o gestionadas y ajusta el tipo de sorteo.'**
+  /// **'Añade personas con app o gestionadas y ajusta el flujo necesario.'**
   String get aboutStep2Body;
 
   /// No description provided for @aboutStep3Title.
   ///
   /// In es, this message translates to:
-  /// **'Lanza la dinámica o sorteo'**
+  /// **'Lanza la dinámica'**
   String get aboutStep3Title;
 
   /// No description provided for @aboutStep3Body.
   ///
   /// In es, this message translates to:
-  /// **'Cuando el grupo esté listo, el organizador ejecuta el sorteo en privado.'**
+  /// **'Ejecuta el sorteo, forma los equipos o completa la experiencia cuando todo esté listo.'**
   String get aboutStep3Body;
 
   /// No description provided for @aboutStep4Title.
@@ -497,7 +491,7 @@ abstract class AppLocalizations {
   /// No description provided for @aboutStep4Body.
   ///
   /// In es, this message translates to:
-  /// **'Cada quien ve su resultado de forma privada y el grupo puede seguir la experiencia.'**
+  /// **'Cada dinámica muestra el resultado de forma clara y permite vivir mejor la experiencia del grupo.'**
   String get aboutStep4Body;
 
   /// No description provided for @aboutSectionPrivacyTitle.
@@ -509,13 +503,13 @@ abstract class AppLocalizations {
   /// No description provided for @aboutSectionPrivacyBody.
   ///
   /// In es, this message translates to:
-  /// **'Cada persona ve solo lo que necesita ver. En un amigo secreto, las asignaciones se protegen para que el resultado siga siendo privado.'**
+  /// **'Cada dinámica muestra solo lo que corresponde. Las asignaciones privadas se protegen, los resultados públicos se comparten únicamente con el grupo y Tarci evita exponer información innecesaria.'**
   String get aboutSectionPrivacyBody;
 
   /// No description provided for @aboutSectionPrivacyTrust.
   ///
   /// In es, this message translates to:
-  /// **'La app prioriza la claridad, la confianza y el respeto por la experiencia del grupo.'**
+  /// **'La privacidad no es un añadido: es parte del diseño de la experiencia.'**
   String get aboutSectionPrivacyTrust;
 
   /// No description provided for @aboutSectionCreatorTitle.
@@ -581,13 +575,13 @@ abstract class AppLocalizations {
   /// No description provided for @homeHeaderSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Organiza amigo secreto y sorteos con quien quieras. Privado por defecto.'**
+  /// **'Organiza amigos secretos, sorteos y equipos con privacidad, emoción y facilidad.'**
   String get homeHeaderSubtitle;
 
   /// No description provided for @homeHeroHeadline.
   ///
   /// In es, this message translates to:
-  /// **'Amigo secreto y sorteos de grupo'**
+  /// **'Dinámicas sociales para grupos reales'**
   String get homeHeroHeadline;
 
   /// No description provided for @homeGroupDrawStatePreparing.
@@ -1819,12 +1813,6 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Acciones principales'**
   String get homePrimaryActionsTitle;
-
-  /// No description provided for @homeComingSoonDescription.
-  ///
-  /// In es, this message translates to:
-  /// **'Próximamente: sorteos, equipos, duelos y emparejamientos.'**
-  String get homeComingSoonDescription;
 
   /// No description provided for @homeChipDraws.
   ///

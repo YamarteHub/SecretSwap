@@ -146,10 +146,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get createSecretFriend => 'Créer un ami secret';
 
   @override
-  String get comingSoonMoreDynamics =>
-      'Prochainement : tirages au sort, équipes, duels et appariements.';
-
-  @override
   String get mySecretFriend => 'mon ami secret';
 
   @override
@@ -199,7 +195,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get aboutSectionWhatBody =>
-      'Tarci Secret est une application conçue pour organiser Secret Santa, tirages au sort et dynamiques de groupe de façon simple, privée et ludique. Elle inclut des personnes réelles : enfants, proches sans téléphone ou participants gérés par un adulte.\n\nTarci Secret naît avec le Secret Santa comme première expérience et est pensée pour évoluer vers de nouvelles dynamiques sociales, tirages, équipes, duels et appariements.';
+      'Tarci Secret est une application sociale pour organiser des dynamiques de groupe de façon simple, privée et ludique. Elle permet de créer un Secret Santa, réaliser des tirages, former des équipes et inclure des personnes avec l’app, sans app ou gérées par un autre participant.\n\nElle est née autour du Secret Santa comme expérience fondatrice, mais évolue comme espace pour créer des rencontres, des défis et des dynamiques sociales avec émotion, clarté et personnes réelles.';
 
   @override
   String get aboutSectionHowTitle => 'Comment ça marche';
@@ -216,32 +212,32 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get aboutStep2Body =>
-      'Ajoutez des personnes avec l’app ou gérées et ajustez le type de tirage.';
+      'Ajoutez des personnes avec l’app ou gérées et ajustez le flux nécessaire.';
 
   @override
-  String get aboutStep3Title => 'Lancer la dynamique ou le tirage';
+  String get aboutStep3Title => 'Lancer la dynamique';
 
   @override
   String get aboutStep3Body =>
-      'Quand le groupe est prêt, l’organisateur exécute le tirage en privé.';
+      'Exécutez le tirage, formez les équipes ou complétez l’expérience quand tout est prêt.';
 
   @override
   String get aboutStep4Title => 'Découvrir, discuter et profiter';
 
   @override
   String get aboutStep4Body =>
-      'Chacun voit son résultat en privé et le groupe peut prolonger l’expérience.';
+      'Chaque dynamique affiche le résultat clairement et permet de vivre au mieux l’expérience du groupe.';
 
   @override
   String get aboutSectionPrivacyTitle => 'Confidentialité dès la conception';
 
   @override
   String get aboutSectionPrivacyBody =>
-      'Chacun ne voit que ce dont il a besoin. En Secret Santa, les attributions sont protégées pour que le résultat reste privé.';
+      'Chaque dynamique n’affiche que ce qui correspond. Les attributions privées restent protégées, les résultats publics ne sont partagés qu’avec le groupe et Tarci évite d’exposer des informations inutiles.';
 
   @override
   String get aboutSectionPrivacyTrust =>
-      'L’application privilégie la clarté, la confiance et le respect de l’expérience du groupe.';
+      'La confidentialité n’est pas un ajout : elle fait partie de la conception de l’expérience.';
 
   @override
   String get aboutSectionCreatorTitle => 'Créé par Stalin Yamarte';
@@ -280,10 +276,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get homeHeaderSubtitle =>
-      'Organisez des amis secrets et des cadeaux avec qui vous voulez. Privé par défaut.';
+      'Organisez Secret Santa, tirages et équipes avec confidentialité, émotion et simplicité.';
 
   @override
-  String get homeHeroHeadline => 'Cadeaux secrets pour amis et groupes';
+  String get homeHeroHeadline => 'Dynamiques sociales pour de vrais groupes';
 
   @override
   String get homeGroupDrawStatePreparing => 'Préparation';
@@ -981,10 +977,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get homePrimaryActionsTitle => 'Principales actions';
-
-  @override
-  String get homeComingSoonDescription =>
-      'Prochainement : tirages au sort, équipes, duels et appariements.';
 
   @override
   String get homeChipDraws => 'Cadeaux';

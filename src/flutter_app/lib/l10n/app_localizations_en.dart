@@ -140,10 +140,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get createSecretFriend => 'Create Secret Santa';
 
   @override
-  String get comingSoonMoreDynamics =>
-      'Coming soon: draws, teams, duels and pairings.';
-
-  @override
   String get mySecretFriend => 'My secret friend';
 
   @override
@@ -193,7 +189,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aboutSectionWhatBody =>
-      'Tarci Secret is an app built to organize Secret Santa, draws, and group dynamics in a simple, private, and fun way. It includes real people: children, relatives without a phone, or participants managed by an adult.\n\nTarci Secret starts with Secret Santa as its first experience and is designed to grow into new social dynamics, draws, teams, duels, and matchups.';
+      'Tarci Secret is a social app for organizing group dynamics in a simple, private, and fun way. Create Secret Santa games, run draws, form teams, and include people with the app, without the app, or managed by another participant.\n\nIt began with Secret Santa as its foundation and grows as a space to create meetups, challenges, and social dynamics with emotion, clarity, and real people.';
 
   @override
   String get aboutSectionHowTitle => 'How it works';
@@ -209,32 +205,32 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aboutStep2Body =>
-      'Add people with the app or managed participants and tune the draw style.';
+      'Add people with the app or managed participants and adjust the flow as needed.';
 
   @override
-  String get aboutStep3Title => 'Launch the dynamic or draw';
+  String get aboutStep3Title => 'Launch the dynamic';
 
   @override
   String get aboutStep3Body =>
-      'When the group is ready, the organizer runs the draw privately.';
+      'Run the draw, form teams, or complete the experience when everything is ready.';
 
   @override
   String get aboutStep4Title => 'Discover, chat, and enjoy';
 
   @override
   String get aboutStep4Body =>
-      'Everyone sees their own result privately and the group can keep the experience going.';
+      'Each dynamic shows results clearly and helps the group enjoy the experience together.';
 
   @override
   String get aboutSectionPrivacyTitle => 'Privacy by design';
 
   @override
   String get aboutSectionPrivacyBody =>
-      'Each person only sees what they need to see. In Secret Santa, assignments are protected so the outcome stays private.';
+      'Each dynamic shows only what applies. Private assignments stay protected, public results are shared only with the group, and Tarci avoids exposing unnecessary information.';
 
   @override
   String get aboutSectionPrivacyTrust =>
-      'The app prioritizes clarity, trust, and respect for the group’s experience.';
+      'Privacy is not an add-on: it is part of how the experience is designed.';
 
   @override
   String get aboutSectionCreatorTitle => 'Created by Stalin Yamarte';
@@ -273,10 +269,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeHeaderSubtitle =>
-      'Organize Secret Santa and private draws with anyone. Private by default.';
+      'Organize Secret Santa, draws, and teams with privacy, emotion, and ease.';
 
   @override
-  String get homeHeroHeadline => 'Secret Santa and group draws';
+  String get homeHeroHeadline => 'Social dynamics for real groups';
 
   @override
   String get homeGroupDrawStatePreparing => 'Getting ready';
@@ -961,10 +957,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homePrimaryActionsTitle => 'Primary actions';
-
-  @override
-  String get homeComingSoonDescription =>
-      'Coming soon: draws, teams, duels and pairings.';
 
   @override
   String get homeChipDraws => 'Draws';

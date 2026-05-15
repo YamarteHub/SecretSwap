@@ -507,8 +507,6 @@ class _GroupsHomeScreenState extends ConsumerState<GroupsHomeScreen> {
                   ),
                 ],
                 const SizedBox(height: 22),
-                _ComingSoonHint(text: context.l10n.homeComingSoonDescription),
-                const SizedBox(height: 12),
                 Text(
                   context.l10n.homePrivacyFooter,
                   style: theme.textTheme.bodySmall?.copyWith(
@@ -955,45 +953,6 @@ class _DebugToolsCard extends StatelessWidget {
             onPressed: onResetUser,
             icon: const Icon(Icons.refresh, size: 20),
             label: Text(l10n.homeDebugResetUser),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ComingSoonHint extends StatelessWidget {
-  const _ComingSoonHint({required this.text});
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-      decoration: BoxDecoration(
-        color: AppTheme.mutedGold.withValues(alpha: 0.10),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: AppTheme.mutedGold.withValues(alpha: 0.32)),
-      ),
-      child: Row(
-        children: [
-          const Icon(
-            Icons.auto_awesome_outlined,
-            size: 18,
-            color: AppTheme.mutedGold,
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Text(
-              text,
-              style: theme.textTheme.labelMedium?.copyWith(
-                color: theme.colorScheme.onSurface.withValues(alpha: 0.85),
-                fontWeight: FontWeight.w600,
-                letterSpacing: 0.1,
-              ),
-            ),
           ),
         ],
       ),
