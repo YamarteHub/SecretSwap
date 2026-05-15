@@ -2456,4 +2456,256 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get functionsErrorTeamsEditLocked =>
       'You can’t edit participants after teams are formed.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful001V1 =>
+      'Teams are set. You can start blaming the algorithm now.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful002V1 =>
+      'Which team is here to win and which one is here for snacks?';
+
+  @override
+  String get chatSystemAutoTeamsPlayful003V1 =>
+      'There\'s talent here… and plenty of confidence. We\'ll see which weighs more.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful004V1 =>
+      'Predictions, excuses, and conspiracy theories are welcome.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful005V1 =>
+      'A fair split. Creative complaints count as participation too.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful006V1 =>
+      'It doesn\'t matter who you\'re with. It matters who asks for a rematch.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful007V1 =>
+      'Tarci made the draw. Now prove it wasn\'t luck.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful008V1 =>
+      'Some teams inspire respect; others inspire memes.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful009V1 =>
+      'Chance has spoken. Dignity gets settled on game day.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful010V1 =>
+      'Don\'t underestimate a quiet team.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful011V1 =>
+      'Some are already celebrating. Others are plotting a discreet team swap.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful012V1 =>
+      'Results are out. The drama officially begins.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful013V1 =>
+      'Team chemistry… or so says the emotional stats.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful014V1 =>
+      'Good teams are built. Legendary ones brag before playing.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful015V1 =>
+      'The group has its lineup. Now bring the epic.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful016V1 =>
+      'From here on, every message can fuel the rivalry.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful017V1 =>
+      'Teams formed. Group pride is now active.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful018V1 =>
+      'You can invent war names now—Tarci doesn\'t store them yet.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful019V1 =>
+      'Time for the best part: debating if the split was fair.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful020V1 =>
+      'Tarci stays neutral. But mentally screenshots the banter.';
+
+  @override
+  String get chatSystemAutoTeamsChallenge001V1 =>
+      'Today\'s challenge: each team must explain why it deserves to win.';
+
+  @override
+  String get chatSystemAutoTeamsChallenge002V1 =>
+      'Who dares to throw the first friendly challenge?';
+
+  @override
+  String get chatSystemAutoTeamsChallenge003V1 =>
+      'A team that doesn\'t post today starts losing on charisma.';
+
+  @override
+  String get chatSystemAutoTeamsChallenge004V1 =>
+      'Unofficial rule: whoever talks most has to answer back.';
+
+  @override
+  String get chatSystemAutoTeamsChallenge005V1 =>
+      'Is there a favorite or are we still pretending to be humble?';
+
+  @override
+  String get chatSystemAutoTeamsChallenge006V1 =>
+      'Leave your mark: which team takes the glory?';
+
+  @override
+  String get chatSystemAutoTeamsChallenge007V1 =>
+      'Soft challenge: make your prediction before the meetup.';
+
+  @override
+  String get chatSystemAutoTeamsChallenge008V1 =>
+      'If there\'s confidence, let\'s have symbolic bets.';
+
+  @override
+  String get chatSystemAutoTeamsChallenge009V1 =>
+      'Which team brings strategy and which brings pure heart?';
+
+  @override
+  String get chatSystemAutoTeamsChallenge010V1 =>
+      'Time to declare intentions. Silence scores zero.';
+
+  @override
+  String get chatSystemAutoTeamsChallenge011V1 =>
+      'Each team picks a spontaneous spokesperson. Then deny you chose them.';
+
+  @override
+  String get chatSystemAutoTeamsChallenge012V1 =>
+      'Who breaks the ice with the first classy provocation?';
+
+  @override
+  String get chatSystemAutoTeamsQuiet001V1 =>
+      'Very quiet for such promising teams.';
+
+  @override
+  String get chatSystemAutoTeamsQuiet002V1 =>
+      'This chat is quieter than the bench before kickoff.';
+
+  @override
+  String get chatSystemAutoTeamsQuiet003V1 =>
+      'Nobody going to comment on the lineup? Suspicious.';
+
+  @override
+  String get chatSystemAutoTeamsQuiet004V1 =>
+      'Tarci senses calm. Sometimes that means strategy.';
+
+  @override
+  String get chatSystemAutoTeamsQuiet005V1 =>
+      'Teams are set. The chat still waits for its first good banter.';
+
+  @override
+  String get chatSystemAutoTeamsQuiet006V1 =>
+      'A silent group isn\'t peace—it\'s dramatic tension.';
+
+  @override
+  String get chatSystemAutoTeamsQuiet007V1 =>
+      'Everyone happy? That unanimity deserves a review.';
+
+  @override
+  String get chatSystemAutoTeamsQuiet008V1 =>
+      'Tactical silence activated. Carry on—it stays elegant.';
+
+  @override
+  String get chatSystemAutoTeamsCountdown014V1 =>
+      '14 days left. Time to organize… or improvise with confidence.';
+
+  @override
+  String get chatSystemAutoTeamsCountdown007V1 =>
+      'One week to go. Absurd strategies may now apply officially.';
+
+  @override
+  String get chatSystemAutoTeamsCountdown003V1 =>
+      '3 days left. Epic energy is allowed now.';
+
+  @override
+  String get chatSystemAutoTeamsCountdown001V1 =>
+      'Tomorrow\'s the day. Last chance to brag without consequences.';
+
+  @override
+  String get chatSystemAutoTeamsCountdown000V1 =>
+      'Today\'s the day. Teams ready, nerves optional.';
+
+  @override
+  String get chatSystemAutoTeamsCountdownExtra001V1 =>
+      'Two weeks feels long until someone remembers they prepared nothing.';
+
+  @override
+  String get chatSystemAutoTeamsCountdownExtra002V1 =>
+      'Seven days. Enough to train or perfect a good excuse.';
+
+  @override
+  String get chatSystemAutoTeamsCountdownExtra003V1 =>
+      'Three days. The chat can go from jokes to official statements.';
+
+  @override
+  String get chatSystemAutoTeamsCountdownExtra004V1 =>
+      'One day left. If there was a secret plan, good time to pretend it exists.';
+
+  @override
+  String get chatSystemAutoTeamsCountdownExtra005V1 =>
+      'It\'s time. May the best win… or the best at hiding it.';
+
+  @override
+  String get teamsChatSectionTitle => 'Group conversation';
+
+  @override
+  String get teamsChatSectionSubtitle =>
+      'Discuss the lineup, challenges, and game day.';
+
+  @override
+  String get teamsChatEnterCta => 'Open chat';
+
+  @override
+  String get chatTeamsCompletedChip => 'Teams ready';
+
+  @override
+  String get chatSystemTeamsCompletedV1 =>
+      'Teams are ready. Let the friendly banter begin.';
+
+  @override
+  String get teamsMemberWaitingTitle => 'Teams in progress';
+
+  @override
+  String get teamsMemberWaitingBody =>
+      'The organizer is preparing the draw. When teams are ready you can see them here and join the group chat.';
+
+  @override
+  String teamsMemberPoolSummary(int count) {
+    return '$count participants in the group';
+  }
+
+  @override
+  String teamsOrganizerByline(String name) {
+    return 'Organized by $name';
+  }
+
+  @override
+  String get teamsResultActionsTitle => 'Result actions';
+
+  @override
+  String get teamsRenameDialogTitle => 'Rename team';
+
+  @override
+  String get teamsRenameDialogFieldLabel => 'Team name';
+
+  @override
+  String get teamsRenameSuccess => 'Team name updated';
+
+  @override
+  String get teamsYouInTeam => 'You';
+
+  @override
+  String get teamsDetailRosterTitle => 'Group participants';
 }

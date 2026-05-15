@@ -1,5 +1,6 @@
 import { randomInt } from "crypto";
 import { FieldValue } from "firebase-admin/firestore";
+import * as logger from "firebase-functions/logger";
 import { onCall, CallableRequest, HttpsError } from "firebase-functions/v2/https";
 import { requireAuthUid } from "../shared/auth";
 import { AppError } from "../shared/errors";
@@ -13,6 +14,7 @@ import {
   TeamSnapshot
 } from "../shared/dtos";
 import { parseOrThrow } from "../shared/validation";
+import { appendGroupChatSystemMessageIfNew } from "../shared/groupChat";
 import { notifyGroupDynamicCompleted } from "../shared/groupNotifications";
 
 type Eligible = {
@@ -320,6 +322,21 @@ export const executeTeams = onCall(async (req: CallableRequest<unknown>): Promis
       groupName,
       triggeredByUid: uid
     });
+
+    try {
+      await appendGroupChatSystemMessageIfNew(
+        db,
+        body.groupId,
+        `system_teamsCompleted_${result.executionId}`,
+        "chat.system.teamsCompleted.v1"
+      );
+    } catch (e) {
+      logger.warn("executeTeams: teamsCompleted chat message failed", {
+        groupId: body.groupId,
+        executionId: result.executionId,
+        err: e
+      });
+    }
 
     return result;
   } catch (e) {

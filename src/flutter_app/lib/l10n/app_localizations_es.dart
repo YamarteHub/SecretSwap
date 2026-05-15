@@ -2473,4 +2473,256 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get functionsErrorTeamsEditLocked =>
       'No se pueden editar participantes después de formar los equipos.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful001V1 =>
+      'Equipos listos. Ya podéis empezar a culpar al algoritmo.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful002V1 =>
+      '¿Qué equipo viene a ganar y cuál viene por la merienda?';
+
+  @override
+  String get chatSystemAutoTeamsPlayful003V1 =>
+      'Aquí hay talento… y también mucha confianza. Veremos cuál pesa más.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful004V1 =>
+      'Se aceptan pronósticos, excusas y teorías conspirativas.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful005V1 =>
+      'Un reparto justo. Las quejas creativas también cuentan como participación.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful006V1 =>
+      'No importa quién quede contigo. Importa quién termina pidiendo revancha.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful007V1 =>
+      'Tarci repartió. Ahora os toca demostrar que no era suerte.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful008V1 =>
+      'Hay equipos que inspiran respeto y otros que inspiran memes.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful009V1 =>
+      'El azar habló. La dignidad se resuelve el día del encuentro.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful010V1 =>
+      'Que nadie subestime a un equipo silencioso.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful011V1 =>
+      'Algunos ya celebran. Otros están calculando cómo cambiar de equipo sin que se note.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful012V1 =>
+      'Resultado publicado. Empieza oficialmente el salseo.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful013V1 =>
+      'Hay química de equipo… o al menos eso dice la estadística emocional.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful014V1 =>
+      'Un buen equipo se construye. Uno legendario se presume antes de jugar.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful015V1 =>
+      'El grupo ya tiene reparto. Ahora falta la épica.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful016V1 =>
+      'A partir de aquí, cada mensaje puede convertirse en motivación para el rival.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful017V1 =>
+      'Equipos formados. El orgullo grupal queda activado.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful018V1 =>
+      'Ya podéis inventar nombre de guerra, aunque Tarci aún no lo guarde.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful019V1 =>
+      'Que empiece la parte favorita: opinar sobre si el reparto fue justo.';
+
+  @override
+  String get chatSystemAutoTeamsPlayful020V1 =>
+      'Tarci no toma partido. Pero sí guarda capturas mentales del pique.';
+
+  @override
+  String get chatSystemAutoTeamsChallenge001V1 =>
+      'Reto del día: cada equipo debe explicar por qué merece ganar.';
+
+  @override
+  String get chatSystemAutoTeamsChallenge002V1 =>
+      '¿Quién se atreve a lanzar el primer desafío amistoso?';
+
+  @override
+  String get chatSystemAutoTeamsChallenge003V1 =>
+      'Equipo que no escriba hoy, empieza perdiendo en carisma.';
+
+  @override
+  String get chatSystemAutoTeamsChallenge004V1 =>
+      'Propongo una norma no oficial: quien más hable, luego tiene que responder.';
+
+  @override
+  String get chatSystemAutoTeamsChallenge005V1 =>
+      '¿Hay favorito o todavía fingimos humildad?';
+
+  @override
+  String get chatSystemAutoTeamsChallenge006V1 =>
+      'Dejad constancia aquí: ¿qué equipo se lleva la gloria?';
+
+  @override
+  String get chatSystemAutoTeamsChallenge007V1 =>
+      'Un reto suave: haced vuestra predicción antes del encuentro.';
+
+  @override
+  String get chatSystemAutoTeamsChallenge008V1 =>
+      'Si hay confianza, que haya apuestas simbólicas.';
+
+  @override
+  String get chatSystemAutoTeamsChallenge009V1 =>
+      '¿Qué equipo trae estrategia y cuál trae puro corazón?';
+
+  @override
+  String get chatSystemAutoTeamsChallenge010V1 =>
+      'Momento de declarar intenciones. El silencio no puntúa.';
+
+  @override
+  String get chatSystemAutoTeamsChallenge011V1 =>
+      'Que cada equipo nombre a su portavoz espontáneo. Luego negáis haberlo elegido.';
+
+  @override
+  String get chatSystemAutoTeamsChallenge012V1 =>
+      '¿Quién rompe el hielo con la primera provocación elegante?';
+
+  @override
+  String get chatSystemAutoTeamsQuiet001V1 =>
+      'Mucho silencio para unos equipos tan prometedores.';
+
+  @override
+  String get chatSystemAutoTeamsQuiet002V1 =>
+      'Este chat está más tranquilo que un banquillo antes del pitido inicial.';
+
+  @override
+  String get chatSystemAutoTeamsQuiet003V1 =>
+      '¿Nadie va a comentar el reparto? Sospechoso.';
+
+  @override
+  String get chatSystemAutoTeamsQuiet004V1 =>
+      'Tarci detecta calma. A veces eso significa estrategia.';
+
+  @override
+  String get chatSystemAutoTeamsQuiet005V1 =>
+      'Los equipos están hechos. El chat aún espera su primer buen pique.';
+
+  @override
+  String get chatSystemAutoTeamsQuiet006V1 =>
+      'Un grupo en silencio no es paz: es tensión dramática.';
+
+  @override
+  String get chatSystemAutoTeamsQuiet007V1 =>
+      '¿Todo el mundo conforme? Esa unanimidad merece revisión.';
+
+  @override
+  String get chatSystemAutoTeamsQuiet008V1 =>
+      'Silencio táctico activado. Continuad, que queda elegante.';
+
+  @override
+  String get chatSystemAutoTeamsCountdown014V1 =>
+      'Faltan 14 días. Tiempo de organizarse… o de improvisar con confianza.';
+
+  @override
+  String get chatSystemAutoTeamsCountdown007V1 =>
+      'Falta una semana. Las estrategias absurdas ya pueden presentarse oficialmente.';
+
+  @override
+  String get chatSystemAutoTeamsCountdown003V1 =>
+      'Quedan 3 días. A estas alturas la épica está permitida.';
+
+  @override
+  String get chatSystemAutoTeamsCountdown001V1 =>
+      'Mañana es el día. Última oportunidad para presumir sin consecuencias.';
+
+  @override
+  String get chatSystemAutoTeamsCountdown000V1 =>
+      'Hoy toca. Equipos listos, nervios opcionales.';
+
+  @override
+  String get chatSystemAutoTeamsCountdownExtra001V1 =>
+      'Dos semanas parecen mucho hasta que alguien recuerda que no ha preparado nada.';
+
+  @override
+  String get chatSystemAutoTeamsCountdownExtra002V1 =>
+      'Siete días. Lo suficiente para entrenar o para perfeccionar una buena excusa.';
+
+  @override
+  String get chatSystemAutoTeamsCountdownExtra003V1 =>
+      'Tres días. El chat puede pasar de bromas a declaraciones oficiales.';
+
+  @override
+  String get chatSystemAutoTeamsCountdownExtra004V1 =>
+      'Queda un día. Si había un plan secreto, es buen momento para fingir que existe.';
+
+  @override
+  String get chatSystemAutoTeamsCountdownExtra005V1 =>
+      'Llegó el momento. Que gane el mejor… o el que mejor lo disimule.';
+
+  @override
+  String get teamsChatSectionTitle => 'Conversación del grupo';
+
+  @override
+  String get teamsChatSectionSubtitle =>
+      'Comentad el reparto, retos y el día del encuentro.';
+
+  @override
+  String get teamsChatEnterCta => 'Abrir chat';
+
+  @override
+  String get chatTeamsCompletedChip => 'Equipos listos';
+
+  @override
+  String get chatSystemTeamsCompletedV1 =>
+      'Los equipos ya están listos. Ahora sí: que empiece el pique.';
+
+  @override
+  String get teamsMemberWaitingTitle => 'Equipos en preparación';
+
+  @override
+  String get teamsMemberWaitingBody =>
+      'El organizador está preparando el reparto. Cuando los equipos estén listos podrás verlos aquí y entrar al chat del grupo.';
+
+  @override
+  String teamsMemberPoolSummary(int count) {
+    return '$count participantes en el grupo';
+  }
+
+  @override
+  String teamsOrganizerByline(String name) {
+    return 'Organizado por $name';
+  }
+
+  @override
+  String get teamsResultActionsTitle => 'Acciones del resultado';
+
+  @override
+  String get teamsRenameDialogTitle => 'Renombrar equipo';
+
+  @override
+  String get teamsRenameDialogFieldLabel => 'Nombre del equipo';
+
+  @override
+  String get teamsRenameSuccess => 'Nombre del equipo actualizado';
+
+  @override
+  String get teamsYouInTeam => 'Tú';
+
+  @override
+  String get teamsDetailRosterTitle => 'Participantes del grupo';
 }

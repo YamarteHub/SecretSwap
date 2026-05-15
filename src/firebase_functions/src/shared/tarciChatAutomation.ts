@@ -6,6 +6,11 @@ import * as logger from "firebase-functions/logger";
 import { buildParticipantsMapForWishlist } from "./wishlistAccess";
 import { groupPaths } from "./firestorePaths";
 import { COUNTDOWN_TEMPLATE_BY_DAYS, TARCI_AUTO_CATALOG, type TarciCatalogEntry } from "./tarciAutoCatalog";
+import {
+  TEAMS_COUNTDOWN_TEMPLATE_BY_DAYS,
+  TARCI_TEAMS_AUTO_CATALOG,
+  type TeamsCatalogEntry
+} from "./tarciAutoCatalogTeams";
 
 const MS_PER_DAY = 86400000;
 const NO_EVENT_ENGAGEMENT_DAYS = 21;
@@ -21,12 +26,15 @@ export type TarciAutomationProcessResult = {
 };
 
 type GroupAutoFields = {
+  dynamicType?: string;
   drawStatus?: string;
+  teamStatus?: string;
   lifecycleStatus?: string;
   eventDate?: Timestamp;
   eventDateDayKey?: string;
   eventTimeZone?: string;
   lastDrawCompletedAt?: Timestamp;
+  lastTeamCompletedAt?: Timestamp;
 };
 
 type TarciStateFields = {
@@ -51,13 +59,20 @@ function sameUtcCalendarDay(ts: Timestamp | null | undefined, d: Date): boolean 
 function readGroupAuto(doc: DocumentSnapshot): GroupAutoFields {
   const x = doc.data() as Record<string, unknown>;
   return {
+    dynamicType: typeof x.dynamicType === "string" ? x.dynamicType : undefined,
     drawStatus: typeof x.drawStatus === "string" ? x.drawStatus : undefined,
+    teamStatus: typeof x.teamStatus === "string" ? x.teamStatus : undefined,
     lifecycleStatus: typeof x.lifecycleStatus === "string" ? x.lifecycleStatus : undefined,
     eventDate: x.eventDate instanceof Timestamp ? x.eventDate : undefined,
     eventDateDayKey: typeof x.eventDateDayKey === "string" ? x.eventDateDayKey : undefined,
     eventTimeZone: typeof x.eventTimeZone === "string" ? x.eventTimeZone : undefined,
-    lastDrawCompletedAt: x.lastDrawCompletedAt instanceof Timestamp ? x.lastDrawCompletedAt : undefined
+    lastDrawCompletedAt: x.lastDrawCompletedAt instanceof Timestamp ? x.lastDrawCompletedAt : undefined,
+    lastTeamCompletedAt: x.lastTeamCompletedAt instanceof Timestamp ? x.lastTeamCompletedAt : undefined
   };
+}
+
+function isTeamsGroup(g: GroupAutoFields): boolean {
+  return g.dynamicType === "teams";
 }
 
 function normalizeTarciState(raw: Record<string, unknown> | undefined): TarciStateFields {
@@ -87,7 +102,7 @@ export function daysUntilEventDay(eventDayKey: string, timeZone: string, now: Da
   }
 }
 
-function engagementWindowOpen(g: GroupAutoFields, now: Date): boolean {
+function engagementWindowOpenSecretSanta(g: GroupAutoFields, now: Date): boolean {
   if (g.drawStatus !== "completed") return false;
   if (g.lifecycleStatus !== "active") return false;
   const dk = g.eventDateDayKey;
@@ -110,6 +125,36 @@ function engagementWindowOpen(g: GroupAutoFields, now: Date): boolean {
   const last = g.lastDrawCompletedAt;
   if (!last) return false;
   return now.getTime() <= last.toMillis() + NO_EVENT_ENGAGEMENT_DAYS * MS_PER_DAY;
+}
+
+function engagementWindowOpenTeams(g: GroupAutoFields, now: Date): boolean {
+  if (g.teamStatus !== "completed") return false;
+  if (g.lifecycleStatus !== "active") return false;
+  const dk = g.eventDateDayKey;
+  const tz = g.eventTimeZone;
+  if (dk && tz) {
+    const days = daysUntilEventDay(dk, tz, now);
+    if (days === null) return false;
+    return days >= 0;
+  }
+  if (dk && !tz) {
+    const last = g.lastTeamCompletedAt;
+    if (!last) return false;
+    return now.getTime() <= last.toMillis() + NO_EVENT_ENGAGEMENT_DAYS * MS_PER_DAY;
+  }
+  if (g.eventDate && !dk) {
+    const ed = g.eventDate.toDate();
+    const end = Date.UTC(ed.getUTCFullYear(), ed.getUTCMonth(), ed.getUTCDate(), 23, 59, 59, 999);
+    return now.getTime() <= end;
+  }
+  const last = g.lastTeamCompletedAt;
+  if (!last) return false;
+  return now.getTime() <= last.toMillis() + NO_EVENT_ENGAGEMENT_DAYS * MS_PER_DAY;
+}
+
+function engagementWindowOpen(g: GroupAutoFields, now: Date): boolean {
+  if (isTeamsGroup(g)) return engagementWindowOpenTeams(g, now);
+  return engagementWindowOpenSecretSanta(g, now);
 }
 
 function parseNonEmptyString(v: unknown): string | null {
@@ -152,7 +197,10 @@ export async function hasAnyEmptyWishlist(db: Firestore, groupId: string): Promi
   return results.some(Boolean);
 }
 
-function pickRandomUnused(candidates: TarciCatalogEntry[], sent: Set<string>): TarciCatalogEntry | null {
+function pickRandomUnused<T extends { templateKey: string }>(
+  candidates: T[],
+  sent: Set<string>
+): T | null {
   const avail = candidates.filter((c) => !sent.has(c.templateKey));
   if (avail.length === 0) return null;
   return avail[Math.floor(Math.random() * avail.length)]!;
@@ -182,21 +230,13 @@ export type AutomationDecision = {
   setNextCadence: boolean;
 };
 
-export function decideTarciAutomationMessage(input: {
+function decideTarciAutomationMessageSecretSanta(input: {
   group: GroupAutoFields;
   state: TarciStateFields;
   now: Date;
   hasEmptyWishlist: boolean;
 }): AutomationDecision | null {
   const { group, state, now, hasEmptyWishlist } = input;
-
-  if (!engagementWindowOpen(group, now)) {
-    return null;
-  }
-  if (sameUtcCalendarDay(state.lastAutoMessageAt, now)) {
-    return null;
-  }
-
   const sent = new Set(state.sentTemplateKeys);
   const milestones = new Set(state.sentCountdownMilestones);
 
@@ -271,6 +311,96 @@ export function decideTarciAutomationMessage(input: {
   return null;
 }
 
+function decideTarciAutomationMessageTeams(input: {
+  group: GroupAutoFields;
+  state: TarciStateFields;
+  now: Date;
+}): AutomationDecision | null {
+  const { group, state, now } = input;
+  const sent = new Set(state.sentTemplateKeys);
+  const milestones = new Set(state.sentCountdownMilestones);
+
+  const dk = group.eventDateDayKey;
+  const tz = group.eventTimeZone;
+  if (dk && tz) {
+    const days = daysUntilEventDay(dk, tz, now);
+    if (days !== null) {
+      const milestonesToCheck = [14, 7, 3, 1, 0] as const;
+      if (milestonesToCheck.includes(days as (typeof milestonesToCheck)[number])) {
+        const key = TEAMS_COUNTDOWN_TEMPLATE_BY_DAYS.get(days);
+        if (key && !milestones.has(String(days)) && !sent.has(key)) {
+          return {
+            templateKey: key,
+            milestoneKey: String(days),
+            bumpWishlistAt: false,
+            bumpQuietAt: false,
+            setNextCadence: false
+          };
+        }
+      }
+    }
+  }
+
+  const lastHum = state.lastHumanMessageAt;
+  if (
+    lastHum != null &&
+    now.getTime() - lastHum.toMillis() >= HUMAN_IDLE_MS &&
+    olderThan(state.lastQuietNudgeAt, QUIET_NUDGE_COOLDOWN_MS, now)
+  ) {
+    const cands = TARCI_TEAMS_AUTO_CATALOG.filter((c) => c.category === "teamsQuietNudge");
+    const pick = pickRandomUnused(cands, sent);
+    if (pick) {
+      return {
+        templateKey: pick.templateKey,
+        bumpWishlistAt: false,
+        bumpQuietAt: true,
+        setNextCadence: true
+      };
+    }
+  }
+
+  if (nextAutoEligible(state, now)) {
+    const cands = TARCI_TEAMS_AUTO_CATALOG.filter(
+      (c): c is TeamsCatalogEntry =>
+        c.category === "teamsPlayful" ||
+        c.category === "teamsChallenge" ||
+        (c.category === "teamsCountdown" && c.daysBeforeEvent === undefined)
+    );
+    const pick = pickRandomUnused(cands, sent);
+    if (pick) {
+      return {
+        templateKey: pick.templateKey,
+        bumpWishlistAt: false,
+        bumpQuietAt: false,
+        setNextCadence: true
+      };
+    }
+  }
+
+  return null;
+}
+
+export function decideTarciAutomationMessage(input: {
+  group: GroupAutoFields;
+  state: TarciStateFields;
+  now: Date;
+  hasEmptyWishlist: boolean;
+}): AutomationDecision | null {
+  const { group, state, now, hasEmptyWishlist } = input;
+
+  if (!engagementWindowOpen(group, now)) {
+    return null;
+  }
+  if (sameUtcCalendarDay(state.lastAutoMessageAt, now)) {
+    return null;
+  }
+
+  if (isTeamsGroup(group)) {
+    return decideTarciAutomationMessageTeams({ group, state, now });
+  }
+  return decideTarciAutomationMessageSecretSanta({ group, state, now, hasEmptyWishlist });
+}
+
 function autoMessageDocId(templateKey: string): string {
   return `tarci_auto_${templateKey.replace(/\./g, "_")}`;
 }
@@ -303,7 +433,13 @@ export async function processTarciAutomationForGroup(
     return { groupId, outcome: "skipped", reason: "daily_cap" };
   }
 
-  const hasEmptyWishlist = await hasAnyEmptyWishlist(db, groupId);
+  const dyn = group.dynamicType ?? "secret_santa";
+  if (dyn === "simple_raffle") {
+    return { groupId, outcome: "skipped", reason: "not_eligible" };
+  }
+
+  const hasEmptyWishlist =
+    isTeamsGroup(group) ? false : await hasAnyEmptyWishlist(db, groupId);
   const decision = decideTarciAutomationMessage({ group, state, now, hasEmptyWishlist });
   if (!decision) {
     return { groupId, outcome: "skipped", reason: "no_candidate" };
@@ -375,19 +511,42 @@ export async function runTarciAutomationSweep(db: Firestore, opts?: { now?: Date
 }> {
   const now = opts?.now ?? new Date();
   const max = opts?.maxGroups ?? 200;
-  const q = db
-    .collection("groups")
-    .where("drawStatus", "==", "completed")
-    .where("lifecycleStatus", "==", "active")
-    .limit(max);
+  const half = Math.max(1, Math.floor(max / 2));
+  const [ssSnap, teamsSnap] = await Promise.all([
+    db
+      .collection("groups")
+      .where("drawStatus", "==", "completed")
+      .where("lifecycleStatus", "==", "active")
+      .limit(half)
+      .get(),
+    db
+      .collection("groups")
+      .where("dynamicType", "==", "teams")
+      .where("teamStatus", "==", "completed")
+      .where("lifecycleStatus", "==", "active")
+      .limit(half)
+      .get()
+  ]);
 
-  const snap = await q.get();
   const results: TarciAutomationProcessResult[] = [];
   let published = 0;
-  for (const doc of snap.docs) {
+  const seen = new Set<string>();
+
+  for (const doc of ssSnap.docs) {
+    if (seen.has(doc.id)) continue;
+    seen.add(doc.id);
+    const g = readGroupAuto(doc);
+    if (g.dynamicType === "teams" || g.dynamicType === "simple_raffle") continue;
     const r = await processTarciAutomationForGroup(db, doc.id, { now });
     results.push(r);
     if (r.outcome === "published") published += 1;
   }
-  return { processed: snap.size, published, results };
+  for (const doc of teamsSnap.docs) {
+    if (seen.has(doc.id)) continue;
+    seen.add(doc.id);
+    const r = await processTarciAutomationForGroup(db, doc.id, { now });
+    results.push(r);
+    if (r.outcome === "published") published += 1;
+  }
+  return { processed: results.length, published, results };
 }

@@ -88,6 +88,7 @@ GoRouter buildRouter({GlobalKey<NavigatorState>? navigatorKey}) {
             groupName: extra?.groupName ?? '',
             eventDate: extra?.eventDate,
             drawCompleted: extra?.drawCompleted ?? false,
+            teamsCompleted: extra?.teamsCompleted ?? false,
           );
         },
       ),

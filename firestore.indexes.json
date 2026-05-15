@@ -7,6 +7,15 @@
         { "fieldPath": "drawStatus", "order": "ASCENDING" },
         { "fieldPath": "lifecycleStatus", "order": "ASCENDING" }
       ]
+    },
+    {
+      "collectionGroup": "groups",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "dynamicType", "order": "ASCENDING" },
+        { "fieldPath": "teamStatus", "order": "ASCENDING" },
+        { "fieldPath": "lifecycleStatus", "order": "ASCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []

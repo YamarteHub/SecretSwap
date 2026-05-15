@@ -15,12 +15,14 @@ class GroupChatRouteExtra {
   const GroupChatRouteExtra({
     required this.groupName,
     this.eventDate,
-    required this.drawCompleted,
+    this.drawCompleted = false,
+    this.teamsCompleted = false,
   });
 
   final String groupName;
   final DateTime? eventDate;
   final bool drawCompleted;
+  final bool teamsCompleted;
 }
 
 class GroupChatScreen extends ConsumerStatefulWidget {
@@ -29,13 +31,15 @@ class GroupChatScreen extends ConsumerStatefulWidget {
     required this.groupId,
     required this.groupName,
     this.eventDate,
-    required this.drawCompleted,
+    this.drawCompleted = false,
+    this.teamsCompleted = false,
   });
 
   final String groupId;
   final String groupName;
   final DateTime? eventDate;
   final bool drawCompleted;
+  final bool teamsCompleted;
 
   @override
   ConsumerState<GroupChatScreen> createState() => _GroupChatScreenState();
@@ -70,6 +74,8 @@ class _GroupChatScreenState extends ConsumerState<GroupChatScreen> {
         return l10n.chatSystemGroupCreatedV1;
       case 'chat.system.drawCompleted.v1':
         return l10n.chatSystemDrawCompletedV1;
+      case 'chat.system.teamsCompleted.v1':
+        return l10n.chatSystemTeamsCompletedV1;
       default:
         return l10n.chatSystemUnknownTemplate(templateKey);
     }
@@ -140,7 +146,22 @@ class _GroupChatScreenState extends ConsumerState<GroupChatScreen> {
           ],
         ),
         actions: [
-          if (widget.drawCompleted)
+          if (widget.teamsCompleted)
+            Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: Center(
+                child: Chip(
+                  label: Text(
+                    l10n.chatTeamsCompletedChip,
+                    style: theme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w700),
+                  ),
+                  visualDensity: VisualDensity.compact,
+                  backgroundColor: AppTheme.sageGreen.withValues(alpha: 0.2),
+                  side: BorderSide(color: AppTheme.sageGreen.withValues(alpha: 0.45)),
+                ),
+              ),
+            )
+          else if (widget.drawCompleted)
             Padding(
               padding: const EdgeInsets.only(right: 10),
               child: Center(

@@ -4273,6 +4273,396 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'No se pueden editar participantes después de formar los equipos.'**
   String get functionsErrorTeamsEditLocked;
+
+  /// No description provided for @chatSystemAutoTeamsPlayful001V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Equipos listos. Ya podéis empezar a culpar al algoritmo.'**
+  String get chatSystemAutoTeamsPlayful001V1;
+
+  /// No description provided for @chatSystemAutoTeamsPlayful002V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué equipo viene a ganar y cuál viene por la merienda?'**
+  String get chatSystemAutoTeamsPlayful002V1;
+
+  /// No description provided for @chatSystemAutoTeamsPlayful003V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Aquí hay talento… y también mucha confianza. Veremos cuál pesa más.'**
+  String get chatSystemAutoTeamsPlayful003V1;
+
+  /// No description provided for @chatSystemAutoTeamsPlayful004V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Se aceptan pronósticos, excusas y teorías conspirativas.'**
+  String get chatSystemAutoTeamsPlayful004V1;
+
+  /// No description provided for @chatSystemAutoTeamsPlayful005V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Un reparto justo. Las quejas creativas también cuentan como participación.'**
+  String get chatSystemAutoTeamsPlayful005V1;
+
+  /// No description provided for @chatSystemAutoTeamsPlayful006V1.
+  ///
+  /// In es, this message translates to:
+  /// **'No importa quién quede contigo. Importa quién termina pidiendo revancha.'**
+  String get chatSystemAutoTeamsPlayful006V1;
+
+  /// No description provided for @chatSystemAutoTeamsPlayful007V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Tarci repartió. Ahora os toca demostrar que no era suerte.'**
+  String get chatSystemAutoTeamsPlayful007V1;
+
+  /// No description provided for @chatSystemAutoTeamsPlayful008V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Hay equipos que inspiran respeto y otros que inspiran memes.'**
+  String get chatSystemAutoTeamsPlayful008V1;
+
+  /// No description provided for @chatSystemAutoTeamsPlayful009V1.
+  ///
+  /// In es, this message translates to:
+  /// **'El azar habló. La dignidad se resuelve el día del encuentro.'**
+  String get chatSystemAutoTeamsPlayful009V1;
+
+  /// No description provided for @chatSystemAutoTeamsPlayful010V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Que nadie subestime a un equipo silencioso.'**
+  String get chatSystemAutoTeamsPlayful010V1;
+
+  /// No description provided for @chatSystemAutoTeamsPlayful011V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Algunos ya celebran. Otros están calculando cómo cambiar de equipo sin que se note.'**
+  String get chatSystemAutoTeamsPlayful011V1;
+
+  /// No description provided for @chatSystemAutoTeamsPlayful012V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Resultado publicado. Empieza oficialmente el salseo.'**
+  String get chatSystemAutoTeamsPlayful012V1;
+
+  /// No description provided for @chatSystemAutoTeamsPlayful013V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Hay química de equipo… o al menos eso dice la estadística emocional.'**
+  String get chatSystemAutoTeamsPlayful013V1;
+
+  /// No description provided for @chatSystemAutoTeamsPlayful014V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Un buen equipo se construye. Uno legendario se presume antes de jugar.'**
+  String get chatSystemAutoTeamsPlayful014V1;
+
+  /// No description provided for @chatSystemAutoTeamsPlayful015V1.
+  ///
+  /// In es, this message translates to:
+  /// **'El grupo ya tiene reparto. Ahora falta la épica.'**
+  String get chatSystemAutoTeamsPlayful015V1;
+
+  /// No description provided for @chatSystemAutoTeamsPlayful016V1.
+  ///
+  /// In es, this message translates to:
+  /// **'A partir de aquí, cada mensaje puede convertirse en motivación para el rival.'**
+  String get chatSystemAutoTeamsPlayful016V1;
+
+  /// No description provided for @chatSystemAutoTeamsPlayful017V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Equipos formados. El orgullo grupal queda activado.'**
+  String get chatSystemAutoTeamsPlayful017V1;
+
+  /// No description provided for @chatSystemAutoTeamsPlayful018V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya podéis inventar nombre de guerra, aunque Tarci aún no lo guarde.'**
+  String get chatSystemAutoTeamsPlayful018V1;
+
+  /// No description provided for @chatSystemAutoTeamsPlayful019V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Que empiece la parte favorita: opinar sobre si el reparto fue justo.'**
+  String get chatSystemAutoTeamsPlayful019V1;
+
+  /// No description provided for @chatSystemAutoTeamsPlayful020V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Tarci no toma partido. Pero sí guarda capturas mentales del pique.'**
+  String get chatSystemAutoTeamsPlayful020V1;
+
+  /// No description provided for @chatSystemAutoTeamsChallenge001V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Reto del día: cada equipo debe explicar por qué merece ganar.'**
+  String get chatSystemAutoTeamsChallenge001V1;
+
+  /// No description provided for @chatSystemAutoTeamsChallenge002V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Quién se atreve a lanzar el primer desafío amistoso?'**
+  String get chatSystemAutoTeamsChallenge002V1;
+
+  /// No description provided for @chatSystemAutoTeamsChallenge003V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Equipo que no escriba hoy, empieza perdiendo en carisma.'**
+  String get chatSystemAutoTeamsChallenge003V1;
+
+  /// No description provided for @chatSystemAutoTeamsChallenge004V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Propongo una norma no oficial: quien más hable, luego tiene que responder.'**
+  String get chatSystemAutoTeamsChallenge004V1;
+
+  /// No description provided for @chatSystemAutoTeamsChallenge005V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Hay favorito o todavía fingimos humildad?'**
+  String get chatSystemAutoTeamsChallenge005V1;
+
+  /// No description provided for @chatSystemAutoTeamsChallenge006V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Dejad constancia aquí: ¿qué equipo se lleva la gloria?'**
+  String get chatSystemAutoTeamsChallenge006V1;
+
+  /// No description provided for @chatSystemAutoTeamsChallenge007V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Un reto suave: haced vuestra predicción antes del encuentro.'**
+  String get chatSystemAutoTeamsChallenge007V1;
+
+  /// No description provided for @chatSystemAutoTeamsChallenge008V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Si hay confianza, que haya apuestas simbólicas.'**
+  String get chatSystemAutoTeamsChallenge008V1;
+
+  /// No description provided for @chatSystemAutoTeamsChallenge009V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué equipo trae estrategia y cuál trae puro corazón?'**
+  String get chatSystemAutoTeamsChallenge009V1;
+
+  /// No description provided for @chatSystemAutoTeamsChallenge010V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Momento de declarar intenciones. El silencio no puntúa.'**
+  String get chatSystemAutoTeamsChallenge010V1;
+
+  /// No description provided for @chatSystemAutoTeamsChallenge011V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Que cada equipo nombre a su portavoz espontáneo. Luego negáis haberlo elegido.'**
+  String get chatSystemAutoTeamsChallenge011V1;
+
+  /// No description provided for @chatSystemAutoTeamsChallenge012V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Quién rompe el hielo con la primera provocación elegante?'**
+  String get chatSystemAutoTeamsChallenge012V1;
+
+  /// No description provided for @chatSystemAutoTeamsQuiet001V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Mucho silencio para unos equipos tan prometedores.'**
+  String get chatSystemAutoTeamsQuiet001V1;
+
+  /// No description provided for @chatSystemAutoTeamsQuiet002V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Este chat está más tranquilo que un banquillo antes del pitido inicial.'**
+  String get chatSystemAutoTeamsQuiet002V1;
+
+  /// No description provided for @chatSystemAutoTeamsQuiet003V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Nadie va a comentar el reparto? Sospechoso.'**
+  String get chatSystemAutoTeamsQuiet003V1;
+
+  /// No description provided for @chatSystemAutoTeamsQuiet004V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Tarci detecta calma. A veces eso significa estrategia.'**
+  String get chatSystemAutoTeamsQuiet004V1;
+
+  /// No description provided for @chatSystemAutoTeamsQuiet005V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Los equipos están hechos. El chat aún espera su primer buen pique.'**
+  String get chatSystemAutoTeamsQuiet005V1;
+
+  /// No description provided for @chatSystemAutoTeamsQuiet006V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Un grupo en silencio no es paz: es tensión dramática.'**
+  String get chatSystemAutoTeamsQuiet006V1;
+
+  /// No description provided for @chatSystemAutoTeamsQuiet007V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Todo el mundo conforme? Esa unanimidad merece revisión.'**
+  String get chatSystemAutoTeamsQuiet007V1;
+
+  /// No description provided for @chatSystemAutoTeamsQuiet008V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Silencio táctico activado. Continuad, que queda elegante.'**
+  String get chatSystemAutoTeamsQuiet008V1;
+
+  /// No description provided for @chatSystemAutoTeamsCountdown014V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Faltan 14 días. Tiempo de organizarse… o de improvisar con confianza.'**
+  String get chatSystemAutoTeamsCountdown014V1;
+
+  /// No description provided for @chatSystemAutoTeamsCountdown007V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Falta una semana. Las estrategias absurdas ya pueden presentarse oficialmente.'**
+  String get chatSystemAutoTeamsCountdown007V1;
+
+  /// No description provided for @chatSystemAutoTeamsCountdown003V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Quedan 3 días. A estas alturas la épica está permitida.'**
+  String get chatSystemAutoTeamsCountdown003V1;
+
+  /// No description provided for @chatSystemAutoTeamsCountdown001V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Mañana es el día. Última oportunidad para presumir sin consecuencias.'**
+  String get chatSystemAutoTeamsCountdown001V1;
+
+  /// No description provided for @chatSystemAutoTeamsCountdown000V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Hoy toca. Equipos listos, nervios opcionales.'**
+  String get chatSystemAutoTeamsCountdown000V1;
+
+  /// No description provided for @chatSystemAutoTeamsCountdownExtra001V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Dos semanas parecen mucho hasta que alguien recuerda que no ha preparado nada.'**
+  String get chatSystemAutoTeamsCountdownExtra001V1;
+
+  /// No description provided for @chatSystemAutoTeamsCountdownExtra002V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Siete días. Lo suficiente para entrenar o para perfeccionar una buena excusa.'**
+  String get chatSystemAutoTeamsCountdownExtra002V1;
+
+  /// No description provided for @chatSystemAutoTeamsCountdownExtra003V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Tres días. El chat puede pasar de bromas a declaraciones oficiales.'**
+  String get chatSystemAutoTeamsCountdownExtra003V1;
+
+  /// No description provided for @chatSystemAutoTeamsCountdownExtra004V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Queda un día. Si había un plan secreto, es buen momento para fingir que existe.'**
+  String get chatSystemAutoTeamsCountdownExtra004V1;
+
+  /// No description provided for @chatSystemAutoTeamsCountdownExtra005V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Llegó el momento. Que gane el mejor… o el que mejor lo disimule.'**
+  String get chatSystemAutoTeamsCountdownExtra005V1;
+
+  /// No description provided for @teamsChatSectionTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Conversación del grupo'**
+  String get teamsChatSectionTitle;
+
+  /// No description provided for @teamsChatSectionSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Comentad el reparto, retos y el día del encuentro.'**
+  String get teamsChatSectionSubtitle;
+
+  /// No description provided for @teamsChatEnterCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Abrir chat'**
+  String get teamsChatEnterCta;
+
+  /// No description provided for @chatTeamsCompletedChip.
+  ///
+  /// In es, this message translates to:
+  /// **'Equipos listos'**
+  String get chatTeamsCompletedChip;
+
+  /// No description provided for @chatSystemTeamsCompletedV1.
+  ///
+  /// In es, this message translates to:
+  /// **'Los equipos ya están listos. Ahora sí: que empiece el pique.'**
+  String get chatSystemTeamsCompletedV1;
+
+  /// No description provided for @teamsMemberWaitingTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Equipos en preparación'**
+  String get teamsMemberWaitingTitle;
+
+  /// No description provided for @teamsMemberWaitingBody.
+  ///
+  /// In es, this message translates to:
+  /// **'El organizador está preparando el reparto. Cuando los equipos estén listos podrás verlos aquí y entrar al chat del grupo.'**
+  String get teamsMemberWaitingBody;
+
+  /// No description provided for @teamsMemberPoolSummary.
+  ///
+  /// In es, this message translates to:
+  /// **'{count} participantes en el grupo'**
+  String teamsMemberPoolSummary(int count);
+
+  /// No description provided for @teamsOrganizerByline.
+  ///
+  /// In es, this message translates to:
+  /// **'Organizado por {name}'**
+  String teamsOrganizerByline(String name);
+
+  /// No description provided for @teamsResultActionsTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Acciones del resultado'**
+  String get teamsResultActionsTitle;
+
+  /// No description provided for @teamsRenameDialogTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Renombrar equipo'**
+  String get teamsRenameDialogTitle;
+
+  /// No description provided for @teamsRenameDialogFieldLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre del equipo'**
+  String get teamsRenameDialogFieldLabel;
+
+  /// No description provided for @teamsRenameSuccess.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre del equipo actualizado'**
+  String get teamsRenameSuccess;
+
+  /// No description provided for @teamsYouInTeam.
+  ///
+  /// In es, this message translates to:
+  /// **'Tú'**
+  String get teamsYouInTeam;
+
+  /// No description provided for @teamsDetailRosterTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Participantes del grupo'**
+  String get teamsDetailRosterTitle;
 }
 
 class _AppLocalizationsDelegate
