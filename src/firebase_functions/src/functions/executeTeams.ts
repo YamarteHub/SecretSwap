@@ -13,6 +13,7 @@ import {
   TeamSnapshot
 } from "../shared/dtos";
 import { parseOrThrow } from "../shared/validation";
+import { notifyGroupDynamicCompleted } from "../shared/groupNotifications";
 
 type Eligible = {
   participantId: string;
@@ -97,7 +98,7 @@ export const executeTeams = onCall(async (req: CallableRequest<unknown>): Promis
       };
     }
 
-    return await db.runTransaction(async (tx) => {
+    const result = await db.runTransaction(async (tx) => {
       const groupSnap = await tx.get(groupRef);
       if (!groupSnap.exists) {
         throw new AppError({ code: "NOT_FOUND", reasonCode: "GROUP_NOT_FOUND", message: "Group not found" });
@@ -307,6 +308,20 @@ export const executeTeams = onCall(async (req: CallableRequest<unknown>): Promis
         teamsSnapshot
       };
     });
+
+    const groupSnapAfter = await groupRef.get();
+    const groupName =
+      typeof (groupSnapAfter.data() as { name?: string } | undefined)?.name === "string"
+        ? ((groupSnapAfter.data() as { name?: string }).name ?? "").trim()
+        : "";
+    await notifyGroupDynamicCompleted(db, {
+      groupId: body.groupId,
+      dynamicType: "teams",
+      groupName,
+      triggeredByUid: uid
+    });
+
+    return result;
   } catch (e) {
     const err = e as unknown;
     if (err instanceof AppError) {

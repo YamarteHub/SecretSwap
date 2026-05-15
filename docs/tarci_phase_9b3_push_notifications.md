@@ -1,7 +1,8 @@
 # Tarci Secret — Fase 9B.3 — Push al completar dinámicas
 
-**Tipo:** notificaciones FCM transversales (Amigo Secreto + Sorteo).  
-**Documento:** `docs/tarci_phase_9b3_push_notifications.md`
+**Tipo:** notificaciones FCM transversales (Amigo Secreto + Sorteo + Equipos).  
+**Documento:** `docs/tarci_phase_9b3_push_notifications.md`  
+**Extensión Equipos:** `docs/tarci_phase_10b1_teams_push_notifications.md`
 
 ---
 
@@ -10,7 +11,8 @@
 Avisar por push a miembros activos con app cuando:
 
 - `executeDraw` completa con éxito (Amigo Secreto);
-- `executeRaffle` completa con éxito (Sorteo público).
+- `executeRaffle` completa con éxito (Sorteo público);
+- `executeTeams` completa con éxito (Equipos) — **Fase 10B.1**.
 
 Al tocar la notificación, la app abre `/groups/{groupId}` y `GroupDetailScreen` resuelve la UI por `dynamicType`.
 
@@ -76,6 +78,15 @@ users/{uid}/pushTokens/{tokenId}
 
 ---
 
+## 6b. Envío tras `executeTeams` (10B.1)
+
+- Solo tras transacción exitosa **nueva** (no en retorno idempotente).
+- `dynamicType: "teams"`, `eventKind: "teams_completed"`.
+- Copy genérico (equipos listos); **no** lista integrantes ni reparto en la push.
+- El ejecutor se excluye vía `triggeredByUid`.
+
+---
+
 ## 7. Payload FCM
 
 **notification:** título y cuerpo localizados (backend).
@@ -86,9 +97,9 @@ users/{uid}/pushTokens/{tokenId}
 |--------|--------|
 | `type` | `group_dynamic_completed` |
 | `groupId` | ID del grupo |
-| `dynamicType` | `secret_santa` \| `simple_raffle` |
+| `dynamicType` | `secret_santa` \| `simple_raffle` \| `teams` |
 | `destination` | `group_detail` |
-| `eventKind` | `secret_santa_completed` \| `raffle_completed` |
+| `eventKind` | `secret_santa_completed` \| `raffle_completed` \| `teams_completed` |
 
 Navegación: `context.go('/groups/$groupId')`.
 
@@ -156,6 +167,6 @@ Configuración manual en Apple Developer + Firebase Console:
 ### Firebase real
 
 - [ ] Android físico o emulador con Play Services
-- [ ] Miembro B recibe push cuando A (organizador) completa draw/raffle
-- [ ] Tap abre detalle correcto (AS vs Sorteo)
+- [ ] Miembro B recibe push cuando A (organizador) completa draw/raffle/teams
+- [ ] Tap abre detalle correcto (AS vs Sorteo vs Equipos)
 - [ ] Token inválido se deshabilita en Firestore

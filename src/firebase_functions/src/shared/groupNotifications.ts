@@ -5,7 +5,7 @@ import { FieldValue, Firestore } from "firebase-admin/firestore";
 import { groupPaths } from "./firestorePaths";
 import { userPaths } from "./userPaths";
 
-export type DynamicTypeForPush = "secret_santa" | "simple_raffle";
+export type DynamicTypeForPush = "secret_santa" | "simple_raffle" | "teams";
 
 type SupportedLocale = "es" | "en" | "pt" | "it" | "fr";
 
@@ -18,37 +18,49 @@ const COPY: Record<
     secretSantaBody: (groupName: string) => string;
     raffleTitle: string;
     raffleBody: (groupName: string) => string;
+    teamsTitle: string;
+    teamsBody: (groupName: string) => string;
   }
 > = {
   es: {
     secretSantaTitle: "Tu amigo secreto ya está listo",
     secretSantaBody: (n) => `El sorteo de «${n}» ya se realizó. Entra para descubrir tu resultado.`,
     raffleTitle: "¡El sorteo ya se realizó!",
-    raffleBody: (n) => `«${n}» ya tiene resultado. Entra para ver a los ganadores.`
+    raffleBody: (n) => `«${n}» ya tiene resultado. Entra para ver a los ganadores.`,
+    teamsTitle: "¡Los equipos ya están listos!",
+    teamsBody: (n) => `«${n}» ya tiene reparto. Entra para ver cómo quedaron los equipos.`
   },
   en: {
     secretSantaTitle: "Your Secret Santa is ready",
     secretSantaBody: (n) => `The draw for “${n}” is done. Open the app to see your match.`,
     raffleTitle: "The raffle is done!",
-    raffleBody: (n) => `“${n}” has a result. Open the app to see the winners.`
+    raffleBody: (n) => `“${n}” has a result. Open the app to see the winners.`,
+    teamsTitle: "Your teams are ready!",
+    teamsBody: (n) => `“${n}” has been arranged. Open Tarci Secret to see the teams.`
   },
   pt: {
     secretSantaTitle: "O teu amigo secreto está pronto",
     secretSantaBody: (n) => `O sorteio de «${n}» já foi feito. Entra para ver o teu resultado.`,
     raffleTitle: "O sorteio já foi realizado!",
-    raffleBody: (n) => `«${n}» já tem resultado. Entra para ver os vencedores.`
+    raffleBody: (n) => `«${n}» já tem resultado. Entra para ver os vencedores.`,
+    teamsTitle: "As equipas já estão prontas!",
+    teamsBody: (n) => `«${n}» já tem reparto. Entra para ver como ficaram as equipas.`
   },
   it: {
     secretSantaTitle: "Il tuo amico segreto è pronto",
     secretSantaBody: (n) => `L'estrazione di «${n}» è stata completata. Apri l'app per vedere il risultato.`,
     raffleTitle: "L'estrazione è stata completata!",
-    raffleBody: (n) => `«${n}» ha un risultato. Apri l'app per vedere i vincitori.`
+    raffleBody: (n) => `«${n}» ha un risultato. Apri l'app per vedere i vincitori.`,
+    teamsTitle: "Le squadre sono pronte!",
+    teamsBody: (n) => `«${n}» è stato ripartito. Apri Tarci Secret per vedere le squadre.`
   },
   fr: {
     secretSantaTitle: "Ton Secret Santa est prêt",
     secretSantaBody: (n) => `Le tirage de « ${n} » est terminé. Ouvre l'app pour découvrir ton résultat.`,
     raffleTitle: "Le tirage est terminé !",
-    raffleBody: (n) => `« ${n} » a un résultat. Ouvre l'app pour voir les gagnants.`
+    raffleBody: (n) => `« ${n} » a un résultat. Ouvre l'app pour voir les gagnants.`,
+    teamsTitle: "Les équipes sont prêtes !",
+    teamsBody: (n) => `« ${n} » a été réparti. Ouvre Tarci Secret pour voir les équipes.`
   }
 };
 
@@ -71,7 +83,16 @@ function copyFor(
   if (dynamicType === "simple_raffle") {
     return { title: pack.raffleTitle, body: pack.raffleBody(name) };
   }
+  if (dynamicType === "teams") {
+    return { title: pack.teamsTitle, body: pack.teamsBody(name) };
+  }
   return { title: pack.secretSantaTitle, body: pack.secretSantaBody(name) };
+}
+
+function eventKindFor(dynamicType: DynamicTypeForPush): string {
+  if (dynamicType === "simple_raffle") return "raffle_completed";
+  if (dynamicType === "teams") return "teams_completed";
+  return "secret_santa_completed";
 }
 
 type TokenTarget = {
@@ -143,7 +164,7 @@ export async function notifyGroupDynamicCompleted(
     groupId: string;
     dynamicType: DynamicTypeForPush;
     groupName: string;
-    /** UID que ejecutó draw/raffle; no recibe push (ya está en la app). */
+    /** UID que ejecutó draw/raffle/teams; no recibe push (ya está en la app). */
     triggeredByUid?: string;
   }
 ): Promise<void> {
@@ -182,8 +203,7 @@ export async function notifyGroupDynamicCompleted(
     }
 
     const messaging = getMessaging();
-    const eventKind =
-      params.dynamicType === "simple_raffle" ? "raffle_completed" : "secret_santa_completed";
+    const eventKind = eventKindFor(params.dynamicType);
 
     for (const [locale, list] of byLocale.entries()) {
       const { title, body } = copyFor(locale, params.dynamicType, params.groupName);
