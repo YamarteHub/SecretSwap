@@ -6,6 +6,13 @@ import {
   removeRaffleManualParticipant,
   updateRaffleManualParticipant
 } from "./functions/raffleManualParticipants";
+import { createTeamsGroup } from "./functions/createTeamsGroup";
+import { executeTeams } from "./functions/executeTeams";
+import {
+  createTeamsManualParticipant,
+  removeTeamsManualParticipant,
+  updateTeamsManualParticipant
+} from "./functions/teamsManualParticipants";
 import { getManagedAssignments } from "./functions/getManagedAssignments";
 import { getWishlist } from "./functions/getWishlist";
 import { setWishlist } from "./functions/setWishlist";
@@ -29,6 +36,11 @@ export {
   createRaffleManualParticipant,
   updateRaffleManualParticipant,
   removeRaffleManualParticipant,
+  createTeamsGroup,
+  executeTeams,
+  createTeamsManualParticipant,
+  updateTeamsManualParticipant,
+  removeTeamsManualParticipant,
   createManagedParticipant,
   updateManagedParticipant,
   removeManagedParticipant,

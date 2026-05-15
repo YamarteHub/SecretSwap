@@ -22,6 +22,9 @@ abstract interface class GroupsRepository {
   /// Estado del sorteo público (`raffleStatus`) para grupos `simple_raffle`.
   Stream<RaffleStatus> watchGroupRaffleStatus(String groupId);
 
+  /// Estado de formación de equipos (`teamStatus`) para grupos `teams`.
+  Stream<TeamStatus> watchGroupTeamStatus(String groupId);
+
   /// Firma estable de miembros + participantes; cambia al unirse alguien o editar el bombo.
   Stream<int> watchGroupRosterSignature(String groupId);
 
@@ -50,6 +53,37 @@ abstract interface class GroupsRepository {
   });
 
   Future<void> removeRaffleManualParticipant({
+    required String groupId,
+    required String participantId,
+  });
+
+  Future<CreatedGroup> createTeamsGroup({
+    required String name,
+    required String nickname,
+    required TeamGroupingMode groupingMode,
+    int? requestedTeamCount,
+    int? requestedTeamSize,
+    required bool ownerParticipatesInTeams,
+    DateTime? eventDate,
+  });
+
+  Future<TeamsExecuteResult> executeTeams({
+    required String groupId,
+    required String idempotencyKey,
+  });
+
+  Future<String> createTeamsManualParticipant({
+    required String groupId,
+    required String displayName,
+  });
+
+  Future<void> updateTeamsManualParticipant({
+    required String groupId,
+    required String participantId,
+    required String displayName,
+  });
+
+  Future<void> removeTeamsManualParticipant({
     required String groupId,
     required String participantId,
   });

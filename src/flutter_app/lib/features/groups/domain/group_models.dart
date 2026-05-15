@@ -1,14 +1,19 @@
 enum DrawStatus { idle, drawing, completed, failed }
 
-enum TarciDynamicType { secretSanta, simpleRaffle }
+enum TarciDynamicType { secretSanta, simpleRaffle, teams }
 
 enum ResultVisibility { privatePerParticipant, publicToGroup }
 
 enum RaffleStatus { idle, drawing, completed, failed }
 
+enum TeamStatus { idle, generating, completed, failed }
+
+enum TeamGroupingMode { teamCount, teamSize }
+
 TarciDynamicType parseTarciDynamicType(String? raw) {
   final s = raw?.trim() ?? '';
   if (s == 'simple_raffle') return TarciDynamicType.simpleRaffle;
+  if (s == 'teams') return TarciDynamicType.teams;
   return TarciDynamicType.secretSanta;
 }
 
@@ -16,10 +21,25 @@ ResultVisibility parseResultVisibility(String? raw, {TarciDynamicType? fallbackD
   final s = raw?.trim() ?? '';
   if (s == 'public_to_group') return ResultVisibility.publicToGroup;
   if (s == 'private_per_participant') return ResultVisibility.privatePerParticipant;
-  if (fallbackDynamic == TarciDynamicType.simpleRaffle) {
+  if (fallbackDynamic == TarciDynamicType.simpleRaffle ||
+      fallbackDynamic == TarciDynamicType.teams) {
     return ResultVisibility.publicToGroup;
   }
   return ResultVisibility.privatePerParticipant;
+}
+
+TeamStatus parseTeamStatus(String? raw) {
+  final k = raw?.trim().toLowerCase() ?? '';
+  return TeamStatus.values.firstWhere(
+    (e) => e.name == k,
+    orElse: () => TeamStatus.idle,
+  );
+}
+
+TeamGroupingMode parseTeamGroupingMode(String? raw) {
+  final s = raw?.trim() ?? '';
+  if (s == 'team_size') return TeamGroupingMode.teamSize;
+  return TeamGroupingMode.teamCount;
 }
 
 RaffleStatus parseRaffleStatus(String? raw) {
@@ -81,6 +101,68 @@ class RaffleExecuteResult {
   });
 }
 
+class TeamsManualParticipant {
+  final String participantId;
+  final String displayName;
+
+  const TeamsManualParticipant({
+    required this.participantId,
+    required this.displayName,
+  });
+}
+
+class TeamMemberSnapshot {
+  final String participantId;
+  final String displayName;
+  final String sourceType;
+  final String? memberUid;
+
+  const TeamMemberSnapshot({
+    required this.participantId,
+    required this.displayName,
+    required this.sourceType,
+    this.memberUid,
+  });
+}
+
+class TeamSnapshot {
+  final int teamIndex;
+  final String teamLabel;
+  final List<TeamMemberSnapshot> members;
+
+  const TeamSnapshot({
+    required this.teamIndex,
+    required this.teamLabel,
+    required this.members,
+  });
+}
+
+class TeamsExecutionSummary {
+  final String executionId;
+  final int eligibleParticipantCount;
+  final int teamCount;
+  final List<TeamSnapshot> teamsSnapshot;
+  final DateTime? createdAt;
+
+  const TeamsExecutionSummary({
+    required this.executionId,
+    required this.eligibleParticipantCount,
+    required this.teamCount,
+    required this.teamsSnapshot,
+    this.createdAt,
+  });
+}
+
+class TeamsExecuteResult {
+  final String executionId;
+  final List<TeamSnapshot> teamsSnapshot;
+
+  const TeamsExecuteResult({
+    required this.executionId,
+    required this.teamsSnapshot,
+  });
+}
+
 /// Regla de subgrupos para el sorteo (almacenada en `rules/{version}.subgroupMode`).
 enum DrawSubgroupRule {
   ignore,
@@ -110,7 +192,7 @@ DrawSubgroupRule parseDrawSubgroupRule(String? raw) {
 
 enum MemberRole { owner, member }
 enum MemberState { active, left, removed }
-enum GroupParticipantType { appMember, managed, childManaged, raffleManual }
+enum GroupParticipantType { appMember, managed, childManaged, raffleManual, teamsManual }
 enum GroupParticipantState { active, removed }
 enum ManagedParticipantDeliveryMode {
   inApp,
@@ -130,9 +212,11 @@ class GroupSummary {
   final DrawStatus drawStatus;
   final TarciDynamicType dynamicType;
   final RaffleStatus raffleStatus;
+  final TeamStatus teamStatus;
   /// `groups/{id}.lastDrawCompletedAt` cuando el sorteo ya se ejecutó (opcional).
   final DateTime? lastDrawCompletedAt;
   final DateTime? lastRaffleCompletedAt;
+  final DateTime? lastTeamCompletedAt;
   /// `groups/{id}.eventDate` — fecha de entrega o evento (opcional).
   final DateTime? eventDate;
 
@@ -144,8 +228,10 @@ class GroupSummary {
     this.drawStatus = DrawStatus.idle,
     this.dynamicType = TarciDynamicType.secretSanta,
     this.raffleStatus = RaffleStatus.idle,
+    this.teamStatus = TeamStatus.idle,
     this.lastDrawCompletedAt,
     this.lastRaffleCompletedAt,
+    this.lastTeamCompletedAt,
     this.eventDate,
   });
 }
@@ -205,12 +291,21 @@ class GroupDetail {
   final String? lastRaffleExecutionId;
   final RaffleExecutionSummary? lastRaffleExecution;
   final List<RaffleManualParticipant> raffleManualParticipants;
+  final TeamStatus teamStatus;
+  final TeamGroupingMode groupingMode;
+  final int? requestedTeamCount;
+  final int? requestedTeamSize;
+  final bool ownerParticipatesInTeams;
+  final String? lastTeamExecutionId;
+  final TeamsExecutionSummary? lastTeamExecution;
+  final List<TeamsManualParticipant> teamsManualParticipants;
   final int rulesVersionCurrent;
   final DrawSubgroupRule drawSubgroupRule;
   final String? currentExecutionId;
   final String? lastExecutionId;
   final DateTime? lastDrawCompletedAt;
   final DateTime? lastRaffleCompletedAt;
+  final DateTime? lastTeamCompletedAt;
   final DateTime? eventDate;
   final List<Subgroup> subgroups;
   final List<GroupMember> members;
@@ -229,12 +324,21 @@ class GroupDetail {
     this.lastRaffleExecutionId,
     this.lastRaffleExecution,
     this.raffleManualParticipants = const [],
+    this.teamStatus = TeamStatus.idle,
+    this.groupingMode = TeamGroupingMode.teamCount,
+    this.requestedTeamCount,
+    this.requestedTeamSize,
+    this.ownerParticipatesInTeams = true,
+    this.lastTeamExecutionId,
+    this.lastTeamExecution,
+    this.teamsManualParticipants = const [],
     required this.rulesVersionCurrent,
     required this.drawSubgroupRule,
     required this.currentExecutionId,
     required this.lastExecutionId,
     this.lastDrawCompletedAt,
     this.lastRaffleCompletedAt,
+    this.lastTeamCompletedAt,
     this.eventDate,
     required this.subgroups,
     required this.members,

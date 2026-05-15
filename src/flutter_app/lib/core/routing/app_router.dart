@@ -10,6 +10,7 @@ import '../../features/groups/presentation/screens/group_detail_screen.dart';
 import '../../features/groups/presentation/screens/groups_home_screen.dart';
 import '../../features/groups/presentation/screens/join_by_code_screen.dart';
 import '../../features/raffle/presentation/screens/create_raffle_wizard_screen.dart';
+import '../../features/teams/presentation/screens/create_teams_wizard_screen.dart';
 import '../../features/about/presentation/about_tarci_screen.dart';
 import '../../features/auth/presentation/splash_screen.dart';
 import '../../features/wishlist/presentation/screens/wishlist_edit_screen.dart';
@@ -27,6 +28,7 @@ class AppRoutes {
   static const createGroup = '/groups/create';
   static const dynamicsSelect = '/groups/dynamics';
   static const createRaffle = '/groups/dynamics/raffle/create';
+  static const createTeams = '/groups/dynamics/teams/create';
   static const joinByCode = '/groups/join';
   static const groupDetail = '/groups/:groupId';
   static const myAssignment = '/groups/:groupId/executions/:executionId/my-assignment';
@@ -67,6 +69,10 @@ GoRouter buildRouter({GlobalKey<NavigatorState>? navigatorKey}) {
       GoRoute(
         path: AppRoutes.createRaffle,
         builder: (context, state) => const CreateRaffleWizardScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.createTeams,
+        builder: (context, state) => const CreateTeamsWizardScreen(),
       ),
       GoRoute(
         path: AppRoutes.joinByCode,

@@ -44,6 +44,7 @@ export const rotateInviteCode = onCall(
               drawStatus?: string;
               dynamicType?: string;
               raffleStatus?: string;
+              teamStatus?: string;
             };
 
             if (group.ownerUid != uid) {
@@ -66,7 +67,15 @@ export const rotateInviteCode = onCall(
                 ? group.dynamicType.trim()
                 : "secret_santa";
 
-            if (dynamicType === "simple_raffle") {
+            if (dynamicType === "teams") {
+              if (group.teamStatus === "generating" || group.teamStatus === "completed") {
+                throw new AppError({
+                  code: "INVITE_ERROR",
+                  reasonCode: "TEAMS_ROTATE_LOCKED",
+                  message: "Cannot rotate invite code after teams are formed"
+                });
+              }
+            } else if (dynamicType === "simple_raffle") {
               if (group.raffleStatus === "drawing" || group.raffleStatus === "completed") {
                 throw new AppError({
                   code: "INVITE_ERROR",

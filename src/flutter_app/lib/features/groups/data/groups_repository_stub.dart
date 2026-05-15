@@ -50,6 +50,11 @@ class GroupsRepositoryStub implements GroupsRepository {
   }
 
   @override
+  Stream<TeamStatus> watchGroupTeamStatus(String groupId) {
+    return Stream.value(TeamStatus.idle);
+  }
+
+  @override
   Stream<int> watchGroupRosterSignature(String groupId) {
     return Stream.value(0);
   }
@@ -96,6 +101,52 @@ class GroupsRepositoryStub implements GroupsRepository {
     required String participantId,
   }) async {
     throw UnimplementedError('removeRaffleManualParticipant not wired');
+  }
+
+  @override
+  Future<CreatedGroup> createTeamsGroup({
+    required String name,
+    required String nickname,
+    required TeamGroupingMode groupingMode,
+    int? requestedTeamCount,
+    int? requestedTeamSize,
+    required bool ownerParticipatesInTeams,
+    DateTime? eventDate,
+  }) async {
+    throw UnimplementedError('createTeamsGroup not wired');
+  }
+
+  @override
+  Future<TeamsExecuteResult> executeTeams({
+    required String groupId,
+    required String idempotencyKey,
+  }) async {
+    throw UnimplementedError('executeTeams not wired');
+  }
+
+  @override
+  Future<String> createTeamsManualParticipant({
+    required String groupId,
+    required String displayName,
+  }) async {
+    throw UnimplementedError('createTeamsManualParticipant not wired');
+  }
+
+  @override
+  Future<void> updateTeamsManualParticipant({
+    required String groupId,
+    required String participantId,
+    required String displayName,
+  }) async {
+    throw UnimplementedError('updateTeamsManualParticipant not wired');
+  }
+
+  @override
+  Future<void> removeTeamsManualParticipant({
+    required String groupId,
+    required String participantId,
+  }) async {
+    throw UnimplementedError('removeTeamsManualParticipant not wired');
   }
 
   @override

@@ -80,6 +80,7 @@ export const joinGroupByCode = onCall(
           drawStatus?: string;
           dynamicType?: string;
           raffleStatus?: string;
+          teamStatus?: string;
         };
 
         const dynamicType =
@@ -95,7 +96,15 @@ export const joinGroupByCode = onCall(
           });
         }
 
-        if (dynamicType === "simple_raffle") {
+        if (dynamicType === "teams") {
+          if (group.teamStatus === "generating") {
+            throw new AppError({
+              code: "INVITE_ERROR",
+              reasonCode: "TEAMS_IN_PROGRESS",
+              message: "Teams formation in progress"
+            });
+          }
+        } else if (dynamicType === "simple_raffle") {
           if (group.raffleStatus === "drawing") {
             throw new AppError({
               code: "INVITE_ERROR",
@@ -134,7 +143,25 @@ export const joinGroupByCode = onCall(
           }
         }
 
-        if (dynamicType === "simple_raffle") {
+        if (dynamicType === "teams") {
+          if (group.teamStatus === "completed") {
+            if (!memberSnap.exists) {
+              throw new AppError({
+                code: "FORBIDDEN",
+                reasonCode: "TEAMS_RESOLVED_INVITES_CLOSED",
+                message: "Teams formed; this group no longer accepts new participants via invite code"
+              });
+            }
+            const memberAfterChecks = memberSnap.data() as { memberState?: "active" | "left" | "removed" };
+            if (memberAfterChecks.memberState !== "active") {
+              throw new AppError({
+                code: "FORBIDDEN",
+                reasonCode: "TEAMS_RESOLVED_INVITES_CLOSED",
+                message: "Teams formed; this group no longer accepts new participants via invite code"
+              });
+            }
+          }
+        } else if (dynamicType === "simple_raffle") {
           if (group.raffleStatus === "completed") {
             if (!memberSnap.exists) {
               throw new AppError({

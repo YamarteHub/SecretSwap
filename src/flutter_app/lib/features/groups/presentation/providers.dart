@@ -29,6 +29,11 @@ final groupRaffleStatusStreamProvider =
   return ref.watch(groupsRepositoryProvider).watchGroupRaffleStatus(groupId);
 });
 
+final groupTeamStatusStreamProvider =
+    StreamProvider.autoDispose.family<TeamStatus, String>((ref, groupId) {
+  return ref.watch(groupsRepositoryProvider).watchGroupTeamStatus(groupId);
+});
+
 /// Cambios en `members` o `participants` del grupo (join remoto, manuales del bombo).
 final groupRosterSignatureStreamProvider =
     StreamProvider.autoDispose.family<int, String>((ref, groupId) {

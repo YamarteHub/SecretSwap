@@ -23,7 +23,10 @@ export const groupPaths = {
   chatAutomationTarciStateDoc: (groupId: string) => `groups/${groupId}/chatAutomation/tarciState`,
   raffleExecutionsCol: (groupId: string) => `groups/${groupId}/raffleExecutions`,
   raffleExecutionDoc: (groupId: string, executionId: string) =>
-    `groups/${groupId}/raffleExecutions/${executionId}`
+    `groups/${groupId}/raffleExecutions/${executionId}`,
+  teamExecutionsCol: (groupId: string) => `groups/${groupId}/teamExecutions`,
+  teamExecutionDoc: (groupId: string, executionId: string) =>
+    `groups/${groupId}/teamExecutions/${executionId}`
 };
 
 export const userGroupPaths = {

@@ -27,19 +27,22 @@ bool _isEventCalendarDateBeforeToday(DateTime eventDate) {
 
 /// Historial: dinámica completada, `eventDate` definida y ya pasada (solo día civil local).
 bool _isHistoryFinishedByEventDate(GroupSummary g) {
-  final completed = g.dynamicType == TarciDynamicType.simpleRaffle
-      ? g.raffleStatus == RaffleStatus.completed
-      : g.drawStatus == DrawStatus.completed;
+  final completed = switch (g.dynamicType) {
+    TarciDynamicType.simpleRaffle => g.raffleStatus == RaffleStatus.completed,
+    TarciDynamicType.teams => g.teamStatus == TeamStatus.completed,
+    TarciDynamicType.secretSanta => g.drawStatus == DrawStatus.completed,
+  };
   return completed &&
       g.eventDate != null &&
       _isEventCalendarDateBeforeToday(g.eventDate!);
 }
 
 bool _isDashboardFlowCompleted(GroupSummary g) {
-  if (g.dynamicType == TarciDynamicType.simpleRaffle) {
-    return g.raffleStatus == RaffleStatus.completed;
-  }
-  return g.drawStatus == DrawStatus.completed;
+  return switch (g.dynamicType) {
+    TarciDynamicType.simpleRaffle => g.raffleStatus == RaffleStatus.completed,
+    TarciDynamicType.teams => g.teamStatus == TeamStatus.completed,
+    TarciDynamicType.secretSanta => g.drawStatus == DrawStatus.completed,
+  };
 }
 
 String? _formatGroupDeliveryDateLine(BuildContext context, GroupSummary g) {
@@ -90,6 +93,18 @@ String _homeDynamicStatusChipLabel(BuildContext context, GroupSummary g) {
         return context.l10n.homeRaffleStatePreparing;
     }
   }
+  if (g.dynamicType == TarciDynamicType.teams) {
+    switch (g.teamStatus) {
+      case TeamStatus.completed:
+        return context.l10n.homeTeamsStateCompleted;
+      case TeamStatus.generating:
+        return context.l10n.homeGroupDrawStateDrawing;
+      case TeamStatus.failed:
+        return context.l10n.homeGroupDrawStateFailed;
+      case TeamStatus.idle:
+        return context.l10n.homeTeamsStatePreparing;
+    }
+  }
   return _homeDrawStatusChipLabel(context, g.drawStatus);
 }
 
@@ -103,6 +118,18 @@ IconData _homeDynamicStatusChipIcon(GroupSummary g) {
       case RaffleStatus.failed:
         return Icons.warning_amber_rounded;
       case RaffleStatus.idle:
+        return Icons.tune_rounded;
+    }
+  }
+  if (g.dynamicType == TarciDynamicType.teams) {
+    switch (g.teamStatus) {
+      case TeamStatus.completed:
+        return Icons.check_circle_outline;
+      case TeamStatus.generating:
+        return Icons.hourglass_top_rounded;
+      case TeamStatus.failed:
+        return Icons.warning_amber_rounded;
+      case TeamStatus.idle:
         return Icons.tune_rounded;
     }
   }
@@ -122,6 +149,18 @@ Color _homeDynamicStatusChipColor(GroupSummary g) {
       case RaffleStatus.failed:
         return AppTheme.softTerracotta;
       case RaffleStatus.idle:
+        return AppTheme.deepPlumAlt;
+    }
+  }
+  if (g.dynamicType == TarciDynamicType.teams) {
+    switch (g.teamStatus) {
+      case TeamStatus.completed:
+        return AppTheme.sageGreen;
+      case TeamStatus.generating:
+        return AppTheme.mutedGold;
+      case TeamStatus.failed:
+        return AppTheme.softTerracotta;
+      case TeamStatus.idle:
         return AppTheme.deepPlumAlt;
     }
   }
@@ -609,12 +648,20 @@ class _GroupCard extends StatelessWidget {
                           children: [
                             if (!completed) ...[
                               _SoftChip(
-                                label: summary.dynamicType == TarciDynamicType.simpleRaffle
-                                    ? l10n.homeDynamicTypeRaffle
-                                    : l10n.homeDynamicTypeSecretSanta,
-                                icon: summary.dynamicType == TarciDynamicType.simpleRaffle
-                                    ? Icons.casino_outlined
-                                    : Icons.card_giftcard_outlined,
+                                label: switch (summary.dynamicType) {
+                                  TarciDynamicType.simpleRaffle =>
+                                    l10n.homeDynamicTypeRaffle,
+                                  TarciDynamicType.teams => l10n.homeDynamicTypeTeams,
+                                  TarciDynamicType.secretSanta =>
+                                    l10n.homeDynamicTypeSecretSanta,
+                                },
+                                icon: switch (summary.dynamicType) {
+                                  TarciDynamicType.simpleRaffle =>
+                                    Icons.casino_outlined,
+                                  TarciDynamicType.teams => Icons.groups_outlined,
+                                  TarciDynamicType.secretSanta =>
+                                    Icons.card_giftcard_outlined,
+                                },
                                 color: AppTheme.deepPlumAlt,
                               ),
                               _SoftChip(

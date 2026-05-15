@@ -332,11 +332,11 @@ export const executeDraw = onCall(async (req: CallableRequest<unknown>): Promise
       typeof group.dynamicType === "string" && group.dynamicType.trim() !== ""
         ? group.dynamicType.trim()
         : "secret_santa";
-    if (dynamicType === "simple_raffle") {
+    if (dynamicType === "simple_raffle" || dynamicType === "teams") {
       throw new AppError({
         code: "FORBIDDEN",
         reasonCode: "DRAW_NOT_SUPPORTED_FOR_DYNAMIC",
-        message: "Secret Santa draw is not available for raffle groups"
+        message: "Secret Santa draw is not available for this dynamic type"
       });
     }
     if (group.ownerUid !== uid) {

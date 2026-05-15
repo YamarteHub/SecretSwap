@@ -67,6 +67,25 @@ String userVisibleErrorMessage(Object error, AppLocalizations l10n) {
         return l10n.functionsErrorAssignmentsNotForRaffle;
       case 'RAFFLE_EDIT_LOCKED':
         return l10n.functionsErrorRaffleEditLocked;
+      case 'TEAMS_RESOLVED_INVITES_CLOSED':
+        return l10n.functionsErrorTeamsResolvedInvitesClosed;
+      case 'TEAMS_IN_PROGRESS':
+        return l10n.functionsErrorTeamsInProgress;
+      case 'TEAMS_ROTATE_LOCKED':
+        return l10n.functionsErrorTeamsRotateLocked;
+      case 'TEAMS_ALREADY_COMPLETED':
+        return l10n.functionsErrorTeamsAlreadyCompleted;
+      case 'TEAMS_INSUFFICIENT_PARTICIPANTS':
+        return l10n.functionsErrorTeamsInsufficientParticipants;
+      case 'TEAMS_INVALID_CONFIGURATION':
+        return l10n.functionsErrorTeamsInvalidConfiguration;
+      case 'TEAMS_TOO_MANY_PARTICIPANTS':
+        return l10n.functionsErrorTeamsTooManyParticipants;
+      case 'TEAMS_INVALID_DYNAMIC':
+      case 'TEAMS_INVALID_STATE':
+        return l10n.functionsErrorTeamsInvalidDynamic;
+      case 'TEAMS_MANUAL_PARTICIPANTS_LOCKED':
+        return l10n.functionsErrorTeamsEditLocked;
     }
 
     if (msg.contains('user already member') || msg.contains('already member')) {
@@ -119,6 +138,17 @@ String? _reasonCodeFromDetails(Object? details) {
     }
   }
   return null;
+}
+
+/// `executeTeams` devolvió que los equipos ya estaban formados (p. ej. doble tap).
+bool executeTeamsErrorIsAlreadyCompleted(Object error) {
+  if (error is FirebaseFunctionsException) {
+    final reason = _reasonCodeFromDetails(error.details);
+    if (reason == 'TEAMS_ALREADY_COMPLETED') return true;
+    final msg = (error.message ?? '').toLowerCase();
+    if (msg.contains('teams') && msg.contains('completed')) return true;
+  }
+  return false;
 }
 
 /// `executeRaffle` devolvió que el sorteo público ya estaba completado (p. ej. doble tap).

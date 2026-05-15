@@ -2227,4 +2227,252 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get pushActivationDeniedSnackbar =>
       'Não foi possível ativar as notificações. Podes tentar mais tarde nas definições do sistema.';
+
+  @override
+  String get dynamicsCardTeamsBody =>
+      'Divide participantes em equipas equilibradas. Resultado visível para todos.';
+
+  @override
+  String get homeDynamicTypeTeams => 'Equipas';
+
+  @override
+  String get homeTeamsStatePreparing => 'A preparar';
+
+  @override
+  String get homeTeamsStateCompleted => 'Equipas prontas';
+
+  @override
+  String get teamsWizardTitle => 'Criar equipas';
+
+  @override
+  String get teamsWizardCreateCta => 'Criar equipas';
+
+  @override
+  String get teamsWizardNameLabel => 'Nome da dinâmica';
+
+  @override
+  String get teamsWizardOwnerNicknameLabel => 'O teu nome nas equipas';
+
+  @override
+  String get teamsWizardOwnerNicknameHelper =>
+      'É assim que os outros te verão. Usa um alcunha, não o papel de organizador.';
+
+  @override
+  String get teamsWizardEventOptional => 'Data do evento (opcional)';
+
+  @override
+  String get teamsWizardPickEventDate => 'Escolher data';
+
+  @override
+  String get teamsWizardOwnerParticipatesTitle => 'Participas?';
+
+  @override
+  String get teamsWizardOwnerParticipatesYes => 'Sim, quero estar numa equipa';
+
+  @override
+  String get teamsWizardOwnerParticipatesNo => 'Não, só organizo';
+
+  @override
+  String get teamsWizardGroupingTitle => 'Como formar as equipas?';
+
+  @override
+  String get teamsWizardGroupingSubtitle =>
+      'Escolhe um número fixo de equipas ou um tamanho por equipa.';
+
+  @override
+  String get teamsWizardModeTeamCount => 'Por número de equipas';
+
+  @override
+  String get teamsWizardModeTeamSize => 'Por pessoas por equipa';
+
+  @override
+  String get teamsWizardTeamCountLabel => 'Quantas equipas?';
+
+  @override
+  String get teamsWizardTeamSizeLabel => 'Quantas pessoas por equipa?';
+
+  @override
+  String get teamsWizardReviewTitle => 'Revisão';
+
+  @override
+  String teamsWizardReviewTeamCount(int count) {
+    return '$count equipas';
+  }
+
+  @override
+  String teamsWizardReviewTeamSize(int size) {
+    return 'Equipas de $size pessoas';
+  }
+
+  @override
+  String get teamsOwnerParticipantFallback => 'Participante';
+
+  @override
+  String get teamsMemberDefaultName => 'Participante';
+
+  @override
+  String get teamsDetailInviteSection => 'Convite';
+
+  @override
+  String get teamsDetailAppMembersTitle => 'Participantes com app';
+
+  @override
+  String get teamsDetailManualTitle => 'Participantes sem app';
+
+  @override
+  String get teamsDetailAddManualCta => 'Adicionar pessoa';
+
+  @override
+  String get teamsDetailFormTeamsCta => 'Formar equipas';
+
+  @override
+  String get teamsDetailConfigTitle => 'Configuração';
+
+  @override
+  String teamsDetailConfigTeamCount(int count) {
+    return '$count equipas';
+  }
+
+  @override
+  String teamsDetailConfigTeamSize(int size) {
+    return 'Equipas de $size pessoas';
+  }
+
+  @override
+  String teamsDetailEstimatedTeams(int count) {
+    return 'Equipas estimadas: $count';
+  }
+
+  @override
+  String teamsDetailEligibleCount(int count) {
+    return 'Participantes no reparto: $count';
+  }
+
+  @override
+  String get teamsDetailMinPoolHint =>
+      'Precisas de pelo menos 2 participantes para formar equipas.';
+
+  @override
+  String get teamsDetailInvalidConfigHint =>
+      'Revê a configuração das equipas antes de continuar.';
+
+  @override
+  String get teamsDetailCompletedHint =>
+      'As equipas já estão formadas: não podes alterar participantes nem voltar a formar.';
+
+  @override
+  String get teamsDetailTeamsListTitle => 'Equipas';
+
+  @override
+  String get teamsDetailShareCta => 'Partilhar resultado';
+
+  @override
+  String get teamsDetailEmailCta => 'Preparar email';
+
+  @override
+  String get teamsDetailPdfCta => 'Gerar PDF';
+
+  @override
+  String get teamsManualDisplayNameLabel => 'Nome visível';
+
+  @override
+  String get teamsManualEditTitle => 'Editar participante';
+
+  @override
+  String get teamsResultHeroTitle => 'Equipas prontas!';
+
+  @override
+  String get teamsResultHeroSubtitle =>
+      'Já podes partilhar o reparto com o grupo.';
+
+  @override
+  String teamsResultSummary(int teamCount, int participantCount) {
+    return '$teamCount equipas · $participantCount participantes';
+  }
+
+  @override
+  String teamsUnitLabel(int number) {
+    return 'Equipa $number';
+  }
+
+  @override
+  String teamsShareBody(String groupName, String teamsBlock) {
+    return '🧩 Equipas geradas em «$groupName»\n\n$teamsBlock\n\nFeito com Tarci Secret.';
+  }
+
+  @override
+  String teamsEmailSubject(String groupName) {
+    return 'Equipas geradas — $groupName';
+  }
+
+  @override
+  String teamsEmailBody(String groupName, String teamsBlock) {
+    return 'Olá,\n\nJá estão prontas as equipas de «$groupName»:\n\n$teamsBlock\n\nGerado com Tarci Secret.';
+  }
+
+  @override
+  String get teamsEmailError =>
+      'Não há uma app de email disponível neste dispositivo.';
+
+  @override
+  String get teamsPdfHeadline => 'Equipas geradas';
+
+  @override
+  String teamsPdfSummary(int teamCount, int participantCount) {
+    return '$teamCount equipas · $participantCount participantes';
+  }
+
+  @override
+  String get teamsPdfFooter => 'Gerado com Tarci Secret';
+
+  @override
+  String get teamsPdfError => 'Não foi possível gerar o PDF. Tenta novamente.';
+
+  @override
+  String joinSuccessTeamsSubtitle(String groupName) {
+    return 'Entraste em «$groupName».';
+  }
+
+  @override
+  String get joinSuccessTeamsBody =>
+      'Quando o organizador formar as equipas, verás o resultado aqui.';
+
+  @override
+  String get joinSuccessTeamsPrimaryCta => 'Ir às equipas';
+
+  @override
+  String get functionsErrorTeamsResolvedInvitesClosed =>
+      'As equipas já estão formadas e este grupo não aceita novos participantes.';
+
+  @override
+  String get functionsErrorTeamsInProgress =>
+      'As equipas estão a ser formadas. Tenta dentro de momentos.';
+
+  @override
+  String get functionsErrorTeamsRotateLocked =>
+      'Não é possível alterar o código depois de formar as equipas.';
+
+  @override
+  String get functionsErrorTeamsAlreadyCompleted =>
+      'As equipas já estão formadas.';
+
+  @override
+  String get functionsErrorTeamsInsufficientParticipants =>
+      'São necessários pelo menos 2 participantes para formar equipas.';
+
+  @override
+  String get functionsErrorTeamsInvalidConfiguration =>
+      'A configuração das equipas não é válida.';
+
+  @override
+  String get functionsErrorTeamsTooManyParticipants =>
+      'Atingiste o máximo de participantes permitidos.';
+
+  @override
+  String get functionsErrorTeamsInvalidDynamic =>
+      'Esta ação não está disponível para este tipo de dinâmica.';
+
+  @override
+  String get functionsErrorTeamsEditLocked =>
+      'Não é possível editar participantes depois de formar as equipas.';
 }

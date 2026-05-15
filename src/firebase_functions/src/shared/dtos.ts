@@ -277,7 +277,7 @@ export const DevRunTarciChatAutomationRequestSchema = z.object({
 });
 export type DevRunTarciChatAutomationRequest = z.infer<typeof DevRunTarciChatAutomationRequestSchema>;
 
-export const TarciDynamicTypeSchema = z.enum(["secret_santa", "simple_raffle"]);
+export const TarciDynamicTypeSchema = z.enum(["secret_santa", "simple_raffle", "teams"]);
 export type TarciDynamicType = z.infer<typeof TarciDynamicTypeSchema>;
 
 export const ResultVisibilitySchema = z.enum(["private_per_participant", "public_to_group"]);
@@ -393,6 +393,154 @@ export const RemoveRaffleManualParticipantResponseSchema = z.object({
 });
 export type RemoveRaffleManualParticipantResponse = z.infer<
   typeof RemoveRaffleManualParticipantResponseSchema
+>;
+
+export const TeamStatusSchema = z.enum(["idle", "generating", "completed", "failed"]);
+export type TeamStatus = z.infer<typeof TeamStatusSchema>;
+
+export const TeamGroupingModeSchema = z.enum(["team_count", "team_size"]);
+export type TeamGroupingMode = z.infer<typeof TeamGroupingModeSchema>;
+
+export const TEAMS_MAX_ELIGIBLE = 100;
+
+export const CreateTeamsGroupRequestSchema = z
+  .object({
+    name: z.string().min(1),
+    nickname: z.string().min(1),
+    groupingMode: TeamGroupingModeSchema,
+    requestedTeamCount: z.number().int().min(2).max(TEAMS_MAX_ELIGIBLE).optional(),
+    requestedTeamSize: z.number().int().min(2).max(TEAMS_MAX_ELIGIBLE).optional(),
+    ownerParticipatesInTeams: z.boolean(),
+    eventDateEpochMs: z.number().int().finite().positive().optional(),
+    eventDateDayKey: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+    eventTimeZone: z.string().min(1).max(80).optional()
+  })
+  .superRefine((d, ctx) => {
+    if (d.eventDateEpochMs !== undefined && !d.eventDateDayKey) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["eventDateDayKey"],
+        message: "eventDateDayKey is required when eventDateEpochMs is set"
+      });
+    }
+    if (d.eventDateDayKey !== undefined && d.eventDateEpochMs === undefined) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["eventDateEpochMs"],
+        message: "eventDateEpochMs is required when eventDateDayKey is set"
+      });
+    }
+    if (d.groupingMode === "team_count") {
+      if (d.requestedTeamCount == null) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["requestedTeamCount"],
+          message: "requestedTeamCount required for team_count mode"
+        });
+      }
+    } else if (d.groupingMode === "team_size") {
+      if (d.requestedTeamSize == null) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["requestedTeamSize"],
+          message: "requestedTeamSize required for team_size mode"
+        });
+      }
+    }
+  });
+export type CreateTeamsGroupRequest = z.infer<typeof CreateTeamsGroupRequestSchema>;
+
+export const CreateTeamsGroupResponseSchema = z.object({
+  groupId: z.string().min(1),
+  inviteCode: z.string().min(8).max(8),
+  group: z.object({
+    groupId: z.string().min(1),
+    name: z.string().min(1),
+    ownerUid: z.string().min(1),
+    lifecycleStatus: z.enum(["active", "archived"]),
+    dynamicType: z.literal("teams"),
+    resultVisibility: ResultVisibilitySchema,
+    teamStatus: TeamStatusSchema,
+    groupingMode: TeamGroupingModeSchema,
+    rulesVersionCurrent: z.number().int().positive()
+  })
+});
+export type CreateTeamsGroupResponse = z.infer<typeof CreateTeamsGroupResponseSchema>;
+
+export const ExecuteTeamsRequestSchema = z.object({
+  groupId: z.string().min(1),
+  idempotencyKey: z.string().min(1)
+});
+export type ExecuteTeamsRequest = z.infer<typeof ExecuteTeamsRequestSchema>;
+
+export const TeamMemberSnapshotSchema = z.object({
+  participantId: z.string().min(1),
+  displayName: z.string().min(1),
+  sourceType: z.enum(["app_member", "teams_manual"]),
+  memberUid: z.string().min(1).optional()
+});
+export type TeamMemberSnapshot = z.infer<typeof TeamMemberSnapshotSchema>;
+
+export const TeamSnapshotSchema = z.object({
+  teamIndex: z.number().int().nonnegative(),
+  teamLabel: z.string().min(1),
+  members: z.array(TeamMemberSnapshotSchema)
+});
+export type TeamSnapshot = z.infer<typeof TeamSnapshotSchema>;
+
+export const ExecuteTeamsResponseSchema = z.object({
+  executionId: z.string().min(1),
+  eligibleParticipantCount: z.number().int().nonnegative(),
+  teamCount: z.number().int().positive(),
+  teamsSnapshot: z.array(TeamSnapshotSchema)
+});
+export type ExecuteTeamsResponse = z.infer<typeof ExecuteTeamsResponseSchema>;
+
+export const CreateTeamsManualParticipantRequestSchema = z.object({
+  groupId: z.string().min(1),
+  displayName: z.string().min(1).max(80)
+});
+export type CreateTeamsManualParticipantRequest = z.infer<
+  typeof CreateTeamsManualParticipantRequestSchema
+>;
+
+export const CreateTeamsManualParticipantResponseSchema = z.object({
+  participantId: z.string().min(1)
+});
+export type CreateTeamsManualParticipantResponse = z.infer<
+  typeof CreateTeamsManualParticipantResponseSchema
+>;
+
+export const UpdateTeamsManualParticipantRequestSchema = z.object({
+  groupId: z.string().min(1),
+  participantId: z.string().min(1),
+  displayName: z.string().min(1).max(80)
+});
+export type UpdateTeamsManualParticipantRequest = z.infer<
+  typeof UpdateTeamsManualParticipantRequestSchema
+>;
+
+export const UpdateTeamsManualParticipantResponseSchema = z.object({
+  participantId: z.string().min(1)
+});
+export type UpdateTeamsManualParticipantResponse = z.infer<
+  typeof UpdateTeamsManualParticipantResponseSchema
+>;
+
+export const RemoveTeamsManualParticipantRequestSchema = z.object({
+  groupId: z.string().min(1),
+  participantId: z.string().min(1)
+});
+export type RemoveTeamsManualParticipantRequest = z.infer<
+  typeof RemoveTeamsManualParticipantRequestSchema
+>;
+
+export const RemoveTeamsManualParticipantResponseSchema = z.object({
+  participantId: z.string().min(1),
+  state: z.literal("removed")
+});
+export type RemoveTeamsManualParticipantResponse = z.infer<
+  typeof RemoveTeamsManualParticipantResponseSchema
 >;
 
 export const PushPlatformSchema = z.enum(["android", "ios", "web", "unknown"]);

@@ -3865,6 +3865,414 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'No pudimos activar las notificaciones. Puedes intentarlo más tarde desde los ajustes del sistema.'**
   String get pushActivationDeniedSnackbar;
+
+  /// No description provided for @dynamicsCardTeamsBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Reparte participantes en equipos equilibrados. Resultado visible para todos.'**
+  String get dynamicsCardTeamsBody;
+
+  /// No description provided for @homeDynamicTypeTeams.
+  ///
+  /// In es, this message translates to:
+  /// **'Equipos'**
+  String get homeDynamicTypeTeams;
+
+  /// No description provided for @homeTeamsStatePreparing.
+  ///
+  /// In es, this message translates to:
+  /// **'Preparando'**
+  String get homeTeamsStatePreparing;
+
+  /// No description provided for @homeTeamsStateCompleted.
+  ///
+  /// In es, this message translates to:
+  /// **'Equipos listos'**
+  String get homeTeamsStateCompleted;
+
+  /// No description provided for @teamsWizardTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Crear equipos'**
+  String get teamsWizardTitle;
+
+  /// No description provided for @teamsWizardCreateCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Crear equipos'**
+  String get teamsWizardCreateCta;
+
+  /// No description provided for @teamsWizardNameLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre de la dinámica'**
+  String get teamsWizardNameLabel;
+
+  /// No description provided for @teamsWizardOwnerNicknameLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu nombre en los equipos'**
+  String get teamsWizardOwnerNicknameLabel;
+
+  /// No description provided for @teamsWizardOwnerNicknameHelper.
+  ///
+  /// In es, this message translates to:
+  /// **'Así te verán los demás en el reparto. Usa un apodo, no tu rol de organizador.'**
+  String get teamsWizardOwnerNicknameHelper;
+
+  /// No description provided for @teamsWizardEventOptional.
+  ///
+  /// In es, this message translates to:
+  /// **'Fecha del evento (opcional)'**
+  String get teamsWizardEventOptional;
+
+  /// No description provided for @teamsWizardPickEventDate.
+  ///
+  /// In es, this message translates to:
+  /// **'Elegir fecha'**
+  String get teamsWizardPickEventDate;
+
+  /// No description provided for @teamsWizardOwnerParticipatesTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Participas tú?'**
+  String get teamsWizardOwnerParticipatesTitle;
+
+  /// No description provided for @teamsWizardOwnerParticipatesYes.
+  ///
+  /// In es, this message translates to:
+  /// **'Sí, quiero estar en un equipo'**
+  String get teamsWizardOwnerParticipatesYes;
+
+  /// No description provided for @teamsWizardOwnerParticipatesNo.
+  ///
+  /// In es, this message translates to:
+  /// **'No, solo organizo'**
+  String get teamsWizardOwnerParticipatesNo;
+
+  /// No description provided for @teamsWizardGroupingTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Cómo formar los equipos?'**
+  String get teamsWizardGroupingTitle;
+
+  /// No description provided for @teamsWizardGroupingSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Elige si prefieres un número fijo de equipos o un tamaño por equipo.'**
+  String get teamsWizardGroupingSubtitle;
+
+  /// No description provided for @teamsWizardModeTeamCount.
+  ///
+  /// In es, this message translates to:
+  /// **'Por número de equipos'**
+  String get teamsWizardModeTeamCount;
+
+  /// No description provided for @teamsWizardModeTeamSize.
+  ///
+  /// In es, this message translates to:
+  /// **'Por personas por equipo'**
+  String get teamsWizardModeTeamSize;
+
+  /// No description provided for @teamsWizardTeamCountLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Cuántos equipos?'**
+  String get teamsWizardTeamCountLabel;
+
+  /// No description provided for @teamsWizardTeamSizeLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Cuántas personas por equipo?'**
+  String get teamsWizardTeamSizeLabel;
+
+  /// No description provided for @teamsWizardReviewTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Revisión'**
+  String get teamsWizardReviewTitle;
+
+  /// No description provided for @teamsWizardReviewTeamCount.
+  ///
+  /// In es, this message translates to:
+  /// **'{count} equipos'**
+  String teamsWizardReviewTeamCount(int count);
+
+  /// No description provided for @teamsWizardReviewTeamSize.
+  ///
+  /// In es, this message translates to:
+  /// **'Equipos de {size} personas'**
+  String teamsWizardReviewTeamSize(int size);
+
+  /// No description provided for @teamsOwnerParticipantFallback.
+  ///
+  /// In es, this message translates to:
+  /// **'Participante'**
+  String get teamsOwnerParticipantFallback;
+
+  /// No description provided for @teamsMemberDefaultName.
+  ///
+  /// In es, this message translates to:
+  /// **'Participante'**
+  String get teamsMemberDefaultName;
+
+  /// No description provided for @teamsDetailInviteSection.
+  ///
+  /// In es, this message translates to:
+  /// **'Invitación'**
+  String get teamsDetailInviteSection;
+
+  /// No description provided for @teamsDetailAppMembersTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Participantes con app'**
+  String get teamsDetailAppMembersTitle;
+
+  /// No description provided for @teamsDetailManualTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Participantes sin app'**
+  String get teamsDetailManualTitle;
+
+  /// No description provided for @teamsDetailAddManualCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Añadir persona'**
+  String get teamsDetailAddManualCta;
+
+  /// No description provided for @teamsDetailFormTeamsCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Formar equipos'**
+  String get teamsDetailFormTeamsCta;
+
+  /// No description provided for @teamsDetailConfigTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Configuración'**
+  String get teamsDetailConfigTitle;
+
+  /// No description provided for @teamsDetailConfigTeamCount.
+  ///
+  /// In es, this message translates to:
+  /// **'{count} equipos'**
+  String teamsDetailConfigTeamCount(int count);
+
+  /// No description provided for @teamsDetailConfigTeamSize.
+  ///
+  /// In es, this message translates to:
+  /// **'Equipos de {size} personas'**
+  String teamsDetailConfigTeamSize(int size);
+
+  /// No description provided for @teamsDetailEstimatedTeams.
+  ///
+  /// In es, this message translates to:
+  /// **'Equipos estimados: {count}'**
+  String teamsDetailEstimatedTeams(int count);
+
+  /// No description provided for @teamsDetailEligibleCount.
+  ///
+  /// In es, this message translates to:
+  /// **'Participantes en el reparto: {count}'**
+  String teamsDetailEligibleCount(int count);
+
+  /// No description provided for @teamsDetailMinPoolHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Necesitas al menos 2 participantes para formar equipos.'**
+  String get teamsDetailMinPoolHint;
+
+  /// No description provided for @teamsDetailInvalidConfigHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Revisa la configuración de equipos antes de continuar.'**
+  String get teamsDetailInvalidConfigHint;
+
+  /// No description provided for @teamsDetailCompletedHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Los equipos ya están formados: no se pueden cambiar participantes ni volver a formar.'**
+  String get teamsDetailCompletedHint;
+
+  /// No description provided for @teamsDetailTeamsListTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Equipos'**
+  String get teamsDetailTeamsListTitle;
+
+  /// No description provided for @teamsDetailShareCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Compartir resultado'**
+  String get teamsDetailShareCta;
+
+  /// No description provided for @teamsDetailEmailCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Preparar correo'**
+  String get teamsDetailEmailCta;
+
+  /// No description provided for @teamsDetailPdfCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Generar PDF'**
+  String get teamsDetailPdfCta;
+
+  /// No description provided for @teamsManualDisplayNameLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre visible'**
+  String get teamsManualDisplayNameLabel;
+
+  /// No description provided for @teamsManualEditTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Editar participante'**
+  String get teamsManualEditTitle;
+
+  /// No description provided for @teamsResultHeroTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¡Equipos listos!'**
+  String get teamsResultHeroTitle;
+
+  /// No description provided for @teamsResultHeroSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya puedes compartir el reparto con el grupo.'**
+  String get teamsResultHeroSubtitle;
+
+  /// No description provided for @teamsResultSummary.
+  ///
+  /// In es, this message translates to:
+  /// **'{teamCount} equipos · {participantCount} participantes'**
+  String teamsResultSummary(int teamCount, int participantCount);
+
+  /// No description provided for @teamsUnitLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Equipo {number}'**
+  String teamsUnitLabel(int number);
+
+  /// No description provided for @teamsShareBody.
+  ///
+  /// In es, this message translates to:
+  /// **'🧩 Equipos generados en «{groupName}»\n\n{teamsBlock}\n\nHecho con Tarci Secret.'**
+  String teamsShareBody(String groupName, String teamsBlock);
+
+  /// No description provided for @teamsEmailSubject.
+  ///
+  /// In es, this message translates to:
+  /// **'Equipos generados — {groupName}'**
+  String teamsEmailSubject(String groupName);
+
+  /// No description provided for @teamsEmailBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Hola,\n\nYa están listos los equipos de «{groupName}»:\n\n{teamsBlock}\n\nGenerado con Tarci Secret.'**
+  String teamsEmailBody(String groupName, String teamsBlock);
+
+  /// No description provided for @teamsEmailError.
+  ///
+  /// In es, this message translates to:
+  /// **'No hay una app de correo disponible en este dispositivo.'**
+  String get teamsEmailError;
+
+  /// No description provided for @teamsPdfHeadline.
+  ///
+  /// In es, this message translates to:
+  /// **'Equipos generados'**
+  String get teamsPdfHeadline;
+
+  /// No description provided for @teamsPdfSummary.
+  ///
+  /// In es, this message translates to:
+  /// **'{teamCount} equipos · {participantCount} participantes'**
+  String teamsPdfSummary(int teamCount, int participantCount);
+
+  /// No description provided for @teamsPdfFooter.
+  ///
+  /// In es, this message translates to:
+  /// **'Generado con Tarci Secret'**
+  String get teamsPdfFooter;
+
+  /// No description provided for @teamsPdfError.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo generar el PDF. Inténtalo de nuevo.'**
+  String get teamsPdfError;
+
+  /// No description provided for @joinSuccessTeamsSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Te uniste a «{groupName}».'**
+  String joinSuccessTeamsSubtitle(String groupName);
+
+  /// No description provided for @joinSuccessTeamsBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Cuando el organizador forme los equipos, podrás ver el resultado aquí.'**
+  String get joinSuccessTeamsBody;
+
+  /// No description provided for @joinSuccessTeamsPrimaryCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Ir a equipos'**
+  String get joinSuccessTeamsPrimaryCta;
+
+  /// No description provided for @functionsErrorTeamsResolvedInvitesClosed.
+  ///
+  /// In es, this message translates to:
+  /// **'Los equipos ya están formados y este grupo no acepta nuevos participantes.'**
+  String get functionsErrorTeamsResolvedInvitesClosed;
+
+  /// No description provided for @functionsErrorTeamsInProgress.
+  ///
+  /// In es, this message translates to:
+  /// **'Se están formando los equipos. Inténtalo en un momento.'**
+  String get functionsErrorTeamsInProgress;
+
+  /// No description provided for @functionsErrorTeamsRotateLocked.
+  ///
+  /// In es, this message translates to:
+  /// **'No se puede cambiar el código después de formar los equipos.'**
+  String get functionsErrorTeamsRotateLocked;
+
+  /// No description provided for @functionsErrorTeamsAlreadyCompleted.
+  ///
+  /// In es, this message translates to:
+  /// **'Los equipos ya están formados.'**
+  String get functionsErrorTeamsAlreadyCompleted;
+
+  /// No description provided for @functionsErrorTeamsInsufficientParticipants.
+  ///
+  /// In es, this message translates to:
+  /// **'Se necesitan al menos 2 participantes para formar equipos.'**
+  String get functionsErrorTeamsInsufficientParticipants;
+
+  /// No description provided for @functionsErrorTeamsInvalidConfiguration.
+  ///
+  /// In es, this message translates to:
+  /// **'La configuración de equipos no es válida.'**
+  String get functionsErrorTeamsInvalidConfiguration;
+
+  /// No description provided for @functionsErrorTeamsTooManyParticipants.
+  ///
+  /// In es, this message translates to:
+  /// **'Has alcanzado el máximo de participantes permitidos.'**
+  String get functionsErrorTeamsTooManyParticipants;
+
+  /// No description provided for @functionsErrorTeamsInvalidDynamic.
+  ///
+  /// In es, this message translates to:
+  /// **'Esta acción no está disponible para este tipo de dinámica.'**
+  String get functionsErrorTeamsInvalidDynamic;
+
+  /// No description provided for @functionsErrorTeamsEditLocked.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pueden editar participantes después de formar los equipos.'**
+  String get functionsErrorTeamsEditLocked;
 }
 
 class _AppLocalizationsDelegate

@@ -147,6 +147,8 @@ class GroupsRepositoryImpl implements GroupsRepository {
     final dynamicById = <String, TarciDynamicType>{};
     final raffleStatusById = <String, RaffleStatus>{};
     final lastRaffleAtById = <String, DateTime?>{};
+    final teamStatusById = <String, TeamStatus>{};
+    final lastTeamAtById = <String, DateTime?>{};
     if (ids.isNotEmpty) {
       final groupSnaps = await Future.wait(
         ids.map((id) => _firestore.doc('groups/$id').get()),
@@ -164,6 +166,9 @@ class GroupsRepositoryImpl implements GroupsRepository {
         raffleStatusById[gid] = parseRaffleStatus(data['raffleStatus'] as String?);
         lastRaffleAtById[gid] =
             _readFirestoreOptionalDate(data, 'lastRaffleCompletedAt');
+        teamStatusById[gid] = parseTeamStatus(data['teamStatus'] as String?);
+        lastTeamAtById[gid] =
+            _readFirestoreOptionalDate(data, 'lastTeamCompletedAt');
       }
     }
     return rows
@@ -178,8 +183,10 @@ class GroupsRepositoryImpl implements GroupsRepository {
                 DrawStatus.idle,
             dynamicType: dynamicById[g.groupId] ?? TarciDynamicType.secretSanta,
             raffleStatus: raffleStatusById[g.groupId] ?? RaffleStatus.idle,
+            teamStatus: teamStatusById[g.groupId] ?? TeamStatus.idle,
             lastDrawCompletedAt: lastDrawAtById[g.groupId],
             lastRaffleCompletedAt: lastRaffleAtById[g.groupId],
+            lastTeamCompletedAt: lastTeamAtById[g.groupId],
             eventDate: eventDateById[g.groupId],
           ),
         )
@@ -203,6 +210,16 @@ class GroupsRepositoryImpl implements GroupsRepository {
       final g = snap.data();
       if (g == null) return RaffleStatus.idle;
       return parseRaffleStatus(g['raffleStatus'] as String?);
+    });
+  }
+
+  @override
+  Stream<TeamStatus> watchGroupTeamStatus(String groupId) {
+    return _firestore.doc('groups/$groupId').snapshots().map((snap) {
+      if (!snap.exists) return TeamStatus.idle;
+      final g = snap.data();
+      if (g == null) return TeamStatus.idle;
+      return parseTeamStatus(g['teamStatus'] as String?);
     });
   }
 
@@ -274,8 +291,9 @@ class GroupsRepositoryImpl implements GroupsRepository {
     final isDetailOwner = _uid == ownerUid;
     final dynamicType = parseTarciDynamicType(g['dynamicType'] as String?);
     final isRaffle = dynamicType == TarciDynamicType.simpleRaffle;
+    final isTeams = dynamicType == TarciDynamicType.teams;
 
-    final participantsFuture = isRaffle
+    final participantsFuture = (isRaffle || isTeams)
         ? _firestore.collection('groups/$groupId/participants').get()
         : (isDetailOwner
               ? _firestore.collection('groups/$groupId/participants').get()
@@ -367,9 +385,25 @@ class GroupsRepositoryImpl implements GroupsRepository {
             .toList()
           ..sort((a, b) => a.displayName.compareTo(b.displayName));
 
+    final teamsManualParticipants =
+        allParticipants
+            .where((p) => p.participantType == GroupParticipantType.teamsManual)
+            .map(
+              (p) => TeamsManualParticipant(
+                participantId: p.participantId,
+                displayName: p.displayName,
+              ),
+            )
+            .toList()
+          ..sort((a, b) => a.displayName.compareTo(b.displayName));
+
     final managedParticipants =
         allParticipants
-            .where((p) => p.participantType != GroupParticipantType.raffleManual)
+            .where(
+              (p) =>
+                  p.participantType != GroupParticipantType.raffleManual &&
+                  p.participantType != GroupParticipantType.teamsManual,
+            )
             .toList();
 
     final lastRaffleIdRaw = g['lastRaffleExecutionId'] as String?;
@@ -381,6 +415,15 @@ class GroupsRepositoryImpl implements GroupsRepository {
         ? await _fetchRaffleExecutionSummary(groupId, lastRaffleId)
         : null;
 
+    final lastTeamIdRaw = g['lastTeamExecutionId'] as String?;
+    final lastTeamId =
+        lastTeamIdRaw != null && lastTeamIdRaw.trim().isNotEmpty
+        ? lastTeamIdRaw.trim()
+        : null;
+    final lastTeamExecution = lastTeamId != null
+        ? await _fetchTeamsExecutionSummary(groupId, lastTeamId)
+        : null;
+
     final resultVisibility = parseResultVisibility(
       g['resultVisibility'] as String?,
       fallbackDynamic: dynamicType,
@@ -388,6 +431,11 @@ class GroupsRepositoryImpl implements GroupsRepository {
     final raffleWinnerCount = (g['raffleWinnerCount'] as num?)?.toInt() ?? 1;
     final ownerParticipatesInRaffle =
         g['ownerParticipatesInRaffle'] as bool? ?? true;
+    final groupingMode = parseTeamGroupingMode(g['groupingMode'] as String?);
+    final requestedTeamCount = (g['requestedTeamCount'] as num?)?.toInt();
+    final requestedTeamSize = (g['requestedTeamSize'] as num?)?.toInt();
+    final ownerParticipatesInTeams =
+        g['ownerParticipatesInTeams'] as bool? ?? true;
 
     return GroupDetail(
       groupId: g['groupId'] as String? ?? groupId,
@@ -402,6 +450,14 @@ class GroupsRepositoryImpl implements GroupsRepository {
       lastRaffleExecutionId: lastRaffleId,
       lastRaffleExecution: lastRaffleExecution,
       raffleManualParticipants: raffleManualParticipants,
+      teamStatus: parseTeamStatus(g['teamStatus'] as String?),
+      groupingMode: groupingMode,
+      requestedTeamCount: requestedTeamCount,
+      requestedTeamSize: requestedTeamSize,
+      ownerParticipatesInTeams: ownerParticipatesInTeams,
+      lastTeamExecutionId: lastTeamId,
+      lastTeamExecution: lastTeamExecution,
+      teamsManualParticipants: teamsManualParticipants,
       rulesVersionCurrent: rulesVersion,
       drawSubgroupRule: drawSubgroupRule,
       currentExecutionId: g['currentExecutionId'] as String?,
@@ -410,6 +466,8 @@ class GroupsRepositoryImpl implements GroupsRepository {
           _readFirestoreOptionalDate(g, 'lastDrawCompletedAt'),
       lastRaffleCompletedAt:
           _readFirestoreOptionalDate(g, 'lastRaffleCompletedAt'),
+      lastTeamCompletedAt:
+          _readFirestoreOptionalDate(g, 'lastTeamCompletedAt'),
       eventDate: _readFirestoreOptionalDate(g, 'eventDate'),
       subgroups: subgroups,
       members: members,
@@ -745,6 +803,154 @@ class GroupsRepositoryImpl implements GroupsRepository {
   }
 
   @override
+  Future<CreatedGroup> createTeamsGroup({
+    required String name,
+    required String nickname,
+    required TeamGroupingMode groupingMode,
+    int? requestedTeamCount,
+    int? requestedTeamSize,
+    required bool ownerParticipatesInTeams,
+    DateTime? eventDate,
+  }) async {
+    final callable = _functions.httpsCallable('createTeamsGroup');
+    final payload = <String, dynamic>{
+      'name': name.trim(),
+      'nickname': nickname.trim(),
+      'groupingMode':
+          groupingMode == TeamGroupingMode.teamSize ? 'team_size' : 'team_count',
+      'ownerParticipatesInTeams': ownerParticipatesInTeams,
+    };
+    if (groupingMode == TeamGroupingMode.teamCount && requestedTeamCount != null) {
+      payload['requestedTeamCount'] = requestedTeamCount;
+    }
+    if (groupingMode == TeamGroupingMode.teamSize && requestedTeamSize != null) {
+      payload['requestedTeamSize'] = requestedTeamSize;
+    }
+    if (eventDate != null) {
+      final day = DateTime(eventDate.year, eventDate.month, eventDate.day);
+      payload['eventDateEpochMs'] = day.millisecondsSinceEpoch;
+      payload['eventDateDayKey'] = DateFormat('yyyy-MM-dd').format(day);
+      try {
+        final tz = await FlutterTimezone.getLocalTimezone();
+        if (tz.isNotEmpty) {
+          payload['eventTimeZone'] = tz;
+        }
+      } catch (_) {}
+    }
+    final result = await callable.call(payload);
+    final data = _asStringKeyMap(result.data);
+    final gid = data['groupId'] as String?;
+    final inviteCode = data['inviteCode'] as String?;
+    if (gid == null || inviteCode == null) {
+      throw StateError('createTeamsGroup: faltan groupId o inviteCode');
+    }
+    return CreatedGroup(groupId: gid, inviteCode: inviteCode);
+  }
+
+  @override
+  Future<TeamsExecuteResult> executeTeams({
+    required String groupId,
+    required String idempotencyKey,
+  }) async {
+    final callable = _functions.httpsCallable('executeTeams');
+    final result = await callable.call(<String, dynamic>{
+      'groupId': groupId,
+      'idempotencyKey': idempotencyKey,
+    });
+    final data = _asStringKeyMap(result.data);
+    final executionId = data['executionId'] as String?;
+    final teamsRaw = data['teamsSnapshot'];
+    final teams = <TeamSnapshot>[];
+    if (teamsRaw is List) {
+      for (final item in teamsRaw) {
+        if (item is! Map) continue;
+        final m = Map<String, dynamic>.from(item);
+        final teamIndex = (m['teamIndex'] as num?)?.toInt() ?? 0;
+        final teamLabel = m['teamLabel'] as String? ?? '';
+        final membersRaw = m['members'];
+        final members = <TeamMemberSnapshot>[];
+        if (membersRaw is List) {
+          for (final mem in membersRaw) {
+            if (mem is! Map) continue;
+            final mm = Map<String, dynamic>.from(mem);
+            final pid = mm['participantId'] as String?;
+            final dn = mm['displayName'] as String?;
+            final st = mm['sourceType'] as String?;
+            if (pid == null || pid.isEmpty || dn == null) continue;
+            members.add(
+              TeamMemberSnapshot(
+                participantId: pid,
+                displayName: dn,
+                sourceType: st ?? 'app_member',
+                memberUid: mm['memberUid'] as String?,
+              ),
+            );
+          }
+        }
+        teams.add(
+          TeamSnapshot(
+            teamIndex: teamIndex,
+            teamLabel: teamLabel,
+            members: members,
+          ),
+        );
+      }
+    }
+    teams.sort((a, b) => a.teamIndex.compareTo(b.teamIndex));
+    if (executionId == null || executionId.isEmpty) {
+      throw StateError('executeTeams: falta executionId');
+    }
+    return TeamsExecuteResult(
+      executionId: executionId,
+      teamsSnapshot: teams,
+    );
+  }
+
+  @override
+  Future<String> createTeamsManualParticipant({
+    required String groupId,
+    required String displayName,
+  }) async {
+    final callable = _functions.httpsCallable('createTeamsManualParticipant');
+    final result = await callable.call(<String, dynamic>{
+      'groupId': groupId,
+      'displayName': displayName.trim(),
+    });
+    final data = _asStringKeyMap(result.data);
+    final id = data['participantId'] as String?;
+    if (id == null || id.isEmpty) {
+      throw StateError('createTeamsManualParticipant: falta participantId');
+    }
+    return id;
+  }
+
+  @override
+  Future<void> updateTeamsManualParticipant({
+    required String groupId,
+    required String participantId,
+    required String displayName,
+  }) async {
+    final callable = _functions.httpsCallable('updateTeamsManualParticipant');
+    await callable.call(<String, dynamic>{
+      'groupId': groupId,
+      'participantId': participantId,
+      'displayName': displayName.trim(),
+    });
+  }
+
+  @override
+  Future<void> removeTeamsManualParticipant({
+    required String groupId,
+    required String participantId,
+  }) async {
+    final callable = _functions.httpsCallable('removeTeamsManualParticipant');
+    await callable.call(<String, dynamic>{
+      'groupId': groupId,
+      'participantId': participantId,
+    });
+  }
+
+  @override
   Future<void> deleteGroup(String groupId) async {
     final callable = _functions.httpsCallable('deleteGroup');
     await callable.call(<String, dynamic>{'groupId': groupId});
@@ -784,6 +990,62 @@ class GroupsRepositoryImpl implements GroupsRepository {
       eligibleParticipantCount:
           (e['eligibleParticipantCount'] as num?)?.toInt() ?? 0,
       winnersSnapshot: list,
+      createdAt: _readFirestoreOptionalDate(e, 'createdAt'),
+    );
+  }
+
+  Future<TeamsExecutionSummary?> _fetchTeamsExecutionSummary(
+    String groupId,
+    String executionId,
+  ) async {
+    final exSnap =
+        await _firestore.doc('groups/$groupId/teamExecutions/$executionId').get();
+    if (!exSnap.exists) return null;
+    final e = exSnap.data()!;
+    final teamsRaw = e['teamsSnapshot'];
+    final teams = <TeamSnapshot>[];
+    if (teamsRaw is List) {
+      for (final item in teamsRaw) {
+        if (item is! Map) continue;
+        final m = Map<String, dynamic>.from(item);
+        final teamIndex = (m['teamIndex'] as num?)?.toInt() ?? 0;
+        final teamLabel = m['teamLabel'] as String? ?? '';
+        final membersRaw = m['members'];
+        final members = <TeamMemberSnapshot>[];
+        if (membersRaw is List) {
+          for (final mem in membersRaw) {
+            if (mem is! Map) continue;
+            final mm = Map<String, dynamic>.from(mem);
+            final pid = mm['participantId'] as String?;
+            final dn = mm['displayName'] as String?;
+            final st = mm['sourceType'] as String?;
+            if (pid == null || pid.isEmpty || dn == null) continue;
+            members.add(
+              TeamMemberSnapshot(
+                participantId: pid,
+                displayName: dn,
+                sourceType: st ?? 'app_member',
+                memberUid: mm['memberUid'] as String?,
+              ),
+            );
+          }
+        }
+        teams.add(
+          TeamSnapshot(
+            teamIndex: teamIndex,
+            teamLabel: teamLabel,
+            members: members,
+          ),
+        );
+      }
+    }
+    teams.sort((a, b) => a.teamIndex.compareTo(b.teamIndex));
+    return TeamsExecutionSummary(
+      executionId: executionId,
+      eligibleParticipantCount:
+          (e['eligibleParticipantCount'] as num?)?.toInt() ?? 0,
+      teamCount: (e['teamCount'] as num?)?.toInt() ?? teams.length,
+      teamsSnapshot: teams,
       createdAt: _readFirestoreOptionalDate(e, 'createdAt'),
     );
   }
@@ -852,6 +1114,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
     if (s == 'child_managed') return GroupParticipantType.childManaged;
     if (s == 'app_member') return GroupParticipantType.appMember;
     if (s == 'raffle_manual') return GroupParticipantType.raffleManual;
+    if (s == 'teams_manual') return GroupParticipantType.teamsManual;
     return GroupParticipantType.managed;
   }
 

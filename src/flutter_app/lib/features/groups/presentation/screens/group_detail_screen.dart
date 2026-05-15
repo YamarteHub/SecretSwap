@@ -18,6 +18,7 @@ import '../../../chat/presentation/providers.dart';
 import '../../../chat/presentation/screens/group_chat_screen.dart';
 import '../../../draw/presentation/providers.dart';
 import '../../../raffle/presentation/screens/raffle_group_detail_screen.dart';
+import '../../../teams/presentation/screens/teams_group_detail_screen.dart';
 import '../../../wishlist/presentation/widgets/group_wishlist_summary_section.dart';
 import '../../../wishlist/presentation/providers.dart';
 import '../../domain/group_exceptions.dart';
@@ -286,6 +287,16 @@ class GroupDetailScreen extends ConsumerWidget {
       });
     });
 
+    ref.listen(groupTeamStatusStreamProvider(groupId), (previous, next) {
+      next.whenData((status) {
+        if (status != TeamStatus.completed) return;
+        final prevStatus = previous?.asData?.value;
+        if (prevStatus == TeamStatus.completed) return;
+        ref.invalidate(groupDetailProvider(groupId));
+        ref.invalidate(myGroupsProvider);
+      });
+    });
+
     return Scaffold(
       backgroundColor: AppTheme.warmIvory,
       appBar: _buildAppBar(context, l10n),
@@ -307,6 +318,28 @@ class GroupDetailScreen extends ConsumerWidget {
                 ref.invalidate(groupDrawStatusStreamProvider(groupId));
                 ref.invalidate(groupRaffleStatusStreamProvider(groupId));
                 ref.invalidate(groupChatMessagesProvider(groupId));
+                if (!context.mounted) return;
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(context.l10n.groupDeleteSuccessSnackbar)),
+                );
+                context.go(AppRoutes.groupsHome);
+              },
+            );
+          }
+          if (detail.dynamicType == TarciDynamicType.teams) {
+            return TeamsGroupDetailScreen(
+              detail: detail,
+              groupId: groupId,
+              currentUid: uid,
+              initialInviteCode: initialInviteCode,
+              onReload: () {
+                ref.invalidate(groupDetailProvider(groupId));
+                ref.invalidate(myGroupsProvider);
+              },
+              onGroupDeletedSuccess: () {
+                ref.invalidate(myGroupsProvider);
+                ref.invalidate(groupDetailProvider(groupId));
+                ref.invalidate(groupTeamStatusStreamProvider(groupId));
                 if (!context.mounted) return;
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(context.l10n.groupDeleteSuccessSnackbar)),

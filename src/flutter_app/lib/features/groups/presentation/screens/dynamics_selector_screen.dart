@@ -49,6 +49,14 @@ class DynamicsSelectorScreen extends StatelessWidget {
             accent: AppTheme.mutedGold,
             onTap: () => context.push(AppRoutes.createRaffle),
           ),
+          const SizedBox(height: 14),
+          _DynamicCard(
+            icon: Icons.groups_rounded,
+            title: l10n.dynamicsCardTeamsTitle,
+            subtitle: l10n.dynamicsCardTeamsBody,
+            accent: AppTheme.sageGreen,
+            onTap: () => context.push(AppRoutes.createTeams),
+          ),
           const SizedBox(height: 22),
           Text(
             l10n.dynamicsComingSoonBadge,
@@ -58,7 +66,6 @@ class DynamicsSelectorScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          _ComingSoonCard(title: l10n.dynamicsCardTeamsTitle),
           const SizedBox(height: 10),
           _ComingSoonCard(title: l10n.dynamicsCardPairingsTitle),
           const SizedBox(height: 10),

@@ -45,6 +45,14 @@ async function deleteRaffleExecutionsTree(db: Firestore, groupId: string): Promi
   }
 }
 
+async function deleteTeamExecutionsTree(db: Firestore, groupId: string): Promise<void> {
+  const col = db.collection(groupPaths.teamExecutionsCol(groupId));
+  const snap = await col.get();
+  for (const d of snap.docs) {
+    await d.ref.delete();
+  }
+}
+
 /**
  * Borrado explícito de subcolecciones conocidas del proyecto + índices externos.
  * (Sin `recursiveDelete`: depende del runtime Admin; aquí el árbol está acotado por el código real.)
@@ -52,6 +60,7 @@ async function deleteRaffleExecutionsTree(db: Firestore, groupId: string): Promi
 async function deleteGroupFirestoreTree(db: Firestore, groupId: string): Promise<void> {
   await deleteExecutionsTree(db, groupId);
   await deleteRaffleExecutionsTree(db, groupId);
+  await deleteTeamExecutionsTree(db, groupId);
   await deleteCollectionByPath(db, groupPaths.membersCol(groupId));
   await deleteCollectionByPath(db, `groups/${groupId}/participants`);
   await deleteCollectionByPath(db, `groups/${groupId}/subgroups`);
