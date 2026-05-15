@@ -244,7 +244,8 @@ export const executeRaffle = onCall(async (req: CallableRequest<unknown>): Promi
     await notifyGroupDynamicCompleted(db, {
       groupId: body.groupId,
       dynamicType: "simple_raffle",
-      groupName
+      groupName,
+      triggeredByUid: uid
     });
 
     return result;

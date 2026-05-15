@@ -62,6 +62,7 @@ users/{uid}/pushTokens/{tokenId}
 - Solo en la ruta de **éxito nuevo** al final de la callable (tras persistir assignments y estado `completed`).
 - **No** se llama en rutas idempotentes que reutilizan `returnSuccessfulDrawWithChat` (doble tap / re-sync).
 - Helper: `notifyGroupDynamicCompleted` en `groupNotifications.ts`.
+- El **UID que ejecuta** (`triggeredByUid`) se excluye de destinatarios (ya está en la app).
 - Fallos de FCM → `logger.warn`; la callable sigue devolviendo éxito.
 
 ---
@@ -70,6 +71,8 @@ users/{uid}/pushTokens/{tokenId}
 
 - Solo tras transacción exitosa **nueva** (no en retorno por `idempotencyKey` duplicado).
 - Mismo helper con `dynamicType: "simple_raffle"`.
+- Copy de notificación **genérico** (nombre del grupo + invitación a abrir la app); **no** lista nombres de ganadores en el body.
+- El ejecutor se excluye vía `triggeredByUid`.
 
 ---
 

@@ -143,12 +143,25 @@ export async function notifyGroupDynamicCompleted(
     groupId: string;
     dynamicType: DynamicTypeForPush;
     groupName: string;
+    /** UID que ejecutó draw/raffle; no recibe push (ya está en la app). */
+    triggeredByUid?: string;
   }
 ): Promise<void> {
   try {
-    const uids = await loadActiveMemberUids(db, params.groupId);
+    const actorUid =
+      typeof params.triggeredByUid === "string" && params.triggeredByUid.trim() !== ""
+        ? params.triggeredByUid.trim()
+        : null;
+
+    const allActiveUids = await loadActiveMemberUids(db, params.groupId);
+    const uids = actorUid != null ? allActiveUids.filter((id) => id !== actorUid) : allActiveUids;
+
     if (uids.length === 0) {
-      logger.info("groupNotifications: no active members", { groupId: params.groupId });
+      logger.info("groupNotifications: no recipients after exclusions", {
+        groupId: params.groupId,
+        activeMemberCount: allActiveUids.length,
+        excludedActorUid: actorUid
+      });
       return;
     }
 
@@ -213,7 +226,9 @@ export async function notifyGroupDynamicCompleted(
     logger.info("groupNotifications: sent", {
       groupId: params.groupId,
       dynamicType: params.dynamicType,
-      tokenCount: targets.length
+      tokenCount: targets.length,
+      excludedActorUid: actorUid,
+      recipientUidCount: uids.length
     });
   } catch (e) {
     logger.warn("groupNotifications: notifyGroupDynamicCompleted failed", {

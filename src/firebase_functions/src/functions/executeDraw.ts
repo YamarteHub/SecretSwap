@@ -733,7 +733,8 @@ export const executeDraw = onCall(async (req: CallableRequest<unknown>): Promise
     await notifyGroupDynamicCompleted(db, {
       groupId: body.groupId,
       dynamicType: "secret_santa",
-      groupName
+      groupName,
+      triggeredByUid: uid
     });
     return await returnSuccessfulDrawWithChat(db, body.groupId, executionId, rulesVersion, outData);
   } catch (e) {
