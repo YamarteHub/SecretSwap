@@ -25,24 +25,38 @@ class _CreateRaffleWizardScreenState extends ConsumerState<CreateRaffleWizardScr
   int _page = 0;
 
   final _nameCtrl = TextEditingController();
+  final _nickCtrl = TextEditingController();
   int _winnerCount = 1;
   bool _ownerParticipates = true;
   DateTime? _eventDate;
 
   @override
+  void initState() {
+    super.initState();
+    final u = FirebaseAuth.instance.currentUser;
+    final d = u?.displayName?.trim();
+    if (d != null && d.isNotEmpty) {
+      _nickCtrl.text = d;
+    } else {
+      final e = u?.email?.trim();
+      if (e != null && e.isNotEmpty) {
+        _nickCtrl.text = e.split('@').first;
+      }
+    }
+  }
+
+  @override
   void dispose() {
     _pageController.dispose();
     _nameCtrl.dispose();
+    _nickCtrl.dispose();
     super.dispose();
   }
 
-  String _nicknameOrDisplay() {
-    final u = FirebaseAuth.instance.currentUser;
-    final d = u?.displayName?.trim();
-    if (d != null && d.isNotEmpty) return d;
-    final e = u?.email?.trim();
-    if (e != null && e.isNotEmpty) return e.split('@').first;
-    return 'Organizador';
+  String _ownerNicknameForCreate(AppLocalizations l10n) {
+    final nick = _nickCtrl.text.trim();
+    if (nick.isNotEmpty) return nick;
+    return l10n.raffleOwnerParticipantFallback;
   }
 
   Future<void> _pickEventDate() async {
@@ -59,13 +73,20 @@ class _CreateRaffleWizardScreenState extends ConsumerState<CreateRaffleWizardScr
   }
 
   Future<void> _submit() async {
+    final l10n = context.l10n;
     final name = _nameCtrl.text.trim();
     if (name.isEmpty) return;
+    if (_ownerParticipates && _nickCtrl.text.trim().length < 3) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.joinScreenNicknameTooShort)),
+      );
+      return;
+    }
     final repo = ref.read(groupsRepositoryProvider);
     try {
       final created = await repo.createRaffleGroup(
         name: name,
-        nickname: _nicknameOrDisplay(),
+        nickname: _ownerNicknameForCreate(l10n),
         raffleWinnerCount: _winnerCount,
         ownerParticipatesInRaffle: _ownerParticipates,
         eventDate: _eventDate,
@@ -159,9 +180,21 @@ class _CreateRaffleWizardScreenState extends ConsumerState<CreateRaffleWizardScr
                     child: FilledButton(
                       onPressed: _page < 3
                           ? () {
-                              if (_page == 0 && _nameCtrl.text.trim().isEmpty) {
-                                HapticFeedback.lightImpact();
-                                return;
+                              if (_page == 0) {
+                                if (_nameCtrl.text.trim().isEmpty) {
+                                  HapticFeedback.lightImpact();
+                                  return;
+                                }
+                                if (_ownerParticipates &&
+                                    _nickCtrl.text.trim().length < 3) {
+                                  HapticFeedback.lightImpact();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(l10n.joinScreenNicknameTooShort),
+                                    ),
+                                  );
+                                  return;
+                                }
                               }
                               _pageController.nextPage(
                                 duration: const Duration(milliseconds: 280),
@@ -201,6 +234,23 @@ class _CreateRaffleWizardScreenState extends ConsumerState<CreateRaffleWizardScr
             decoration: InputDecoration(
               filled: true,
               fillColor: AppTheme.softCream,
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+            ),
+          ),
+          const SizedBox(height: 20),
+          Text(
+            l10n.raffleWizardOwnerNicknameLabel,
+            style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(height: 8),
+          TextField(
+            controller: _nickCtrl,
+            textCapitalization: TextCapitalization.words,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: AppTheme.softCream,
+              helperText: l10n.raffleWizardOwnerNicknameHelper,
+              helperMaxLines: 3,
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
             ),
           ),

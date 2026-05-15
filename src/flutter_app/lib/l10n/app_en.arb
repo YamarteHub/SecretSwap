@@ -972,5 +972,30 @@
   },
   "raffleWizardPickEventDate": "Pick date",
   "functionsErrorDrawNotSupportedForDynamic": "Secret Santa draw is not available for this group type.",
-  "functionsErrorRaffleEditLocked": "This raffle no longer allows participant changes."
+  "functionsErrorRaffleEditLocked": "This raffle no longer allows participant changes.",
+  "raffleDetailMinPoolHint": "You need at least 2 people in the pool to run the draw.",
+  "raffleResultHeroTitle": "Draw complete!",
+  "raffleResultHeroSubtitle": "We have a result.",
+  "raffleResultSingleWinner": "Winner: {name}",
+  "@raffleResultSingleWinner": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "raffleResultMultipleWinners": "Winners: {names}",
+  "@raffleResultMultipleWinners": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "raffleWizardOwnerNicknameLabel": "Your name in the draw",
+  "raffleWizardOwnerNicknameHelper": "Others will see this name. Use a nickname, not your organizer role.",
+  "raffleOwnerParticipantFallback": "Participant",
+  "raffleMemberDefaultName": "Participant",
+  "raffleDetailStatsWinners": "Number of winners",
+  "raffleDetailInPool": "In the pool"
 }

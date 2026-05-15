@@ -6,6 +6,7 @@ import 'package:share_plus/share_plus.dart';
 import '../../../../core/l10n/l10n.dart';
 import '../../../../core/messaging/functions_user_message.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/theme/premium_ui.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../groups/domain/group_models.dart';
 import '../../../groups/presentation/providers.dart';
@@ -72,11 +73,88 @@ class _RaffleGroupDetailScreenState extends ConsumerState<RaffleGroupDetailScree
     return n;
   }
 
+  bool get _hasMinPool => _eligibleCount >= 2;
+
   bool get _canExecute =>
       _isOwner &&
       !_raffleComplete &&
+      _hasMinPool &&
       _eligibleCount >= widget.detail.raffleWinnerCount &&
       widget.detail.raffleWinnerCount >= 1;
+
+  bool _isAdministrativeParticipantLabel(String value, AppLocalizations l10n) {
+    final v = value.trim().toLowerCase();
+    final blocked = <String>{
+      l10n.groupRoleOrganizer.toLowerCase(),
+      l10n.groupRoleAdmin.toLowerCase(),
+      'organizador',
+      'organizer',
+      'admin',
+      'administrator',
+      'administrador',
+      'miembro',
+      'member',
+    };
+    return blocked.contains(v);
+  }
+
+  String _memberBomboDisplayName(GroupMember m, AppLocalizations l10n) {
+    final nick = m.nickname.trim();
+    if (nick.isEmpty || _isAdministrativeParticipantLabel(nick, l10n)) {
+      return l10n.raffleMemberDefaultName;
+    }
+    return nick;
+  }
+
+  String _winnerDisplayName(RaffleWinnerSnapshot w, AppLocalizations l10n) {
+    final uid = w.memberUid;
+    if (uid != null && uid.isNotEmpty) {
+      for (final m in widget.detail.members) {
+        if (m.uid == uid) {
+          return _memberBomboDisplayName(m, l10n);
+        }
+      }
+    }
+    final snap = w.displayName.trim();
+    if (snap.isEmpty || _isAdministrativeParticipantLabel(snap, l10n)) {
+      return l10n.raffleMemberDefaultName;
+    }
+    return snap;
+  }
+
+  String _winnersSummaryLine(AppLocalizations l10n) {
+    final names = _winners.map((w) => _winnerDisplayName(w, l10n)).toList();
+    if (names.isEmpty) return '';
+    if (names.length == 1) {
+      return l10n.raffleResultSingleWinner(names.first);
+    }
+    return l10n.raffleResultMultipleWinners(names.join(', '));
+  }
+
+  Widget _statusChip({
+    required String label,
+    required Color background,
+    required Color foreground,
+    IconData? icon,
+  }) {
+    return Chip(
+      avatar: icon != null
+          ? Icon(icon, size: 16, color: foreground)
+          : null,
+      label: Text(
+        label,
+        style: TextStyle(
+          color: foreground,
+          fontWeight: FontWeight.w700,
+          fontSize: 12,
+        ),
+      ),
+      backgroundColor: background,
+      side: BorderSide.none,
+      visualDensity: VisualDensity.compact,
+      padding: const EdgeInsets.symmetric(horizontal: 4),
+    );
+  }
 
   List<RaffleWinnerSnapshot> get _winners =>
       widget.detail.lastRaffleExecution?.winnersSnapshot ?? const [];
@@ -135,7 +213,8 @@ class _RaffleGroupDetailScreenState extends ConsumerState<RaffleGroupDetailScree
 
   Future<void> _shareWinners(AppLocalizations l10n) async {
     if (_winners.isEmpty) return;
-    final bullets = _winners.map((w) => '• ${w.displayName}').join('\n');
+    final bullets =
+        _winners.map((w) => '• ${_winnerDisplayName(w, l10n)}').join('\n');
     final text = l10n.raffleShareBody(
       widget.detail.name.isEmpty ? widget.groupId : widget.detail.name,
       bullets,
@@ -283,6 +362,11 @@ class _RaffleGroupDetailScreenState extends ConsumerState<RaffleGroupDetailScree
         .toList()
       ..sort((a, b) => a.nickname.compareTo(b.nickname));
 
+    final preparingChipBg = AppTheme.mutedGold.withValues(alpha: 0.22);
+    final preparingChipFg = AppTheme.deepPlumAlt;
+    final completedChipBg = AppTheme.sageGreen.withValues(alpha: 0.22);
+    final completedChipFg = AppTheme.sageGreen;
+
     return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(18, 12, 18, 28),
       child: Column(
@@ -292,156 +376,323 @@ class _RaffleGroupDetailScreenState extends ConsumerState<RaffleGroupDetailScree
             widget.detail.name,
             style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w900),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 10),
           Wrap(
             spacing: 8,
             runSpacing: 8,
             children: [
-              Chip(
-                label: Text(l10n.homeDynamicTypeRaffle),
-                visualDensity: VisualDensity.compact,
+              _statusChip(
+                label: l10n.homeDynamicTypeRaffle,
+                background: AppTheme.deepPlum.withValues(alpha: 0.10),
+                foreground: AppTheme.deepPlum,
+                icon: Icons.casino_outlined,
               ),
-              Chip(
-                label: Text(
-                  _raffleComplete
-                      ? l10n.homeRaffleStateCompleted
-                      : l10n.homeRaffleStatePreparing,
-                ),
-                visualDensity: VisualDensity.compact,
+              _statusChip(
+                label: _raffleComplete
+                    ? l10n.homeRaffleStateCompleted
+                    : l10n.homeRaffleStatePreparing,
+                background: _raffleComplete ? completedChipBg : preparingChipBg,
+                foreground: _raffleComplete ? completedChipFg : preparingChipFg,
+                icon: _raffleComplete
+                    ? Icons.emoji_events_outlined
+                    : Icons.hourglass_empty_rounded,
               ),
             ],
           ),
-          if (_raffleComplete) ...[
-            const SizedBox(height: 16),
+          if (_raffleComplete && _winners.isNotEmpty) ...[
+            const SizedBox(height: 20),
+            SecretCard(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: AppTheme.mutedGold.withValues(alpha: 0.28),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: const Icon(
+                          Icons.emoji_events_rounded,
+                          color: AppTheme.deepPlum,
+                          size: 28,
+                        ),
+                      ),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              l10n.raffleResultHeroTitle,
+                              style: theme.textTheme.titleLarge?.copyWith(
+                                fontWeight: FontWeight.w900,
+                                color: AppTheme.deepPlum,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              l10n.raffleResultHeroSubtitle,
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                color: theme.colorScheme.onSurfaceVariant,
+                                height: 1.35,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              _winnersSummaryLine(l10n),
+                              style: theme.textTheme.titleSmall?.copyWith(
+                                fontWeight: FontWeight.w800,
+                                height: 1.35,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 10),
             Text(
               l10n.raffleDetailCompletedHint,
               style: theme.textTheme.bodySmall?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
+                height: 1.4,
               ),
             ),
           ],
           if (!_raffleComplete) ...[
-            const SizedBox(height: 22),
-            Text(
-              l10n.raffleDetailInviteSection,
-              style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
-            ),
-            const SizedBox(height: 8),
-            if (_inviteCode != null) ...[
-              SelectableText(
-                _inviteCode!,
-                style: theme.textTheme.titleMedium?.copyWith(
-                  letterSpacing: 2,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              Row(
+            const SizedBox(height: 20),
+            SectionCard(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  TextButton.icon(
-                    onPressed: () async {
-                      await Clipboard.setData(ClipboardData(text: _inviteCode!));
-                      if (context.mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(l10n.codeCopied)),
-                        );
-                      }
-                    },
-                    icon: const Icon(Icons.copy_rounded),
-                    label: Text(l10n.copyCode),
+                  Text(
+                    l10n.raffleDetailInviteSection,
+                    style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
                   ),
-                  if (_canRotate)
-                    TextButton.icon(
-                      onPressed: _rotating ? null : _rotateInvite,
-                      icon: _rotating
-                          ? const SizedBox(
-                              width: 16,
-                              height: 16,
-                              child: CircularProgressIndicator(strokeWidth: 2),
-                            )
-                          : const Icon(Icons.refresh_rounded),
-                      label: Text(l10n.groupActionGenerateNewCode),
+                  const SizedBox(height: 12),
+                  if (_inviteCode != null) ...[
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                      decoration: BoxDecoration(
+                        color: AppTheme.warmIvory,
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(color: theme.colorScheme.outlineVariant),
+                      ),
+                      child: SelectableText(
+                        _inviteCode!,
+                        textAlign: TextAlign.center,
+                        style: theme.textTheme.titleLarge?.copyWith(
+                          letterSpacing: 3,
+                          fontWeight: FontWeight.w900,
+                          color: AppTheme.deepPlum,
+                        ),
+                      ),
                     ),
+                    const SizedBox(height: 8),
+                    Wrap(
+                      spacing: 4,
+                      runSpacing: 0,
+                      children: [
+                        TextButton.icon(
+                          onPressed: () async {
+                            await Clipboard.setData(ClipboardData(text: _inviteCode!));
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text(l10n.codeCopied)),
+                              );
+                            }
+                          },
+                          icon: const Icon(Icons.copy_rounded),
+                          label: Text(l10n.copyCode),
+                        ),
+                        if (_canRotate)
+                          TextButton.icon(
+                            onPressed: _rotating ? null : _rotateInvite,
+                            icon: _rotating
+                                ? const SizedBox(
+                                    width: 16,
+                                    height: 16,
+                                    child: CircularProgressIndicator(strokeWidth: 2),
+                                  )
+                                : const Icon(Icons.refresh_rounded),
+                            label: Text(l10n.groupActionGenerateNewCode),
+                          ),
+                      ],
+                    ),
+                  ] else ...[
+                    Text(
+                      l10n.groupInvitationsHelp,
+                      style: theme.textTheme.bodySmall?.copyWith(height: 1.4),
+                    ),
+                    if (_canRotate) ...[
+                      const SizedBox(height: 10),
+                      FilledButton.tonalIcon(
+                        onPressed: _rotating ? null : _rotateInvite,
+                        icon: const Icon(Icons.vpn_key_outlined),
+                        label: Text(l10n.groupActionGenerateNewCode),
+                      ),
+                    ],
+                  ],
                 ],
               ),
-            ] else ...[
-              Text(
-                l10n.groupInvitationsHelp,
-                style: theme.textTheme.bodySmall,
-              ),
-              if (_canRotate)
-                FilledButton.tonalIcon(
-                  onPressed: _rotating ? null : _rotateInvite,
-                  icon: const Icon(Icons.vpn_key_outlined),
-                  label: Text(l10n.groupActionGenerateNewCode),
-                ),
-            ],
+            ),
           ],
           const SizedBox(height: 20),
-          Text(
-            l10n.raffleDetailAppMembersTitle,
-            style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
-          ),
-          const SizedBox(height: 8),
-          ...appMembers.map(
-            (m) => ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.person_outline),
-              title: Text(m.nickname),
-              subtitle: Text(m.uid == widget.detail.ownerUid ? l10n.groupRoleAdmin : l10n.groupRoleMember),
-            ),
-          ),
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  l10n.raffleDetailManualTitle,
+          SectionCard(
+            padding: const EdgeInsets.fromLTRB(16, 14, 16, 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  l10n.raffleDetailAppMembersTitle,
                   style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
                 ),
-              ),
-              if (_isOwner && !_raffleComplete)
-                TextButton.icon(
-                  onPressed: _addManual,
-                  icon: const Icon(Icons.person_add_alt_1_outlined),
-                  label: Text(l10n.raffleDetailAddManualCta),
+                const SizedBox(height: 6),
+                ...appMembers.map(
+                  (m) => ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: CircleAvatar(
+                      backgroundColor: AppTheme.deepPlum.withValues(alpha: 0.10),
+                      child: Icon(
+                        m.uid == widget.detail.ownerUid
+                            ? Icons.star_outline_rounded
+                            : Icons.person_outline,
+                        color: AppTheme.deepPlum,
+                        size: 20,
+                      ),
+                    ),
+                    title: Text(
+                      _memberBomboDisplayName(m, l10n),
+                      style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700),
+                    ),
+                    subtitle: Text(
+                      m.uid == widget.detail.ownerUid
+                          ? l10n.groupRoleAdmin
+                          : l10n.groupRoleMember,
+                      style: theme.textTheme.bodySmall,
+                    ),
+                  ),
                 ),
-            ],
-          ),
-          ...widget.detail.raffleManualParticipants.map(
-            (p) => ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.emoji_people_outlined),
-              title: Text(p.displayName),
-              trailing: _isOwner && !_raffleComplete
-                  ? Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.edit_outlined),
-                          onPressed: () => _editManual(p),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.delete_outline),
-                          onPressed: () => _removeManual(p),
-                        ),
-                      ],
-                    )
-                  : null,
+              ],
             ),
           ),
-          const SizedBox(height: 12),
-          Text(
-            '${l10n.raffleWizardWinnersLabel}: ${widget.detail.raffleWinnerCount}',
-            style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700),
+          const SizedBox(height: 14),
+          SectionCard(
+            padding: const EdgeInsets.fromLTRB(16, 14, 16, 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        l10n.raffleDetailManualTitle,
+                        style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
+                      ),
+                    ),
+                    if (_isOwner && !_raffleComplete)
+                      TextButton.icon(
+                        onPressed: _addManual,
+                        icon: const Icon(Icons.person_add_alt_1_outlined),
+                        label: Text(l10n.raffleDetailAddManualCta),
+                      ),
+                  ],
+                ),
+                ...widget.detail.raffleManualParticipants.map(
+                  (p) => ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: CircleAvatar(
+                      backgroundColor: AppTheme.mutedGold.withValues(alpha: 0.22),
+                      child: const Icon(
+                        Icons.emoji_people_outlined,
+                        color: AppTheme.deepPlum,
+                        size: 20,
+                      ),
+                    ),
+                    title: Text(
+                      p.displayName,
+                      style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700),
+                    ),
+                    trailing: _isOwner && !_raffleComplete
+                        ? Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.edit_outlined),
+                                onPressed: () => _editManual(p),
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.delete_outline),
+                                onPressed: () => _removeManual(p),
+                              ),
+                            ],
+                          )
+                        : null,
+                  ),
+                ),
+              ],
+            ),
           ),
-          Text(
-            l10n.raffleDetailEligibleCount(_eligibleCount),
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
+          const SizedBox(height: 14),
+          SectionCard(
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l10n.raffleDetailStatsWinners,
+                        style: theme.textTheme.labelMedium?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        '${widget.detail.raffleWinnerCount}',
+                        style: theme.textTheme.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(width: 1, height: 44, color: theme.colorScheme.outlineVariant),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l10n.raffleDetailInPool,
+                        style: theme.textTheme.labelMedium?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        '$_eligibleCount',
+                        style: theme.textTheme.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.w900,
+                          color: _hasMinPool ? AppTheme.sageGreen : AppTheme.softTerracotta,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
           if (_isOwner && !_raffleComplete) ...[
-            const SizedBox(height: 20),
+            const SizedBox(height: 22),
             FilledButton.icon(
               onPressed: (_canExecute && !_executeInFlight) ? _executeRaffle : null,
               icon: _executeInFlight
@@ -453,30 +704,61 @@ class _RaffleGroupDetailScreenState extends ConsumerState<RaffleGroupDetailScree
                   : const Icon(Icons.casino_rounded),
               label: Text(l10n.raffleDetailRunRaffleCta),
             ),
+            if (!_hasMinPool) ...[
+              const SizedBox(height: 10),
+              Text(
+                l10n.raffleDetailMinPoolHint,
+                textAlign: TextAlign.center,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  height: 1.4,
+                ),
+              ),
+            ],
           ],
           if (_raffleComplete && _winners.isNotEmpty) ...[
-            const SizedBox(height: 24),
+            const SizedBox(height: 22),
             Text(
               l10n.raffleDetailWinnersTitle,
               style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w900),
             ),
             const SizedBox(height: 12),
-            ..._winners.map(
-              (w) => Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Material(
-                  color: AppTheme.softCream,
-                  borderRadius: BorderRadius.circular(16),
-                  child: ListTile(
-                    title: Text(
-                      w.displayName,
-                      style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
+            SectionCard(
+              highlighted: true,
+              child: Column(
+                children: _winners.map(
+                  (w) => Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 6),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: AppTheme.mutedGold.withValues(alpha: 0.24),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.workspace_premium_rounded,
+                            color: AppTheme.deepPlum,
+                            size: 22,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            _winnerDisplayName(w, l10n),
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
+                ).toList(),
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 14),
             OutlinedButton.icon(
               onPressed: () => _shareWinners(l10n),
               icon: const Icon(Icons.ios_share_rounded),

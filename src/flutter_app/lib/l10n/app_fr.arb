@@ -972,5 +972,30 @@
   },
   "raffleWizardPickEventDate": "Choisir la date",
   "functionsErrorDrawNotSupportedForDynamic": "Le tirage Secret Santa n'est pas disponible pour ce type de groupe.",
-  "functionsErrorRaffleEditLocked": "Ce tirage ne permet plus de modifier les participants."
+  "functionsErrorRaffleEditLocked": "Ce tirage ne permet plus de modifier les participants.",
+  "raffleDetailMinPoolHint": "Il faut au moins 2 participants dans le tirage pour lancer le tirage au sort.",
+  "raffleResultHeroTitle": "Tirage effectué !",
+  "raffleResultHeroSubtitle": "Nous avons le résultat.",
+  "raffleResultSingleWinner": "Gagnant : {name}",
+  "@raffleResultSingleWinner": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "raffleResultMultipleWinners": "Gagnants : {names}",
+  "@raffleResultMultipleWinners": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "raffleWizardOwnerNicknameLabel": "Ton nom dans le tirage",
+  "raffleWizardOwnerNicknameHelper": "Les autres te verront ainsi. Utilise un surnom, pas ton rôle d’organisateur.",
+  "raffleOwnerParticipantFallback": "Participant",
+  "raffleMemberDefaultName": "Participant",
+  "raffleDetailStatsWinners": "Nombre de gagnants",
+  "raffleDetailInPool": "Dans le tirage"
 }

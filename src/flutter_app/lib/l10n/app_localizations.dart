@@ -3769,6 +3769,72 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Este sorteo ya no admite cambios en participantes.'**
   String get functionsErrorRaffleEditLocked;
+
+  /// No description provided for @raffleDetailMinPoolHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Necesitas al menos 2 participantes en el bombo para realizar el sorteo.'**
+  String get raffleDetailMinPoolHint;
+
+  /// No description provided for @raffleResultHeroTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¡Sorteo realizado!'**
+  String get raffleResultHeroTitle;
+
+  /// No description provided for @raffleResultHeroSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya tenemos el resultado.'**
+  String get raffleResultHeroSubtitle;
+
+  /// No description provided for @raffleResultSingleWinner.
+  ///
+  /// In es, this message translates to:
+  /// **'Ganador: {name}'**
+  String raffleResultSingleWinner(String name);
+
+  /// No description provided for @raffleResultMultipleWinners.
+  ///
+  /// In es, this message translates to:
+  /// **'Ganadores: {names}'**
+  String raffleResultMultipleWinners(String names);
+
+  /// No description provided for @raffleWizardOwnerNicknameLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu nombre en el bombo'**
+  String get raffleWizardOwnerNicknameLabel;
+
+  /// No description provided for @raffleWizardOwnerNicknameHelper.
+  ///
+  /// In es, this message translates to:
+  /// **'Así te verán los demás. Usa un apodo o nombre, no tu rol de organizador.'**
+  String get raffleWizardOwnerNicknameHelper;
+
+  /// No description provided for @raffleOwnerParticipantFallback.
+  ///
+  /// In es, this message translates to:
+  /// **'Participante'**
+  String get raffleOwnerParticipantFallback;
+
+  /// No description provided for @raffleMemberDefaultName.
+  ///
+  /// In es, this message translates to:
+  /// **'Participante'**
+  String get raffleMemberDefaultName;
+
+  /// No description provided for @raffleDetailStatsWinners.
+  ///
+  /// In es, this message translates to:
+  /// **'Número de ganadores'**
+  String get raffleDetailStatsWinners;
+
+  /// No description provided for @raffleDetailInPool.
+  ///
+  /// In es, this message translates to:
+  /// **'En el bombo'**
+  String get raffleDetailInPool;
 }
 
 class _AppLocalizationsDelegate

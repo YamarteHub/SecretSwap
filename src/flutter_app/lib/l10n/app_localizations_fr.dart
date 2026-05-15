@@ -2190,4 +2190,43 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get functionsErrorRaffleEditLocked =>
       'Ce tirage ne permet plus de modifier les participants.';
+
+  @override
+  String get raffleDetailMinPoolHint =>
+      'Il faut au moins 2 participants dans le tirage pour lancer le tirage au sort.';
+
+  @override
+  String get raffleResultHeroTitle => 'Tirage effectué !';
+
+  @override
+  String get raffleResultHeroSubtitle => 'Nous avons le résultat.';
+
+  @override
+  String raffleResultSingleWinner(String name) {
+    return 'Gagnant : $name';
+  }
+
+  @override
+  String raffleResultMultipleWinners(String names) {
+    return 'Gagnants : $names';
+  }
+
+  @override
+  String get raffleWizardOwnerNicknameLabel => 'Ton nom dans le tirage';
+
+  @override
+  String get raffleWizardOwnerNicknameHelper =>
+      'Les autres te verront ainsi. Utilise un surnom, pas ton rôle d’organisateur.';
+
+  @override
+  String get raffleOwnerParticipantFallback => 'Participant';
+
+  @override
+  String get raffleMemberDefaultName => 'Participant';
+
+  @override
+  String get raffleDetailStatsWinners => 'Nombre de gagnants';
+
+  @override
+  String get raffleDetailInPool => 'Dans le tirage';
 }

@@ -2154,4 +2154,43 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get functionsErrorRaffleEditLocked =>
       'This raffle no longer allows participant changes.';
+
+  @override
+  String get raffleDetailMinPoolHint =>
+      'You need at least 2 people in the pool to run the draw.';
+
+  @override
+  String get raffleResultHeroTitle => 'Draw complete!';
+
+  @override
+  String get raffleResultHeroSubtitle => 'We have a result.';
+
+  @override
+  String raffleResultSingleWinner(String name) {
+    return 'Winner: $name';
+  }
+
+  @override
+  String raffleResultMultipleWinners(String names) {
+    return 'Winners: $names';
+  }
+
+  @override
+  String get raffleWizardOwnerNicknameLabel => 'Your name in the draw';
+
+  @override
+  String get raffleWizardOwnerNicknameHelper =>
+      'Others will see this name. Use a nickname, not your organizer role.';
+
+  @override
+  String get raffleOwnerParticipantFallback => 'Participant';
+
+  @override
+  String get raffleMemberDefaultName => 'Participant';
+
+  @override
+  String get raffleDetailStatsWinners => 'Number of winners';
+
+  @override
+  String get raffleDetailInPool => 'In the pool';
 }

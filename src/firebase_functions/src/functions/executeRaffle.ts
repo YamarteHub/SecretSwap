@@ -179,11 +179,11 @@ export const executeRaffle = onCall(async (req: CallableRequest<unknown>): Promi
       }
       const pool = [...dedup.values()].sort((a, b) => a.participantId.localeCompare(b.participantId));
 
-      if (pool.length < 1) {
+      if (pool.length < 2) {
         throw new AppError({
           code: "VALIDATION_ERROR",
           reasonCode: "RAFFLE_INSUFFICIENT_PARTICIPANTS",
-          message: "Not enough eligible participants"
+          message: "Not enough eligible participants (minimum 2)"
         });
       }
       if (winnerCount > pool.length) {

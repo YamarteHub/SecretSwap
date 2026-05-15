@@ -2169,4 +2169,43 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get functionsErrorRaffleEditLocked =>
       'Este sorteo ya no admite cambios en participantes.';
+
+  @override
+  String get raffleDetailMinPoolHint =>
+      'Necesitas al menos 2 participantes en el bombo para realizar el sorteo.';
+
+  @override
+  String get raffleResultHeroTitle => '¡Sorteo realizado!';
+
+  @override
+  String get raffleResultHeroSubtitle => 'Ya tenemos el resultado.';
+
+  @override
+  String raffleResultSingleWinner(String name) {
+    return 'Ganador: $name';
+  }
+
+  @override
+  String raffleResultMultipleWinners(String names) {
+    return 'Ganadores: $names';
+  }
+
+  @override
+  String get raffleWizardOwnerNicknameLabel => 'Tu nombre en el bombo';
+
+  @override
+  String get raffleWizardOwnerNicknameHelper =>
+      'Así te verán los demás. Usa un apodo o nombre, no tu rol de organizador.';
+
+  @override
+  String get raffleOwnerParticipantFallback => 'Participante';
+
+  @override
+  String get raffleMemberDefaultName => 'Participante';
+
+  @override
+  String get raffleDetailStatsWinners => 'Número de ganadores';
+
+  @override
+  String get raffleDetailInPool => 'En el bombo';
 }

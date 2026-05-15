@@ -972,5 +972,30 @@
   },
   "raffleWizardPickEventDate": "Seleccionar fecha",
   "functionsErrorDrawNotSupportedForDynamic": "El sorteo de amigo secreto no está disponible para este tipo de grupo.",
-  "functionsErrorRaffleEditLocked": "Este sorteo ya no admite cambios en participantes."
+  "functionsErrorRaffleEditLocked": "Este sorteo ya no admite cambios en participantes.",
+  "raffleDetailMinPoolHint": "Necesitas al menos 2 participantes en el bombo para realizar el sorteo.",
+  "raffleResultHeroTitle": "¡Sorteo realizado!",
+  "raffleResultHeroSubtitle": "Ya tenemos el resultado.",
+  "raffleResultSingleWinner": "Ganador: {name}",
+  "@raffleResultSingleWinner": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "raffleResultMultipleWinners": "Ganadores: {names}",
+  "@raffleResultMultipleWinners": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "raffleWizardOwnerNicknameLabel": "Tu nombre en el bombo",
+  "raffleWizardOwnerNicknameHelper": "Así te verán los demás. Usa un apodo o nombre, no tu rol de organizador.",
+  "raffleOwnerParticipantFallback": "Participante",
+  "raffleMemberDefaultName": "Participante",
+  "raffleDetailStatsWinners": "Número de ganadores",
+  "raffleDetailInPool": "En el bombo"
 }

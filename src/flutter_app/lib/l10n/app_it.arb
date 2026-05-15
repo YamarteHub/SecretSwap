@@ -972,5 +972,30 @@
   },
   "raffleWizardPickEventDate": "Scegli data",
   "functionsErrorDrawNotSupportedForDynamic": "Il sorteggio dell'amico segreto non è disponibile per questo tipo di gruppo.",
-  "functionsErrorRaffleEditLocked": "Questo sorteggio non consente più modifiche ai partecipanti."
+  "functionsErrorRaffleEditLocked": "Questo sorteggio non consente più modifiche ai partecipanti.",
+  "raffleDetailMinPoolHint": "Servono almeno 2 partecipanti nel bombo per eseguire l’estrazione.",
+  "raffleResultHeroTitle": "Estrazione completata!",
+  "raffleResultHeroSubtitle": "Abbiamo il risultato.",
+  "raffleResultSingleWinner": "Vincitore: {name}",
+  "@raffleResultSingleWinner": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "raffleResultMultipleWinners": "Vincitori: {names}",
+  "@raffleResultMultipleWinners": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "raffleWizardOwnerNicknameLabel": "Il tuo nome nel bombo",
+  "raffleWizardOwnerNicknameHelper": "Gli altri ti vedranno così. Usa un soprannome, non il ruolo di organizzatore.",
+  "raffleOwnerParticipantFallback": "Partecipante",
+  "raffleMemberDefaultName": "Partecipante",
+  "raffleDetailStatsWinners": "Numero di vincitori",
+  "raffleDetailInPool": "Nel bombo"
 }
