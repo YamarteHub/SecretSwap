@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -202,6 +204,61 @@ class GroupsRepositoryImpl implements GroupsRepository {
       if (g == null) return RaffleStatus.idle;
       return parseRaffleStatus(g['raffleStatus'] as String?);
     });
+  }
+
+  static int _rosterSignature(
+    QuerySnapshot<Map<String, dynamic>> membersSnap,
+    QuerySnapshot<Map<String, dynamic>> participantsSnap,
+  ) {
+    final memberPart = membersSnap.docs
+        .map((d) {
+          final m = d.data();
+          return '${d.id}:${m['memberState']}:${m['nickname']}';
+        })
+        .join('|');
+    final participantPart = participantsSnap.docs
+        .map((d) {
+          final p = d.data();
+          return '${d.id}:${p['state']}:${p['participantType']}:${p['displayName']}';
+        })
+        .join('|');
+    return Object.hash(memberPart, participantPart);
+  }
+
+  @override
+  Stream<int> watchGroupRosterSignature(String groupId) {
+    final controller = StreamController<int>();
+    QuerySnapshot<Map<String, dynamic>>? lastMembers;
+    QuerySnapshot<Map<String, dynamic>>? lastParticipants;
+
+    void emitIfReady() {
+      final members = lastMembers;
+      final participants = lastParticipants;
+      if (members == null || participants == null) return;
+      controller.add(_rosterSignature(members, participants));
+    }
+
+    final membersSub = _firestore
+        .collection('groups/$groupId/members')
+        .snapshots()
+        .listen((snap) {
+      lastMembers = snap;
+      emitIfReady();
+    });
+    final participantsSub = _firestore
+        .collection('groups/$groupId/participants')
+        .snapshots()
+        .listen((snap) {
+      lastParticipants = snap;
+      emitIfReady();
+    });
+
+    controller.onCancel = () async {
+      await membersSub.cancel();
+      await participantsSub.cancel();
+    };
+
+    return controller.stream;
   }
 
   @override

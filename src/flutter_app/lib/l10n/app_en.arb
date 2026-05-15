@@ -43,6 +43,16 @@
   "joinSuccessChooseRequired": "Pick an option to continue.",
   "joinSuccessPrimaryCta": "Go to group",
   "joinSuccessSecondaryCta": "Stay here",
+  "joinSuccessRaffleSubtitle": "You joined {groupName}. When the organizer runs the draw, you’ll see the result here.",
+  "@joinSuccessRaffleSubtitle": {
+    "placeholders": {
+      "groupName": {
+        "type": "String"
+      }
+    }
+  },
+  "joinSuccessRaffleBody": "In the meantime you can see who’s in the pool and wait for draw day.",
+  "joinSuccessRafflePrimaryCta": "Go to raffle",
   "createSecretFriend": "Create Secret Santa",
   "comingSoonMoreDynamics": "Coming soon: draws, teams, duels and pairings.",
   "mySecretFriend": "My secret friend",

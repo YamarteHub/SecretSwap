@@ -320,6 +320,24 @@ abstract class AppLocalizations {
   /// **'Quedarme aquí'**
   String get joinSuccessSecondaryCta;
 
+  /// No description provided for @joinSuccessRaffleSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Te uniste a {groupName}. Cuando el organizador realice el sorteo, podrás ver el resultado aquí.'**
+  String joinSuccessRaffleSubtitle(String groupName);
+
+  /// No description provided for @joinSuccessRaffleBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Mientras tanto puedes revisar quién participa y esperar el momento del sorteo.'**
+  String get joinSuccessRaffleBody;
+
+  /// No description provided for @joinSuccessRafflePrimaryCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Ir al sorteo'**
+  String get joinSuccessRafflePrimaryCta;
+
   /// No description provided for @createSecretFriend.
   ///
   /// In es, this message translates to:

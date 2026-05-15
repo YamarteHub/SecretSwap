@@ -268,6 +268,14 @@ class _RaffleGroupDetailScreenState extends ConsumerState<RaffleGroupDetailScree
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(groupRosterSignatureStreamProvider(widget.groupId), (previous, next) {
+      next.whenData((signature) {
+        final prevSignature = previous?.asData?.value;
+        if (prevSignature == null || prevSignature == signature) return;
+        widget.onReload();
+      });
+    });
+
     final l10n = context.l10n;
     final theme = Theme.of(context);
     final appMembers = widget.detail.members

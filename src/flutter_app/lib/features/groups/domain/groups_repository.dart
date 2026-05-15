@@ -22,6 +22,9 @@ abstract interface class GroupsRepository {
   /// Estado del sorteo público (`raffleStatus`) para grupos `simple_raffle`.
   Stream<RaffleStatus> watchGroupRaffleStatus(String groupId);
 
+  /// Firma estable de miembros + participantes; cambia al unirse alguien o editar el bombo.
+  Stream<int> watchGroupRosterSignature(String groupId);
+
   Future<CreatedGroup> createRaffleGroup({
     required String name,
     required String nickname,

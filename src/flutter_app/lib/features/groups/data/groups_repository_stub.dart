@@ -50,6 +50,11 @@ class GroupsRepositoryStub implements GroupsRepository {
   }
 
   @override
+  Stream<int> watchGroupRosterSignature(String groupId) {
+    return Stream.value(0);
+  }
+
+  @override
   Future<CreatedGroup> createRaffleGroup({
     required String name,
     required String nickname,

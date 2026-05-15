@@ -43,6 +43,16 @@
   "joinSuccessChooseRequired": "Choisissez une option pour continuer.",
   "joinSuccessPrimaryCta": "Aller au groupe",
   "joinSuccessSecondaryCta": "reste ici",
+  "joinSuccessRaffleSubtitle": "Tu as rejoint {groupName}. Quand l’organisateur lancera le tirage, tu pourras voir le résultat ici.",
+  "@joinSuccessRaffleSubtitle": {
+    "placeholders": {
+      "groupName": {
+        "type": "String"
+      }
+    }
+  },
+  "joinSuccessRaffleBody": "En attendant, tu peux voir qui participe et attendre le moment du tirage.",
+  "joinSuccessRafflePrimaryCta": "Aller au tirage",
   "createSecretFriend": "Créer un ami secret",
   "comingSoonMoreDynamics": "Prochainement : tirages au sort, équipes, duels et appariements.",
   "mySecretFriend": "mon ami secret",

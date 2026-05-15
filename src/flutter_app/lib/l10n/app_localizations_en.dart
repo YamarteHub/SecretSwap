@@ -125,6 +125,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get joinSuccessSecondaryCta => 'Stay here';
 
   @override
+  String joinSuccessRaffleSubtitle(String groupName) {
+    return 'You joined $groupName. When the organizer runs the draw, you’ll see the result here.';
+  }
+
+  @override
+  String get joinSuccessRaffleBody =>
+      'In the meantime you can see who’s in the pool and wait for draw day.';
+
+  @override
+  String get joinSuccessRafflePrimaryCta => 'Go to raffle';
+
+  @override
   String get createSecretFriend => 'Create Secret Santa';
 
   @override

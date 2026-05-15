@@ -133,7 +133,8 @@ class _JoinByCodeScreenState extends ConsumerState<JoinByCodeScreen> {
       }
 
       final selectedSubgroupId = result.subgroupId;
-      if (selectedSubgroupId != null) {
+      if (detail.dynamicType != TarciDynamicType.simpleRaffle &&
+          selectedSubgroupId != null) {
         final uid = FirebaseAuth.instance.currentUser?.uid;
         if (uid != null && uid.isNotEmpty) {
           await repo.setMemberSubgroup(
@@ -371,6 +372,35 @@ class _JoinSuccessDialogState extends State<_JoinSuccessDialog> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.detail.dynamicType == TarciDynamicType.simpleRaffle) {
+      return _buildRaffleSuccessDialog(context);
+    }
+    return _buildSecretSantaSuccessDialog(context);
+  }
+
+  Widget _buildRaffleSuccessDialog(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = context.l10n;
+
+    return PremiumDialog(
+      icon: Icons.celebration_outlined,
+      title: l10n.joinSuccessTitle,
+      subtitle: l10n.joinSuccessRaffleSubtitle(widget.detail.name),
+      content: Text(
+        l10n.joinSuccessRaffleBody,
+        style: theme.textTheme.bodyMedium?.copyWith(
+          color: theme.colorScheme.onSurfaceVariant,
+          height: 1.45,
+        ),
+      ),
+      primaryLabel: l10n.joinSuccessRafflePrimaryCta,
+      onPrimary: () => Navigator.pop(context, const _JoinSuccessResult()),
+      secondaryLabel: l10n.joinSuccessSecondaryCta,
+      onSecondary: () => Navigator.pop(context),
+    );
+  }
+
+  Widget _buildSecretSantaSuccessDialog(BuildContext context) {
     final theme = Theme.of(context);
     final l10n = context.l10n;
     final subgroups = widget.detail.subgroups;

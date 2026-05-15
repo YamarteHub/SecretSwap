@@ -43,6 +43,16 @@
   "joinSuccessChooseRequired": "Escolha uma opção para continuar.",
   "joinSuccessPrimaryCta": "Ir para o grupo",
   "joinSuccessSecondaryCta": "fique aqui",
+  "joinSuccessRaffleSubtitle": "Entraste em {groupName}. Quando o organizador fizer o sorteio, poderás ver o resultado aqui.",
+  "@joinSuccessRaffleSubtitle": {
+    "placeholders": {
+      "groupName": {
+        "type": "String"
+      }
+    }
+  },
+  "joinSuccessRaffleBody": "Entretanto podes ver quem participa e esperar pelo momento do sorteio.",
+  "joinSuccessRafflePrimaryCta": "Ir ao sorteio",
   "createSecretFriend": "Criar amigo secreto",
   "comingSoonMoreDynamics": "Em breve: sorteios, times, duelos e pareamentos.",
   "mySecretFriend": "meu amigo secreto",

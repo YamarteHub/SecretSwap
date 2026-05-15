@@ -127,6 +127,18 @@ class AppLocalizationsIt extends AppLocalizations {
   String get joinSuccessSecondaryCta => 'rimani qui';
 
   @override
+  String joinSuccessRaffleSubtitle(String groupName) {
+    return 'Sei entrato in $groupName. Quando l’organizzatore farà l’estrazione, potrai vedere il risultato qui.';
+  }
+
+  @override
+  String get joinSuccessRaffleBody =>
+      'Nel frattempo puoi vedere chi partecipa e attendere il momento dell’estrazione.';
+
+  @override
+  String get joinSuccessRafflePrimaryCta => 'Vai al sorteggio';
+
+  @override
   String get createSecretFriend => 'Crea un amico segreto';
 
   @override
