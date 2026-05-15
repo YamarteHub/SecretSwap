@@ -3417,7 +3417,6 @@ class _CreateManagedParticipantDialogState
   String _deliveryMode = _deliveryVerbal;
   static const _guardianSelf = 'self';
   static const _guardianOther = 'other';
-  static const _guardianSpecific = 'specific';
   String _guardian = _guardianSelf;
   String? _subgroupId;
   String? _otherGuardianUid;
@@ -3633,13 +3632,6 @@ class _CreateManagedParticipantDialogState
                     : l10n.groupManagedDialogGuardianNoEligibleMembers,
                 enabled: canDelegate,
               ),
-              _ChoiceOption(
-                value: _guardianSpecific,
-                icon: Icons.shield_outlined,
-                label: l10n.groupManagedDialogGuardianSpecific,
-                hint: l10n.groupManagedDialogGuardianComingSoon,
-                enabled: false,
-              ),
             ],
             selected: _guardian,
             onChanged: (v) => _onGuardianChoice(v, context),
@@ -3781,9 +3773,9 @@ class _ChoiceOption {
   final bool enabled;
 }
 
-/// Fila de chips de selección. Cuando una opción no está habilitada, se
-/// muestra atenuada con un pequeño badge ("Próximamente"). Tap mostrará
-/// un snackbar amable indicando que la opción aún no está disponible.
+/// Fila de chips de selección. Opciones deshabilitadas se muestran atenuadas;
+/// el tap puede mostrar un snackbar si la opción define [hint] (p. ej. sin
+/// miembros elegibles para delegar).
 ///
 /// Diseño pensado para sustituir el típico `DropdownButtonFormField` por
 /// un patrón visual más cálido y social, sin sensación de formulario CRUD.

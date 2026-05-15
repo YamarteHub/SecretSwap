@@ -678,8 +678,6 @@
   "groupManagedDialogGuardianMe": "IO",
   "groupManagedDialogGuardianMeHint": "Condividerò il risultato in privato",
   "groupManagedDialogGuardianOther": "altro membro",
-  "groupManagedDialogGuardianSpecific": "Responsabile specifico",
-  "groupManagedDialogGuardianComingSoon": "Presto",
   "groupManagedDialogDeliverySectionTitle": "Come farai a darglielo?",
   "groupManagedResponsibleUnavailable": "Gestore non disponibile",
   "groupManagedDeliversResponsible": "Lo gestisce:{name}",

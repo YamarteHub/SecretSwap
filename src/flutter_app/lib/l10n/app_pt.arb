@@ -678,8 +678,6 @@
   "groupManagedDialogGuardianMe": "EU",
   "groupManagedDialogGuardianMeHint": "Vou compartilhar o resultado em particular",
   "groupManagedDialogGuardianOther": "outro membro",
-  "groupManagedDialogGuardianSpecific": "Responsável específico",
-  "groupManagedDialogGuardianComingSoon": "Breve",
   "groupManagedDialogDeliverySectionTitle": "Como você vai entregar isso a eles?",
   "groupManagedResponsibleUnavailable": "Gerente não disponível",
   "groupManagedDeliversResponsible": "Gerencia:{name}",

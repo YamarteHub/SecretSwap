@@ -1553,12 +1553,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get groupManagedDialogGuardianOther => 'altro membro';
 
   @override
-  String get groupManagedDialogGuardianSpecific => 'Responsabile specifico';
-
-  @override
-  String get groupManagedDialogGuardianComingSoon => 'Presto';
-
-  @override
   String get groupManagedDialogDeliverySectionTitle =>
       'Come farai a darglielo?';
 

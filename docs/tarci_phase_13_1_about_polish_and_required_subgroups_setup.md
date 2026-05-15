@@ -99,3 +99,9 @@ Backend **no** modificado → `npm run build` no requerido para esta fase.
 - [ ] **Caso B**: Si en el futuro el owner no es miembro activo → solo paso 1 (hoy el asistente de Amigo Secreto crea miembro owner).
 - [ ] **Caso C**: “Lo haré después” → detalle con warnings/checklist como antes.
 - [ ] **Caso D**: Sin regla de exigencia o con ignorar/preferir → **no** debe aparecer el sheet al crear (Para **preferir**, no implementado en 13.1).
+
+---
+
+## Microfix QA 13.1.1 (post fase)
+
+- **Participante sin app:** eliminada de la UI la opción no disponible «Responsable específico / Próximamente» en «¿Quién entregará el resultado?». Solo quedan **Yo** y **Otro miembro**. Se retiraron las claves ARB `groupManagedDialogGuardianSpecific` y `groupManagedDialogGuardianComingSoon` (solo usadas por esa opción).

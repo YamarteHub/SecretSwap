@@ -2756,18 +2756,6 @@ abstract class AppLocalizations {
   /// **'Otro miembro'**
   String get groupManagedDialogGuardianOther;
 
-  /// No description provided for @groupManagedDialogGuardianSpecific.
-  ///
-  /// In es, this message translates to:
-  /// **'Responsable específico'**
-  String get groupManagedDialogGuardianSpecific;
-
-  /// No description provided for @groupManagedDialogGuardianComingSoon.
-  ///
-  /// In es, this message translates to:
-  /// **'Próximamente'**
-  String get groupManagedDialogGuardianComingSoon;
-
   /// No description provided for @groupManagedDialogDeliverySectionTitle.
   ///
   /// In es, this message translates to:
