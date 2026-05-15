@@ -68,6 +68,26 @@
   "aboutScreenTitle": "About Tarci Secret",
   "aboutTooltip": "About Tarci Secret",
   "aboutTagline": "Group dynamics, draws, and social experiences with privacy, emotion, and real people.",
+  "aboutCapabilitiesTitle": "One app, five live dynamics",
+  "aboutSectionPrivacyLead": "Control and transparency for every outcome.",
+  "aboutRetentionLead": "Data is not kept forever.",
+  "requiredSubgroupsSetupSheetTitle": "Set up your subgroups",
+  "requiredSubgroupsSetupSheetBody": "The rule you chose needs subgroups to work. Create houses, teams, classes, or categories, then assign each participant.",
+  "requiredSubgroupsSetupSubgroupFieldLabel": "Subgroup {index}",
+  "@requiredSubgroupsSetupSubgroupFieldLabel": {
+    "placeholders": {
+      "index": { "type": "int" }
+    }
+  },
+  "requiredSubgroupsSetupAddAnother": "Add another subgroup",
+  "requiredSubgroupsSetupContinue": "Create subgroups and continue",
+  "requiredSubgroupsSetupAssignTitle": "Place yourself in a subgroup",
+  "requiredSubgroupsSetupAssignBody": "For this rule to work well, choose which subgroup you belong to.",
+  "requiredSubgroupsSetupSaveContinue": "Save and continue",
+  "requiredSubgroupsSetupDoLater": "I'll do this later",
+  "requiredSubgroupsSetupErrorMinTwo": "Add at least two named subgroups.",
+  "requiredSubgroupsSetupErrorDuplicateName": "Some names are duplicated. Use distinct names.",
+  "requiredSubgroupsSetupAssignErrorSelect": "Select a subgroup to continue.",
   "aboutSectionWhatTitle": "What is Tarci Secret",
   "aboutSectionWhatBody": "Tarci Secret is a social app for organizing group dynamics in a simple, private, and fun way. Create Secret Santa games, run draws, form teams, generate pairings, prepare duels, and include people with the app, without the app, or managed by another participant.\n\nIt began with Secret Santa as its foundation and grows as a space to create meetups, challenges, and social dynamics with emotion, clarity, and real people.",
   "aboutSectionHowTitle": "How it works",

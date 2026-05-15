@@ -8,10 +8,29 @@ import '../../../core/routing/app_router.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/premium_ui.dart';
 import '../../../core/version/public_marketing_version.dart';
+import '../../../l10n/app_localizations.dart';
 
 /// Perfil público indicado en la fase 7B.
 const String kTarciCreatorLinkedInUrl =
     'https://es.linkedin.com/in/stalin-yamarte-4360b857';
+
+List<String> _aboutSplitParagraphs(String text) {
+  return text
+      .split('\n\n')
+      .map((e) => e.trim())
+      .where((e) => e.isNotEmpty)
+      .toList();
+}
+
+List<String> _aboutCapabilityLabels(AppLocalizations l10n) {
+  return [
+    l10n.dynamicsCardSecretSantaTitle,
+    l10n.dynamicsCardRaffleTitle,
+    l10n.dynamicsCardTeamsTitle,
+    l10n.dynamicsCardPairingsTitle,
+    l10n.dynamicsCardDuelsTitle,
+  ];
+}
 
 class AboutTarciScreen extends StatelessWidget {
   const AboutTarciScreen({super.key});
@@ -42,6 +61,9 @@ class AboutTarciScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final theme = Theme.of(context);
+    final whatParas = _aboutSplitParagraphs(l10n.aboutSectionWhatBody);
+    final privacyParas = _aboutSplitParagraphs(l10n.aboutSectionPrivacyBody);
+
     return Scaffold(
       backgroundColor: AppTheme.warmIvory,
       appBar: AppBar(
@@ -63,38 +85,55 @@ class AboutTarciScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(18, 8, 18, 32),
+        padding: const EdgeInsets.fromLTRB(18, 10, 18, 36),
         children: [
-          SecretCard(
-            padding: const EdgeInsets.fromLTRB(22, 22, 22, 22),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.fromLTRB(24, 28, 24, 30),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  AppTheme.softCream,
+                  AppTheme.warmIvory.withValues(alpha: 0.92),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(26),
+              boxShadow: AppTheme.softElevatedShadow,
+              border: Border.all(
+                color: theme.colorScheme.primary.withValues(alpha: 0.11),
+              ),
+            ),
             child: Column(
               children: [
-                const BrandMark(variant: BrandAsset.vertical, height: 112, rounded: false),
-                const SizedBox(height: 16),
+                const BrandMark(variant: BrandAsset.vertical, height: 104, rounded: false),
+                const SizedBox(height: 18),
                 Text(
                   l10n.appName,
                   textAlign: TextAlign.center,
                   style: theme.textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.w800,
-                    height: 1.15,
+                    height: 1.12,
+                    letterSpacing: -0.3,
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 12),
                 Text(
                   l10n.aboutTagline,
                   textAlign: TextAlign.center,
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: theme.colorScheme.onSurface.withValues(alpha: 0.82),
-                    height: 1.45,
+                    height: 1.5,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 20),
           SecretCard(
-            padding: const EdgeInsets.fromLTRB(20, 18, 20, 18),
+            padding: const EdgeInsets.fromLTRB(22, 20, 22, 22),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -102,106 +141,225 @@ class AboutTarciScreen extends StatelessWidget {
                   l10n.aboutSectionWhatTitle,
                   style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w800,
+                    letterSpacing: -0.2,
                   ),
                 ),
-                const SizedBox(height: 10),
-                Text(
-                  l10n.aboutSectionWhatBody,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    height: 1.42,
-                    color: theme.colorScheme.onSurface.withValues(alpha: 0.9),
+                const SizedBox(height: 14),
+                for (var i = 0; i < whatParas.length; i++) ...[
+                  if (i > 0) const SizedBox(height: 14),
+                  Text(
+                    whatParas[i],
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      height: 1.52,
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.9),
+                    ),
                   ),
-                ),
+                ],
               ],
             ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 18),
           Text(
-            l10n.aboutSectionHowTitle,
-            style: theme.textTheme.titleMedium?.copyWith(
+            l10n.aboutCapabilitiesTitle,
+            style: theme.textTheme.titleSmall?.copyWith(
               fontWeight: FontWeight.w800,
+              letterSpacing: 0.1,
+              color: AppTheme.deepPlum.withValues(alpha: 0.88),
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: _aboutCapabilityLabels(l10n).map((label) {
+              return Container(
+                padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
+                decoration: BoxDecoration(
+                  color: AppTheme.deepPlum.withValues(alpha: 0.07),
+                  borderRadius: BorderRadius.circular(999),
+                  border: Border.all(
+                    color: AppTheme.deepPlum.withValues(alpha: 0.12),
+                  ),
+                ),
+                child: Text(
+                  label,
+                  style: theme.textTheme.labelLarge?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: AppTheme.deepPlum.withValues(alpha: 0.88),
+                    height: 1.15,
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+          const SizedBox(height: 22),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: AppTheme.mutedGold.withValues(alpha: 0.22),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  Icons.auto_stories_outlined,
+                  color: AppTheme.deepPlum.withValues(alpha: 0.88),
+                  size: 22,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  l10n.aboutSectionHowTitle,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w800,
+                    height: 1.15,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
           _AboutStepTile(
             icon: Icons.groups_outlined,
             title: l10n.aboutStep1Title,
             body: l10n.aboutStep1Body,
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 10),
           _AboutStepTile(
             icon: Icons.tune_rounded,
             title: l10n.aboutStep2Title,
             body: l10n.aboutStep2Body,
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 10),
           _AboutStepTile(
             icon: Icons.shuffle_rounded,
             title: l10n.aboutStep3Title,
             body: l10n.aboutStep3Body,
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 10),
           _AboutStepTile(
             icon: Icons.celebration_outlined,
             title: l10n.aboutStep4Title,
             body: l10n.aboutStep4Body,
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 20),
           SecretCard(
-            padding: const EdgeInsets.fromLTRB(20, 18, 20, 18),
+            padding: const EdgeInsets.fromLTRB(20, 18, 20, 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(
+                      Icons.verified_user_outlined,
+                      color: AppTheme.deepPlum.withValues(alpha: 0.78),
+                      size: 22,
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        l10n.aboutSectionPrivacyTitle,
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
                 Text(
-                  l10n.aboutSectionPrivacyTitle,
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w800,
+                  l10n.aboutSectionPrivacyLead,
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w700,
+                    height: 1.35,
+                    color: AppTheme.deepPlum.withValues(alpha: 0.85),
                   ),
                 ),
-                const SizedBox(height: 10),
-                Text(
-                  l10n.aboutSectionPrivacyBody,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    height: 1.42,
-                    color: theme.colorScheme.onSurface.withValues(alpha: 0.9),
+                const SizedBox(height: 12),
+                for (var i = 0; i < privacyParas.length; i++) ...[
+                  if (i > 0) const SizedBox(height: 14),
+                  Text(
+                    privacyParas[i],
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      height: 1.5,
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.9),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  l10n.aboutSectionPrivacyTrust,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    height: 1.38,
-                    color: theme.colorScheme.onSurfaceVariant,
-                    fontStyle: FontStyle.italic,
+                ],
+                const SizedBox(height: 12),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
+                  decoration: BoxDecoration(
+                    color: AppTheme.deepPlum.withValues(alpha: 0.05),
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(
+                      color: AppTheme.deepPlum.withValues(alpha: 0.08),
+                    ),
+                  ),
+                  child: Text(
+                    l10n.aboutSectionPrivacyTrust,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      height: 1.42,
+                      color: theme.colorScheme.onSurfaceVariant,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               ],
             ),
           ),
           const SizedBox(height: 16),
-          SecretCard(
-            padding: const EdgeInsets.fromLTRB(20, 18, 20, 18),
+          SectionCard(
+            padding: const EdgeInsets.fromLTRB(20, 18, 20, 20),
+            backgroundColor: AppTheme.warmIvory,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(
+                      Icons.schedule_outlined,
+                      color: AppTheme.softTerracotta.withValues(alpha: 0.95),
+                      size: 22,
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        l10n.aboutRetentionTitle,
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
                 Text(
-                  l10n.aboutRetentionTitle,
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w800,
+                  l10n.aboutRetentionLead,
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w700,
+                    height: 1.35,
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.88),
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 12),
                 Text(
                   l10n.aboutRetentionBody,
                   style: theme.textTheme.bodyMedium?.copyWith(
-                    height: 1.42,
+                    height: 1.5,
                     color: theme.colorScheme.onSurface.withValues(alpha: 0.9),
                   ),
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 18),
           SecretCard(
             padding: const EdgeInsets.fromLTRB(20, 18, 20, 18),
             child: Column(
@@ -213,15 +371,15 @@ class AboutTarciScreen extends StatelessWidget {
                     fontWeight: FontWeight.w800,
                   ),
                 ),
-                const SizedBox(height: 6),
+                const SizedBox(height: 8),
                 Text(
                   l10n.aboutSectionCreatorSubtitle,
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: theme.colorScheme.onSurfaceVariant,
-                    height: 1.35,
+                    height: 1.42,
                   ),
                 ),
-                const SizedBox(height: 14),
+                const SizedBox(height: 16),
                 FilledButton.tonalIcon(
                   onPressed: () => _openLinkedIn(context),
                   icon: const Icon(Icons.work_outline_rounded),
@@ -336,20 +494,20 @@ class _AboutStepTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return SecretCard(
-      padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
+    return SectionCard(
+      padding: const EdgeInsets.fromLTRB(16, 15, 16, 15),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(11),
             decoration: BoxDecoration(
-              color: AppTheme.mutedGold.withValues(alpha: 0.2),
-              borderRadius: BorderRadius.circular(12),
+              gradient: AppTheme.brandHeroGradient,
+              borderRadius: BorderRadius.circular(14),
             ),
-            child: Icon(icon, color: AppTheme.deepPlum.withValues(alpha: 0.88)),
+            child: Icon(icon, color: AppTheme.deepPlum.withValues(alpha: 0.88), size: 21),
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: 14),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -358,14 +516,15 @@ class _AboutStepTile extends StatelessWidget {
                   title,
                   style: theme.textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.w800,
+                    height: 1.2,
                   ),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 6),
                 Text(
                   body,
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: theme.colorScheme.onSurface.withValues(alpha: 0.82),
-                    height: 1.35,
+                    height: 1.45,
                   ),
                 ),
               ],

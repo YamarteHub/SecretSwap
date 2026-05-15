@@ -68,6 +68,26 @@
   "aboutScreenTitle": "À propos de Tarci Secret",
   "aboutTooltip": "À propos de Tarci Secret",
   "aboutTagline": "Dynamiques de groupe, tirages au sort et expériences sociales avec confidentialité, émotion et personnes réelles.",
+  "aboutCapabilitiesTitle": "Une app, cinq dynamiques actives",
+  "aboutSectionPrivacyLead": "Contrôle et transparence pour chaque résultat.",
+  "aboutRetentionLead": "Les données ne sont pas conservées indéfiniment.",
+  "requiredSubgroupsSetupSheetTitle": "Configurez vos sous-groupes",
+  "requiredSubgroupsSetupSheetBody": "La règle choisie a besoin de sous-groupes pour fonctionner. Créez des maisons, équipes, classes ou catégories, puis assignez chaque participant.",
+  "requiredSubgroupsSetupSubgroupFieldLabel": "Sous-groupe {index}",
+  "@requiredSubgroupsSetupSubgroupFieldLabel": {
+    "placeholders": {
+      "index": { "type": "int" }
+    }
+  },
+  "requiredSubgroupsSetupAddAnother": "Ajouter un autre sous-groupe",
+  "requiredSubgroupsSetupContinue": "Créer les sous-groupes et continuer",
+  "requiredSubgroupsSetupAssignTitle": "Placez-vous dans un sous-groupe",
+  "requiredSubgroupsSetupAssignBody": "Pour que la règle fonctionne bien, indiquez le sous-groupe auquel vous appartenez.",
+  "requiredSubgroupsSetupSaveContinue": "Enregistrer et continuer",
+  "requiredSubgroupsSetupDoLater": "Je ferai cela plus tard",
+  "requiredSubgroupsSetupErrorMinTwo": "Ajoutez au moins deux sous-groupes nommés.",
+  "requiredSubgroupsSetupErrorDuplicateName": "Des noms sont en double. Utilisez des noms distincts.",
+  "requiredSubgroupsSetupAssignErrorSelect": "Sélectionnez un sous-groupe pour continuer.",
   "aboutSectionWhatTitle": "Qu’est-ce que Tarci Secret",
   "aboutSectionWhatBody": "Tarci Secret est une application sociale pour organiser des dynamiques de groupe de façon simple, privée et ludique. Elle permet de créer un Secret Santa, réaliser des tirages, former des équipes, générer des appariements et préparer des duels, en incluant des personnes avec l’app, sans app ou gérées par un autre participant.\n\nElle est née autour du Secret Santa comme expérience fondatrice, mais évolue comme espace pour créer des rencontres, des défis et des dynamiques sociales avec émotion, clarté et personnes réelles.",
   "aboutSectionHowTitle": "Comment ça marche",

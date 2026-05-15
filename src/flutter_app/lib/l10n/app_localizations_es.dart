@@ -187,6 +187,59 @@ class AppLocalizationsEs extends AppLocalizations {
       'Dinámicas de grupo, sorteos y experiencias sociales con privacidad, emoción y personas reales.';
 
   @override
+  String get aboutCapabilitiesTitle => 'Una app, cinco dinámicas activas';
+
+  @override
+  String get aboutSectionPrivacyLead =>
+      'Control y transparencia en cada resultado.';
+
+  @override
+  String get aboutRetentionLead => 'Los datos no se almacenan indefinidamente.';
+
+  @override
+  String get requiredSubgroupsSetupSheetTitle => 'Configura tus subgrupos';
+
+  @override
+  String get requiredSubgroupsSetupSheetBody =>
+      'La regla elegida necesita subgrupos para funcionar. Crea casas, equipos, clases o categorías y después asigna a cada participante.';
+
+  @override
+  String requiredSubgroupsSetupSubgroupFieldLabel(int index) {
+    return 'Subgrupo $index';
+  }
+
+  @override
+  String get requiredSubgroupsSetupAddAnother => 'Añadir otro subgrupo';
+
+  @override
+  String get requiredSubgroupsSetupContinue => 'Crear subgrupos y continuar';
+
+  @override
+  String get requiredSubgroupsSetupAssignTitle => 'Ubícate en un subgrupo';
+
+  @override
+  String get requiredSubgroupsSetupAssignBody =>
+      'Para que la regla funcione bien, indica a qué subgrupo perteneces.';
+
+  @override
+  String get requiredSubgroupsSetupSaveContinue => 'Guardar y continuar';
+
+  @override
+  String get requiredSubgroupsSetupDoLater => 'Lo haré después';
+
+  @override
+  String get requiredSubgroupsSetupErrorMinTwo =>
+      'Añade al menos dos subgrupos con nombre.';
+
+  @override
+  String get requiredSubgroupsSetupErrorDuplicateName =>
+      'Hay nombres duplicados. Usa nombres distintos.';
+
+  @override
+  String get requiredSubgroupsSetupAssignErrorSelect =>
+      'Selecciona un subgrupo para continuar.';
+
+  @override
   String get aboutSectionWhatTitle => 'Qué es Tarci Secret';
 
   @override

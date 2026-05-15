@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../core/l10n/l10n.dart';
 import '../../../../core/messaging/functions_user_message.dart';
+import '../../../../core/routing/app_router.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/theme/premium_ui.dart';
 import '../../domain/group_models.dart';
@@ -227,7 +228,13 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
       );
       if (!mounted) return;
       if (openGroup == true) {
-        context.go('/groups/${created.groupId}');
+        context.go(
+          AppRoutes.groupDetailFor(created.groupId),
+          extra: GroupDetailRouteExtra(
+            offerPostCreateRequiredSubgroupsSetup:
+                _drawRule == DrawSubgroupRule.requireDifferent,
+          ),
+        );
       } else {
         context.pop();
       }

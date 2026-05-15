@@ -24,6 +24,7 @@ import '../../../wishlist/presentation/providers.dart';
 import '../../domain/group_exceptions.dart';
 import '../../domain/group_models.dart';
 import '../providers.dart';
+import '../widgets/required_subgroups_post_create_sheet.dart';
 import '../widgets/retention_auto_delete_notice.dart';
 
 String? _subgroupDisplayName(GroupDetail detail, String? subgroupId) {
@@ -231,11 +232,13 @@ String _shortNamesList(List<String> names, {int maxVisible = 4}) {
 class GroupDetailScreen extends ConsumerWidget {
   final String groupId;
   final String? initialInviteCode;
+  final bool offerPostCreateRequiredSubgroupsSetup;
 
   const GroupDetailScreen({
     super.key,
     required this.groupId,
     this.initialInviteCode,
+    this.offerPostCreateRequiredSubgroupsSetup = false,
   });
 
   void _goBack(BuildContext context) {
@@ -347,6 +350,8 @@ class GroupDetailScreen extends ConsumerWidget {
             detail: detail,
             currentUid: uid,
             groupId: groupId,
+            offerPostCreateRequiredSubgroupsSetup:
+                offerPostCreateRequiredSubgroupsSetup,
             onAfterDraw: () {
               ref.invalidate(groupDetailProvider(groupId));
               ref.invalidate(myGroupsProvider);
@@ -509,6 +514,7 @@ class _GroupDetailBody extends ConsumerStatefulWidget {
   final GroupDetail detail;
   final String? currentUid;
   final String groupId;
+  final bool offerPostCreateRequiredSubgroupsSetup;
   final VoidCallback onAfterDraw;
   final VoidCallback onReload;
   final VoidCallback onGroupDeletedSuccess;
@@ -517,6 +523,7 @@ class _GroupDetailBody extends ConsumerStatefulWidget {
     required this.detail,
     required this.currentUid,
     required this.groupId,
+    this.offerPostCreateRequiredSubgroupsSetup = false,
     required this.onAfterDraw,
     required this.onReload,
     required this.onGroupDeletedSuccess,
@@ -539,10 +546,40 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
   bool _rotatingInviteCode = false;
   String? _lastInviteCode;
   bool _deleteGroupInFlight = false;
+  bool _consumedPostCreateSubgroupRouteFlag = false;
   // Sección actualmente expandida. `null` = todas colapsadas.
   // El usuario abre y cierra manualmente; no expandimos por defecto para
   // que la pantalla quede limpia y los headers se vean como un índice.
   _DetailSection? _expandedSection;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _offerRequiredSubgroupsPostCreateSetupIfNeeded();
+    });
+  }
+
+  Future<void> _offerRequiredSubgroupsPostCreateSetupIfNeeded() async {
+    if (_consumedPostCreateSubgroupRouteFlag) return;
+    if (!widget.offerPostCreateRequiredSubgroupsSetup) return;
+    _consumedPostCreateSubgroupRouteFlag = true;
+
+    if (!mounted) return;
+    if (!_isOwner) return;
+    if (widget.detail.drawSubgroupRule != DrawSubgroupRule.requireDifferent) {
+      return;
+    }
+    if (widget.detail.subgroups.isNotEmpty) return;
+    if (!_drawAllowsSubgroupChange(widget.detail.drawStatus)) return;
+
+    await showRequiredSubgroupsPostCreateSheet(
+      context: context,
+      groupId: widget.groupId,
+      initialDetail: widget.detail,
+      onReload: widget.onReload,
+    );
+  }
 
   void _toggleSection(_DetailSection section) {
     setState(() {

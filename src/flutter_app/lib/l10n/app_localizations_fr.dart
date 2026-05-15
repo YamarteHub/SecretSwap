@@ -191,6 +191,62 @@ class AppLocalizationsFr extends AppLocalizations {
       'Dynamiques de groupe, tirages au sort et expériences sociales avec confidentialité, émotion et personnes réelles.';
 
   @override
+  String get aboutCapabilitiesTitle => 'Une app, cinq dynamiques actives';
+
+  @override
+  String get aboutSectionPrivacyLead =>
+      'Contrôle et transparence pour chaque résultat.';
+
+  @override
+  String get aboutRetentionLead =>
+      'Les données ne sont pas conservées indéfiniment.';
+
+  @override
+  String get requiredSubgroupsSetupSheetTitle => 'Configurez vos sous-groupes';
+
+  @override
+  String get requiredSubgroupsSetupSheetBody =>
+      'La règle choisie a besoin de sous-groupes pour fonctionner. Créez des maisons, équipes, classes ou catégories, puis assignez chaque participant.';
+
+  @override
+  String requiredSubgroupsSetupSubgroupFieldLabel(int index) {
+    return 'Sous-groupe $index';
+  }
+
+  @override
+  String get requiredSubgroupsSetupAddAnother => 'Ajouter un autre sous-groupe';
+
+  @override
+  String get requiredSubgroupsSetupContinue =>
+      'Créer les sous-groupes et continuer';
+
+  @override
+  String get requiredSubgroupsSetupAssignTitle =>
+      'Placez-vous dans un sous-groupe';
+
+  @override
+  String get requiredSubgroupsSetupAssignBody =>
+      'Pour que la règle fonctionne bien, indiquez le sous-groupe auquel vous appartenez.';
+
+  @override
+  String get requiredSubgroupsSetupSaveContinue => 'Enregistrer et continuer';
+
+  @override
+  String get requiredSubgroupsSetupDoLater => 'Je ferai cela plus tard';
+
+  @override
+  String get requiredSubgroupsSetupErrorMinTwo =>
+      'Ajoutez au moins deux sous-groupes nommés.';
+
+  @override
+  String get requiredSubgroupsSetupErrorDuplicateName =>
+      'Des noms sont en double. Utilisez des noms distincts.';
+
+  @override
+  String get requiredSubgroupsSetupAssignErrorSelect =>
+      'Sélectionnez un sous-groupe pour continuer.';
+
+  @override
   String get aboutSectionWhatTitle => 'Qu’est-ce que Tarci Secret';
 
   @override

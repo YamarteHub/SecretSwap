@@ -19,9 +19,14 @@ import '../../features/auth/presentation/splash_screen.dart';
 import '../../features/wishlist/presentation/screens/wishlist_edit_screen.dart';
 
 class GroupDetailRouteExtra {
-  const GroupDetailRouteExtra({this.inviteCode});
+  const GroupDetailRouteExtra({
+    this.inviteCode,
+    this.offerPostCreateRequiredSubgroupsSetup = false,
+  });
 
   final String? inviteCode;
+  /// Tras crear Amigo Secreto con subgrupo obligatorio (Fase 13.1).
+  final bool offerPostCreateRequiredSubgroupsSetup;
 }
 
 class AppRoutes {
@@ -114,6 +119,8 @@ GoRouter buildRouter({GlobalKey<NavigatorState>? navigatorKey}) {
           return GroupDetailScreen(
             groupId: groupId,
             initialInviteCode: extra?.inviteCode,
+            offerPostCreateRequiredSubgroupsSetup:
+                extra?.offerPostCreateRequiredSubgroupsSetup ?? false,
           );
         },
       ),

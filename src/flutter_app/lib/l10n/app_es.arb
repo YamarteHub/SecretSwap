@@ -68,6 +68,26 @@
   "aboutScreenTitle": "Acerca de Tarci Secret",
   "aboutTooltip": "Acerca de Tarci Secret",
   "aboutTagline": "Dinámicas de grupo, sorteos y experiencias sociales con privacidad, emoción y personas reales.",
+  "aboutCapabilitiesTitle": "Una app, cinco dinámicas activas",
+  "aboutSectionPrivacyLead": "Control y transparencia en cada resultado.",
+  "aboutRetentionLead": "Los datos no se almacenan indefinidamente.",
+  "requiredSubgroupsSetupSheetTitle": "Configura tus subgrupos",
+  "requiredSubgroupsSetupSheetBody": "La regla elegida necesita subgrupos para funcionar. Crea casas, equipos, clases o categorías y después asigna a cada participante.",
+  "requiredSubgroupsSetupSubgroupFieldLabel": "Subgrupo {index}",
+  "@requiredSubgroupsSetupSubgroupFieldLabel": {
+    "placeholders": {
+      "index": { "type": "int" }
+    }
+  },
+  "requiredSubgroupsSetupAddAnother": "Añadir otro subgrupo",
+  "requiredSubgroupsSetupContinue": "Crear subgrupos y continuar",
+  "requiredSubgroupsSetupAssignTitle": "Ubícate en un subgrupo",
+  "requiredSubgroupsSetupAssignBody": "Para que la regla funcione bien, indica a qué subgrupo perteneces.",
+  "requiredSubgroupsSetupSaveContinue": "Guardar y continuar",
+  "requiredSubgroupsSetupDoLater": "Lo haré después",
+  "requiredSubgroupsSetupErrorMinTwo": "Añade al menos dos subgrupos con nombre.",
+  "requiredSubgroupsSetupErrorDuplicateName": "Hay nombres duplicados. Usa nombres distintos.",
+  "requiredSubgroupsSetupAssignErrorSelect": "Selecciona un subgrupo para continuar.",
   "aboutSectionWhatTitle": "Qué es Tarci Secret",
   "aboutSectionWhatBody": "Tarci Secret es una app social para organizar dinámicas de grupo de forma sencilla, privada y divertida. Permite crear amigos secretos, realizar sorteos, formar equipos, generar parejas y preparar duelos, incluyendo personas con app, sin app o gestionadas por otro participante.\n\nNace alrededor del amigo secreto como experiencia fundacional, pero evoluciona como un espacio para crear encuentros, retos y dinámicas sociales con emoción, claridad y personas reales.",
   "aboutSectionHowTitle": "Cómo funciona",

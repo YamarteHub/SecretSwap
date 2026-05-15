@@ -428,6 +428,96 @@ abstract class AppLocalizations {
   /// **'Dinámicas de grupo, sorteos y experiencias sociales con privacidad, emoción y personas reales.'**
   String get aboutTagline;
 
+  /// No description provided for @aboutCapabilitiesTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Una app, cinco dinámicas activas'**
+  String get aboutCapabilitiesTitle;
+
+  /// No description provided for @aboutSectionPrivacyLead.
+  ///
+  /// In es, this message translates to:
+  /// **'Control y transparencia en cada resultado.'**
+  String get aboutSectionPrivacyLead;
+
+  /// No description provided for @aboutRetentionLead.
+  ///
+  /// In es, this message translates to:
+  /// **'Los datos no se almacenan indefinidamente.'**
+  String get aboutRetentionLead;
+
+  /// No description provided for @requiredSubgroupsSetupSheetTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Configura tus subgrupos'**
+  String get requiredSubgroupsSetupSheetTitle;
+
+  /// No description provided for @requiredSubgroupsSetupSheetBody.
+  ///
+  /// In es, this message translates to:
+  /// **'La regla elegida necesita subgrupos para funcionar. Crea casas, equipos, clases o categorías y después asigna a cada participante.'**
+  String get requiredSubgroupsSetupSheetBody;
+
+  /// No description provided for @requiredSubgroupsSetupSubgroupFieldLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Subgrupo {index}'**
+  String requiredSubgroupsSetupSubgroupFieldLabel(int index);
+
+  /// No description provided for @requiredSubgroupsSetupAddAnother.
+  ///
+  /// In es, this message translates to:
+  /// **'Añadir otro subgrupo'**
+  String get requiredSubgroupsSetupAddAnother;
+
+  /// No description provided for @requiredSubgroupsSetupContinue.
+  ///
+  /// In es, this message translates to:
+  /// **'Crear subgrupos y continuar'**
+  String get requiredSubgroupsSetupContinue;
+
+  /// No description provided for @requiredSubgroupsSetupAssignTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Ubícate en un subgrupo'**
+  String get requiredSubgroupsSetupAssignTitle;
+
+  /// No description provided for @requiredSubgroupsSetupAssignBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Para que la regla funcione bien, indica a qué subgrupo perteneces.'**
+  String get requiredSubgroupsSetupAssignBody;
+
+  /// No description provided for @requiredSubgroupsSetupSaveContinue.
+  ///
+  /// In es, this message translates to:
+  /// **'Guardar y continuar'**
+  String get requiredSubgroupsSetupSaveContinue;
+
+  /// No description provided for @requiredSubgroupsSetupDoLater.
+  ///
+  /// In es, this message translates to:
+  /// **'Lo haré después'**
+  String get requiredSubgroupsSetupDoLater;
+
+  /// No description provided for @requiredSubgroupsSetupErrorMinTwo.
+  ///
+  /// In es, this message translates to:
+  /// **'Añade al menos dos subgrupos con nombre.'**
+  String get requiredSubgroupsSetupErrorMinTwo;
+
+  /// No description provided for @requiredSubgroupsSetupErrorDuplicateName.
+  ///
+  /// In es, this message translates to:
+  /// **'Hay nombres duplicados. Usa nombres distintos.'**
+  String get requiredSubgroupsSetupErrorDuplicateName;
+
+  /// No description provided for @requiredSubgroupsSetupAssignErrorSelect.
+  ///
+  /// In es, this message translates to:
+  /// **'Selecciona un subgrupo para continuar.'**
+  String get requiredSubgroupsSetupAssignErrorSelect;
+
   /// No description provided for @aboutSectionWhatTitle.
   ///
   /// In es, this message translates to:
