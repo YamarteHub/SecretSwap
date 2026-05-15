@@ -176,9 +176,6 @@ class _WishlistEditScreenState extends ConsumerState<WishlistEditScreen> {
         ),
       );
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.wishlistSaveSuccess)),
-      );
       context.pop();
     } catch (e) {
       if (!mounted) return;

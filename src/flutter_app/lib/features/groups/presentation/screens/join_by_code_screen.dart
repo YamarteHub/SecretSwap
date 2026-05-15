@@ -147,9 +147,6 @@ class _JoinByCodeScreenState extends ConsumerState<JoinByCodeScreen> {
         }
       }
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.joinScreenSuccessSnackbar)),
-      );
       context.go(AppRoutes.groupDetail.replaceFirst(':groupId', groupId));
     } catch (e) {
       if (mounted) {

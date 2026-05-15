@@ -320,9 +320,6 @@ class GroupDetailScreen extends ConsumerWidget {
                 ref.invalidate(groupRaffleStatusStreamProvider(groupId));
                 ref.invalidate(groupChatMessagesProvider(groupId));
                 if (!context.mounted) return;
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(context.l10n.groupDeleteSuccessSnackbar)),
-                );
                 context.go(AppRoutes.groupsHome);
               },
             );
@@ -342,9 +339,6 @@ class GroupDetailScreen extends ConsumerWidget {
                 ref.invalidate(groupDetailProvider(groupId));
                 ref.invalidate(groupTeamStatusStreamProvider(groupId));
                 if (!context.mounted) return;
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(context.l10n.groupDeleteSuccessSnackbar)),
-                );
                 context.go(AppRoutes.groupsHome);
               },
             );
@@ -371,9 +365,6 @@ class GroupDetailScreen extends ConsumerWidget {
               ref.invalidate(groupRaffleStatusStreamProvider(groupId));
               ref.invalidate(groupChatMessagesProvider(groupId));
               if (!context.mounted) return;
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(context.l10n.groupDeleteSuccessSnackbar)),
-              );
               context.go(AppRoutes.groupsHome);
             },
           );
@@ -714,9 +705,6 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
         // debe mostrarse como error del sorteo. El usuario puede refrescar.
       }
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.groupSnackbarDrawCompleted)),
-      );
     } catch (e) {
       if (!mounted) return;
       if (executeDrawErrorIsAlreadyCompleted(e)) {
@@ -730,9 +718,6 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
           await ref.read(groupDetailProvider(widget.groupId).future);
         } catch (_) {}
         if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.groupSnackbarDrawCompleted)),
-        );
       } else {
         if (kDebugMode) {
           debugPrint('[runDraw] error groupId=${widget.groupId} e=$e');
@@ -838,11 +823,6 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
           .read(groupsRepositoryProvider)
           .createSubgroup(groupId: widget.groupId, name: name);
       _reloadDetail();
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.groupActionCreateSubgroup)),
-        );
-      }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -871,11 +851,6 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
             subgroupId: result.subgroupId,
           );
       _reloadDetail();
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.groupSnackbarSubgroupUpdated)),
-        );
-      }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -904,11 +879,6 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
           .read(groupsRepositoryProvider)
           .setDrawSubgroupRule(groupId: widget.groupId, mode: mode);
       _reloadDetail();
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.groupSnackbarRuleUpdated)),
-        );
-      }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -929,9 +899,6 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
           .rotateInviteCode(groupId: widget.groupId);
       if (!mounted) return;
       setState(() => _lastInviteCode = code);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.groupSnackbarNewCodeGenerated)),
-      );
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -985,11 +952,6 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
             managedByUid: result.managedByUid,
           );
       _reloadDetail();
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.groupSnackbarManagedAdded)),
-        );
-      }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -1034,11 +996,6 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
           .read(groupsRepositoryProvider)
           .renameGroup(groupId: widget.groupId, name: nextName.trim());
       _reloadDetail();
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.groupSnackbarGroupNameUpdated)),
-        );
-      }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -1087,11 +1044,6 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
             name: nextName.trim(),
           );
       _reloadDetail();
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.groupSnackbarSubgroupUpdated)),
-        );
-      }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -1131,11 +1083,6 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
             subgroupId: subgroup.subgroupId,
           );
       _reloadDetail();
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.groupActionDeleteSubgroup)),
-        );
-      }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -1267,11 +1214,6 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
         toSubgroupId: targetSubgroupId,
       );
       _reloadDetail();
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.groupActionEmptySubgroup)),
-        );
-      }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -1361,11 +1303,6 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
             subgroupId: subgroup.subgroupId,
           );
       _reloadDetail();
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.groupActionDeleteSubgroup)),
-        );
-      }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -1406,11 +1343,6 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
             syncManagedByUid: true,
           );
       _reloadDetail();
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.groupSnackbarManagedUpdated)),
-        );
-      }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -1452,11 +1384,6 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
             participantId: participant.participantId,
           );
       _reloadDetail();
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.groupSnackbarManagedDeleted)),
-        );
-      }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

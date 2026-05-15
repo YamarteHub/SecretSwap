@@ -27,9 +27,6 @@ class _PushActivationCardState extends ConsumerState<PushActivationCard> {
       if (!mounted) return;
       if (ok) {
         ref.invalidate(pushActivationVisibleProvider);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.pushActivationSuccessSnackbar)),
-        );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(context.l10n.pushActivationDeniedSnackbar)),

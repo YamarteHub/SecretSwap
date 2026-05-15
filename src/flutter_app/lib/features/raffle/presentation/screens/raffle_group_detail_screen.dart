@@ -169,9 +169,6 @@ class _RaffleGroupDetailScreenState extends ConsumerState<RaffleGroupDetailScree
           .rotateInviteCode(groupId: widget.groupId);
       if (!mounted) return;
       setState(() => _inviteCode = code);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.groupSnackbarNewCodeGenerated)),
-      );
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -195,9 +192,6 @@ class _RaffleGroupDetailScreenState extends ConsumerState<RaffleGroupDetailScree
           );
       if (!mounted) return;
       widget.onReload();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.homeRaffleStateCompleted)),
-      );
     } catch (e) {
       if (!mounted) return;
       if (executeRaffleErrorIsAlreadyCompleted(e)) {

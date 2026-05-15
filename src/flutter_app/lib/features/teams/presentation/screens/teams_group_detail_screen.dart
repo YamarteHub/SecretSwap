@@ -210,9 +210,6 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
           );
       if (!mounted) return;
       widget.onReload();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(ui.renameSuccess)),
-      );
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -233,9 +230,6 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
           .rotateInviteCode(groupId: widget.groupId);
       if (!mounted) return;
       setState(() => _inviteCode = code);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.groupSnackbarNewCodeGenerated)),
-      );
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -259,10 +253,6 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
           );
       if (!mounted) return;
       widget.onReload();
-      final ui = TeamsUiCopy.of(context.l10n, widget.detail.teamsPreset);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(ui.homeStateCompleted)),
-      );
     } catch (e) {
       if (!mounted) return;
       if (executeTeamsErrorIsAlreadyCompleted(e)) {
