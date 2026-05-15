@@ -503,7 +503,7 @@ abstract class AppLocalizations {
   /// No description provided for @aboutSectionPrivacyBody.
   ///
   /// In es, this message translates to:
-  /// **'Cada dinámica muestra solo lo que corresponde. Las asignaciones privadas se protegen, los resultados públicos se comparten únicamente con el grupo y Tarci evita exponer información innecesaria.'**
+  /// **'Cada dinámica muestra solo lo que corresponde. Las asignaciones privadas se protegen, los resultados públicos se comparten únicamente con el grupo y Tarci evita exponer información innecesaria.\n\nTarci Secret no necesita pedir correo electrónico ni teléfono para usar el modo rápido. Solo conserva los datos necesarios para que cada dinámica funcione y elimina automáticamente las dinámicas completadas tras un periodo limitado.'**
   String get aboutSectionPrivacyBody;
 
   /// No description provided for @aboutSectionPrivacyTrust.
@@ -511,6 +511,30 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'La privacidad no es un añadido: es parte del diseño de la experiencia.'**
   String get aboutSectionPrivacyTrust;
+
+  /// No description provided for @aboutRetentionTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Retención limitada'**
+  String get aboutRetentionTitle;
+
+  /// No description provided for @aboutRetentionBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Las dinámicas completadas se conservan durante 90 días desde su fecha de cierre o evento, para que puedas consultar resultados y compartirlos. Después se eliminan automáticamente del sistema.'**
+  String get aboutRetentionBody;
+
+  /// No description provided for @retentionAutoDeleteNotice.
+  ///
+  /// In es, this message translates to:
+  /// **'Esta dinámica se eliminará automáticamente el {date}.'**
+  String retentionAutoDeleteNotice(String date);
+
+  /// No description provided for @retentionAutoDeleteBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Conservamos los resultados durante un tiempo limitado para proteger tu privacidad y evitar guardar datos innecesarios.'**
+  String get retentionAutoDeleteBody;
 
   /// No description provided for @aboutSectionCreatorTitle.
   ///

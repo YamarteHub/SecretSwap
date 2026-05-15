@@ -80,8 +80,17 @@
   "aboutStep4Title": "Découvrir, discuter et profiter",
   "aboutStep4Body": "Chaque dynamique affiche le résultat clairement et permet de vivre au mieux l’expérience du groupe.",
   "aboutSectionPrivacyTitle": "Confidentialité dès la conception",
-  "aboutSectionPrivacyBody": "Chaque dynamique n’affiche que ce qui correspond. Les attributions privées restent protégées, les résultats publics ne sont partagés qu’avec le groupe et Tarci évite d’exposer des informations inutiles.",
+  "aboutSectionPrivacyBody": "Chaque dynamique n’affiche que ce qui correspond. Les attributions privées restent protégées, les résultats publics ne sont partagés qu’avec le groupe et Tarci évite d’exposer des informations inutiles.\n\nTarci Secret n’a pas besoin de votre e-mail ni de votre téléphone pour le mode rapide. Il ne conserve que les données nécessaires au bon fonctionnement de chaque dynamique et supprime automatiquement les dynamiques terminées après une période limitée.",
   "aboutSectionPrivacyTrust": "La confidentialité n’est pas un ajout : elle fait partie de la conception de l’expérience.",
+  "aboutRetentionTitle": "Conservation limitée",
+  "aboutRetentionBody": "Les dynamiques terminées sont conservées pendant 90 jours à partir de leur date de clôture ou d’événement, afin que vous puissiez consulter les résultats et les partager. Ensuite, elles sont supprimées automatiquement du système.",
+  "retentionAutoDeleteNotice": "Cette dynamique sera supprimée automatiquement le {date}.",
+  "@retentionAutoDeleteNotice": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+  "retentionAutoDeleteBody": "Nous conservons les résultats pendant une durée limitée pour protéger votre vie privée et éviter de stocker des données inutiles.",
   "aboutSectionCreatorTitle": "Créé par Stalin Yamarte",
   "aboutSectionCreatorSubtitle": "Spécialiste en systèmes et développeur d’applications.",
   "aboutLinkedInCta": "Voir le profil LinkedIn",

@@ -16,6 +16,13 @@
         { "fieldPath": "teamStatus", "order": "ASCENDING" },
         { "fieldPath": "lifecycleStatus", "order": "ASCENDING" }
       ]
+    },
+    {
+      "collectionGroup": "groups",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "retentionDeleteAt", "order": "ASCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []

@@ -474,6 +474,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
       lastTeamCompletedAt:
           _readFirestoreOptionalDate(g, 'lastTeamCompletedAt'),
       eventDate: _readFirestoreOptionalDate(g, 'eventDate'),
+      retentionDeleteAt: _readFirestoreOptionalDate(g, 'retentionDeleteAt'),
       subgroups: subgroups,
       members: members,
       managedParticipants: managedParticipants,

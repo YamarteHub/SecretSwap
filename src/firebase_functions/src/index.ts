@@ -29,6 +29,7 @@ import { sendGroupChatMessage } from "./functions/sendGroupChatMessage";
 import { publishTarciScheduledChatMessages } from "./functions/publishTarciScheduledChatMessages";
 import { devRunTarciChatAutomation } from "./functions/devRunTarciChatAutomation";
 import { registerPushToken } from "./functions/registerPushToken";
+import { purgeExpiredCompletedGroups } from "./functions/purgeExpiredCompletedGroups";
 
 export {
   createGroup,
@@ -57,6 +58,7 @@ export {
   sendGroupChatMessage,
   publishTarciScheduledChatMessages,
   devRunTarciChatAutomation,
-  registerPushToken
+  registerPushToken,
+  purgeExpiredCompletedGroups
 };
 

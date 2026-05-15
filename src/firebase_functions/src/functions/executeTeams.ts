@@ -16,6 +16,7 @@ import {
 import { parseOrThrow } from "../shared/validation";
 import { appendGroupChatSystemMessageIfNew } from "../shared/groupChat";
 import { notifyGroupDynamicCompleted } from "../shared/groupNotifications";
+import { buildRetentionFirestoreUpdate, readEventDate } from "../shared/retention";
 
 type TeamsPresetRun = "standard" | "pairings" | "duels";
 
@@ -128,6 +129,7 @@ export const executeTeams = onCall(async (req: CallableRequest<unknown>): Promis
         requestedTeamCount?: number;
         requestedTeamSize?: number;
         ownerParticipatesInTeams?: boolean;
+        eventDate?: unknown;
       };
       const teamsPreset = parseTeamsPresetRun(group.teamsPreset);
 
@@ -305,6 +307,7 @@ export const executeTeams = onCall(async (req: CallableRequest<unknown>): Promis
       const executionRef = db.collection(groupPaths.teamExecutionsCol(body.groupId)).doc();
       const executionId = executionRef.id;
       const nowTs = FieldValue.serverTimestamp();
+      const retentionNow = new Date();
 
       tx.set(executionRef, {
         executionId,
@@ -325,7 +328,11 @@ export const executeTeams = onCall(async (req: CallableRequest<unknown>): Promis
         teamStatus: "completed",
         lastTeamExecutionId: executionId,
         lastTeamCompletedAt: nowTs,
-        updatedAt: nowTs
+        updatedAt: nowTs,
+        ...buildRetentionFirestoreUpdate({
+          completedAt: retentionNow,
+          eventDate: readEventDate(group.eventDate)
+        })
       });
 
       return {

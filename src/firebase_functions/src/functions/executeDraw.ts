@@ -21,6 +21,18 @@ import { notifyGroupDynamicCompleted } from "../shared/groupNotifications";
 import { groupPaths } from "../shared/firestorePaths";
 import { acquireDrawingLock, clearDrawingLock } from "../shared/lock";
 import { parseOrThrow } from "../shared/validation";
+import { buildRetentionFirestoreUpdate, readEventDate } from "../shared/retention";
+
+function retentionPatchIfFirstDrawCompletion(
+  groupBefore: { drawStatus?: string; eventDate?: unknown },
+  completedAt: Date
+): Record<string, unknown> {
+  if (groupBefore.drawStatus === "completed") return {};
+  return buildRetentionFirestoreUpdate({
+    completedAt,
+    eventDate: readEventDate(groupBefore.eventDate)
+  });
+}
 
 function assignmentsCollection(db: Firestore, groupId: string, executionId: string) {
   return db.collection("groups").doc(groupId).collection("executions").doc(executionId).collection("assignments");
@@ -550,8 +562,10 @@ export const executeDraw = onCall(async (req: CallableRequest<unknown>): Promise
         subgroupMode: summarySubgroupLabel(subgroupMode),
         internalMatchCount: internalMatchFromAssignments(participantById, assignSnap.docs)
       };
+      const retentionNowRepair = new Date();
       await db.runTransaction(async (tx) => {
         const [gSnap, eSnap] = await Promise.all([tx.get(groupRef), tx.get(executionRef)]);
+        const gData = gSnap.data() as { drawStatus?: string; eventDate?: unknown } | undefined;
         const lock = gSnap.data()?.drawingLock as { executionId?: string; idempotencyKey?: string } | undefined;
         if (!lock || lock.executionId !== executionId || lock.idempotencyKey !== body.idempotencyKey) {
           throw new AppError({ code: "DRAW_IN_PROGRESS", message: "Draw lock lost" });
@@ -577,7 +591,9 @@ export const executeDraw = onCall(async (req: CallableRequest<unknown>): Promise
           drawingLock: null,
           currentExecutionId: executionId,
           lastExecutionId: executionId,
-          updatedAt: FieldValue.serverTimestamp()
+          lastDrawCompletedAt: nowTs,
+          updatedAt: FieldValue.serverTimestamp(),
+          ...retentionPatchIfFirstDrawCompletion(gData ?? {}, retentionNowRepair)
         });
       });
 
@@ -632,9 +648,11 @@ export const executeDraw = onCall(async (req: CallableRequest<unknown>): Promise
     };
 
     const nowTs = FieldValue.serverTimestamp();
+    const retentionNow = new Date();
 
     await db.runTransaction(async (tx) => {
       const [gSnap, eSnap] = await Promise.all([tx.get(groupRef), tx.get(executionRef)]);
+      const gData = gSnap.data() as { drawStatus?: string; eventDate?: unknown } | undefined;
       const lock = gSnap.data()?.drawingLock as { executionId?: string; idempotencyKey?: string } | undefined;
       if (!lock || lock.executionId !== executionId || lock.idempotencyKey !== body.idempotencyKey) {
         throw new AppError({ code: "DRAW_IN_PROGRESS", message: "Draw lock lost" });
@@ -712,7 +730,8 @@ export const executeDraw = onCall(async (req: CallableRequest<unknown>): Promise
         currentExecutionId: executionId,
         lastExecutionId: executionId,
         lastDrawCompletedAt: nowTs,
-        updatedAt: FieldValue.serverTimestamp()
+        updatedAt: FieldValue.serverTimestamp(),
+        ...retentionPatchIfFirstDrawCompletion(gData ?? {}, retentionNow)
       });
     });
 

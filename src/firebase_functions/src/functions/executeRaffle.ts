@@ -12,6 +12,7 @@ import {
 } from "../shared/dtos";
 import { parseOrThrow } from "../shared/validation";
 import { notifyGroupDynamicCompleted } from "../shared/groupNotifications";
+import { buildRetentionFirestoreUpdate, readEventDate } from "../shared/retention";
 
 type Eligible = {
   participantId: string;
@@ -66,6 +67,7 @@ export const executeRaffle = onCall(async (req: CallableRequest<unknown>): Promi
       };
     }
 
+    const retentionNow = new Date();
     const result = await db.runTransaction(async (tx) => {
       const groupSnap = await tx.get(groupRef);
       if (!groupSnap.exists) {
@@ -79,6 +81,7 @@ export const executeRaffle = onCall(async (req: CallableRequest<unknown>): Promi
         raffleWinnerCount?: number;
         ownerParticipatesInRaffle?: boolean;
         name?: string;
+        eventDate?: unknown;
       };
 
       if (group.ownerUid !== uid) {
@@ -224,7 +227,11 @@ export const executeRaffle = onCall(async (req: CallableRequest<unknown>): Promi
         raffleStatus: "completed",
         lastRaffleExecutionId: executionId,
         lastRaffleCompletedAt: nowTs,
-        updatedAt: nowTs
+        updatedAt: nowTs,
+        ...buildRetentionFirestoreUpdate({
+          completedAt: retentionNow,
+          eventDate: readEventDate(group.eventDate)
+        })
       });
 
       return {

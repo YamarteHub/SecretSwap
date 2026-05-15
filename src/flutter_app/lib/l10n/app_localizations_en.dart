@@ -226,11 +226,27 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aboutSectionPrivacyBody =>
-      'Each dynamic shows only what applies. Private assignments stay protected, public results are shared only with the group, and Tarci avoids exposing unnecessary information.';
+      'Each dynamic shows only what applies. Private assignments stay protected, public results are shared only with the group, and Tarci avoids exposing unnecessary information.\n\nTarci Secret does not need your email or phone number for quick mode. It only keeps the data needed for each dynamic to work and automatically deletes completed dynamics after a limited period.';
 
   @override
   String get aboutSectionPrivacyTrust =>
       'Privacy is not an add-on: it is part of how the experience is designed.';
+
+  @override
+  String get aboutRetentionTitle => 'Limited retention';
+
+  @override
+  String get aboutRetentionBody =>
+      'Completed dynamics are kept for 90 days from their closing or event date so you can review results and share them. After that, they are automatically removed from the system.';
+
+  @override
+  String retentionAutoDeleteNotice(String date) {
+    return 'This dynamic will be automatically deleted on $date.';
+  }
+
+  @override
+  String get retentionAutoDeleteBody =>
+      'We keep results for a limited time to protect your privacy and avoid storing unnecessary data.';
 
   @override
   String get aboutSectionCreatorTitle => 'Created by Stalin Yamarte';

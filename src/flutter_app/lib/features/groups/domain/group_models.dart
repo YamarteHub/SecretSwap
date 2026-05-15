@@ -319,6 +319,7 @@ class GroupDetail {
   final DateTime? lastRaffleCompletedAt;
   final DateTime? lastTeamCompletedAt;
   final DateTime? eventDate;
+  final DateTime? retentionDeleteAt;
   final List<Subgroup> subgroups;
   final List<GroupMember> members;
   final List<GroupParticipant> managedParticipants;
@@ -353,6 +354,7 @@ class GroupDetail {
     this.lastRaffleCompletedAt,
     this.lastTeamCompletedAt,
     this.eventDate,
+    this.retentionDeleteAt,
     required this.subgroups,
     required this.members,
     required this.managedParticipants,

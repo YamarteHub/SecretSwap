@@ -80,8 +80,17 @@
   "aboutStep4Title": "Descubre, conversa y disfruta",
   "aboutStep4Body": "Cada dinámica muestra el resultado de forma clara y permite vivir mejor la experiencia del grupo.",
   "aboutSectionPrivacyTitle": "Privacidad por diseño",
-  "aboutSectionPrivacyBody": "Cada dinámica muestra solo lo que corresponde. Las asignaciones privadas se protegen, los resultados públicos se comparten únicamente con el grupo y Tarci evita exponer información innecesaria.",
+  "aboutSectionPrivacyBody": "Cada dinámica muestra solo lo que corresponde. Las asignaciones privadas se protegen, los resultados públicos se comparten únicamente con el grupo y Tarci evita exponer información innecesaria.\n\nTarci Secret no necesita pedir correo electrónico ni teléfono para usar el modo rápido. Solo conserva los datos necesarios para que cada dinámica funcione y elimina automáticamente las dinámicas completadas tras un periodo limitado.",
   "aboutSectionPrivacyTrust": "La privacidad no es un añadido: es parte del diseño de la experiencia.",
+  "aboutRetentionTitle": "Retención limitada",
+  "aboutRetentionBody": "Las dinámicas completadas se conservan durante 90 días desde su fecha de cierre o evento, para que puedas consultar resultados y compartirlos. Después se eliminan automáticamente del sistema.",
+  "retentionAutoDeleteNotice": "Esta dinámica se eliminará automáticamente el {date}.",
+  "@retentionAutoDeleteNotice": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+  "retentionAutoDeleteBody": "Conservamos los resultados durante un tiempo limitado para proteger tu privacidad y evitar guardar datos innecesarios.",
   "aboutSectionCreatorTitle": "Creado por Stalin Yamarte",
   "aboutSectionCreatorSubtitle": "Especialista en Sistemas y desarrollador de aplicaciones.",
   "aboutLinkedInCta": "Ver perfil en LinkedIn",

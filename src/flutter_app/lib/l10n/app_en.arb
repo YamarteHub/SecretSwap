@@ -80,8 +80,17 @@
   "aboutStep4Title": "Discover, chat, and enjoy",
   "aboutStep4Body": "Each dynamic shows results clearly and helps the group enjoy the experience together.",
   "aboutSectionPrivacyTitle": "Privacy by design",
-  "aboutSectionPrivacyBody": "Each dynamic shows only what applies. Private assignments stay protected, public results are shared only with the group, and Tarci avoids exposing unnecessary information.",
+  "aboutSectionPrivacyBody": "Each dynamic shows only what applies. Private assignments stay protected, public results are shared only with the group, and Tarci avoids exposing unnecessary information.\n\nTarci Secret does not need your email or phone number for quick mode. It only keeps the data needed for each dynamic to work and automatically deletes completed dynamics after a limited period.",
   "aboutSectionPrivacyTrust": "Privacy is not an add-on: it is part of how the experience is designed.",
+  "aboutRetentionTitle": "Limited retention",
+  "aboutRetentionBody": "Completed dynamics are kept for 90 days from their closing or event date so you can review results and share them. After that, they are automatically removed from the system.",
+  "retentionAutoDeleteNotice": "This dynamic will be automatically deleted on {date}.",
+  "@retentionAutoDeleteNotice": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+  "retentionAutoDeleteBody": "We keep results for a limited time to protect your privacy and avoid storing unnecessary data.",
   "aboutSectionCreatorTitle": "Created by Stalin Yamarte",
   "aboutSectionCreatorSubtitle": "Systems specialist and application developer.",
   "aboutLinkedInCta": "View LinkedIn profile",

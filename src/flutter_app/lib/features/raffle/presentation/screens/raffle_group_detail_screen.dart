@@ -10,6 +10,7 @@ import '../../../../core/theme/premium_ui.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../groups/domain/group_models.dart';
 import '../../../groups/presentation/providers.dart';
+import '../../../groups/presentation/widgets/retention_auto_delete_notice.dart';
 
 /// Detalle de grupo tipo sorteo público (`simple_raffle`). No mezcla UI de Amigo Secreto.
 class RaffleGroupDetailScreen extends ConsumerStatefulWidget {
@@ -455,6 +456,9 @@ class _RaffleGroupDetailScreenState extends ConsumerState<RaffleGroupDetailScree
                   ),
                 ],
               ),
+            ),
+            RetentionAutoDeleteNoticeSlot(
+              retentionDeleteAt: widget.detail.retentionDeleteAt,
             ),
             const SizedBox(height: 10),
             Text(

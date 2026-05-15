@@ -15,6 +15,7 @@ import '../../../draw/services/managed_delivery_launcher.dart';
 import '../../../chat/presentation/screens/group_chat_screen.dart';
 import '../../../groups/domain/group_models.dart';
 import '../../../groups/presentation/providers.dart';
+import '../../../groups/presentation/widgets/retention_auto_delete_notice.dart';
 import '../../services/team_result_pdf.dart';
 import '../../services/team_result_text.dart';
 import '../teams_ui_copy.dart';
@@ -578,6 +579,9 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
               title: ui.resultHeroTitle,
               subtitle: ui.resultHeroSubtitle,
               summary: ui.resultSummary(_teams.length, _eligibleCount),
+            ),
+            RetentionAutoDeleteNoticeSlot(
+              retentionDeleteAt: widget.detail.retentionDeleteAt,
             ),
             if (_isActiveTeamsMember(widget.detail, widget.currentUid)) ...[
               const SizedBox(height: 16),

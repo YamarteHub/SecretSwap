@@ -24,6 +24,7 @@ import '../../../wishlist/presentation/providers.dart';
 import '../../domain/group_exceptions.dart';
 import '../../domain/group_models.dart';
 import '../providers.dart';
+import '../widgets/retention_auto_delete_notice.dart';
 
 String? _subgroupDisplayName(GroupDetail detail, String? subgroupId) {
   if (subgroupId == null || subgroupId.isEmpty) return null;
@@ -1606,6 +1607,9 @@ class _GroupDetailBodyState extends ConsumerState<_GroupDetailBody> {
           ),
         ],
         if (isCompleted) ...[
+          RetentionAutoDeleteNoticeSlot(
+            retentionDeleteAt: d.retentionDeleteAt,
+          ),
           const SizedBox(height: 16),
           GroupWishlistSummarySection(
             detail: d,

@@ -229,11 +229,27 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get aboutSectionPrivacyBody =>
-      'Ogni dinamica mostra solo ciò che corrisponde. Le assegnazioni private restano protette, i risultati pubblici si condividono solo con il gruppo e Tarci evita di esporre informazioni non necessarie.';
+      'Ogni dinamica mostra solo ciò che corrisponde. Le assegnazioni private restano protette, i risultati pubblici si condividono solo con il gruppo e Tarci evita di esporre informazioni non necessarie.\n\nTarci Secret non richiede email né telefono per la modalità rapida. Conserva solo i dati necessari al funzionamento di ogni dinamica ed elimina automaticamente le dinamiche completate dopo un periodo limitato.';
 
   @override
   String get aboutSectionPrivacyTrust =>
       'La privacy non è un extra: fa parte del design dell’esperienza.';
+
+  @override
+  String get aboutRetentionTitle => 'Conservazione limitata';
+
+  @override
+  String get aboutRetentionBody =>
+      'Le dinamiche completate si conservano per 90 giorni dalla data di chiusura o dell’evento, così puoi consultare i risultati e condividerli. Poi vengono eliminate automaticamente dal sistema.';
+
+  @override
+  String retentionAutoDeleteNotice(String date) {
+    return 'Questa dinamica verrà eliminata automaticamente il $date.';
+  }
+
+  @override
+  String get retentionAutoDeleteBody =>
+      'Conserviamo i risultati per un tempo limitato per proteggere la tua privacy ed evitare dati non necessari.';
 
   @override
   String get aboutSectionCreatorTitle => 'Creato da Stalin Yamarte';
