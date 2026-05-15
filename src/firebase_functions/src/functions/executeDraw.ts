@@ -104,16 +104,25 @@ function parseDeliveryMode(raw: unknown, fallback: DeliveryMode): DeliveryMode {
 }
 
 async function loadDrawParticipants(groupId: string, db: Firestore): Promise<UnifiedDrawParticipant[]> {
-  const [membersSnap, participantsSnap] = await Promise.all([
-    db.collection("groups").doc(groupId).collection("members").get(),
-    db.collection("groups").doc(groupId).collection("participants").get()
+  const groupRef = db.collection("groups").doc(groupId);
+  const [groupSnap, membersSnap, participantsSnap] = await Promise.all([
+    groupRef.get(),
+    groupRef.collection("members").get(),
+    groupRef.collection("participants").get()
   ]);
+  const groupData = groupSnap.exists ? (groupSnap.data() as Record<string, unknown>) : null;
+  const ownerUidRaw = groupData != null ? groupData["ownerUid"] : undefined;
+  const ownerUid = typeof ownerUidRaw === "string" && ownerUidRaw.trim() !== "" ? ownerUidRaw.trim() : "";
+  const ownerParticipatesInSecretSanta = groupData == null ? true : groupData["ownerParticipatesInSecretSanta"] !== false;
 
   const membersByUid = new Map<string, UnifiedDrawParticipant>();
   for (const doc of membersSnap.docs) {
     const d = doc.data() as Record<string, unknown>;
     if (d.memberState !== "active") continue;
     const uid = typeof d.uid === "string" && d.uid.trim() !== "" ? d.uid.trim() : doc.id;
+    if (ownerUid !== "" && uid === ownerUid && !ownerParticipatesInSecretSanta) {
+      continue;
+    }
     const displayName =
       typeof d.nickname === "string" && d.nickname.trim() !== "" ? d.nickname.trim() : "Miembro";
     membersByUid.set(uid, {

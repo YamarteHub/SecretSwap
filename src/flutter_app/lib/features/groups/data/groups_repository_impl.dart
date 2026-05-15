@@ -49,11 +49,13 @@ class GroupsRepositoryImpl implements GroupsRepository {
     required String name,
     required String nickname,
     DateTime? eventDate,
+    bool ownerParticipatesInSecretSanta = true,
   }) async {
     final callable = _functions.httpsCallable('createGroup');
     final payload = <String, dynamic>{
       'name': name,
       'nickname': nickname,
+      'ownerParticipatesInSecretSanta': ownerParticipatesInSecretSanta,
     };
     if (eventDate != null) {
       final day = DateTime(
@@ -439,6 +441,8 @@ class GroupsRepositoryImpl implements GroupsRepository {
     final requestedTeamSize = (g['requestedTeamSize'] as num?)?.toInt();
     final ownerParticipatesInTeams =
         g['ownerParticipatesInTeams'] as bool? ?? true;
+    final ownerParticipatesInSecretSanta =
+        g['ownerParticipatesInSecretSanta'] as bool? ?? true;
     final teamsPreset = parseTeamsPreset(g['teamsPreset'] as String?);
 
     return GroupDetail(
@@ -460,6 +464,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
       requestedTeamCount: requestedTeamCount,
       requestedTeamSize: requestedTeamSize,
       ownerParticipatesInTeams: ownerParticipatesInTeams,
+      ownerParticipatesInSecretSanta: ownerParticipatesInSecretSanta,
       lastTeamExecutionId: lastTeamId,
       lastTeamExecution: lastTeamExecution,
       teamsManualParticipants: teamsManualParticipants,

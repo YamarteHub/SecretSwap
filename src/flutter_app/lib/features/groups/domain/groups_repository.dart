@@ -8,6 +8,8 @@ abstract interface class GroupsRepository {
     required String nickname,
     /// Día civil local del evento/entrega; opcional (`groups.eventDate` en Firestore).
     DateTime? eventDate,
+    /// `false` = owner no entra en el sorteo (solo organiza).
+    bool ownerParticipatesInSecretSanta = true,
   });
 
   Future<void> renameGroup({required String groupId, required String name});

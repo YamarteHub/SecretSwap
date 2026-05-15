@@ -79,8 +79,7 @@ Comando: `flutter gen-l10n`.
 
 - `flutter gen-l10n`
 - `flutter analyze`
-
-Backend **no** modificado → `npm run build` no requerido para esta fase.
+- `npm run build` en `src/firebase_functions` (post QA 13.1.2: `createGroup` / `executeDraw`).
 
 ## Checklist manual (Stan)
 
@@ -96,7 +95,7 @@ Backend **no** modificado → `npm run build` no requerido para esta fase.
 ### Subgrupos obligatorios
 
 - [ ] **Caso A**: Owner participa + Exigir subgrupo diferente → sheet tras crear → ≥2 subgrupos → asignación propia → detalle sin bloqueos previos de subgrupo vacío para el owner.
-- [ ] **Caso B**: Si en el futuro el owner no es miembro activo → solo paso 1 (hoy el asistente de Amigo Secreto crea miembro owner).
+- [ ] **Caso B**: Owner **no** participa (solo organiza) + Exigir subgrupo diferente → sheet solo paso de creación de subgrupos; no pide ubicar al owner.
 - [ ] **Caso C**: “Lo haré después” → detalle con warnings/checklist como antes.
 - [ ] **Caso D**: Sin regla de exigencia o con ignorar/preferir → **no** debe aparecer el sheet al crear (Para **preferir**, no implementado en 13.1).
 
@@ -105,3 +104,17 @@ Backend **no** modificado → `npm run build` no requerido para esta fase.
 ## Microfix QA 13.1.1 (post fase)
 
 - **Participante sin app:** eliminada de la UI la opción no disponible «Responsable específico / Próximamente» en «¿Quién entregará el resultado?». Solo quedan **Yo** y **Otro miembro**. Se retiraron las claves ARB `groupManagedDialogGuardianSpecific` y `groupManagedDialogGuardianComingSoon` (solo usadas por esa opción).
+
+---
+
+## Auditoría QA 13.1.2 — «¿Participas tú?» / solo organizo (Amigo Secreto)
+
+**Hallazgo:** La capacidad fundacional **no estaba implementada**: `createGroup` (callable) siempre daba de alta al owner en `members` y `executeDraw` proyectaba **todos** los miembros activos al bombo. La frase del informe 13.1 describía el estado real previo a este ajuste (owner siempre en el sorteo), no solo una confusión documental.
+
+**Corrección (mínima y coherente con Sorteos/Equipos):**
+
+- Documento de grupo Firestore: `ownerParticipatesInSecretSanta` (default `true` para grupos antiguos sin campo).
+- `createGroup` acepta el booleano y lo persiste; el owner **sigue** teniendo doc en `members` (requerido por reglas Firestore `isActiveMember`).
+- `executeDraw` excluye al owner del conjunto de participantes del sorteo cuando `ownerParticipatesInSecretSanta === false`.
+- Wizard Flutter (paso participantes): reutiliza copy de sorteo («¿Participas…?») + apodo condicional; nickname de respaldo localizado cuando solo organiza.
+- Contadores / nombres sin subgrupo en detalle y sheet post-create respetan el flag (owner no cuenta para preparación del sorteo ni para autoasignación de subgrupo obligatorio).

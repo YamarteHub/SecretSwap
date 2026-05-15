@@ -162,6 +162,8 @@
   "wizardGroupNameLabel": "Group name",
   "wizardGroupNameHint": "Family Christmas 2026",
   "wizardNicknameLabel": "How do you appear?",
+  "wizardSecretSantaOrganizerOnlyNickFallback": "Organizer",
+  "wizardSecretSantaOrganizerOnlyHint": "You will manage the group and will not be included in the draw. You keep organizer permissions.",
   "wizardRuleIgnore": "Ignore subgroups",
   "wizardRulePrefer": "Prefer different subgroup",
   "wizardRuleRequire": "Require different subgroup",

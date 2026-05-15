@@ -31,6 +31,7 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
   String _groupType = 'family';
   DrawSubgroupRule _drawRule = DrawSubgroupRule.ignore;
   DateTime? _eventDate;
+  bool _ownerParticipatesInSecretSanta = true;
 
   static const _groupTypeOptions = ['family', 'friends', 'company', 'class', 'other'];
 
@@ -147,7 +148,7 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
       );
       return false;
     }
-    if (_step == 5 && _nickCtrl.text.trim().isEmpty) {
+    if (_step == 5 && _ownerParticipatesInSecretSanta && _nickCtrl.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(context.l10n.wizardNicknameLabel)),
       );
@@ -189,14 +190,17 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
 
   Future<void> _submit() async {
     final name = _nameCtrl.text.trim();
-    final nick = _nickCtrl.text.trim();
+    final participates = _ownerParticipatesInSecretSanta;
+    final nick = participates
+        ? _nickCtrl.text.trim()
+        : context.l10n.wizardSecretSantaOrganizerOnlyNickFallback;
     if (name.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(context.l10n.wizardGroupNameLabel)),
       );
       return;
     }
-    if (nick.isEmpty) {
+    if (participates && nick.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(context.l10n.wizardNicknameLabel)),
       );
@@ -209,6 +213,7 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
         name: name,
         nickname: nick,
         eventDate: _eventDate,
+        ownerParticipatesInSecretSanta: participates,
       );
       if (_drawRule != DrawSubgroupRule.ignore) {
         await repo.setDrawSubgroupRule(
@@ -517,15 +522,50 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
         ];
       case 5:
         return [
-          TextField(
-            controller: _nickCtrl,
-            decoration: InputDecoration(
-              labelText: context.l10n.wizardNicknameLabel,
-              prefixIcon: const Icon(Icons.person_outline),
+          Text(
+            context.l10n.raffleWizardOwnerParticipatesTitle,
+            style: theme.textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.w800,
+              height: 1.2,
             ),
-            textInputAction: TextInputAction.done,
-            textCapitalization: TextCapitalization.words,
           ),
+          const SizedBox(height: 6),
+          RadioListTile<bool>(
+            contentPadding: EdgeInsets.zero,
+            title: Text(context.l10n.raffleWizardOwnerParticipatesYes),
+            value: true,
+            groupValue: _ownerParticipatesInSecretSanta,
+            onChanged: (v) => setState(() => _ownerParticipatesInSecretSanta = v ?? true),
+          ),
+          RadioListTile<bool>(
+            contentPadding: EdgeInsets.zero,
+            title: Text(context.l10n.raffleWizardOwnerParticipatesNo),
+            value: false,
+            groupValue: _ownerParticipatesInSecretSanta,
+            onChanged: (v) => setState(() => _ownerParticipatesInSecretSanta = v ?? false),
+          ),
+          if (!_ownerParticipatesInSecretSanta) ...[
+            const SizedBox(height: 6),
+            Text(
+              context.l10n.wizardSecretSantaOrganizerOnlyHint,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+                height: 1.45,
+              ),
+            ),
+          ],
+          if (_ownerParticipatesInSecretSanta) ...[
+            const SizedBox(height: 12),
+            TextField(
+              controller: _nickCtrl,
+              decoration: InputDecoration(
+                labelText: context.l10n.wizardNicknameLabel,
+                prefixIcon: const Icon(Icons.person_outline),
+              ),
+              textInputAction: TextInputAction.done,
+              textCapitalization: TextCapitalization.words,
+            ),
+          ],
         ];
       case 6:
         return [
@@ -556,6 +596,14 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
                   icon: Icons.tune_outlined,
                   label: context.l10n.wizardSummaryRule,
                   value: _ruleTitle(context, _drawRule),
+                ),
+                _SummaryDivider(theme: theme),
+                _summaryRow(
+                  icon: Icons.how_to_reg_outlined,
+                  label: context.l10n.raffleWizardOwnerParticipatesTitle,
+                  value: _ownerParticipatesInSecretSanta
+                      ? context.l10n.raffleWizardOwnerParticipatesYes
+                      : context.l10n.raffleWizardOwnerParticipatesNo,
                 ),
                 _SummaryDivider(theme: theme),
                 _summaryRow(

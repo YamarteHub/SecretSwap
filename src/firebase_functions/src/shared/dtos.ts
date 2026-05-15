@@ -38,6 +38,8 @@ export const CreateGroupRequestSchema = z
   .object({
     name: z.string().min(1),
     nickname: z.string().min(1),
+    /** Si es `false`, el owner sigue siendo miembro activo (ACL) pero no entra en el sorteo de Amigo Secreto. */
+    ownerParticipatesInSecretSanta: z.boolean().optional(),
     /** Día del evento/entrega (medianoche local del cliente), epoch ms. Opcional. */
     eventDateEpochMs: z.number().int().finite().positive().optional(),
     /** Día civil elegido por el usuario (YYYY-MM-DD en su calendario local). Obligatorio si hay eventDateEpochMs. */

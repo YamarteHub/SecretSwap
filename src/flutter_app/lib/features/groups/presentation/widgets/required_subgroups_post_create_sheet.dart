@@ -73,6 +73,7 @@ class _RequiredSubgroupsPostCreateSheetState
   }
 
   bool get _needsOwnerSubgroup {
+    if (!widget.initialDetail.ownerParticipatesInSecretSanta) return false;
     final uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid == null) return false;
     for (final m in widget.initialDetail.members) {

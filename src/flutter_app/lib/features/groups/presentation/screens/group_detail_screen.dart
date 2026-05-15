@@ -121,6 +121,12 @@ String _drawRuleOptionDescription(BuildContext context, DrawSubgroupRule r) {
   }
 }
 
+bool _memberCountsTowardSecretDrawRoster(GroupDetail d, String memberUid) {
+  if (d.dynamicType != TarciDynamicType.secretSanta) return true;
+  if (memberUid != d.ownerUid) return true;
+  return d.ownerParticipatesInSecretSanta;
+}
+
 class _UnifiedPreparationCounts {
   final int effectiveTotal;
   final int withApp;
@@ -160,6 +166,7 @@ _UnifiedPreparationCounts _buildUnifiedPreparationCounts(GroupDetail d) {
 
   for (final m in membersByUid.values) {
     if (linkedUids.contains(m.uid)) continue;
+    if (!_memberCountsTowardSecretDrawRoster(d, m.uid)) continue;
     withApp++;
     if (m.subgroupId == null || m.subgroupId!.trim().isEmpty) {
       withoutSubgroup++;
@@ -208,6 +215,7 @@ List<String> _effectiveParticipantsWithoutSubgroupNames(GroupDetail d) {
   final names = <String>[];
   for (final m in membersByUid.values) {
     if (linkedUids.contains(m.uid)) continue;
+    if (!_memberCountsTowardSecretDrawRoster(d, m.uid)) continue;
     if (m.subgroupId != null && m.subgroupId!.trim().isNotEmpty) continue;
     final nick = m.nickname.trim();
     names.add(nick.isNotEmpty ? nick : m.uid);

@@ -414,6 +414,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get wizardNicknameLabel => 'How do you appear?';
 
   @override
+  String get wizardSecretSantaOrganizerOnlyNickFallback => 'Organizer';
+
+  @override
+  String get wizardSecretSantaOrganizerOnlyHint =>
+      'You will manage the group and will not be included in the draw. You keep organizer permissions.';
+
+  @override
   String get wizardRuleIgnore => 'Ignore subgroups';
 
   @override

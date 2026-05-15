@@ -27,6 +27,7 @@ export const createGroup = onCall(async (req: CallableRequest<unknown>): Promise
   try {
     const uid = requireAuthUid(req.auth?.uid);
     const body = parseOrThrow(CreateGroupRequestSchema, req.data);
+    const ownerParticipatesInSecretSanta = body.ownerParticipatesInSecretSanta !== false;
     const eventDateTs = optionalEventTimestamp(body.eventDateEpochMs);
 
     const db = getDb();
@@ -59,6 +60,7 @@ export const createGroup = onCall(async (req: CallableRequest<unknown>): Promise
             groupId,
             name: body.name,
             ownerUid: uid,
+            ownerParticipatesInSecretSanta,
             lifecycleStatus: "active",
             dynamicType: "secret_santa",
             resultVisibility: "private_per_participant",

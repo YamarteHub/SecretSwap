@@ -417,6 +417,13 @@ class AppLocalizationsPt extends AppLocalizations {
   String get wizardNicknameLabel => 'Como você aparece?';
 
   @override
+  String get wizardSecretSantaOrganizerOnlyNickFallback => 'Organizador';
+
+  @override
+  String get wizardSecretSantaOrganizerOnlyHint =>
+      'Você gerencia o grupo e não entra no sorteio. Mantém as permissões de organizador.';
+
+  @override
   String get wizardRuleIgnore => 'Ignorar subgrupos';
 
   @override

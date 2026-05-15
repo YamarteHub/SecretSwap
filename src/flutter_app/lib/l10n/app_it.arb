@@ -162,6 +162,8 @@
   "wizardGroupNameLabel": "Nome del gruppo",
   "wizardGroupNameHint": "Natale in famiglia 2026",
   "wizardNicknameLabel": "Come appari?",
+  "wizardSecretSantaOrganizerOnlyNickFallback": "Organizzatore",
+  "wizardSecretSantaOrganizerOnlyHint": "Gestisci il gruppo e non entri nell'estrazione. Conservi i permessi di organizzatore.",
   "wizardRuleIgnore": "Ignora i sottogruppi",
   "wizardRulePrefer": "Preferisci sottogruppi diversi",
   "wizardRuleRequire": "Richiedono sottogruppi diversi",

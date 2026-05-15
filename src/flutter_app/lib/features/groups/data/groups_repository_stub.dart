@@ -9,6 +9,7 @@ class GroupsRepositoryStub implements GroupsRepository {
     required String name,
     required String nickname,
     DateTime? eventDate,
+    bool ownerParticipatesInSecretSanta = true,
   }) async {
     throw UnimplementedError('createGroup not wired');
   }

@@ -830,6 +830,18 @@ abstract class AppLocalizations {
   /// **'¿Cómo apareces tú?'**
   String get wizardNicknameLabel;
 
+  /// No description provided for @wizardSecretSantaOrganizerOnlyNickFallback.
+  ///
+  /// In es, this message translates to:
+  /// **'Organizador'**
+  String get wizardSecretSantaOrganizerOnlyNickFallback;
+
+  /// No description provided for @wizardSecretSantaOrganizerOnlyHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Gestionarás el grupo y no entrarás en el sorteo. Seguirás con permisos de organizador.'**
+  String get wizardSecretSantaOrganizerOnlyHint;
+
   /// No description provided for @wizardRuleIgnore.
   ///
   /// In es, this message translates to:

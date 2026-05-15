@@ -308,6 +308,8 @@ class GroupDetail {
   final int? requestedTeamCount;
   final int? requestedTeamSize;
   final bool ownerParticipatesInTeams;
+  /// Amigo Secreto: si es `false`, el owner no entra en el sorteo (solo organiza).
+  final bool ownerParticipatesInSecretSanta;
   final String? lastTeamExecutionId;
   final TeamsExecutionSummary? lastTeamExecution;
   final List<TeamsManualParticipant> teamsManualParticipants;
@@ -343,6 +345,7 @@ class GroupDetail {
     this.requestedTeamCount,
     this.requestedTeamSize,
     this.ownerParticipatesInTeams = true,
+    this.ownerParticipatesInSecretSanta = true,
     this.lastTeamExecutionId,
     this.lastTeamExecution,
     this.teamsManualParticipants = const [],
