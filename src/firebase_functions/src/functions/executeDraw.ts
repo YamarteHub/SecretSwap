@@ -21,18 +21,7 @@ import { notifyGroupDynamicCompleted } from "../shared/groupNotifications";
 import { groupPaths } from "../shared/firestorePaths";
 import { acquireDrawingLock, clearDrawingLock } from "../shared/lock";
 import { parseOrThrow } from "../shared/validation";
-import { buildRetentionFirestoreUpdate, readEventDate } from "../shared/retention";
-
-function retentionPatchIfFirstDrawCompletion(
-  groupBefore: { drawStatus?: string; eventDate?: unknown },
-  completedAt: Date
-): Record<string, unknown> {
-  if (groupBefore.drawStatus === "completed") return {};
-  return buildRetentionFirestoreUpdate({
-    completedAt,
-    eventDate: readEventDate(groupBefore.eventDate)
-  });
-}
+import { retentionPatchIfFirstDrawCompletion } from "../shared/retention";
 
 function assignmentsCollection(db: Firestore, groupId: string, executionId: string) {
   return db.collection("groups").doc(groupId).collection("executions").doc(executionId).collection("assignments");
@@ -603,6 +592,17 @@ export const executeDraw = onCall(async (req: CallableRequest<unknown>): Promise
       if ((fd.status as string) !== "success") {
         throw new AppError({ code: "INTERNAL", message: "Repair transaction did not complete execution" });
       }
+      const groupSnapAfterRepair = await groupRef.get();
+      const groupNameRepair =
+        typeof (groupSnapAfterRepair.data() as { name?: string } | undefined)?.name === "string"
+          ? ((groupSnapAfterRepair.data() as { name?: string }).name ?? "").trim()
+          : "";
+      await notifyGroupDynamicCompleted(db, {
+        groupId: body.groupId,
+        dynamicType: "secret_santa",
+        groupName: groupNameRepair,
+        triggeredByUid: uid
+      });
       return await returnSuccessfulDrawWithChat(db, body.groupId, executionId, rulesVersion, fd);
     }
 

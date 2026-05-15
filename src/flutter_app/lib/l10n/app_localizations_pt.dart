@@ -2008,7 +2008,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get dynamicsSelectSubtitle =>
-      'Comece com uma experiência pronta hoje. Mais modos chegam em breve.';
+      'Escolha uma dinâmica: Amigo Secreto, Sorteio, Equipas, Parejas ou Duelos.';
 
   @override
   String get dynamicsCardSecretSantaTitle => 'Amigo secreto';
@@ -2245,6 +2245,15 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get homeTeamsStatePreparing => 'A preparar';
+
+  @override
+  String get homeTeamsStateGenerating => 'A formar equipas';
+
+  @override
+  String get homePairingsStateGenerating => 'A formar parejas';
+
+  @override
+  String get homeDuelsStateGenerating => 'A formar duelos';
 
   @override
   String get homeTeamsStateCompleted => 'Equipas prontas';

@@ -2011,7 +2011,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get dynamicsSelectSubtitle =>
-      'Inizia con un\'esperienza pronta oggi. Arriveranno presto altre modalità.';
+      'Scegli una modalità: Amico Segreto, Sorteggio, Squadre, Coppie o Duelli.';
 
   @override
   String get dynamicsCardSecretSantaTitle => 'Amico segreto';
@@ -2248,6 +2248,15 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get homeTeamsStatePreparing => 'In preparazione';
+
+  @override
+  String get homeTeamsStateGenerating => 'Formazione squadre';
+
+  @override
+  String get homePairingsStateGenerating => 'Formazione coppie';
+
+  @override
+  String get homeDuelsStateGenerating => 'Formazione duelli';
 
   @override
   String get homeTeamsStateCompleted => 'Squadre pronte';

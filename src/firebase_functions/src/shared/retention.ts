@@ -109,3 +109,37 @@ export function buildRetentionBackfillUpdate(data: Record<string, unknown>): Rec
     eventDate: readEventDate(data.eventDate)
   });
 }
+
+/** No recalcula retención si la dinámica ya estaba completada (idempotencia / repair). */
+export function retentionPatchIfFirstDrawCompletion(
+  groupBefore: { drawStatus?: string; eventDate?: unknown },
+  completedAt: Date
+): Record<string, unknown> {
+  if (groupBefore.drawStatus === "completed") return {};
+  return buildRetentionFirestoreUpdate({
+    completedAt,
+    eventDate: readEventDate(groupBefore.eventDate)
+  });
+}
+
+export function retentionPatchIfFirstRaffleCompletion(
+  groupBefore: { raffleStatus?: string; eventDate?: unknown },
+  completedAt: Date
+): Record<string, unknown> {
+  if (groupBefore.raffleStatus === "completed") return {};
+  return buildRetentionFirestoreUpdate({
+    completedAt,
+    eventDate: readEventDate(groupBefore.eventDate)
+  });
+}
+
+export function retentionPatchIfFirstTeamsCompletion(
+  groupBefore: { teamStatus?: string; eventDate?: unknown },
+  completedAt: Date
+): Record<string, unknown> {
+  if (groupBefore.teamStatus === "completed") return {};
+  return buildRetentionFirestoreUpdate({
+    completedAt,
+    eventDate: readEventDate(groupBefore.eventDate)
+  });
+}

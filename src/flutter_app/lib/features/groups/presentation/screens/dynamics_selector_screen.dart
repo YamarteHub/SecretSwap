@@ -5,7 +5,7 @@ import '../../../../core/l10n/l10n.dart';
 import '../../../../core/routing/app_router.dart';
 import '../../../../core/theme/app_theme.dart';
 
-/// Selector de dinámica: Amigo secreto (activo), Sorteo (activo), resto próximamente.
+/// Selector de dinámica: las cinco modalidades de la v1 pública están activas.
 class DynamicsSelectorScreen extends StatelessWidget {
   const DynamicsSelectorScreen({super.key});
 

@@ -2027,7 +2027,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get dynamicsSelectSubtitle =>
-      'Commencez avec une expérience prête aujourd\'hui. D\'autres modes arrivent bientôt.';
+      'Choisissez une dynamique : Secret Santa, Tirage, Équipes, Paires ou Duels.';
 
   @override
   String get dynamicsCardSecretSantaTitle => 'Secret Santa';
@@ -2264,6 +2264,15 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get homeTeamsStatePreparing => 'En préparation';
+
+  @override
+  String get homeTeamsStateGenerating => 'Formation des équipes';
+
+  @override
+  String get homePairingsStateGenerating => 'Formation des paires';
+
+  @override
+  String get homeDuelsStateGenerating => 'Formation des duels';
 
   @override
   String get homeTeamsStateCompleted => 'Équipes prêtes';

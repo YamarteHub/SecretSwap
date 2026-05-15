@@ -3485,7 +3485,7 @@ abstract class AppLocalizations {
   /// No description provided for @dynamicsSelectSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Empieza con una experiencia lista hoy. Más modos llegarán pronto.'**
+  /// **'Elige una dinámica: Amigo Secreto, Sorteo, Equipos, Parejas o Duelos.'**
   String get dynamicsSelectSubtitle;
 
   /// No description provided for @dynamicsCardSecretSantaTitle.
@@ -3895,6 +3895,24 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Preparando'**
   String get homeTeamsStatePreparing;
+
+  /// No description provided for @homeTeamsStateGenerating.
+  ///
+  /// In es, this message translates to:
+  /// **'Formando equipos'**
+  String get homeTeamsStateGenerating;
+
+  /// No description provided for @homePairingsStateGenerating.
+  ///
+  /// In es, this message translates to:
+  /// **'Formando parejas'**
+  String get homePairingsStateGenerating;
+
+  /// No description provided for @homeDuelsStateGenerating.
+  ///
+  /// In es, this message translates to:
+  /// **'Formando duelos'**
+  String get homeDuelsStateGenerating;
 
   /// No description provided for @homeTeamsStateCompleted.
   ///

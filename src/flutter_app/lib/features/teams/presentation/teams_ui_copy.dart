@@ -33,6 +33,12 @@ class TeamsUiCopy {
     return _l10n.homeTeamsStatePreparing;
   }
 
+  String get homeStateGenerating {
+    if (isDuels) return _l10n.homeDuelsStateGenerating;
+    if (isPairings) return _l10n.homePairingsStateGenerating;
+    return _l10n.homeTeamsStateGenerating;
+  }
+
   String unitLabel(int index) {
     final n = index + 1;
     if (isDuels) return _l10n.duelsUnitLabel(n);

@@ -12,7 +12,7 @@ import {
 } from "../shared/dtos";
 import { parseOrThrow } from "../shared/validation";
 import { notifyGroupDynamicCompleted } from "../shared/groupNotifications";
-import { buildRetentionFirestoreUpdate, readEventDate } from "../shared/retention";
+import { retentionPatchIfFirstRaffleCompletion } from "../shared/retention";
 
 type Eligible = {
   participantId: string;
@@ -228,10 +228,7 @@ export const executeRaffle = onCall(async (req: CallableRequest<unknown>): Promi
         lastRaffleExecutionId: executionId,
         lastRaffleCompletedAt: nowTs,
         updatedAt: nowTs,
-        ...buildRetentionFirestoreUpdate({
-          completedAt: retentionNow,
-          eventDate: readEventDate(group.eventDate)
-        })
+        ...retentionPatchIfFirstRaffleCompletion(group, retentionNow)
       });
 
       return {

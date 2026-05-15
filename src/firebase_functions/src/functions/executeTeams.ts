@@ -16,7 +16,7 @@ import {
 import { parseOrThrow } from "../shared/validation";
 import { appendGroupChatSystemMessageIfNew } from "../shared/groupChat";
 import { notifyGroupDynamicCompleted } from "../shared/groupNotifications";
-import { buildRetentionFirestoreUpdate, readEventDate } from "../shared/retention";
+import { retentionPatchIfFirstTeamsCompletion } from "../shared/retention";
 
 type TeamsPresetRun = "standard" | "pairings" | "duels";
 
@@ -329,10 +329,7 @@ export const executeTeams = onCall(async (req: CallableRequest<unknown>): Promis
         lastTeamExecutionId: executionId,
         lastTeamCompletedAt: nowTs,
         updatedAt: nowTs,
-        ...buildRetentionFirestoreUpdate({
-          completedAt: retentionNow,
-          eventDate: readEventDate(group.eventDate)
-        })
+        ...retentionPatchIfFirstTeamsCompletion(group, retentionNow)
       });
 
       return {

@@ -100,7 +100,7 @@ String _homeDynamicStatusChipLabel(BuildContext context, GroupSummary g) {
       case TeamStatus.completed:
         return ui.homeStateCompleted;
       case TeamStatus.generating:
-        return context.l10n.homeGroupDrawStateDrawing;
+        return ui.homeStateGenerating;
       case TeamStatus.failed:
         return context.l10n.homeGroupDrawStateFailed;
       case TeamStatus.idle:
@@ -441,7 +441,7 @@ class _GroupsHomeScreenState extends ConsumerState<GroupsHomeScreen> {
                       (g) => _GroupCard(
                         summary: g,
                         eventDateLine: _formatGroupDeliveryDateLine(context, g),
-                        onTap: () => context.push('/groups/${g.groupId}'),
+                        onTap: () => context.push(AppRoutes.groupDetailFor(g.groupId)),
                       ),
                     ),
                 ],
@@ -467,7 +467,7 @@ class _GroupsHomeScreenState extends ConsumerState<GroupsHomeScreen> {
                       summary: g,
                       completed: true,
                       eventDateLine: _formatGroupDeliveryDateLine(context, g),
-                      onTap: () => context.push('/groups/${g.groupId}'),
+                      onTap: () => context.push(AppRoutes.groupDetailFor(g.groupId)),
                     ),
                   ),
                 ],
@@ -493,7 +493,7 @@ class _GroupsHomeScreenState extends ConsumerState<GroupsHomeScreen> {
                       summary: g,
                       completed: true,
                       eventDateLine: _formatGroupDeliveryDateLine(context, g),
-                      onTap: () => context.push('/groups/${g.groupId}'),
+                      onTap: () => context.push(AppRoutes.groupDetailFor(g.groupId)),
                     ),
                   ),
                 ],

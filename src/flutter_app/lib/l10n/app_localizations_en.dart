@@ -1991,7 +1991,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dynamicsSelectSubtitle =>
-      'Start with an experience that is ready today. More modes are coming soon.';
+      'Pick a dynamic: Secret Santa, Raffle, Teams, Pairings, or Duels.';
 
   @override
   String get dynamicsCardSecretSantaTitle => 'Secret Santa';
@@ -2228,6 +2228,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeTeamsStatePreparing => 'Preparing';
+
+  @override
+  String get homeTeamsStateGenerating => 'Forming teams';
+
+  @override
+  String get homePairingsStateGenerating => 'Forming pairings';
+
+  @override
+  String get homeDuelsStateGenerating => 'Forming duels';
 
   @override
   String get homeTeamsStateCompleted => 'Teams ready';
