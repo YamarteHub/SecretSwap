@@ -177,33 +177,16 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
 
   Future<void> _renameTeam(TeamSnapshot team, AppLocalizations l10n) async {
     final current = TeamResultText.teamDisplayName(l10n, team);
-    final controller = TextEditingController(text: current);
     final newName = await showDialog<String>(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(l10n.teamsRenameDialogTitle),
-        content: TextField(
-          controller: controller,
-          maxLength: 40,
-          autofocus: true,
-          decoration: InputDecoration(
-            labelText: l10n.teamsRenameDialogFieldLabel,
-          ),
-          textCapitalization: TextCapitalization.sentences,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(),
-            child: Text(l10n.groupDialogCancel),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(ctx).pop(controller.text.trim()),
-            child: Text(l10n.save),
-          ),
-        ],
+      builder: (ctx) => _TeamsRenameDialog(
+        initialName: current,
+        title: l10n.teamsRenameDialogTitle,
+        fieldLabel: l10n.teamsRenameDialogFieldLabel,
+        cancelLabel: l10n.groupDialogCancel,
+        saveLabel: l10n.save,
       ),
     );
-    controller.dispose();
     if (!mounted || newName == null || newName.isEmpty || newName == current) return;
 
     setState(() => _renamingTeamIndex = team.teamIndex);
@@ -822,6 +805,72 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
           ],
         ],
       ),
+    );
+  }
+}
+
+/// Diálogo de renombrado: el [TextEditingController] vive en el State del diálogo
+/// y se dispone tras desmontar el [TextField], evitando `_dependents.isEmpty`.
+class _TeamsRenameDialog extends StatefulWidget {
+  const _TeamsRenameDialog({
+    required this.initialName,
+    required this.title,
+    required this.fieldLabel,
+    required this.cancelLabel,
+    required this.saveLabel,
+  });
+
+  final String initialName;
+  final String title;
+  final String fieldLabel;
+  final String cancelLabel;
+  final String saveLabel;
+
+  @override
+  State<_TeamsRenameDialog> createState() => _TeamsRenameDialogState();
+}
+
+class _TeamsRenameDialogState extends State<_TeamsRenameDialog> {
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.initialName);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _submit() {
+    Navigator.of(context).pop(_controller.text.trim());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text(widget.title),
+      content: TextField(
+        controller: _controller,
+        maxLength: 40,
+        autofocus: true,
+        decoration: InputDecoration(labelText: widget.fieldLabel),
+        textCapitalization: TextCapitalization.sentences,
+        onSubmitted: (_) => _submit(),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text(widget.cancelLabel),
+        ),
+        FilledButton(
+          onPressed: _submit,
+          child: Text(widget.saveLabel),
+        ),
+      ],
     );
   }
 }
