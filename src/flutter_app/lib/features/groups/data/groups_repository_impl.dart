@@ -951,6 +951,20 @@ class GroupsRepositoryImpl implements GroupsRepository {
   }
 
   @override
+  Future<void> updateTeamLabel({
+    required String groupId,
+    required int teamIndex,
+    required String teamLabel,
+  }) async {
+    final callable = _functions.httpsCallable('updateTeamLabel');
+    await callable.call(<String, dynamic>{
+      'groupId': groupId,
+      'teamIndex': teamIndex,
+      'teamLabel': teamLabel.trim(),
+    });
+  }
+
+  @override
   Future<void> deleteGroup(String groupId) async {
     final callable = _functions.httpsCallable('deleteGroup');
     await callable.call(<String, dynamic>{'groupId': groupId});

@@ -104,7 +104,7 @@ class TeamResultPdf {
                   ),
                   pw.SizedBox(height: 20),
                   ...teams.map((team) {
-                    final label = TeamResultText.unitLabel(l10n, team.teamIndex);
+                    final label = TeamResultText.teamDisplayName(l10n, team);
                     return pw.Padding(
                       padding: const pw.EdgeInsets.only(bottom: 14),
                       child: pw.Container(

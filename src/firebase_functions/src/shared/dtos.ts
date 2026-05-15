@@ -543,6 +543,19 @@ export type RemoveTeamsManualParticipantResponse = z.infer<
   typeof RemoveTeamsManualParticipantResponseSchema
 >;
 
+export const UpdateTeamLabelRequestSchema = z.object({
+  groupId: z.string().min(1),
+  teamIndex: z.number().int().min(0),
+  teamLabel: z.string().min(1).max(40)
+});
+export type UpdateTeamLabelRequest = z.infer<typeof UpdateTeamLabelRequestSchema>;
+
+export const UpdateTeamLabelResponseSchema = z.object({
+  teamIndex: z.number().int().min(0),
+  teamLabel: z.string().min(1)
+});
+export type UpdateTeamLabelResponse = z.infer<typeof UpdateTeamLabelResponseSchema>;
+
 export const PushPlatformSchema = z.enum(["android", "ios", "web", "unknown"]);
 export type PushPlatform = z.infer<typeof PushPlatformSchema>;
 

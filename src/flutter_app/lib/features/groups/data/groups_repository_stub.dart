@@ -150,6 +150,15 @@ class GroupsRepositoryStub implements GroupsRepository {
   }
 
   @override
+  Future<void> updateTeamLabel({
+    required String groupId,
+    required int teamIndex,
+    required String teamLabel,
+  }) async {
+    throw UnimplementedError('updateTeamLabel not wired');
+  }
+
+  @override
   Future<Subgroup> createSubgroup({
     required String groupId,
     required String name,

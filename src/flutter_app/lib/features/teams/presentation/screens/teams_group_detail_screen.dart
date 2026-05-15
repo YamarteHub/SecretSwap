@@ -1,19 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../../core/l10n/l10n.dart';
+import '../../../../core/routing/app_router.dart';
 import '../../../../core/messaging/functions_user_message.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/theme/premium_ui.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../draw/services/managed_delivery_launcher.dart';
+import '../../../chat/presentation/screens/group_chat_screen.dart';
 import '../../../groups/domain/group_models.dart';
 import '../../../groups/presentation/providers.dart';
 import '../../services/team_result_pdf.dart';
 import '../../services/team_result_text.dart';
+
+bool _isActiveTeamsMember(GroupDetail d, String? uid) {
+  if (uid == null || uid.isEmpty) return false;
+  for (final m in d.members) {
+    if (m.uid == uid && m.memberState == MemberState.active) return true;
+  }
+  return false;
+}
 
 class TeamsGroupDetailScreen extends ConsumerStatefulWidget {
   const TeamsGroupDetailScreen({
@@ -43,6 +54,7 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
   bool _executeInFlight = false;
   bool _deleteInFlight = false;
   bool _pdfBusy = false;
+  int? _renamingTeamIndex;
 
   @override
   void initState() {
@@ -147,6 +159,75 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
 
   String get _groupDisplayName =>
       widget.detail.name.isEmpty ? widget.groupId : widget.detail.name;
+
+  String? _ownerDisplayName(AppLocalizations l10n) {
+    for (final m in widget.detail.members) {
+      if (m.uid == widget.detail.ownerUid) {
+        return _memberDisplayName(m, l10n);
+      }
+    }
+    return null;
+  }
+
+  bool _isCurrentUserInTeam(TeamSnapshot team) {
+    final uid = widget.currentUid;
+    if (uid == null || uid.isEmpty) return false;
+    return team.members.any((m) => m.memberUid == uid);
+  }
+
+  Future<void> _renameTeam(TeamSnapshot team, AppLocalizations l10n) async {
+    final current = TeamResultText.teamDisplayName(l10n, team);
+    final controller = TextEditingController(text: current);
+    final newName = await showDialog<String>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(l10n.teamsRenameDialogTitle),
+        content: TextField(
+          controller: controller,
+          maxLength: 40,
+          autofocus: true,
+          decoration: InputDecoration(
+            labelText: l10n.teamsRenameDialogFieldLabel,
+          ),
+          textCapitalization: TextCapitalization.sentences,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: Text(l10n.groupDialogCancel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(ctx).pop(controller.text.trim()),
+            child: Text(l10n.save),
+          ),
+        ],
+      ),
+    );
+    controller.dispose();
+    if (!mounted || newName == null || newName.isEmpty || newName == current) return;
+
+    setState(() => _renamingTeamIndex = team.teamIndex);
+    try {
+      await ref.read(groupsRepositoryProvider).updateTeamLabel(
+            groupId: widget.groupId,
+            teamIndex: team.teamIndex,
+            teamLabel: newName,
+          );
+      if (!mounted) return;
+      widget.onReload();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.teamsRenameSuccess)),
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(userVisibleActionErrorMessage(e, l10n))),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _renamingTeamIndex = null);
+    }
+  }
 
   Future<void> _rotateInvite() async {
     if (!_canRotate || _rotating) return;
@@ -438,6 +519,7 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
     final configLine = widget.detail.groupingMode == TeamGroupingMode.teamCount
         ? l10n.teamsDetailConfigTeamCount(widget.detail.requestedTeamCount ?? 2)
         : l10n.teamsDetailConfigTeamSize(widget.detail.requestedTeamSize ?? 2);
+    final ownerName = _ownerDisplayName(l10n);
 
     return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(18, 12, 18, 28),
@@ -471,67 +553,126 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
               ),
             ],
           ),
-          if (_teamsComplete && _teams.isNotEmpty) ...[
-            const SizedBox(height: 20),
-            SecretCard(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: AppTheme.sageGreen.withValues(alpha: 0.22),
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                    child: const Icon(
-                      Icons.groups_rounded,
-                      color: AppTheme.deepPlum,
-                      size: 28,
-                    ),
-                  ),
-                  const SizedBox(width: 14),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          l10n.teamsResultHeroTitle,
-                          style: theme.textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.w900,
-                            color: AppTheme.deepPlum,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          l10n.teamsResultHeroSubtitle,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            color: theme.colorScheme.onSurfaceVariant,
-                            height: 1.35,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          l10n.teamsResultSummary(_teams.length, _eligibleCount),
-                          style: theme.textTheme.titleSmall?.copyWith(
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 10),
+          if (!_isOwner && ownerName != null) ...[
+            const SizedBox(height: 8),
             Text(
-              l10n.teamsDetailCompletedHint,
+              l10n.teamsOrganizerByline(ownerName),
               style: theme.textTheme.bodySmall?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
-                height: 1.4,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ],
-          if (!_teamsComplete) ...[
+          if (_teamsComplete && _teams.isNotEmpty) ...[
+            const SizedBox(height: 20),
+            _TeamsResultHero(
+              title: l10n.teamsResultHeroTitle,
+              subtitle: l10n.teamsResultHeroSubtitle,
+              summary: l10n.teamsResultSummary(_teams.length, _eligibleCount),
+            ),
+            if (_isActiveTeamsMember(widget.detail, widget.currentUid)) ...[
+              const SizedBox(height: 16),
+              _TeamsGroupChatAccessCard(
+                groupId: widget.groupId,
+                groupName: _groupDisplayName,
+                eventDate: widget.detail.eventDate,
+              ),
+            ],
+            const SizedBox(height: 22),
+            Text(
+              l10n.teamsDetailTeamsListTitle,
+              style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w900),
+            ),
+            const SizedBox(height: 12),
+            ..._teams.map(
+              (team) => Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: _TeamsResultTeamCard(
+                  team: team,
+                  displayName: TeamResultText.teamDisplayName(l10n, team),
+                  memberNameFor: (m) => _memberSnapshotDisplayName(m, l10n),
+                  youInTeam: _isCurrentUserInTeam(team),
+                  youLabel: l10n.teamsYouInTeam,
+                  canRename: _isOwner,
+                  isRenaming: _renamingTeamIndex == team.teamIndex,
+                  onRename: () => _renameTeam(team, l10n),
+                ),
+              ),
+            ),
+            if (_isOwner) ...[
+              const SizedBox(height: 8),
+              if (_teamsComplete)
+                Text(
+                  l10n.teamsDetailCompletedHint,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                    height: 1.4,
+                  ),
+                ),
+              const SizedBox(height: 20),
+              Text(
+                l10n.teamsDetailRosterTitle,
+                style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
+              ),
+              const SizedBox(height: 10),
+              _TeamsRosterSection(
+                appMembers: appMembers,
+                manualParticipants: widget.detail.teamsManualParticipants,
+                memberDisplayName: (m) => _memberDisplayName(m, l10n),
+                ownerUid: widget.detail.ownerUid,
+                adminLabel: l10n.groupRoleAdmin,
+                memberLabel: l10n.groupRoleMember,
+                appMembersTitle: l10n.teamsDetailAppMembersTitle,
+                manualTitle: l10n.teamsDetailManualTitle,
+              ),
+              const SizedBox(height: 22),
+              Text(
+                l10n.teamsResultActionsTitle,
+                style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
+              ),
+              const SizedBox(height: 10),
+              SecretCard(
+                padding: const EdgeInsets.fromLTRB(14, 12, 14, 14),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    FilledButton.tonalIcon(
+                      onPressed: () => _shareResult(l10n),
+                      icon: const Icon(Icons.ios_share_rounded),
+                      label: Text(l10n.teamsDetailShareCta),
+                    ),
+                    const SizedBox(height: 8),
+                    OutlinedButton.icon(
+                      onPressed: () => _openEmail(l10n),
+                      icon: const Icon(Icons.mail_outline_rounded),
+                      label: Text(l10n.teamsDetailEmailCta),
+                    ),
+                    const SizedBox(height: 8),
+                    OutlinedButton.icon(
+                      onPressed: _pdfBusy ? null : () => _generatePdf(l10n),
+                      icon: _pdfBusy
+                          ? const SizedBox(
+                              width: 18,
+                              height: 18,
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            )
+                          : const Icon(Icons.picture_as_pdf_outlined),
+                      label: Text(l10n.teamsDetailPdfCta),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ] else if (!_isOwner && !_teamsComplete) ...[
+            const SizedBox(height: 20),
+            _TeamsMemberWaitingCard(
+              title: l10n.teamsMemberWaitingTitle,
+              body: l10n.teamsMemberWaitingBody,
+              poolSummary: l10n.teamsMemberPoolSummary(_eligibleCount),
+              appMembers: appMembers,
+              memberDisplayName: (m) => _memberDisplayName(m, l10n),
+            ),
+          ] else if (_isOwner && !_teamsComplete) ...[
             const SizedBox(height: 20),
             SectionCard(
               child: Column(
@@ -601,104 +742,21 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
                 ],
               ),
             ),
-          ],
-          const SizedBox(height: 20),
-          SectionCard(
-            padding: const EdgeInsets.fromLTRB(16, 14, 16, 8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  l10n.teamsDetailAppMembersTitle,
-                  style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
-                ),
-                const SizedBox(height: 6),
-                ...appMembers.map(
-                  (m) => ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    leading: CircleAvatar(
-                      backgroundColor: AppTheme.deepPlum.withValues(alpha: 0.10),
-                      child: Icon(
-                        m.uid == widget.detail.ownerUid
-                            ? Icons.star_outline_rounded
-                            : Icons.person_outline,
-                        color: AppTheme.deepPlum,
-                        size: 20,
-                      ),
-                    ),
-                    title: Text(
-                      _memberDisplayName(m, l10n),
-                      style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700),
-                    ),
-                    subtitle: Text(
-                      m.uid == widget.detail.ownerUid
-                          ? l10n.groupRoleAdmin
-                          : l10n.groupRoleMember,
-                      style: theme.textTheme.bodySmall,
-                    ),
-                  ),
-                ),
-              ],
+            const SizedBox(height: 20),
+            _TeamsRosterSection(
+              appMembers: appMembers,
+              manualParticipants: widget.detail.teamsManualParticipants,
+              memberDisplayName: (m) => _memberDisplayName(m, l10n),
+              ownerUid: widget.detail.ownerUid,
+              adminLabel: l10n.groupRoleAdmin,
+              memberLabel: l10n.groupRoleMember,
+              appMembersTitle: l10n.teamsDetailAppMembersTitle,
+              manualTitle: l10n.teamsDetailManualTitle,
+              onAddManual: _addManual,
+              addManualLabel: l10n.teamsDetailAddManualCta,
+              onEditManual: _editManual,
+              onRemoveManual: _removeManual,
             ),
-          ),
-          const SizedBox(height: 14),
-          SectionCard(
-            padding: const EdgeInsets.fromLTRB(16, 14, 16, 8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        l10n.teamsDetailManualTitle,
-                        style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
-                      ),
-                    ),
-                    if (_isOwner && !_teamsComplete)
-                      TextButton.icon(
-                        onPressed: _addManual,
-                        icon: const Icon(Icons.person_add_alt_1_outlined),
-                        label: Text(l10n.teamsDetailAddManualCta),
-                      ),
-                  ],
-                ),
-                ...widget.detail.teamsManualParticipants.map(
-                  (p) => ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    leading: CircleAvatar(
-                      backgroundColor: AppTheme.mutedGold.withValues(alpha: 0.22),
-                      child: const Icon(
-                        Icons.emoji_people_outlined,
-                        color: AppTheme.deepPlum,
-                        size: 20,
-                      ),
-                    ),
-                    title: Text(
-                      p.displayName,
-                      style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700),
-                    ),
-                    trailing: _isOwner && !_teamsComplete
-                        ? Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              IconButton(
-                                icon: const Icon(Icons.edit_outlined),
-                                onPressed: () => _editManual(p),
-                              ),
-                              IconButton(
-                                icon: const Icon(Icons.delete_outline),
-                                onPressed: () => _removeManual(p),
-                              ),
-                            ],
-                          )
-                        : null,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          if (!_teamsComplete) ...[
             const SizedBox(height: 14),
             SectionCard(
               child: Column(
@@ -727,8 +785,6 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
                 ],
               ),
             ),
-          ],
-          if (_isOwner && !_teamsComplete) ...[
             const SizedBox(height: 22),
             FilledButton.icon(
               onPressed: (_canExecute && !_executeInFlight) ? _executeTeams : null,
@@ -753,78 +809,6 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
               ),
             ],
           ],
-          if (_teamsComplete && _teams.isNotEmpty) ...[
-            const SizedBox(height: 22),
-            Text(
-              l10n.teamsDetailTeamsListTitle,
-              style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w900),
-            ),
-            const SizedBox(height: 12),
-            ..._teams.map((team) {
-              final label = TeamResultText.unitLabel(l10n, team.teamIndex);
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 12),
-                child: SectionCard(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        label,
-                        style: theme.textTheme.titleSmall?.copyWith(
-                          fontWeight: FontWeight.w900,
-                          color: AppTheme.deepPlum,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      ...team.members.map(
-                        (m) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4),
-                          child: Row(
-                            children: [
-                              const Icon(Icons.person_outline, size: 18),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: Text(
-                                  _memberSnapshotDisplayName(m, l10n),
-                                  style: theme.textTheme.bodyLarge?.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            }),
-            const SizedBox(height: 14),
-            OutlinedButton.icon(
-              onPressed: () => _shareResult(l10n),
-              icon: const Icon(Icons.ios_share_rounded),
-              label: Text(l10n.teamsDetailShareCta),
-            ),
-            const SizedBox(height: 10),
-            OutlinedButton.icon(
-              onPressed: () => _openEmail(l10n),
-              icon: const Icon(Icons.mail_outline_rounded),
-              label: Text(l10n.teamsDetailEmailCta),
-            ),
-            const SizedBox(height: 10),
-            OutlinedButton.icon(
-              onPressed: _pdfBusy ? null : () => _generatePdf(l10n),
-              icon: _pdfBusy
-                  ? const SizedBox(
-                      width: 18,
-                      height: 18,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
-                  : const Icon(Icons.picture_as_pdf_outlined),
-              label: Text(l10n.teamsDetailPdfCta),
-            ),
-          ],
           if (_isOwner) ...[
             const SizedBox(height: 32),
             TextButton.icon(
@@ -836,6 +820,531 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
               ),
             ),
           ],
+        ],
+      ),
+    );
+  }
+}
+
+class _TeamsResultHero extends StatelessWidget {
+  const _TeamsResultHero({
+    required this.title,
+    required this.subtitle,
+    required this.summary,
+  });
+
+  final String title;
+  final String subtitle;
+  final String summary;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return SecretCard(
+      padding: const EdgeInsets.fromLTRB(20, 22, 20, 22),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          gradient: LinearGradient(
+            colors: [
+              AppTheme.sageGreen.withValues(alpha: 0.28),
+              AppTheme.mutedGold.withValues(alpha: 0.18),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(18),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.65),
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppTheme.deepPlum.withValues(alpha: 0.08),
+                      blurRadius: 12,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: const Icon(
+                  Icons.emoji_events_outlined,
+                  color: AppTheme.deepPlum,
+                  size: 32,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: theme.textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.w900,
+                        color: AppTheme.deepPlum,
+                        height: 1.15,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      subtitle,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                        height: 1.35,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.72),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Text(
+                        summary,
+                        style: theme.textTheme.titleSmall?.copyWith(
+                          fontWeight: FontWeight.w800,
+                          color: AppTheme.deepPlum,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _TeamsResultTeamCard extends StatelessWidget {
+  const _TeamsResultTeamCard({
+    required this.team,
+    required this.displayName,
+    required this.memberNameFor,
+    required this.youInTeam,
+    required this.youLabel,
+    required this.canRename,
+    required this.isRenaming,
+    required this.onRename,
+  });
+
+  final TeamSnapshot team;
+  final String displayName;
+  final String Function(TeamMemberSnapshot member) memberNameFor;
+  final bool youInTeam;
+  final String youLabel;
+  final bool canRename;
+  final bool isRenaming;
+  final VoidCallback onRename;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return SecretCard(
+      padding: const EdgeInsets.fromLTRB(18, 16, 14, 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 4,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: youInTeam ? AppTheme.sageGreen : AppTheme.deepPlum.withValues(alpha: 0.35),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      displayName,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w900,
+                        color: AppTheme.deepPlum,
+                      ),
+                    ),
+                    if (youInTeam) ...[
+                      const SizedBox(height: 4),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                        decoration: BoxDecoration(
+                          color: AppTheme.sageGreen.withValues(alpha: 0.22),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          youLabel,
+                          style: theme.textTheme.labelSmall?.copyWith(
+                            fontWeight: FontWeight.w800,
+                            color: AppTheme.deepPlum,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+              if (canRename)
+                IconButton(
+                  tooltip: displayName,
+                  onPressed: isRenaming ? null : onRename,
+                  icon: isRenaming
+                      ? const SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : Icon(
+                          Icons.edit_outlined,
+                          color: AppTheme.deepPlum.withValues(alpha: 0.75),
+                        ),
+                ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          ...team.members.map(
+            (m) => Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 16,
+                    backgroundColor: AppTheme.deepPlum.withValues(alpha: 0.08),
+                    child: Icon(
+                      Icons.person_outline,
+                      size: 18,
+                      color: AppTheme.deepPlum.withValues(alpha: 0.7),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      memberNameFor(m),
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _TeamsRosterSection extends StatelessWidget {
+  const _TeamsRosterSection({
+    required this.appMembers,
+    required this.manualParticipants,
+    required this.memberDisplayName,
+    required this.ownerUid,
+    required this.adminLabel,
+    required this.memberLabel,
+    required this.appMembersTitle,
+    required this.manualTitle,
+    this.onAddManual,
+    this.addManualLabel,
+    this.onEditManual,
+    this.onRemoveManual,
+  });
+
+  final List<GroupMember> appMembers;
+  final List<TeamsManualParticipant> manualParticipants;
+  final String Function(GroupMember m) memberDisplayName;
+  final String ownerUid;
+  final String adminLabel;
+  final String memberLabel;
+  final String appMembersTitle;
+  final String manualTitle;
+  final VoidCallback? onAddManual;
+  final String? addManualLabel;
+  final void Function(TeamsManualParticipant p)? onEditManual;
+  final void Function(TeamsManualParticipant p)? onRemoveManual;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final editable = onAddManual != null;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        SectionCard(
+          padding: const EdgeInsets.fromLTRB(16, 14, 16, 8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                appMembersTitle,
+                style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
+              ),
+              const SizedBox(height: 6),
+              ...appMembers.map(
+                (m) => ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  leading: CircleAvatar(
+                    backgroundColor: AppTheme.deepPlum.withValues(alpha: 0.10),
+                    child: Icon(
+                      m.uid == ownerUid
+                          ? Icons.star_outline_rounded
+                          : Icons.person_outline,
+                      color: AppTheme.deepPlum,
+                      size: 20,
+                    ),
+                  ),
+                  title: Text(
+                    memberDisplayName(m),
+                    style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700),
+                  ),
+                  subtitle: Text(
+                    m.uid == ownerUid ? adminLabel : memberLabel,
+                    style: theme.textTheme.bodySmall,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        if (manualParticipants.isNotEmpty || editable) ...[
+          const SizedBox(height: 12),
+          SectionCard(
+            padding: const EdgeInsets.fromLTRB(16, 14, 16, 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        manualTitle,
+                        style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
+                      ),
+                    ),
+                    if (editable && addManualLabel != null)
+                      TextButton.icon(
+                        onPressed: onAddManual,
+                        icon: const Icon(Icons.person_add_alt_1_outlined),
+                        label: Text(addManualLabel!),
+                      ),
+                  ],
+                ),
+                ...manualParticipants.map(
+                  (p) => ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: CircleAvatar(
+                      backgroundColor: AppTheme.mutedGold.withValues(alpha: 0.22),
+                      child: const Icon(
+                        Icons.emoji_people_outlined,
+                        color: AppTheme.deepPlum,
+                        size: 20,
+                      ),
+                    ),
+                    title: Text(
+                      p.displayName,
+                      style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700),
+                    ),
+                    trailing: editable && onEditManual != null && onRemoveManual != null
+                        ? Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.edit_outlined),
+                                onPressed: () => onEditManual!(p),
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.delete_outline),
+                                onPressed: () => onRemoveManual!(p),
+                              ),
+                            ],
+                          )
+                        : null,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+class _TeamsMemberWaitingCard extends StatelessWidget {
+  const _TeamsMemberWaitingCard({
+    required this.title,
+    required this.body,
+    required this.poolSummary,
+    required this.appMembers,
+    required this.memberDisplayName,
+  });
+
+  final String title;
+  final String body;
+  final String poolSummary;
+  final List<GroupMember> appMembers;
+  final String Function(GroupMember m) memberDisplayName;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return SecretCard(
+      padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: AppTheme.mutedGold.withValues(alpha: 0.25),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  Icons.hourglass_top_rounded,
+                  color: AppTheme.deepPlum.withValues(alpha: 0.85),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  title,
+                  style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Text(
+            body,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+              height: 1.4,
+            ),
+          ),
+          const SizedBox(height: 14),
+          Text(
+            poolSummary,
+            style: theme.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w700),
+          ),
+          if (appMembers.isNotEmpty) ...[
+            const SizedBox(height: 12),
+            Wrap(
+              spacing: 6,
+              runSpacing: 6,
+              children: appMembers.take(8).map((m) {
+                final name = memberDisplayName(m);
+                final initial =
+                    name.isNotEmpty ? name.substring(0, 1).toUpperCase() : '?';
+                return Chip(
+                  avatar: CircleAvatar(
+                    backgroundColor: AppTheme.deepPlum.withValues(alpha: 0.12),
+                    child: Text(
+                      initial,
+                      style: theme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w800),
+                    ),
+                  ),
+                  label: Text(memberDisplayName(m)),
+                  visualDensity: VisualDensity.compact,
+                );
+              }).toList(),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _TeamsGroupChatAccessCard extends StatelessWidget {
+  const _TeamsGroupChatAccessCard({
+    required this.groupId,
+    required this.groupName,
+    this.eventDate,
+  });
+
+  final String groupId;
+  final String groupName;
+  final DateTime? eventDate;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final theme = Theme.of(context);
+    return SecretCard(
+      padding: const EdgeInsets.fromLTRB(18, 18, 18, 18),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: AppTheme.mutedGold.withValues(alpha: 0.2),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  Icons.forum_rounded,
+                  color: AppTheme.deepPlum.withValues(alpha: 0.85),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.teamsChatSectionTitle,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      l10n.teamsChatSectionSubtitle,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                        height: 1.4,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 14),
+          FilledButton.tonalIcon(
+            onPressed: () {
+              context.push(
+                AppRoutes.groupChatFor(groupId),
+                extra: GroupChatRouteExtra(
+                  groupName: groupName,
+                  eventDate: eventDate,
+                  teamsCompleted: true,
+                ),
+              );
+            },
+            icon: const Icon(Icons.chat_bubble_outline_rounded),
+            label: Text(l10n.teamsChatEnterCta),
+          ),
         ],
       ),
     );

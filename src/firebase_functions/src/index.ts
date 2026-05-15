@@ -13,6 +13,7 @@ import {
   removeTeamsManualParticipant,
   updateTeamsManualParticipant
 } from "./functions/teamsManualParticipants";
+import { updateTeamLabel } from "./functions/updateTeamLabel";
 import { getManagedAssignments } from "./functions/getManagedAssignments";
 import { getWishlist } from "./functions/getWishlist";
 import { setWishlist } from "./functions/setWishlist";
@@ -41,6 +42,7 @@ export {
   createTeamsManualParticipant,
   updateTeamsManualParticipant,
   removeTeamsManualParticipant,
+  updateTeamLabel,
   createManagedParticipant,
   updateManagedParticipant,
   removeManagedParticipant,

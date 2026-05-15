@@ -88,6 +88,12 @@ abstract interface class GroupsRepository {
     required String participantId,
   });
 
+  Future<void> updateTeamLabel({
+    required String groupId,
+    required int teamIndex,
+    required String teamLabel,
+  });
+
   /// Crea un subgrupo (Firestore: `groups/{groupId}/subgroups/{id}`).
   Future<Subgroup> createSubgroup({
     required String groupId,
