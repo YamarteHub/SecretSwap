@@ -1,36 +1,57 @@
 import '../../../l10n/app_localizations.dart';
 import '../../groups/domain/group_models.dart';
+import '../presentation/teams_ui_copy.dart';
 
 /// Texto plano para compartir o correo (snapshot de equipos).
 class TeamResultText {
   TeamResultText._();
 
-  static String unitLabel(AppLocalizations l10n, int teamIndex) {
-    return l10n.teamsUnitLabel(teamIndex + 1);
+  static String unitLabel(
+    AppLocalizations l10n,
+    int teamIndex, {
+    TeamsPreset preset = TeamsPreset.standard,
+  }) {
+    return TeamsUiCopy.of(l10n, preset).unitLabel(teamIndex);
   }
 
   /// `true` si el label guardado es el fallback automático (p. ej. "Team 1").
-  static bool isDefaultTeamLabel(String teamLabel, int teamIndex) {
+  static bool isDefaultTeamLabel(
+    String teamLabel,
+    int teamIndex, {
+    TeamsPreset preset = TeamsPreset.standard,
+  }) {
     final t = teamLabel.trim();
     if (t.isEmpty) return true;
     final n = teamIndex + 1;
     if (t == 'Team $n') return true;
-    final patterns = [
-      RegExp(r'^Team\s+$n$', caseSensitive: false),
-      RegExp(r'^Equipo\s+$n$', caseSensitive: false),
-      RegExp(r'^Equipa\s+$n$', caseSensitive: false),
-      RegExp(r'^Squadra\s+$n$', caseSensitive: false),
-      RegExp(r'^Équipe\s+$n$', caseSensitive: false),
-    ];
+    final patterns = preset == TeamsPreset.pairings
+        ? [
+            RegExp(r'^Pair\s+$n$', caseSensitive: false),
+            RegExp(r'^Pareja\s+$n$', caseSensitive: false),
+            RegExp(r'^Pareja\s+$n$', caseSensitive: false),
+            RegExp(r'^Coppia\s+$n$', caseSensitive: false),
+            RegExp(r'^Paire\s+$n$', caseSensitive: false),
+          ]
+        : [
+            RegExp(r'^Team\s+$n$', caseSensitive: false),
+            RegExp(r'^Equipo\s+$n$', caseSensitive: false),
+            RegExp(r'^Equipa\s+$n$', caseSensitive: false),
+            RegExp(r'^Squadra\s+$n$', caseSensitive: false),
+            RegExp(r'^Équipe\s+$n$', caseSensitive: false),
+          ];
     return patterns.any((p) => p.hasMatch(t));
   }
 
-  static String teamDisplayName(AppLocalizations l10n, TeamSnapshot team) {
+  static String teamDisplayName(
+    AppLocalizations l10n,
+    TeamSnapshot team, {
+    TeamsPreset preset = TeamsPreset.standard,
+  }) {
     final custom = team.teamLabel.trim();
-    if (custom.isNotEmpty && !isDefaultTeamLabel(custom, team.teamIndex)) {
+    if (custom.isNotEmpty && !isDefaultTeamLabel(custom, team.teamIndex, preset: preset)) {
       return custom;
     }
-    return unitLabel(l10n, team.teamIndex);
+    return unitLabel(l10n, team.teamIndex, preset: preset);
   }
 
   static String memberLine(String name) => '• $name';
@@ -40,18 +61,24 @@ class TeamResultText {
     required String groupName,
     required List<TeamSnapshot> teams,
     required String Function(TeamMemberSnapshot member) displayNameFor,
+    TeamsPreset preset = TeamsPreset.standard,
   }) {
+    final ui = TeamsUiCopy.of(l10n, preset);
     final blocks = <String>[];
     for (final team in teams) {
-      final label = teamDisplayName(l10n, team);
+      final label = teamDisplayName(l10n, team, preset: preset);
       final lines = team.members.map((m) => memberLine(displayNameFor(m))).join('\n');
       blocks.add('$label\n$lines');
     }
-    return l10n.teamsShareBody(groupName, blocks.join('\n\n'));
+    return ui.shareBody(groupName, blocks.join('\n\n'));
   }
 
-  static String buildEmailSubject(AppLocalizations l10n, String groupName) {
-    return l10n.teamsEmailSubject(groupName);
+  static String buildEmailSubject(
+    AppLocalizations l10n,
+    String groupName, {
+    TeamsPreset preset = TeamsPreset.standard,
+  }) {
+    return TeamsUiCopy.of(l10n, preset).emailSubject(groupName);
   }
 
   static String buildEmailBody({
@@ -59,13 +86,15 @@ class TeamResultText {
     required String groupName,
     required List<TeamSnapshot> teams,
     required String Function(TeamMemberSnapshot member) displayNameFor,
+    TeamsPreset preset = TeamsPreset.standard,
   }) {
+    final ui = TeamsUiCopy.of(l10n, preset);
     final blocks = <String>[];
     for (final team in teams) {
-      final label = teamDisplayName(l10n, team);
+      final label = teamDisplayName(l10n, team, preset: preset);
       final lines = team.members.map((m) => '- ${displayNameFor(m)}').join('\n');
       blocks.add('$label\n$lines');
     }
-    return l10n.teamsEmailBody(groupName, blocks.join('\n\n'));
+    return ui.emailBody(groupName, blocks.join('\n\n'));
   }
 }

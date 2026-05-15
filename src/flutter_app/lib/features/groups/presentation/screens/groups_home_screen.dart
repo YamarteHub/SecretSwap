@@ -14,6 +14,7 @@ import '../../../../core/routing/app_router.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/theme/premium_ui.dart';
 import '../../domain/group_models.dart';
+import '../../../teams/presentation/teams_ui_copy.dart';
 import '../../../notifications/presentation/providers.dart';
 import '../../../notifications/presentation/widgets/push_activation_card.dart';
 import '../providers.dart';
@@ -94,15 +95,16 @@ String _homeDynamicStatusChipLabel(BuildContext context, GroupSummary g) {
     }
   }
   if (g.dynamicType == TarciDynamicType.teams) {
+    final ui = TeamsUiCopy.of(context.l10n, g.teamsPreset);
     switch (g.teamStatus) {
       case TeamStatus.completed:
-        return context.l10n.homeTeamsStateCompleted;
+        return ui.homeStateCompleted;
       case TeamStatus.generating:
         return context.l10n.homeGroupDrawStateDrawing;
       case TeamStatus.failed:
         return context.l10n.homeGroupDrawStateFailed;
       case TeamStatus.idle:
-        return context.l10n.homeTeamsStatePreparing;
+        return ui.homeStatePreparing;
     }
   }
   return _homeDrawStatusChipLabel(context, g.drawStatus);
@@ -649,14 +651,20 @@ class _GroupCard extends StatelessWidget {
                                 label: switch (summary.dynamicType) {
                                   TarciDynamicType.simpleRaffle =>
                                     l10n.homeDynamicTypeRaffle,
-                                  TarciDynamicType.teams => l10n.homeDynamicTypeTeams,
+                                  TarciDynamicType.teams => TeamsUiCopy.of(
+                                        l10n,
+                                        summary.teamsPreset,
+                                      ).homeDynamicTypeLabel,
                                   TarciDynamicType.secretSanta =>
                                     l10n.homeDynamicTypeSecretSanta,
                                 },
                                 icon: switch (summary.dynamicType) {
                                   TarciDynamicType.simpleRaffle =>
                                     Icons.casino_outlined,
-                                  TarciDynamicType.teams => Icons.groups_outlined,
+                                  TarciDynamicType.teams =>
+                                    summary.teamsPreset == TeamsPreset.pairings
+                                        ? Icons.people_alt_outlined
+                                        : Icons.groups_outlined,
                                   TarciDynamicType.secretSanta =>
                                     Icons.card_giftcard_outlined,
                                 },

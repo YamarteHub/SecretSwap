@@ -28,6 +28,11 @@ export const createTeamsGroup = onCall(
     try {
       const uid = requireAuthUid(req.auth?.uid);
       const body = parseOrThrow(CreateTeamsGroupRequestSchema, req.data);
+      const teamsPreset = body.teamsPreset ?? "standard";
+      const groupingMode = teamsPreset === "pairings" ? "team_size" : body.groupingMode;
+      const requestedTeamCount =
+        teamsPreset === "pairings" ? undefined : body.requestedTeamCount;
+      const requestedTeamSize = teamsPreset === "pairings" ? 2 : body.requestedTeamSize;
       const eventDateTs = optionalEventTimestamp(body.eventDateEpochMs);
 
       const db = getDb();
@@ -64,10 +69,11 @@ export const createTeamsGroup = onCall(
               dynamicType: "teams",
               resultVisibility: "public_to_group",
               teamStatus: TeamStatusSchema.enum.idle,
-              groupingMode: body.groupingMode,
-              ...(body.groupingMode === "team_count"
-                ? { requestedTeamCount: body.requestedTeamCount }
-                : { requestedTeamSize: body.requestedTeamSize }),
+              teamsPreset,
+              groupingMode,
+              ...(groupingMode === "team_count"
+                ? { requestedTeamCount }
+                : { requestedTeamSize }),
               ownerParticipatesInTeams: body.ownerParticipatesInTeams,
               lastTeamExecutionId: null,
               drawStatus: DrawStatusSchema.enum.idle,

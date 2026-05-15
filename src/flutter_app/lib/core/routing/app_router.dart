@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/chat/presentation/screens/group_chat_screen.dart';
+import '../../features/groups/domain/group_models.dart';
 import '../../features/draw/presentation/screens/managed_assignments_screen.dart';
 import '../../features/draw/presentation/screens/my_assignment_screen.dart';
 import '../../features/groups/presentation/screens/create_group_screen.dart';
@@ -10,6 +11,7 @@ import '../../features/groups/presentation/screens/group_detail_screen.dart';
 import '../../features/groups/presentation/screens/groups_home_screen.dart';
 import '../../features/groups/presentation/screens/join_by_code_screen.dart';
 import '../../features/raffle/presentation/screens/create_raffle_wizard_screen.dart';
+import '../../features/teams/presentation/screens/create_pairings_wizard_screen.dart';
 import '../../features/teams/presentation/screens/create_teams_wizard_screen.dart';
 import '../../features/about/presentation/about_tarci_screen.dart';
 import '../../features/auth/presentation/splash_screen.dart';
@@ -29,6 +31,7 @@ class AppRoutes {
   static const dynamicsSelect = '/groups/dynamics';
   static const createRaffle = '/groups/dynamics/raffle/create';
   static const createTeams = '/groups/dynamics/teams/create';
+  static const createPairings = '/groups/dynamics/pairings/create';
   static const joinByCode = '/groups/join';
   static const groupDetail = '/groups/:groupId';
   static const myAssignment = '/groups/:groupId/executions/:executionId/my-assignment';
@@ -75,6 +78,10 @@ GoRouter buildRouter({GlobalKey<NavigatorState>? navigatorKey}) {
         builder: (context, state) => const CreateTeamsWizardScreen(),
       ),
       GoRoute(
+        path: AppRoutes.createPairings,
+        builder: (context, state) => const CreatePairingsWizardScreen(),
+      ),
+      GoRoute(
         path: AppRoutes.joinByCode,
         builder: (context, state) => const JoinByCodeScreen(),
       ),
@@ -89,6 +96,7 @@ GoRouter buildRouter({GlobalKey<NavigatorState>? navigatorKey}) {
             eventDate: extra?.eventDate,
             drawCompleted: extra?.drawCompleted ?? false,
             teamsCompleted: extra?.teamsCompleted ?? false,
+            teamsPreset: extra?.teamsPreset ?? TeamsPreset.standard,
           );
         },
       ),

@@ -17,6 +17,7 @@ import '../../../groups/domain/group_models.dart';
 import '../../../groups/presentation/providers.dart';
 import '../../services/team_result_pdf.dart';
 import '../../services/team_result_text.dart';
+import '../teams_ui_copy.dart';
 
 bool _isActiveTeamsMember(GroupDetail d, String? uid) {
   if (uid == null || uid.isEmpty) return false;
@@ -93,6 +94,9 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
 
   bool get _configValid {
     if (_eligibleCount < 2) return false;
+    if (widget.detail.teamsPreset == TeamsPreset.pairings) {
+      return _eligibleCount % 2 == 0;
+    }
     if (widget.detail.groupingMode == TeamGroupingMode.teamCount) {
       final n = widget.detail.requestedTeamCount ?? 2;
       return n >= 2 && n <= _eligibleCount;
@@ -107,6 +111,9 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
 
   int? get _estimatedTeamCount {
     if (!_hasMinPool) return null;
+    if (widget.detail.teamsPreset == TeamsPreset.pairings) {
+      return _eligibleCount ~/ 2;
+    }
     if (widget.detail.groupingMode == TeamGroupingMode.teamCount) {
       return widget.detail.requestedTeamCount;
     }
@@ -176,13 +183,15 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
   }
 
   Future<void> _renameTeam(TeamSnapshot team, AppLocalizations l10n) async {
-    final current = TeamResultText.teamDisplayName(l10n, team);
+    final ui = TeamsUiCopy.of(l10n, widget.detail.teamsPreset);
+    final preset = widget.detail.teamsPreset;
+    final current = TeamResultText.teamDisplayName(l10n, team, preset: preset);
     final newName = await showDialog<String>(
       context: context,
       builder: (ctx) => _TeamsRenameDialog(
         initialName: current,
-        title: l10n.teamsRenameDialogTitle,
-        fieldLabel: l10n.teamsRenameDialogFieldLabel,
+        title: ui.renameDialogTitle,
+        fieldLabel: ui.renameDialogFieldLabel,
         cancelLabel: l10n.groupDialogCancel,
         saveLabel: l10n.save,
       ),
@@ -199,7 +208,7 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
       if (!mounted) return;
       widget.onReload();
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.teamsRenameSuccess)),
+        SnackBar(content: Text(ui.renameSuccess)),
       );
     } catch (e) {
       if (mounted) {
@@ -247,8 +256,9 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
           );
       if (!mounted) return;
       widget.onReload();
+      final ui = TeamsUiCopy.of(context.l10n, widget.detail.teamsPreset);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.homeTeamsStateCompleted)),
+        SnackBar(content: Text(ui.homeStateCompleted)),
       );
     } catch (e) {
       if (!mounted) return;
@@ -266,23 +276,27 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
 
   Future<void> _shareResult(AppLocalizations l10n) async {
     if (_teams.isEmpty) return;
+    final preset = widget.detail.teamsPreset;
     final text = TeamResultText.buildShareBody(
       l10n: l10n,
       groupName: _groupDisplayName,
       teams: _teams,
       displayNameFor: (m) => _memberSnapshotDisplayName(m, l10n),
+      preset: preset,
     );
     await Share.share(text);
   }
 
   Future<void> _openEmail(AppLocalizations l10n) async {
     if (_teams.isEmpty) return;
-    final subject = TeamResultText.buildEmailSubject(l10n, _groupDisplayName);
+    final preset = widget.detail.teamsPreset;
+    final subject = TeamResultText.buildEmailSubject(l10n, _groupDisplayName, preset: preset);
     final body = TeamResultText.buildEmailBody(
       l10n: l10n,
       groupName: _groupDisplayName,
       teams: _teams,
       displayNameFor: (m) => _memberSnapshotDisplayName(m, l10n),
+      preset: preset,
     );
     final ok = await ManagedDeliveryLauncher.openEmailComposer(
       subject: subject,
@@ -298,6 +312,7 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
 
   Future<void> _generatePdf(AppLocalizations l10n) async {
     if (_teams.isEmpty || _pdfBusy) return;
+    final ui = TeamsUiCopy.of(l10n, widget.detail.teamsPreset);
     setState(() => _pdfBusy = true);
     try {
       String? eventLine;
@@ -310,14 +325,15 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
       final teamCount = widget.detail.lastTeamExecution?.teamCount ?? _teams.length;
       final bytes = await TeamResultPdf.buildDocument(
         l10n: l10n,
-        headline: l10n.teamsPdfHeadline,
+        headline: ui.pdfHeadline,
         groupName: _groupDisplayName,
         eventDateLine: eventLine,
         teamCount: teamCount,
         participantCount: participantCount,
         teams: _teams,
         displayNameFor: (m) => _memberSnapshotDisplayName(m, l10n),
-        footerBrand: l10n.teamsPdfFooter,
+        footerBrand: ui.pdfFooter,
+        teamsPreset: widget.detail.teamsPreset,
       );
       if (!mounted) return;
       await TeamResultPdf.previewAndShare(
@@ -488,6 +504,8 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
     });
 
     final l10n = context.l10n;
+    final ui = TeamsUiCopy.of(l10n, widget.detail.teamsPreset);
+    final preset = widget.detail.teamsPreset;
     final theme = Theme.of(context);
     final appMembers = widget.detail.members
         .where((m) => m.memberState == MemberState.active)
@@ -499,9 +517,11 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
     final completedChipBg = AppTheme.sageGreen.withValues(alpha: 0.22);
     final completedChipFg = AppTheme.sageGreen;
 
-    final configLine = widget.detail.groupingMode == TeamGroupingMode.teamCount
-        ? l10n.teamsDetailConfigTeamCount(widget.detail.requestedTeamCount ?? 2)
-        : l10n.teamsDetailConfigTeamSize(widget.detail.requestedTeamSize ?? 2);
+    final configLine = widget.detail.teamsPreset == TeamsPreset.pairings
+        ? l10n.pairingsWizardReviewSummary
+        : widget.detail.groupingMode == TeamGroupingMode.teamCount
+            ? l10n.teamsDetailConfigTeamCount(widget.detail.requestedTeamCount ?? 2)
+            : l10n.teamsDetailConfigTeamSize(widget.detail.requestedTeamSize ?? 2);
     final ownerName = _ownerDisplayName(l10n);
 
     return SingleChildScrollView(
@@ -519,15 +539,15 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
             runSpacing: 8,
             children: [
               _statusChip(
-                label: l10n.homeDynamicTypeTeams,
+                label: ui.homeDynamicTypeLabel,
                 background: AppTheme.deepPlum.withValues(alpha: 0.10),
                 foreground: AppTheme.deepPlum,
-                icon: Icons.groups_outlined,
+                icon: widget.detail.teamsPreset == TeamsPreset.pairings
+                    ? Icons.people_alt_outlined
+                    : Icons.groups_outlined,
               ),
               _statusChip(
-                label: _teamsComplete
-                    ? l10n.homeTeamsStateCompleted
-                    : l10n.homeTeamsStatePreparing,
+                label: _teamsComplete ? ui.homeStateCompleted : ui.homeStatePreparing,
                 background: _teamsComplete ? completedChipBg : preparingChipBg,
                 foreground: _teamsComplete ? completedChipFg : preparingChipFg,
                 icon: _teamsComplete
@@ -549,9 +569,9 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
           if (_teamsComplete && _teams.isNotEmpty) ...[
             const SizedBox(height: 20),
             _TeamsResultHero(
-              title: l10n.teamsResultHeroTitle,
-              subtitle: l10n.teamsResultHeroSubtitle,
-              summary: l10n.teamsResultSummary(_teams.length, _eligibleCount),
+              title: ui.resultHeroTitle,
+              subtitle: ui.resultHeroSubtitle,
+              summary: ui.resultSummary(_teams.length, _eligibleCount),
             ),
             if (_isActiveTeamsMember(widget.detail, widget.currentUid)) ...[
               const SizedBox(height: 16),
@@ -559,11 +579,12 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
                 groupId: widget.groupId,
                 groupName: _groupDisplayName,
                 eventDate: widget.detail.eventDate,
+                teamsPreset: widget.detail.teamsPreset,
               ),
             ],
             const SizedBox(height: 22),
             Text(
-              l10n.teamsDetailTeamsListTitle,
+              ui.detailListTitle,
               style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w900),
             ),
             const SizedBox(height: 12),
@@ -572,7 +593,7 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
                 padding: const EdgeInsets.only(bottom: 12),
                 child: _TeamsResultTeamCard(
                   team: team,
-                  displayName: TeamResultText.teamDisplayName(l10n, team),
+                  displayName: TeamResultText.teamDisplayName(l10n, team, preset: preset),
                   memberNameFor: (m) => _memberSnapshotDisplayName(m, l10n),
                   youInTeam: _isCurrentUserInTeam(team),
                   youLabel: l10n.teamsYouInTeam,
@@ -649,8 +670,8 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
           ] else if (!_isOwner && !_teamsComplete) ...[
             const SizedBox(height: 20),
             _TeamsMemberWaitingCard(
-              title: l10n.teamsMemberWaitingTitle,
-              body: l10n.teamsMemberWaitingBody,
+              title: ui.memberWaitingTitle,
+              body: ui.memberWaitingBody,
               poolSummary: l10n.teamsMemberPoolSummary(_eligibleCount),
               appMembers: appMembers,
               memberDisplayName: (m) => _memberDisplayName(m, l10n),
@@ -746,7 +767,7 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    l10n.teamsDetailConfigTitle,
+                    ui.detailConfigTitle,
                     style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
                   ),
                   const SizedBox(height: 8),
@@ -754,7 +775,7 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
                   if (_estimatedTeamCount != null) ...[
                     const SizedBox(height: 8),
                     Text(
-                      l10n.teamsDetailEstimatedTeams(_estimatedTeamCount!),
+                      ui.detailConfigSummary(_estimatedTeamCount!),
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: theme.colorScheme.onSurfaceVariant,
                       ),
@@ -778,12 +799,16 @@ class _TeamsGroupDetailScreenState extends ConsumerState<TeamsGroupDetailScreen>
                       child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
                     )
                   : const Icon(Icons.groups_rounded),
-              label: Text(l10n.teamsDetailFormTeamsCta),
+              label: Text(ui.detailFormCta),
             ),
             if (!_hasMinPool || !_configValid) ...[
               const SizedBox(height: 10),
               Text(
-                !_hasMinPool ? l10n.teamsDetailMinPoolHint : l10n.teamsDetailInvalidConfigHint,
+                !_hasMinPool
+                    ? l10n.teamsDetailMinPoolHint
+                    : widget.detail.teamsPreset == TeamsPreset.pairings
+                        ? l10n.pairingsDetailEvenHint
+                        : l10n.teamsDetailInvalidConfigHint,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: theme.colorScheme.onSurfaceVariant,
@@ -1326,15 +1351,17 @@ class _TeamsGroupChatAccessCard extends StatelessWidget {
     required this.groupId,
     required this.groupName,
     this.eventDate,
+    this.teamsPreset = TeamsPreset.standard,
   });
 
   final String groupId;
   final String groupName;
   final DateTime? eventDate;
+  final TeamsPreset teamsPreset;
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
+    final ui = TeamsUiCopy.of(context.l10n, teamsPreset);
     final theme = Theme.of(context);
     return SecretCard(
       padding: const EdgeInsets.fromLTRB(18, 18, 18, 18),
@@ -1361,14 +1388,14 @@ class _TeamsGroupChatAccessCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      l10n.teamsChatSectionTitle,
+                      ui.chatSectionTitle,
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w800,
                       ),
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      l10n.teamsChatSectionSubtitle,
+                      ui.chatSectionSubtitle,
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: theme.colorScheme.onSurfaceVariant,
                         height: 1.4,
@@ -1388,11 +1415,12 @@ class _TeamsGroupChatAccessCard extends StatelessWidget {
                   groupName: groupName,
                   eventDate: eventDate,
                   teamsCompleted: true,
+                  teamsPreset: teamsPreset,
                 ),
               );
             },
             icon: const Icon(Icons.chat_bubble_outline_rounded),
-            label: Text(l10n.teamsChatEnterCta),
+            label: Text(ui.chatEnterCta),
           ),
         ],
       ),

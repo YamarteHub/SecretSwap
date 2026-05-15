@@ -6,6 +6,7 @@ import { groupPaths } from "./firestorePaths";
 import { userPaths } from "./userPaths";
 
 export type DynamicTypeForPush = "secret_santa" | "simple_raffle" | "teams";
+export type TeamsPresetForPush = "standard" | "pairings";
 
 type SupportedLocale = "es" | "en" | "pt" | "it" | "fr";
 
@@ -20,6 +21,8 @@ const COPY: Record<
     raffleBody: (groupName: string) => string;
     teamsTitle: string;
     teamsBody: (groupName: string) => string;
+    pairingsTitle: string;
+    pairingsBody: (groupName: string) => string;
   }
 > = {
   es: {
@@ -28,7 +31,9 @@ const COPY: Record<
     raffleTitle: "¡El sorteo ya se realizó!",
     raffleBody: (n) => `«${n}» ya tiene resultado. Entra para ver a los ganadores.`,
     teamsTitle: "¡Los equipos ya están listos!",
-    teamsBody: (n) => `«${n}» ya tiene reparto. Entra para ver cómo quedaron los equipos.`
+    teamsBody: (n) => `«${n}» ya tiene reparto. Entra para ver cómo quedaron los equipos.`,
+    pairingsTitle: "¡Las parejas ya están listas!",
+    pairingsBody: (n) => `«${n}» ya tiene emparejamientos. Entra para ver el resultado.`
   },
   en: {
     secretSantaTitle: "Your Secret Santa is ready",
@@ -36,7 +41,9 @@ const COPY: Record<
     raffleTitle: "The raffle is done!",
     raffleBody: (n) => `“${n}” has a result. Open the app to see the winners.`,
     teamsTitle: "Your teams are ready!",
-    teamsBody: (n) => `“${n}” has been arranged. Open Tarci Secret to see the teams.`
+    teamsBody: (n) => `“${n}” has been arranged. Open Tarci Secret to see the teams.`,
+    pairingsTitle: "Your pairings are ready!",
+    pairingsBody: (n) => `“${n}” has pairings. Open the app to see the result.`
   },
   pt: {
     secretSantaTitle: "O teu amigo secreto está pronto",
@@ -44,7 +51,9 @@ const COPY: Record<
     raffleTitle: "O sorteio já foi realizado!",
     raffleBody: (n) => `«${n}» já tem resultado. Entra para ver os vencedores.`,
     teamsTitle: "As equipas já estão prontas!",
-    teamsBody: (n) => `«${n}» já tem reparto. Entra para ver como ficaram as equipas.`
+    teamsBody: (n) => `«${n}» já tem reparto. Entra para ver como ficaram as equipas.`,
+    pairingsTitle: "As parejas já estão prontas!",
+    pairingsBody: (n) => `«${n}» já tem emparelhamentos. Entra para ver o resultado.`
   },
   it: {
     secretSantaTitle: "Il tuo amico segreto è pronto",
@@ -52,7 +61,9 @@ const COPY: Record<
     raffleTitle: "L'estrazione è stata completata!",
     raffleBody: (n) => `«${n}» ha un risultato. Apri l'app per vedere i vincitori.`,
     teamsTitle: "Le squadre sono pronte!",
-    teamsBody: (n) => `«${n}» è stato ripartito. Apri Tarci Secret per vedere le squadre.`
+    teamsBody: (n) => `«${n}» è stato ripartito. Apri Tarci Secret per vedere le squadre.`,
+    pairingsTitle: "Le coppie sono pronte!",
+    pairingsBody: (n) => `«${n}» ha gli abbinamenti. Apri l'app per vedere il risultato.`
   },
   fr: {
     secretSantaTitle: "Ton Secret Santa est prêt",
@@ -60,7 +71,9 @@ const COPY: Record<
     raffleTitle: "Le tirage est terminé !",
     raffleBody: (n) => `« ${n} » a un résultat. Ouvre l'app pour voir les gagnants.`,
     teamsTitle: "Les équipes sont prêtes !",
-    teamsBody: (n) => `« ${n} » a été réparti. Ouvre Tarci Secret pour voir les équipes.`
+    teamsBody: (n) => `« ${n} » a été réparti. Ouvre Tarci Secret pour voir les équipes.`,
+    pairingsTitle: "Les paires sont prêtes !",
+    pairingsBody: (n) => `« ${n} » a ses paires. Ouvre l'app pour voir le résultat.`
   }
 };
 
@@ -76,7 +89,8 @@ function normalizeLocale(raw: unknown): SupportedLocale {
 function copyFor(
   locale: SupportedLocale,
   dynamicType: DynamicTypeForPush,
-  groupName: string
+  groupName: string,
+  teamsPreset?: TeamsPresetForPush
 ): { title: string; body: string } {
   const pack = COPY[locale];
   const name = groupName.trim() || "Tarci Secret";
@@ -84,13 +98,17 @@ function copyFor(
     return { title: pack.raffleTitle, body: pack.raffleBody(name) };
   }
   if (dynamicType === "teams") {
+    if (teamsPreset === "pairings") {
+      return { title: pack.pairingsTitle, body: pack.pairingsBody(name) };
+    }
     return { title: pack.teamsTitle, body: pack.teamsBody(name) };
   }
   return { title: pack.secretSantaTitle, body: pack.secretSantaBody(name) };
 }
 
-function eventKindFor(dynamicType: DynamicTypeForPush): string {
+function eventKindFor(dynamicType: DynamicTypeForPush, teamsPreset?: TeamsPresetForPush): string {
   if (dynamicType === "simple_raffle") return "raffle_completed";
+  if (dynamicType === "teams" && teamsPreset === "pairings") return "pairings_completed";
   if (dynamicType === "teams") return "teams_completed";
   return "secret_santa_completed";
 }
@@ -163,6 +181,7 @@ export async function notifyGroupDynamicCompleted(
   params: {
     groupId: string;
     dynamicType: DynamicTypeForPush;
+    teamsPreset?: TeamsPresetForPush;
     groupName: string;
     /** UID que ejecutó draw/raffle/teams; no recibe push (ya está en la app). */
     triggeredByUid?: string;
@@ -203,10 +222,11 @@ export async function notifyGroupDynamicCompleted(
     }
 
     const messaging = getMessaging();
-    const eventKind = eventKindFor(params.dynamicType);
+    const teamsPreset = params.teamsPreset ?? "standard";
+    const eventKind = eventKindFor(params.dynamicType, teamsPreset);
 
     for (const [locale, list] of byLocale.entries()) {
-      const { title, body } = copyFor(locale, params.dynamicType, params.groupName);
+      const { title, body } = copyFor(locale, params.dynamicType, params.groupName, teamsPreset);
       const tokens = list.map((t) => t.token);
       const response = await messaging.sendEachForMulticast({
         tokens,
@@ -215,6 +235,7 @@ export async function notifyGroupDynamicCompleted(
           type: "group_dynamic_completed",
           groupId: params.groupId,
           dynamicType: params.dynamicType,
+          teamsPreset,
           destination: "group_detail",
           eventKind
         }

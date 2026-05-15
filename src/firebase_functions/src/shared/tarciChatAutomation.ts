@@ -7,6 +7,11 @@ import { buildParticipantsMapForWishlist } from "./wishlistAccess";
 import { groupPaths } from "./firestorePaths";
 import { COUNTDOWN_TEMPLATE_BY_DAYS, TARCI_AUTO_CATALOG, type TarciCatalogEntry } from "./tarciAutoCatalog";
 import {
+  PAIRINGS_COUNTDOWN_TEMPLATE_BY_DAYS,
+  TARCI_PAIRINGS_AUTO_CATALOG,
+  type PairingsCatalogEntry
+} from "./tarciAutoCatalogPairings";
+import {
   TEAMS_COUNTDOWN_TEMPLATE_BY_DAYS,
   TARCI_TEAMS_AUTO_CATALOG,
   type TeamsCatalogEntry
@@ -29,6 +34,7 @@ type GroupAutoFields = {
   dynamicType?: string;
   drawStatus?: string;
   teamStatus?: string;
+  teamsPreset?: string;
   lifecycleStatus?: string;
   eventDate?: Timestamp;
   eventDateDayKey?: string;
@@ -62,6 +68,7 @@ function readGroupAuto(doc: DocumentSnapshot): GroupAutoFields {
     dynamicType: typeof x.dynamicType === "string" ? x.dynamicType : undefined,
     drawStatus: typeof x.drawStatus === "string" ? x.drawStatus : undefined,
     teamStatus: typeof x.teamStatus === "string" ? x.teamStatus : undefined,
+    teamsPreset: typeof x.teamsPreset === "string" ? x.teamsPreset : undefined,
     lifecycleStatus: typeof x.lifecycleStatus === "string" ? x.lifecycleStatus : undefined,
     eventDate: x.eventDate instanceof Timestamp ? x.eventDate : undefined,
     eventDateDayKey: typeof x.eventDateDayKey === "string" ? x.eventDateDayKey : undefined,
@@ -74,6 +81,12 @@ function readGroupAuto(doc: DocumentSnapshot): GroupAutoFields {
 function isTeamsGroup(g: GroupAutoFields): boolean {
   return g.dynamicType === "teams";
 }
+
+function isPairingsGroup(g: GroupAutoFields): boolean {
+  return isTeamsGroup(g) && g.teamsPreset === "pairings";
+}
+
+type TeamsLikeCatalogEntry = TeamsCatalogEntry | PairingsCatalogEntry;
 
 function normalizeTarciState(raw: Record<string, unknown> | undefined): TarciStateFields {
   const sk = raw?.sentTemplateKeys;
@@ -317,6 +330,18 @@ function decideTarciAutomationMessageTeams(input: {
   now: Date;
 }): AutomationDecision | null {
   const { group, state, now } = input;
+  const pairings = isPairingsGroup(group);
+  const catalog: TeamsLikeCatalogEntry[] = pairings
+    ? TARCI_PAIRINGS_AUTO_CATALOG
+    : TARCI_TEAMS_AUTO_CATALOG;
+  const countdownByDays = pairings
+    ? PAIRINGS_COUNTDOWN_TEMPLATE_BY_DAYS
+    : TEAMS_COUNTDOWN_TEMPLATE_BY_DAYS;
+  const playfulCat = pairings ? "pairingsPlayful" : "teamsPlayful";
+  const challengeCat = pairings ? "pairingsChallenge" : "teamsChallenge";
+  const quietCat = pairings ? "pairingsQuietNudge" : "teamsQuietNudge";
+  const countdownCat = pairings ? "pairingsCountdown" : "teamsCountdown";
+
   const sent = new Set(state.sentTemplateKeys);
   const milestones = new Set(state.sentCountdownMilestones);
 
@@ -327,7 +352,7 @@ function decideTarciAutomationMessageTeams(input: {
     if (days !== null) {
       const milestonesToCheck = [14, 7, 3, 1, 0] as const;
       if (milestonesToCheck.includes(days as (typeof milestonesToCheck)[number])) {
-        const key = TEAMS_COUNTDOWN_TEMPLATE_BY_DAYS.get(days);
+        const key = countdownByDays.get(days);
         if (key && !milestones.has(String(days)) && !sent.has(key)) {
           return {
             templateKey: key,
@@ -347,7 +372,7 @@ function decideTarciAutomationMessageTeams(input: {
     now.getTime() - lastHum.toMillis() >= HUMAN_IDLE_MS &&
     olderThan(state.lastQuietNudgeAt, QUIET_NUDGE_COOLDOWN_MS, now)
   ) {
-    const cands = TARCI_TEAMS_AUTO_CATALOG.filter((c) => c.category === "teamsQuietNudge");
+    const cands = catalog.filter((c) => c.category === quietCat);
     const pick = pickRandomUnused(cands, sent);
     if (pick) {
       return {
@@ -360,11 +385,11 @@ function decideTarciAutomationMessageTeams(input: {
   }
 
   if (nextAutoEligible(state, now)) {
-    const cands = TARCI_TEAMS_AUTO_CATALOG.filter(
-      (c): c is TeamsCatalogEntry =>
-        c.category === "teamsPlayful" ||
-        c.category === "teamsChallenge" ||
-        (c.category === "teamsCountdown" && c.daysBeforeEvent === undefined)
+    const cands = catalog.filter(
+      (c) =>
+        c.category === playfulCat ||
+        c.category === challengeCat ||
+        (c.category === countdownCat && c.daysBeforeEvent === undefined)
     );
     const pick = pickRandomUnused(cands, sent);
     if (pick) {

@@ -2700,4 +2700,352 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get teamsDetailRosterTitle => 'Group participants';
+
+  @override
+  String get dynamicsCardPairingsBody =>
+      'Pair participants in groups of two. Results visible to everyone.';
+
+  @override
+  String get homeDynamicTypePairings => 'Pairings';
+
+  @override
+  String get homePairingsStateCompleted => 'Pairings ready';
+
+  @override
+  String get homePairingsStatePreparing => 'Preparing pairings';
+
+  @override
+  String get pairingsWizardTitle => 'Create pairings';
+
+  @override
+  String get pairingsWizardCreateCta => 'Create pairings';
+
+  @override
+  String get pairingsWizardNameLabel => 'Dynamic name';
+
+  @override
+  String get pairingsWizardOwnerNicknameLabel => 'Your name in the pairings';
+
+  @override
+  String get pairingsWizardOwnerNicknameHelper =>
+      'How others will see you in the draw.';
+
+  @override
+  String get pairingsWizardEventOptional => 'Event date (optional)';
+
+  @override
+  String get pairingsWizardPickEventDate => 'Pick date';
+
+  @override
+  String get pairingsWizardOwnerParticipatesTitle => 'Are you participating?';
+
+  @override
+  String get pairingsWizardOwnerParticipatesYes =>
+      'Yes, I want to be in a pair';
+
+  @override
+  String get pairingsWizardOwnerParticipatesNo => 'No, I only organize';
+
+  @override
+  String get pairingsWizardReviewTitle => 'Review';
+
+  @override
+  String get pairingsWizardReviewSummary => 'Pairs of 2 people';
+
+  @override
+  String pairingsUnitLabel(int index) {
+    return 'Pair $index';
+  }
+
+  @override
+  String get pairingsResultHeroTitle => 'Pairings are ready!';
+
+  @override
+  String get pairingsResultHeroSubtitle => 'Each pair has its two members.';
+
+  @override
+  String pairingsResultSummary(int count, int eligible) {
+    return '$count pairs · $eligible participants';
+  }
+
+  @override
+  String get pairingsDetailListTitle => 'Pairs';
+
+  @override
+  String get pairingsDetailFormCta => 'Form pairs';
+
+  @override
+  String get pairingsDetailConfigTitle => 'Configuration';
+
+  @override
+  String pairingsDetailConfigSummary(int count) {
+    return 'About $count pairs';
+  }
+
+  @override
+  String get pairingsRenameDialogTitle => 'Rename pair';
+
+  @override
+  String get pairingsRenameDialogFieldLabel => 'Pair name';
+
+  @override
+  String get pairingsRenameSuccess => 'Pair name updated';
+
+  @override
+  String pairingsShareBody(String groupName, String blocks) {
+    return 'Pairings for «$groupName»:\n\n$blocks';
+  }
+
+  @override
+  String pairingsEmailSubject(String groupName) {
+    return 'Pairings: $groupName';
+  }
+
+  @override
+  String pairingsEmailBody(String groupName, String blocks) {
+    return 'Pairings for «$groupName»:\n\n$blocks';
+  }
+
+  @override
+  String get pairingsPdfHeadline => 'Pairings';
+
+  @override
+  String get pairingsChatSectionTitle => 'Group conversation';
+
+  @override
+  String get pairingsChatSectionSubtitle =>
+      'Discuss the pairings and event day.';
+
+  @override
+  String get pairingsChatEnterCta => 'Open chat';
+
+  @override
+  String get chatPairingsCompletedChip => 'Pairings ready';
+
+  @override
+  String get chatSystemPairingsCompletedV1 =>
+      'The pairings are ready. Enjoy the meetup!';
+
+  @override
+  String get pairingsMemberWaitingTitle => 'Pairings in progress';
+
+  @override
+  String get pairingsMemberWaitingBody =>
+      'The organizer is preparing the pairings. You\'ll see them here when ready.';
+
+  @override
+  String joinSuccessPairingsSubtitle(String groupName) {
+    return 'You joined «$groupName».';
+  }
+
+  @override
+  String get joinSuccessPairingsBody =>
+      'When the organizer forms the pairs, you\'ll see the result here.';
+
+  @override
+  String get joinSuccessPairingsPrimaryCta => 'Go to pairings';
+
+  @override
+  String get pairingsDetailEvenHint =>
+      'You need an even number of eligible participants to form pairs.';
+
+  @override
+  String get chatSystemAutoPairingsPlayful001V1 =>
+      'Pairs are set. You can start blaming the algorithm now.';
+
+  @override
+  String get chatSystemAutoPairingsPlayful002V1 =>
+      'Which pair is here to win and which one is here for snacks?';
+
+  @override
+  String get chatSystemAutoPairingsPlayful003V1 =>
+      'There\'s talent here… and plenty of confidence. We\'ll see which weighs more.';
+
+  @override
+  String get chatSystemAutoPairingsPlayful004V1 =>
+      'Predictions, excuses, and conspiracy theories are welcome.';
+
+  @override
+  String get chatSystemAutoPairingsPlayful005V1 =>
+      'A fair split. Creative complaints count as participation too.';
+
+  @override
+  String get chatSystemAutoPairingsPlayful006V1 =>
+      'It doesn\'t matter who you\'re with. It matters who asks for a revancha.';
+
+  @override
+  String get chatSystemAutoPairingsPlayful007V1 =>
+      'Tarci made the draw. Now prove it wasn\'t luck.';
+
+  @override
+  String get chatSystemAutoPairingsPlayful008V1 =>
+      'Some pairs inspire respect; others inspire memes.';
+
+  @override
+  String get chatSystemAutoPairingsPlayful009V1 =>
+      'Chance has spoken. Dignity gets settled on game day.';
+
+  @override
+  String get chatSystemAutoPairingsPlayful010V1 =>
+      'Don\'t underestimate a quiet pair.';
+
+  @override
+  String get chatSystemAutoPairingsPlayful011V1 =>
+      'Some are already celebrating. Others are plotting a discreet pair swap.';
+
+  @override
+  String get chatSystemAutoPairingsPlayful012V1 =>
+      'Results are out. The drama officially begins.';
+
+  @override
+  String get chatSystemAutoPairingsPlayful013V1 =>
+      'Pair chemistry… or so says the emotional stats.';
+
+  @override
+  String get chatSystemAutoPairingsPlayful014V1 =>
+      'Good pairs are built. Legendary ones brag before playing.';
+
+  @override
+  String get chatSystemAutoPairingsPlayful015V1 =>
+      'The group has its pairings. Now bring the epic.';
+
+  @override
+  String get chatSystemAutoPairingsPlayful016V1 =>
+      'From here on, every message can fuel the chemistry.';
+
+  @override
+  String get chatSystemAutoPairingsPlayful017V1 =>
+      'Pairs formed. Group pride is now active.';
+
+  @override
+  String get chatSystemAutoPairingsPlayful018V1 =>
+      'You can invent war names now—Tarci doesn\'t store them yet.';
+
+  @override
+  String get chatSystemAutoPairingsPlayful019V1 =>
+      'Time for the best part: debating if the split was fair.';
+
+  @override
+  String get chatSystemAutoPairingsPlayful020V1 =>
+      'Tarci stays neutral. But mentally screenshots the chat.';
+
+  @override
+  String get chatSystemAutoPairingsChallenge001V1 =>
+      'Today\'s challenge: each pair must explain why it deserves to win.';
+
+  @override
+  String get chatSystemAutoPairingsChallenge002V1 =>
+      'Who dares to throw the first friendly challenge?';
+
+  @override
+  String get chatSystemAutoPairingsChallenge003V1 =>
+      'A pair that doesn\'t post today starts losing on charisma.';
+
+  @override
+  String get chatSystemAutoPairingsChallenge004V1 =>
+      'Unofficial rule: whoever talks most has to answer back.';
+
+  @override
+  String get chatSystemAutoPairingsChallenge005V1 =>
+      'Is there a favorite or are we still pretending to be humble?';
+
+  @override
+  String get chatSystemAutoPairingsChallenge006V1 =>
+      'Leave your mark: which pair takes the glory?';
+
+  @override
+  String get chatSystemAutoPairingsChallenge007V1 =>
+      'Soft challenge: make your prediction before the meetup.';
+
+  @override
+  String get chatSystemAutoPairingsChallenge008V1 =>
+      'If there\'s confidence, let\'s have symbolic bets.';
+
+  @override
+  String get chatSystemAutoPairingsChallenge009V1 =>
+      'Which pair brings strategy and which brings pure heart?';
+
+  @override
+  String get chatSystemAutoPairingsChallenge010V1 =>
+      'Time to declare intentions. Silence scores zero.';
+
+  @override
+  String get chatSystemAutoPairingsChallenge011V1 =>
+      'Each pair picks a spontaneous spokesperson. Then deny you chose them.';
+
+  @override
+  String get chatSystemAutoPairingsChallenge012V1 =>
+      'Who breaks the ice with the first classy provocation?';
+
+  @override
+  String get chatSystemAutoPairingsQuiet001V1 =>
+      'Very quiet for such promising pairs.';
+
+  @override
+  String get chatSystemAutoPairingsQuiet002V1 =>
+      'This chat is quieter than the bench before kickoff.';
+
+  @override
+  String get chatSystemAutoPairingsQuiet003V1 =>
+      'Nobody going to comment on the pairings? Suspicious.';
+
+  @override
+  String get chatSystemAutoPairingsQuiet004V1 =>
+      'Tarci senses calm. Sometimes that means strategy.';
+
+  @override
+  String get chatSystemAutoPairingsQuiet005V1 =>
+      'Pairs are set. The chat still waits for its first good chat.';
+
+  @override
+  String get chatSystemAutoPairingsQuiet006V1 =>
+      'A silent group isn\'t peace—it\'s dramatic tension.';
+
+  @override
+  String get chatSystemAutoPairingsQuiet007V1 =>
+      'Everyone happy? That unanimity deserves a review.';
+
+  @override
+  String get chatSystemAutoPairingsQuiet008V1 =>
+      'Tactical silence activated. Carry on—it stays elegant.';
+
+  @override
+  String get chatSystemAutoPairingsCountdown014V1 =>
+      '14 days left. Time to organize… or improvise with confidence.';
+
+  @override
+  String get chatSystemAutoPairingsCountdown007V1 =>
+      'One week to go. Absurd strategies may now apply officially.';
+
+  @override
+  String get chatSystemAutoPairingsCountdown003V1 =>
+      '3 days left. Epic energy is allowed now.';
+
+  @override
+  String get chatSystemAutoPairingsCountdown001V1 =>
+      'Tomorrow\'s the day. Last chance to brag without consequences.';
+
+  @override
+  String get chatSystemAutoPairingsCountdown000V1 =>
+      'Today\'s the day. Pairs ready, nerves optional.';
+
+  @override
+  String get chatSystemAutoPairingsCountdownExtra001V1 =>
+      'Two weeks feels long until someone remembers they prepared nothing.';
+
+  @override
+  String get chatSystemAutoPairingsCountdownExtra002V1 =>
+      'Seven days. Enough to train or perfect a good excuse.';
+
+  @override
+  String get chatSystemAutoPairingsCountdownExtra003V1 =>
+      'Three days. The chat can go from jokes to official statements.';
+
+  @override
+  String get chatSystemAutoPairingsCountdownExtra004V1 =>
+      'One day left. If there was a secret plan, good time to pretend it exists.';
+
+  @override
+  String get chatSystemAutoPairingsCountdownExtra005V1 =>
+      'It\'s time. May the best win… or the best at hiding it.';
 }

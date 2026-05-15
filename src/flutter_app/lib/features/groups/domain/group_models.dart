@@ -10,6 +10,13 @@ enum TeamStatus { idle, generating, completed, failed }
 
 enum TeamGroupingMode { teamCount, teamSize }
 
+enum TeamsPreset { standard, pairings }
+
+TeamsPreset parseTeamsPreset(String? raw) {
+  if (raw?.trim() == 'pairings') return TeamsPreset.pairings;
+  return TeamsPreset.standard;
+}
+
 TarciDynamicType parseTarciDynamicType(String? raw) {
   final s = raw?.trim() ?? '';
   if (s == 'simple_raffle') return TarciDynamicType.simpleRaffle;
@@ -213,6 +220,7 @@ class GroupSummary {
   final TarciDynamicType dynamicType;
   final RaffleStatus raffleStatus;
   final TeamStatus teamStatus;
+  final TeamsPreset teamsPreset;
   /// `groups/{id}.lastDrawCompletedAt` cuando el sorteo ya se ejecutó (opcional).
   final DateTime? lastDrawCompletedAt;
   final DateTime? lastRaffleCompletedAt;
@@ -229,6 +237,7 @@ class GroupSummary {
     this.dynamicType = TarciDynamicType.secretSanta,
     this.raffleStatus = RaffleStatus.idle,
     this.teamStatus = TeamStatus.idle,
+    this.teamsPreset = TeamsPreset.standard,
     this.lastDrawCompletedAt,
     this.lastRaffleCompletedAt,
     this.lastTeamCompletedAt,
@@ -292,6 +301,7 @@ class GroupDetail {
   final RaffleExecutionSummary? lastRaffleExecution;
   final List<RaffleManualParticipant> raffleManualParticipants;
   final TeamStatus teamStatus;
+  final TeamsPreset teamsPreset;
   final TeamGroupingMode groupingMode;
   final int? requestedTeamCount;
   final int? requestedTeamSize;
@@ -325,6 +335,7 @@ class GroupDetail {
     this.lastRaffleExecution,
     this.raffleManualParticipants = const [],
     this.teamStatus = TeamStatus.idle,
+    this.teamsPreset = TeamsPreset.standard,
     this.groupingMode = TeamGroupingMode.teamCount,
     this.requestedTeamCount,
     this.requestedTeamSize,

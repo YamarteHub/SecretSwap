@@ -23,6 +23,7 @@ class TeamResultPdf {
     required List<TeamSnapshot> teams,
     required String Function(TeamMemberSnapshot member) displayNameFor,
     required String footerBrand,
+    TeamsPreset teamsPreset = TeamsPreset.standard,
   }) async {
     pw.ImageProvider? logo;
     try {
@@ -104,7 +105,7 @@ class TeamResultPdf {
                   ),
                   pw.SizedBox(height: 20),
                   ...teams.map((team) {
-                    final label = TeamResultText.teamDisplayName(l10n, team);
+                    final label = TeamResultText.teamDisplayName(l10n, team, preset: teamsPreset);
                     return pw.Padding(
                       padding: const pw.EdgeInsets.only(bottom: 14),
                       child: pw.Container(

@@ -110,11 +110,16 @@ export const executeTeams = onCall(async (req: CallableRequest<unknown>): Promis
         lifecycleStatus?: string;
         dynamicType?: string;
         teamStatus?: string;
+        teamsPreset?: string;
         groupingMode?: string;
         requestedTeamCount?: number;
         requestedTeamSize?: number;
         ownerParticipatesInTeams?: boolean;
       };
+      const teamsPreset =
+        typeof group.teamsPreset === "string" && group.teamsPreset.trim() === "pairings"
+          ? "pairings"
+          : "standard";
 
       if (group.ownerUid !== uid) {
         throw new AppError({
@@ -242,6 +247,13 @@ export const executeTeams = onCall(async (req: CallableRequest<unknown>): Promis
           message: "Not enough eligible participants (minimum 2)"
         });
       }
+      if (teamsPreset === "pairings" && pool.length % 2 !== 0) {
+        throw new AppError({
+          code: "VALIDATION_ERROR",
+          reasonCode: "PAIRINGS_REQUIRES_EVEN_PARTICIPANTS",
+          message: "Pairings require an even number of eligible participants"
+        });
+      }
       if (pool.length > TEAMS_MAX_ELIGIBLE) {
         throw new AppError({
           code: "VALIDATION_ERROR",
@@ -252,7 +264,7 @@ export const executeTeams = onCall(async (req: CallableRequest<unknown>): Promis
 
       const numTeams = resolveNumTeams(pool.length, groupingMode, requestedTeamCount, requestedTeamSize);
 
-      if (numTeams < 2) {
+      if (teamsPreset !== "pairings" && numTeams < 2) {
         throw new AppError({
           code: "VALIDATION_ERROR",
           reasonCode: "TEAMS_INVALID_CONFIGURATION",
@@ -316,20 +328,30 @@ export const executeTeams = onCall(async (req: CallableRequest<unknown>): Promis
       typeof (groupSnapAfter.data() as { name?: string } | undefined)?.name === "string"
         ? ((groupSnapAfter.data() as { name?: string }).name ?? "").trim()
         : "";
+    const groupDataAfter = groupSnapAfter.data() as { teamsPreset?: string };
+    const teamsPresetAfter =
+      typeof groupDataAfter.teamsPreset === "string" && groupDataAfter.teamsPreset.trim() === "pairings"
+        ? "pairings"
+        : "standard";
+
     await notifyGroupDynamicCompleted(db, {
       groupId: body.groupId,
       dynamicType: "teams",
+      teamsPreset: teamsPresetAfter,
       groupName,
       triggeredByUid: uid
     });
 
     try {
-      await appendGroupChatSystemMessageIfNew(
-        db,
-        body.groupId,
-        `system_teamsCompleted_${result.executionId}`,
-        "chat.system.teamsCompleted.v1"
-      );
+      const chatTemplateKey =
+        teamsPresetAfter === "pairings"
+          ? "chat.system.pairingsCompleted.v1"
+          : "chat.system.teamsCompleted.v1";
+      const chatDocId =
+        teamsPresetAfter === "pairings"
+          ? `system_pairingsCompleted_${result.executionId}`
+          : `system_teamsCompleted_${result.executionId}`;
+      await appendGroupChatSystemMessageIfNew(db, body.groupId, chatDocId, chatTemplateKey);
     } catch (e) {
       logger.warn("executeTeams: teamsCompleted chat message failed", {
         groupId: body.groupId,

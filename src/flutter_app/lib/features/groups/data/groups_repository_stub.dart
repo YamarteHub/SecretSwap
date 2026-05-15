@@ -111,6 +111,7 @@ class GroupsRepositoryStub implements GroupsRepository {
     int? requestedTeamCount,
     int? requestedTeamSize,
     required bool ownerParticipatesInTeams,
+    TeamsPreset teamsPreset = TeamsPreset.standard,
     DateTime? eventDate,
   }) async {
     throw UnimplementedError('createTeamsGroup not wired');

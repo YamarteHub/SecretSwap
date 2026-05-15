@@ -148,6 +148,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
     final raffleStatusById = <String, RaffleStatus>{};
     final lastRaffleAtById = <String, DateTime?>{};
     final teamStatusById = <String, TeamStatus>{};
+    final teamsPresetById = <String, TeamsPreset>{};
     final lastTeamAtById = <String, DateTime?>{};
     if (ids.isNotEmpty) {
       final groupSnaps = await Future.wait(
@@ -167,6 +168,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
         lastRaffleAtById[gid] =
             _readFirestoreOptionalDate(data, 'lastRaffleCompletedAt');
         teamStatusById[gid] = parseTeamStatus(data['teamStatus'] as String?);
+        teamsPresetById[gid] = parseTeamsPreset(data['teamsPreset'] as String?);
         lastTeamAtById[gid] =
             _readFirestoreOptionalDate(data, 'lastTeamCompletedAt');
       }
@@ -184,6 +186,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
             dynamicType: dynamicById[g.groupId] ?? TarciDynamicType.secretSanta,
             raffleStatus: raffleStatusById[g.groupId] ?? RaffleStatus.idle,
             teamStatus: teamStatusById[g.groupId] ?? TeamStatus.idle,
+            teamsPreset: teamsPresetById[g.groupId] ?? TeamsPreset.standard,
             lastDrawCompletedAt: lastDrawAtById[g.groupId],
             lastRaffleCompletedAt: lastRaffleAtById[g.groupId],
             lastTeamCompletedAt: lastTeamAtById[g.groupId],
@@ -436,6 +439,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
     final requestedTeamSize = (g['requestedTeamSize'] as num?)?.toInt();
     final ownerParticipatesInTeams =
         g['ownerParticipatesInTeams'] as bool? ?? true;
+    final teamsPreset = parseTeamsPreset(g['teamsPreset'] as String?);
 
     return GroupDetail(
       groupId: g['groupId'] as String? ?? groupId,
@@ -451,6 +455,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
       lastRaffleExecution: lastRaffleExecution,
       raffleManualParticipants: raffleManualParticipants,
       teamStatus: parseTeamStatus(g['teamStatus'] as String?),
+      teamsPreset: teamsPreset,
       groupingMode: groupingMode,
       requestedTeamCount: requestedTeamCount,
       requestedTeamSize: requestedTeamSize,
@@ -810,6 +815,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
     int? requestedTeamCount,
     int? requestedTeamSize,
     required bool ownerParticipatesInTeams,
+    TeamsPreset teamsPreset = TeamsPreset.standard,
     DateTime? eventDate,
   }) async {
     final callable = _functions.httpsCallable('createTeamsGroup');
@@ -820,6 +826,9 @@ class GroupsRepositoryImpl implements GroupsRepository {
           groupingMode == TeamGroupingMode.teamSize ? 'team_size' : 'team_count',
       'ownerParticipatesInTeams': ownerParticipatesInTeams,
     };
+    if (teamsPreset == TeamsPreset.pairings) {
+      payload['teamsPreset'] = 'pairings';
+    }
     if (groupingMode == TeamGroupingMode.teamCount && requestedTeamCount != null) {
       payload['requestedTeamCount'] = requestedTeamCount;
     }

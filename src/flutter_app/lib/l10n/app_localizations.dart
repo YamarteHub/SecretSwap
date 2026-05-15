@@ -3497,7 +3497,7 @@ abstract class AppLocalizations {
   /// No description provided for @dynamicsCardPairingsTitle.
   ///
   /// In es, this message translates to:
-  /// **'Emparejamientos'**
+  /// **'Parejas'**
   String get dynamicsCardPairingsTitle;
 
   /// No description provided for @dynamicsCardDuelsTitle.
@@ -4651,6 +4651,558 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Participantes del grupo'**
   String get teamsDetailRosterTitle;
+
+  /// No description provided for @dynamicsCardPairingsBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Empareja participantes en parejas de dos. Resultado visible para todos.'**
+  String get dynamicsCardPairingsBody;
+
+  /// No description provided for @homeDynamicTypePairings.
+  ///
+  /// In es, this message translates to:
+  /// **'Parejas'**
+  String get homeDynamicTypePairings;
+
+  /// No description provided for @homePairingsStateCompleted.
+  ///
+  /// In es, this message translates to:
+  /// **'Parejas listas'**
+  String get homePairingsStateCompleted;
+
+  /// No description provided for @homePairingsStatePreparing.
+  ///
+  /// In es, this message translates to:
+  /// **'Preparando parejas'**
+  String get homePairingsStatePreparing;
+
+  /// No description provided for @pairingsWizardTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Crear parejas'**
+  String get pairingsWizardTitle;
+
+  /// No description provided for @pairingsWizardCreateCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Crear parejas'**
+  String get pairingsWizardCreateCta;
+
+  /// No description provided for @pairingsWizardNameLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre de la dinámica'**
+  String get pairingsWizardNameLabel;
+
+  /// No description provided for @pairingsWizardOwnerNicknameLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu nombre en las parejas'**
+  String get pairingsWizardOwnerNicknameLabel;
+
+  /// No description provided for @pairingsWizardOwnerNicknameHelper.
+  ///
+  /// In es, this message translates to:
+  /// **'Así te verán los demás en el emparejamiento.'**
+  String get pairingsWizardOwnerNicknameHelper;
+
+  /// No description provided for @pairingsWizardEventOptional.
+  ///
+  /// In es, this message translates to:
+  /// **'Fecha del evento (opcional)'**
+  String get pairingsWizardEventOptional;
+
+  /// No description provided for @pairingsWizardPickEventDate.
+  ///
+  /// In es, this message translates to:
+  /// **'Elegir fecha'**
+  String get pairingsWizardPickEventDate;
+
+  /// No description provided for @pairingsWizardOwnerParticipatesTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Participas tú?'**
+  String get pairingsWizardOwnerParticipatesTitle;
+
+  /// No description provided for @pairingsWizardOwnerParticipatesYes.
+  ///
+  /// In es, this message translates to:
+  /// **'Sí, quiero estar en una pareja'**
+  String get pairingsWizardOwnerParticipatesYes;
+
+  /// No description provided for @pairingsWizardOwnerParticipatesNo.
+  ///
+  /// In es, this message translates to:
+  /// **'No, solo organizo'**
+  String get pairingsWizardOwnerParticipatesNo;
+
+  /// No description provided for @pairingsWizardReviewTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Revisión'**
+  String get pairingsWizardReviewTitle;
+
+  /// No description provided for @pairingsWizardReviewSummary.
+  ///
+  /// In es, this message translates to:
+  /// **'Parejas de 2 personas'**
+  String get pairingsWizardReviewSummary;
+
+  /// No description provided for @pairingsUnitLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Pareja {index}'**
+  String pairingsUnitLabel(int index);
+
+  /// No description provided for @pairingsResultHeroTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¡Parejas listas!'**
+  String get pairingsResultHeroTitle;
+
+  /// No description provided for @pairingsResultHeroSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Cada pareja ya tiene a sus dos integrantes.'**
+  String get pairingsResultHeroSubtitle;
+
+  /// No description provided for @pairingsResultSummary.
+  ///
+  /// In es, this message translates to:
+  /// **'{count} parejas · {eligible} participantes'**
+  String pairingsResultSummary(int count, int eligible);
+
+  /// No description provided for @pairingsDetailListTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Parejas'**
+  String get pairingsDetailListTitle;
+
+  /// No description provided for @pairingsDetailFormCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Formar parejas'**
+  String get pairingsDetailFormCta;
+
+  /// No description provided for @pairingsDetailConfigTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Configuración'**
+  String get pairingsDetailConfigTitle;
+
+  /// No description provided for @pairingsDetailConfigSummary.
+  ///
+  /// In es, this message translates to:
+  /// **'Aproximadamente {count} parejas'**
+  String pairingsDetailConfigSummary(int count);
+
+  /// No description provided for @pairingsRenameDialogTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Renombrar pareja'**
+  String get pairingsRenameDialogTitle;
+
+  /// No description provided for @pairingsRenameDialogFieldLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre de la pareja'**
+  String get pairingsRenameDialogFieldLabel;
+
+  /// No description provided for @pairingsRenameSuccess.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre de la pareja actualizado'**
+  String get pairingsRenameSuccess;
+
+  /// No description provided for @pairingsShareBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Parejas de «{groupName}»:\n\n{blocks}'**
+  String pairingsShareBody(String groupName, String blocks);
+
+  /// No description provided for @pairingsEmailSubject.
+  ///
+  /// In es, this message translates to:
+  /// **'Parejas: {groupName}'**
+  String pairingsEmailSubject(String groupName);
+
+  /// No description provided for @pairingsEmailBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Parejas de «{groupName}»:\n\n{blocks}'**
+  String pairingsEmailBody(String groupName, String blocks);
+
+  /// No description provided for @pairingsPdfHeadline.
+  ///
+  /// In es, this message translates to:
+  /// **'Parejas'**
+  String get pairingsPdfHeadline;
+
+  /// No description provided for @pairingsChatSectionTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Conversación del grupo'**
+  String get pairingsChatSectionTitle;
+
+  /// No description provided for @pairingsChatSectionSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Comentad el emparejamiento y el día del encuentro.'**
+  String get pairingsChatSectionSubtitle;
+
+  /// No description provided for @pairingsChatEnterCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Abrir chat'**
+  String get pairingsChatEnterCta;
+
+  /// No description provided for @chatPairingsCompletedChip.
+  ///
+  /// In es, this message translates to:
+  /// **'Parejas listas'**
+  String get chatPairingsCompletedChip;
+
+  /// No description provided for @chatSystemPairingsCompletedV1.
+  ///
+  /// In es, this message translates to:
+  /// **'Las parejas ya están listas. ¡A disfrutar del encuentro!'**
+  String get chatSystemPairingsCompletedV1;
+
+  /// No description provided for @pairingsMemberWaitingTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Parejas en preparación'**
+  String get pairingsMemberWaitingTitle;
+
+  /// No description provided for @pairingsMemberWaitingBody.
+  ///
+  /// In es, this message translates to:
+  /// **'El organizador está preparando el emparejamiento. Cuando las parejas estén listas podrás verlas aquí.'**
+  String get pairingsMemberWaitingBody;
+
+  /// No description provided for @joinSuccessPairingsSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Te uniste a «{groupName}».'**
+  String joinSuccessPairingsSubtitle(String groupName);
+
+  /// No description provided for @joinSuccessPairingsBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Cuando el organizador forme las parejas, podrás ver el resultado aquí.'**
+  String get joinSuccessPairingsBody;
+
+  /// No description provided for @joinSuccessPairingsPrimaryCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Ir a parejas'**
+  String get joinSuccessPairingsPrimaryCta;
+
+  /// No description provided for @pairingsDetailEvenHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Para formar parejas necesitas un número par de participantes elegibles.'**
+  String get pairingsDetailEvenHint;
+
+  /// No description provided for @chatSystemAutoPairingsPlayful001V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Parejas listos. Ya podéis empezar a culpar al algoritmo.'**
+  String get chatSystemAutoPairingsPlayful001V1;
+
+  /// No description provided for @chatSystemAutoPairingsPlayful002V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué pareja viene a ganar y cuál viene por la merienda?'**
+  String get chatSystemAutoPairingsPlayful002V1;
+
+  /// No description provided for @chatSystemAutoPairingsPlayful003V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Aquí hay talento… y también mucha confianza. Veremos cuál pesa más.'**
+  String get chatSystemAutoPairingsPlayful003V1;
+
+  /// No description provided for @chatSystemAutoPairingsPlayful004V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Se aceptan pronósticos, excusas y teorías conspirativas.'**
+  String get chatSystemAutoPairingsPlayful004V1;
+
+  /// No description provided for @chatSystemAutoPairingsPlayful005V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Un emparejamiento justo. Las quejas creativas también cuentan como participación.'**
+  String get chatSystemAutoPairingsPlayful005V1;
+
+  /// No description provided for @chatSystemAutoPairingsPlayful006V1.
+  ///
+  /// In es, this message translates to:
+  /// **'No importa quién quede contigo. Importa quién termina pidiendo revancha.'**
+  String get chatSystemAutoPairingsPlayful006V1;
+
+  /// No description provided for @chatSystemAutoPairingsPlayful007V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Tarci repartió. Ahora os toca demostrar que no era suerte.'**
+  String get chatSystemAutoPairingsPlayful007V1;
+
+  /// No description provided for @chatSystemAutoPairingsPlayful008V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Hay parejas que inspiran respeto y otros que inspiran memes.'**
+  String get chatSystemAutoPairingsPlayful008V1;
+
+  /// No description provided for @chatSystemAutoPairingsPlayful009V1.
+  ///
+  /// In es, this message translates to:
+  /// **'El azar habló. La dignidad se resuelve el día del encuentro.'**
+  String get chatSystemAutoPairingsPlayful009V1;
+
+  /// No description provided for @chatSystemAutoPairingsPlayful010V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Que nadie subestime a un pareja silencioso.'**
+  String get chatSystemAutoPairingsPlayful010V1;
+
+  /// No description provided for @chatSystemAutoPairingsPlayful011V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Algunos ya celebran. Otros están calculando cómo cambiar de pareja sin que se note.'**
+  String get chatSystemAutoPairingsPlayful011V1;
+
+  /// No description provided for @chatSystemAutoPairingsPlayful012V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Resultado publicado. Empieza oficialmente el salseo.'**
+  String get chatSystemAutoPairingsPlayful012V1;
+
+  /// No description provided for @chatSystemAutoPairingsPlayful013V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Hay química de pareja… o al menos eso dice la estadística emocional.'**
+  String get chatSystemAutoPairingsPlayful013V1;
+
+  /// No description provided for @chatSystemAutoPairingsPlayful014V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Un buen pareja se construye. Uno legendario se presume antes de jugar.'**
+  String get chatSystemAutoPairingsPlayful014V1;
+
+  /// No description provided for @chatSystemAutoPairingsPlayful015V1.
+  ///
+  /// In es, this message translates to:
+  /// **'El grupo ya tiene emparejamiento. Ahora falta la épica.'**
+  String get chatSystemAutoPairingsPlayful015V1;
+
+  /// No description provided for @chatSystemAutoPairingsPlayful016V1.
+  ///
+  /// In es, this message translates to:
+  /// **'A partir de aquí, cada mensaje puede convertirse en motivación para el rival.'**
+  String get chatSystemAutoPairingsPlayful016V1;
+
+  /// No description provided for @chatSystemAutoPairingsPlayful017V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Parejas formados. El orgullo grupal queda activado.'**
+  String get chatSystemAutoPairingsPlayful017V1;
+
+  /// No description provided for @chatSystemAutoPairingsPlayful018V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya podéis inventar nombre de guerra, aunque Tarci aún no lo guarde.'**
+  String get chatSystemAutoPairingsPlayful018V1;
+
+  /// No description provided for @chatSystemAutoPairingsPlayful019V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Que empiece la parte favorita: opinar sobre si el emparejamiento fue justo.'**
+  String get chatSystemAutoPairingsPlayful019V1;
+
+  /// No description provided for @chatSystemAutoPairingsPlayful020V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Tarci no toma partido. Pero sí guarda capturas mentales del conversación.'**
+  String get chatSystemAutoPairingsPlayful020V1;
+
+  /// No description provided for @chatSystemAutoPairingsChallenge001V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Reto del día: cada pareja debe explicar por qué merece ganar.'**
+  String get chatSystemAutoPairingsChallenge001V1;
+
+  /// No description provided for @chatSystemAutoPairingsChallenge002V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Quién se atreve a lanzar el primer desafío amistoso?'**
+  String get chatSystemAutoPairingsChallenge002V1;
+
+  /// No description provided for @chatSystemAutoPairingsChallenge003V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Pareja que no escriba hoy, empieza perdiendo en carisma.'**
+  String get chatSystemAutoPairingsChallenge003V1;
+
+  /// No description provided for @chatSystemAutoPairingsChallenge004V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Propongo una norma no oficial: quien más hable, luego tiene que responder.'**
+  String get chatSystemAutoPairingsChallenge004V1;
+
+  /// No description provided for @chatSystemAutoPairingsChallenge005V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Hay favorito o todavía fingimos humildad?'**
+  String get chatSystemAutoPairingsChallenge005V1;
+
+  /// No description provided for @chatSystemAutoPairingsChallenge006V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Dejad constancia aquí: ¿qué pareja se lleva la gloria?'**
+  String get chatSystemAutoPairingsChallenge006V1;
+
+  /// No description provided for @chatSystemAutoPairingsChallenge007V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Un reto suave: haced vuestra predicción antes del encuentro.'**
+  String get chatSystemAutoPairingsChallenge007V1;
+
+  /// No description provided for @chatSystemAutoPairingsChallenge008V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Si hay confianza, que haya apuestas simbólicas.'**
+  String get chatSystemAutoPairingsChallenge008V1;
+
+  /// No description provided for @chatSystemAutoPairingsChallenge009V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué pareja trae estrategia y cuál trae puro corazón?'**
+  String get chatSystemAutoPairingsChallenge009V1;
+
+  /// No description provided for @chatSystemAutoPairingsChallenge010V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Momento de declarar intenciones. El silencio no puntúa.'**
+  String get chatSystemAutoPairingsChallenge010V1;
+
+  /// No description provided for @chatSystemAutoPairingsChallenge011V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Que cada pareja nombre a su portavoz espontáneo. Luego negáis haberlo elegido.'**
+  String get chatSystemAutoPairingsChallenge011V1;
+
+  /// No description provided for @chatSystemAutoPairingsChallenge012V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Quién rompe el hielo con la primera provocación elegante?'**
+  String get chatSystemAutoPairingsChallenge012V1;
+
+  /// No description provided for @chatSystemAutoPairingsQuiet001V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Mucho silencio para unos parejas tan prometedores.'**
+  String get chatSystemAutoPairingsQuiet001V1;
+
+  /// No description provided for @chatSystemAutoPairingsQuiet002V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Este chat está más tranquilo que un banquillo antes del pitido inicial.'**
+  String get chatSystemAutoPairingsQuiet002V1;
+
+  /// No description provided for @chatSystemAutoPairingsQuiet003V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Nadie va a comentar el emparejamiento? Sospechoso.'**
+  String get chatSystemAutoPairingsQuiet003V1;
+
+  /// No description provided for @chatSystemAutoPairingsQuiet004V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Tarci detecta calma. A veces eso significa estrategia.'**
+  String get chatSystemAutoPairingsQuiet004V1;
+
+  /// No description provided for @chatSystemAutoPairingsQuiet005V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Los parejas están hechos. El chat aún espera su primer buen conversación.'**
+  String get chatSystemAutoPairingsQuiet005V1;
+
+  /// No description provided for @chatSystemAutoPairingsQuiet006V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Un grupo en silencio no es paz: es tensión dramática.'**
+  String get chatSystemAutoPairingsQuiet006V1;
+
+  /// No description provided for @chatSystemAutoPairingsQuiet007V1.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Todo el mundo conforme? Esa unanimidad merece revisión.'**
+  String get chatSystemAutoPairingsQuiet007V1;
+
+  /// No description provided for @chatSystemAutoPairingsQuiet008V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Silencio táctico activado. Continuad, que queda elegante.'**
+  String get chatSystemAutoPairingsQuiet008V1;
+
+  /// No description provided for @chatSystemAutoPairingsCountdown014V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Faltan 14 días. Tiempo de organizarse… o de improvisar con confianza.'**
+  String get chatSystemAutoPairingsCountdown014V1;
+
+  /// No description provided for @chatSystemAutoPairingsCountdown007V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Falta una semana. Las estrategias absurdas ya pueden presentarse oficialmente.'**
+  String get chatSystemAutoPairingsCountdown007V1;
+
+  /// No description provided for @chatSystemAutoPairingsCountdown003V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Quedan 3 días. A estas alturas la épica está permitida.'**
+  String get chatSystemAutoPairingsCountdown003V1;
+
+  /// No description provided for @chatSystemAutoPairingsCountdown001V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Mañana es el día. Última oportunidad para presumir sin consecuencias.'**
+  String get chatSystemAutoPairingsCountdown001V1;
+
+  /// No description provided for @chatSystemAutoPairingsCountdown000V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Hoy toca. Parejas listos, nervios opcionales.'**
+  String get chatSystemAutoPairingsCountdown000V1;
+
+  /// No description provided for @chatSystemAutoPairingsCountdownExtra001V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Dos semanas parecen mucho hasta que alguien recuerda que no ha preparado nada.'**
+  String get chatSystemAutoPairingsCountdownExtra001V1;
+
+  /// No description provided for @chatSystemAutoPairingsCountdownExtra002V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Siete días. Lo suficiente para entrenar o para perfeccionar una buena excusa.'**
+  String get chatSystemAutoPairingsCountdownExtra002V1;
+
+  /// No description provided for @chatSystemAutoPairingsCountdownExtra003V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Tres días. El chat puede pasar de bromas a declaraciones oficiales.'**
+  String get chatSystemAutoPairingsCountdownExtra003V1;
+
+  /// No description provided for @chatSystemAutoPairingsCountdownExtra004V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Queda un día. Si había un plan secreto, es buen momento para fingir que existe.'**
+  String get chatSystemAutoPairingsCountdownExtra004V1;
+
+  /// No description provided for @chatSystemAutoPairingsCountdownExtra005V1.
+  ///
+  /// In es, this message translates to:
+  /// **'Llegó el momento. Que gane el mejor… o el que mejor lo disimule.'**
+  String get chatSystemAutoPairingsCountdownExtra005V1;
 }
 
 class _AppLocalizationsDelegate

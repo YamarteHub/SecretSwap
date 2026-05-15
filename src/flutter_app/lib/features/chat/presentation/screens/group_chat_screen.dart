@@ -6,6 +6,8 @@ import 'package:intl/intl.dart';
 import '../../../../core/l10n/l10n.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/theme/premium_ui.dart';
+import '../../../groups/domain/group_models.dart';
+import '../../../teams/presentation/teams_ui_copy.dart';
 import '../../domain/group_chat_message.dart';
 import '../tarci_auto_chat_l10n.dart';
 import '../providers.dart';
@@ -17,12 +19,14 @@ class GroupChatRouteExtra {
     this.eventDate,
     this.drawCompleted = false,
     this.teamsCompleted = false,
+    this.teamsPreset = TeamsPreset.standard,
   });
 
   final String groupName;
   final DateTime? eventDate;
   final bool drawCompleted;
   final bool teamsCompleted;
+  final TeamsPreset teamsPreset;
 }
 
 class GroupChatScreen extends ConsumerStatefulWidget {
@@ -33,6 +37,7 @@ class GroupChatScreen extends ConsumerStatefulWidget {
     this.eventDate,
     this.drawCompleted = false,
     this.teamsCompleted = false,
+    this.teamsPreset = TeamsPreset.standard,
   });
 
   final String groupId;
@@ -40,6 +45,7 @@ class GroupChatScreen extends ConsumerStatefulWidget {
   final DateTime? eventDate;
   final bool drawCompleted;
   final bool teamsCompleted;
+  final TeamsPreset teamsPreset;
 
   @override
   ConsumerState<GroupChatScreen> createState() => _GroupChatScreenState();
@@ -76,6 +82,8 @@ class _GroupChatScreenState extends ConsumerState<GroupChatScreen> {
         return l10n.chatSystemDrawCompletedV1;
       case 'chat.system.teamsCompleted.v1':
         return l10n.chatSystemTeamsCompletedV1;
+      case 'chat.system.pairingsCompleted.v1':
+        return l10n.chatSystemPairingsCompletedV1;
       default:
         return l10n.chatSystemUnknownTemplate(templateKey);
     }
@@ -109,6 +117,7 @@ class _GroupChatScreenState extends ConsumerState<GroupChatScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final teamsUi = TeamsUiCopy.of(l10n, widget.teamsPreset);
     final theme = Theme.of(context);
     final loc = Localizations.localeOf(context).toString();
     final uid = FirebaseAuth.instance.currentUser?.uid;
@@ -152,7 +161,7 @@ class _GroupChatScreenState extends ConsumerState<GroupChatScreen> {
               child: Center(
                 child: Chip(
                   label: Text(
-                    l10n.chatTeamsCompletedChip,
+                    teamsUi.chatCompletedChip,
                     style: theme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w700),
                   ),
                   visualDensity: VisualDensity.compact,

@@ -401,12 +401,16 @@ export type TeamStatus = z.infer<typeof TeamStatusSchema>;
 export const TeamGroupingModeSchema = z.enum(["team_count", "team_size"]);
 export type TeamGroupingMode = z.infer<typeof TeamGroupingModeSchema>;
 
+export const TeamsPresetSchema = z.enum(["standard", "pairings"]);
+export type TeamsPreset = z.infer<typeof TeamsPresetSchema>;
+
 export const TEAMS_MAX_ELIGIBLE = 100;
 
 export const CreateTeamsGroupRequestSchema = z
   .object({
     name: z.string().min(1),
     nickname: z.string().min(1),
+    teamsPreset: TeamsPresetSchema.optional(),
     groupingMode: TeamGroupingModeSchema,
     requestedTeamCount: z.number().int().min(2).max(TEAMS_MAX_ELIGIBLE).optional(),
     requestedTeamSize: z.number().int().min(2).max(TEAMS_MAX_ELIGIBLE).optional(),
@@ -416,6 +420,16 @@ export const CreateTeamsGroupRequestSchema = z
     eventTimeZone: z.string().min(1).max(80).optional()
   })
   .superRefine((d, ctx) => {
+    const preset = d.teamsPreset ?? "standard";
+    if (preset === "pairings") {
+      if (d.groupingMode !== "team_size" || d.requestedTeamSize !== 2) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["teamsPreset"],
+          message: "pairings preset requires team_size mode with size 2"
+        });
+      }
+    }
     if (d.eventDateEpochMs !== undefined && !d.eventDateDayKey) {
       ctx.addIssue({
         code: "custom",

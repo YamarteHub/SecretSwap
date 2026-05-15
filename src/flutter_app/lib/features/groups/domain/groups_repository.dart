@@ -64,6 +64,7 @@ abstract interface class GroupsRepository {
     int? requestedTeamCount,
     int? requestedTeamSize,
     required bool ownerParticipatesInTeams,
+    TeamsPreset teamsPreset = TeamsPreset.standard,
     DateTime? eventDate,
   });
 

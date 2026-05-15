@@ -10,6 +10,7 @@ import '../../../../core/routing/app_router.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/theme/premium_ui.dart';
 import '../../domain/group_models.dart';
+import '../../../teams/presentation/teams_ui_copy.dart';
 import '../providers.dart';
 
 /// Pantalla "Unirme con código".
@@ -377,9 +378,35 @@ class _JoinSuccessDialogState extends State<_JoinSuccessDialog> {
       return _buildRaffleSuccessDialog(context);
     }
     if (widget.detail.dynamicType == TarciDynamicType.teams) {
+      if (widget.detail.teamsPreset == TeamsPreset.pairings) {
+        return _buildPairingsSuccessDialog(context);
+      }
       return _buildTeamsSuccessDialog(context);
     }
     return _buildSecretSantaSuccessDialog(context);
+  }
+
+  Widget _buildPairingsSuccessDialog(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = context.l10n;
+    final ui = TeamsUiCopy.of(l10n, TeamsPreset.pairings);
+
+    return PremiumDialog(
+      icon: Icons.celebration_outlined,
+      title: l10n.joinSuccessTitle,
+      subtitle: ui.joinSuccessSubtitle(widget.detail.name),
+      content: Text(
+        ui.joinSuccessBody,
+        style: theme.textTheme.bodyMedium?.copyWith(
+          color: theme.colorScheme.onSurfaceVariant,
+          height: 1.45,
+        ),
+      ),
+      primaryLabel: ui.joinSuccessPrimaryCta,
+      onPrimary: () => Navigator.pop(context, const _JoinSuccessResult()),
+      secondaryLabel: l10n.joinSuccessSecondaryCta,
+      onSecondary: () => Navigator.pop(context),
+    );
   }
 
   Widget _buildTeamsSuccessDialog(BuildContext context) {
