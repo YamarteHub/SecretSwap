@@ -272,7 +272,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get homeHeaderSubtitle =>
-      'Organiza amigos secretos, sorteos y equipos con privacidad, emoción y facilidad.';
+      'Organiza amigos secretos, sorteos, equipos, parejas y duelos con privacidad, emoción y facilidad.';
 
   @override
   String get homeHeroHeadline => 'Dinámicas sociales para grupos reales';
@@ -3089,7 +3089,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsPlayful006V1 =>
-      'No importa quién quede contigo. Importa quién termina pidiendo revancha.';
+      'No importa contra quién te toque. Importa quién pide la revancha.';
 
   @override
   String get chatSystemAutoDuelsPlayful007V1 =>
@@ -3109,7 +3109,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsPlayful011V1 =>
-      'Algunos ya celebran. Otros están calculando cómo cambiar de duelo sin que se note.';
+      'Algunos ya celebran. Otros calculan cómo cambiar de rival sin que se note.';
 
   @override
   String get chatSystemAutoDuelsPlayful012V1 =>

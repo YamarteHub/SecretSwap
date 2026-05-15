@@ -30,34 +30,105 @@ function adaptText(text) {
     .replace(/\bEquipas\b/g, "Duelos")
     .replace(/\bequipas\b/g, "duelos")
     .replace(/\bEquipa\b/g, "Duelo")
+    .replace(/\bequipa\b/g, "duelo")
     .replace(/\bSquadre\b/g, "Duelli")
     .replace(/\bsquadre\b/g, "duelli")
     .replace(/\bSquadra\b/g, "Duello")
-    .replace(/\bÉquipes\b/g, "Duels")
-    .replace(/\béquipes\b/g, "duels")
-    .replace(/\bÉquipe\b/g, "Duel")
+    .replace(/\bsquadra\b/g, "duello")
+    .replace(/Équipes/g, "Duels")
+    .replace(/équipes/g, "duels")
+    .replace(/Équipe/g, "Duel")
+    .replace(/équipe/g, "duel")
+    .replace(/d'équipe/g, "de duel")
+    .replace(/d'équipes/g, "de duels")
     .replace(/\bEmparelhamentos\b/g, "Duelos")
+    .replace(/\bemparelhamentos\b/g, "duelos")
     .replace(/\bAbbinamenti\b/g, "Duelli")
+    .replace(/\babbinamenti\b/g, "duelli")
     .replace(/\bAppariements\b/g, "Duels")
-    .replace(/\breparto\b/g, "enfrentamiento")
+    .replace(/\bappariements\b/g, "duels")
+    .replace(/\breparto\b/gi, (m) => (m === "reparto" ? "enfrentamiento" : "Enfrentamiento"))
+    .replace(/\brépartition\b/gi, "affrontement")
+    .replace(/\bripartizione\b/gi, "scontro")
     .replace(/\blineup\b/g, "matchups")
     .replace(/\brivalry\b/g, "rivalry")
     .replace(/\bbanter\b/g, "banter");
 }
 
-function adaptMsg(m) {
+/** Ajustes puntuales tras adaptación mecánica (tono 1 vs 1). */
+const DUELS_TEXT_OVERRIDES = {
+  playful: {
+    6: {
+      es: "No importa contra quién te toque. Importa quién pide la revancha.",
+      en: "It doesn't matter who you face. It matters who asks for a rematch.",
+      pt: "Não importa contra quem te calhas. Importa quem pede a revanche.",
+      it: "Non importa contro chi ti capita. Importa chi chiede la rivincita.",
+      fr: "Peu importe contre qui tu tombes. Importe qui demande la revanche."
+    },
+    11: {
+      es: "Algunos ya celebran. Otros calculan cómo cambiar de rival sin que se note.",
+      en: "Some are already celebrating. Others are plotting how to swap rivals on the down-low.",
+      pt: "Alguns já celebram. Outros calculam como mudar de rival sem ser notado.",
+      it: "Alcuni festeggiano già. Altri calcolano come cambiare rivale senza farsi notare.",
+      fr: "Certains fêtent déjà. D'autres calculent comment changer de rival discrètement."
+    }
+  }
+};
+
+function polishItalianDuels(text) {
+  return text.replace(/Duelli pronte/g, "Duelli pronti");
+}
+
+function polishPortugueseDuels(text) {
+  return text.replace(/Duelos prontas/g, "Duelos prontos");
+}
+
+function polishFrenchDuels(text) {
+  return text
+    .replace(/Les duels sont prêtes/g, "Les duels sont prêts")
+    .replace(/Quelle duel/g, "Quel duel")
+    .replace(/laquelle pour/g, "lequel pour")
+    .replace(/Certaines duels/g, "Certains duels")
+    .replace(/une duel silencieuse/g, "un duel silencieux")
+    .replace(/d'duel/g, "de duel")
+    .replace(/Une bonne duel/g, "Un bon duel")
+    .replace(/Duels formées/g, "Duels formés")
+    .replace(/L'duel/g, "Le duel")
+    .replace(/chaque duel doit expliquer pourquoi elle/g, "chaque duel doit expliquer pourquoi il")
+    .replace(/quelle duel remporte/g, "quel duel remporte")
+    .replace(/Quelle duel apporte/g, "Quel duel apporte")
+    .replace(/Chaque duel nomme/g, "Chaque duel nomme")
+    .replace(/pour des duels si prometteuses/g, "pour des duels si prometteurs")
+    .replace(/Les duels sont faites/g, "Les duels sont faits")
+    .replace(/Un tirage équitable/g, "Un affrontement équitable")
+    .replace(/son tirage/g, "ses affrontements")
+    .replace(/le tirage était juste/g, "les affrontements étaient justes")
+    .replace(/Personne ne commente le tirage/g, "Personne ne commente les affrontements")
+    .replace(/Équipes prêtes/g, "Duels prêts")
+    .replace(/Duels prêtes/g, "Duels prêts");
+}
+
+function adaptMsg(m, category, index) {
   const out = {};
-  for (const loc of ["es", "en", "pt", "it", "fr"]) out[loc] = adaptText(m[loc]);
+  const n = index + 1;
+  const overrides = DUELS_TEXT_OVERRIDES[category]?.[n];
+  for (const loc of ["es", "en", "pt", "it", "fr"]) {
+    let t = overrides?.[loc] ?? adaptText(m[loc]);
+    if (loc === "fr") t = polishFrenchDuels(t);
+    if (loc === "it") t = polishItalianDuels(t);
+    if (loc === "pt") t = polishPortugueseDuels(t);
+    out[loc] = t;
+  }
   if (m.days != null) out.days = m.days;
   if (m.key) out.key = m.key;
   return out;
 }
 
 const duelsMessages = {
-  playful: messages.playful.map(adaptMsg),
-  challenge: messages.challenge.map(adaptMsg),
-  quiet: messages.quiet.map(adaptMsg),
-  countdown: messages.countdown.map(adaptMsg)
+  playful: messages.playful.map((m, i) => adaptMsg(m, "playful", i)),
+  challenge: messages.challenge.map((m, i) => adaptMsg(m, "challenge", i)),
+  quiet: messages.quiet.map((m, i) => adaptMsg(m, "quiet", i)),
+  countdown: messages.countdown.map((m, i) => adaptMsg(m, "countdown", i))
 };
 
 function arbKey(category, num) {
@@ -173,23 +244,40 @@ for (const [k, v] of Object.entries(duelsUi)) {
   for (const loc of ["es", "en", "pt", "it", "fr"]) arbByLocale[loc][k] = v[loc];
 }
 
-function appendArb(locale, entries) {
+function upsertArb(locale, entries) {
   const p = path.join(root, "src/flutter_app/lib/l10n", `app_${locale}.arb`);
   let raw = fs.readFileSync(p, "utf8");
-  const filtered = {};
+  raw = raw.replace(/^\s*,\s*\n/gm, "");
   for (const [k, v] of Object.entries(entries)) {
-    if (raw.includes(`"${k}"`)) continue;
-    filtered[k] = v;
+    const line = `  "${k}": ${JSON.stringify(v)},`;
+    const re = new RegExp(`  "${k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}": [^\\n]*,?\\n`, "g");
+    if (re.test(raw)) {
+      raw = raw.replace(re, `${line}\n`);
+    } else {
+      raw = raw.replace(/(\n})\s*$/, `,\n${line}\n$1`);
+    }
   }
-  if (Object.keys(filtered).length === 0) return;
-  const insert = Object.entries(filtered)
-    .map(([k, v]) => `  "${k}": ${JSON.stringify(v)}`)
-    .join(",\n");
-  raw = raw.replace(/\n}\s*$/, `,\n${insert}\n}\n`);
+  raw = raw.replace(/,(\s*\n})/, "$1");
   fs.writeFileSync(p, raw);
 }
 
-for (const loc of ["es", "en", "pt", "it", "fr"]) appendArb(loc, arbByLocale[loc]);
+const homeHeroCopy = {
+  homeHeaderSubtitle: {
+    es: "Organiza amigos secretos, sorteos, equipos, parejas y duelos con privacidad, emoción y facilidad.",
+    en: "Organize Secret Santa, draws, teams, pairings, and duels with privacy, emotion, and ease.",
+    pt: "Organize amigo secreto, sorteios, equipas, parejas e duelos com privacidade, emoção e facilidade.",
+    it: "Organizza amico segreto, estrazioni, squadre, coppie e duelli con privacy, emozione e semplicità.",
+    fr: "Organisez Secret Santa, tirages, équipes, appariements et duels avec confidentialité, émotion et simplicité."
+  }
+};
+
+for (const loc of ["es", "en", "pt", "it", "fr"]) {
+  const autoOnly = {};
+  for (const [k, v] of Object.entries(arbByLocale[loc])) {
+    if (k.startsWith("chatSystemAutoDuels")) autoOnly[k] = v;
+  }
+  upsertArb(loc, { ...autoOnly, homeHeaderSubtitle: homeHeroCopy.homeHeaderSubtitle[loc] });
+}
 
 const catalogTs = `/** Catálogo automático Tarci para Duelos (metadatos; textos en ARB). */
 

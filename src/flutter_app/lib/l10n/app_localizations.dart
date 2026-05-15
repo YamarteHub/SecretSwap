@@ -575,7 +575,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeHeaderSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Organiza amigos secretos, sorteos y equipos con privacidad, emoción y facilidad.'**
+  /// **'Organiza amigos secretos, sorteos, equipos, parejas y duelos con privacidad, emoción y facilidad.'**
   String get homeHeaderSubtitle;
 
   /// No description provided for @homeHeroHeadline.
@@ -5237,7 +5237,7 @@ abstract class AppLocalizations {
   /// No description provided for @chatSystemAutoDuelsPlayful006V1.
   ///
   /// In es, this message translates to:
-  /// **'No importa quién quede contigo. Importa quién termina pidiendo revancha.'**
+  /// **'No importa contra quién te toque. Importa quién pide la revancha.'**
   String get chatSystemAutoDuelsPlayful006V1;
 
   /// No description provided for @chatSystemAutoDuelsPlayful007V1.
@@ -5267,7 +5267,7 @@ abstract class AppLocalizations {
   /// No description provided for @chatSystemAutoDuelsPlayful011V1.
   ///
   /// In es, this message translates to:
-  /// **'Algunos ya celebran. Otros están calculando cómo cambiar de duelo sin que se note.'**
+  /// **'Algunos ya celebran. Otros calculan cómo cambiar de rival sin que se note.'**
   String get chatSystemAutoDuelsPlayful011V1;
 
   /// No description provided for @chatSystemAutoDuelsPlayful012V1.

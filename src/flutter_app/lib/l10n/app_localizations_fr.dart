@@ -276,7 +276,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get homeHeaderSubtitle =>
-      'Organisez Secret Santa, tirages et équipes avec confidentialité, émotion et simplicité.';
+      'Organisez Secret Santa, tirages, équipes, appariements et duels avec confidentialité, émotion et simplicité.';
 
   @override
   String get homeHeroHeadline => 'Dynamiques sociales pour de vrais groupes';
@@ -3091,11 +3091,11 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsPlayful001V1 =>
-      'Les équipes sont prêtes. Vous pouvez commencer à blâmer l\'algorithme.';
+      'Les duels sont prêts. Vous pouvez commencer à blâmer l\'algorithme.';
 
   @override
   String get chatSystemAutoDuelsPlayful002V1 =>
-      'Quelle équipe vient pour gagner et laquelle pour le goûter ?';
+      'Quel duel vient pour gagner et lequel pour le goûter ?';
 
   @override
   String get chatSystemAutoDuelsPlayful003V1 =>
@@ -3107,11 +3107,11 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsPlayful005V1 =>
-      'Un tirage équitable. Les plaintes créatives comptent aussi comme participation.';
+      'Un affrontement équitable. Les plaintes créatives comptent aussi comme participation.';
 
   @override
   String get chatSystemAutoDuelsPlayful006V1 =>
-      'Peu importe avec qui tu es. Importe qui demande la revanche.';
+      'Peu importe contre qui tu tombes. Importe qui demande la revanche.';
 
   @override
   String get chatSystemAutoDuelsPlayful007V1 =>
@@ -3119,7 +3119,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsPlayful008V1 =>
-      'Certaines équipes inspirent le respect, d\'autres des mèmes.';
+      'Certains duels inspirent le respect, d\'autres des mèmes.';
 
   @override
   String get chatSystemAutoDuelsPlayful009V1 =>
@@ -3127,11 +3127,11 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsPlayful010V1 =>
-      'Ne sous-estimez pas une équipe silencieuse.';
+      'Ne sous-estimez pas un duel silencieux.';
 
   @override
   String get chatSystemAutoDuelsPlayful011V1 =>
-      'Certains fêtent déjà. D\'autres calculent comment changer d\'équipe discrètement.';
+      'Certains fêtent déjà. D\'autres calculent comment changer de rival discrètement.';
 
   @override
   String get chatSystemAutoDuelsPlayful012V1 =>
@@ -3139,15 +3139,15 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsPlayful013V1 =>
-      'De la chimie d\'équipe… du moins selon les stats émotionnelles.';
+      'De la chimie de duel… du moins selon les stats émotionnelles.';
 
   @override
   String get chatSystemAutoDuelsPlayful014V1 =>
-      'Une bonne équipe se construit. Une légendaire se vante avant de jouer.';
+      'Un bon duel se construit. Une légendaire se vante avant de jouer.';
 
   @override
   String get chatSystemAutoDuelsPlayful015V1 =>
-      'Le groupe a son tirage. Il manque l\'épopée.';
+      'Le groupe a ses affrontements. Il manque l\'épopée.';
 
   @override
   String get chatSystemAutoDuelsPlayful016V1 =>
@@ -3155,7 +3155,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsPlayful017V1 =>
-      'Équipes formées. La fierté collective est activée.';
+      'Duels formés. La fierté collective est activée.';
 
   @override
   String get chatSystemAutoDuelsPlayful018V1 =>
@@ -3163,7 +3163,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsPlayful019V1 =>
-      'Place à la meilleure partie : débattre si le tirage était juste.';
+      'Place à la meilleure partie : débattre si les affrontements étaient justes.';
 
   @override
   String get chatSystemAutoDuelsPlayful020V1 =>
@@ -3171,7 +3171,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsChallenge001V1 =>
-      'Défi du jour : chaque équipe doit expliquer pourquoi elle mérite de gagner.';
+      'Défi du jour : chaque duel doit expliquer pourquoi il mérite de gagner.';
 
   @override
   String get chatSystemAutoDuelsChallenge002V1 =>
@@ -3179,7 +3179,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsChallenge003V1 =>
-      'L\'équipe qui ne poste pas aujourd\'hui perd en charisme.';
+      'Le duel qui ne poste pas aujourd\'hui perd en charisme.';
 
   @override
   String get chatSystemAutoDuelsChallenge004V1 =>
@@ -3191,7 +3191,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsChallenge006V1 =>
-      'Laissez une trace : quelle équipe remporte la gloire ?';
+      'Laissez une trace : quel duel remporte la gloire ?';
 
   @override
   String get chatSystemAutoDuelsChallenge007V1 =>
@@ -3203,7 +3203,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsChallenge009V1 =>
-      'Quelle équipe apporte la stratégie et laquelle le cœur pur ?';
+      'Quel duel apporte la stratégie et laquelle le cœur pur ?';
 
   @override
   String get chatSystemAutoDuelsChallenge010V1 =>
@@ -3211,7 +3211,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsChallenge011V1 =>
-      'Chaque équipe nomme un porte-parole spontané. Puis niez l\'avoir choisi.';
+      'Chaque duel nomme un porte-parole spontané. Puis niez l\'avoir choisi.';
 
   @override
   String get chatSystemAutoDuelsChallenge012V1 =>
@@ -3219,7 +3219,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsQuiet001V1 =>
-      'Bien silencieux pour des équipes si prometteuses.';
+      'Bien silencieux pour des duels si prometteurs.';
 
   @override
   String get chatSystemAutoDuelsQuiet002V1 =>
@@ -3227,7 +3227,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsQuiet003V1 =>
-      'Personne ne commente le tirage ? Suspect.';
+      'Personne ne commente les affrontements ? Suspect.';
 
   @override
   String get chatSystemAutoDuelsQuiet004V1 =>
@@ -3235,7 +3235,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsQuiet005V1 =>
-      'Les équipes sont faites. Le chat attend encore son premier bon pique.';
+      'Les duels sont faits. Le chat attend encore son premier bon pique.';
 
   @override
   String get chatSystemAutoDuelsQuiet006V1 =>
@@ -3267,7 +3267,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsCountdown000V1 =>
-      'C\'est aujourd\'hui. Équipes prêtes, nerfs optionnels.';
+      'C\'est aujourd\'hui. Duels prêts, nerfs optionnels.';
 
   @override
   String get chatSystemAutoDuelsCountdownExtra001V1 =>

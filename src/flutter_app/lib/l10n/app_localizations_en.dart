@@ -269,7 +269,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeHeaderSubtitle =>
-      'Organize Secret Santa, draws, and teams with privacy, emotion, and ease.';
+      'Organize Secret Santa, draws, teams, pairings, and duels with privacy, emotion, and ease.';
 
   @override
   String get homeHeroHeadline => 'Social dynamics for real groups';
@@ -3071,7 +3071,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsPlayful006V1 =>
-      'It doesn\'t matter who you\'re with. It matters who asks for a rematch.';
+      'It doesn\'t matter who you face. It matters who asks for a rematch.';
 
   @override
   String get chatSystemAutoDuelsPlayful007V1 =>
@@ -3091,7 +3091,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsPlayful011V1 =>
-      'Some are already celebrating. Others are plotting a discreet duel swap.';
+      'Some are already celebrating. Others are plotting how to swap rivals on the down-low.';
 
   @override
   String get chatSystemAutoDuelsPlayful012V1 =>

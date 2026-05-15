@@ -272,7 +272,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get homeHeaderSubtitle =>
-      'Organize amigo secreto, sorteios e equipas com privacidade, emoção e facilidade.';
+      'Organize amigo secreto, sorteios, equipas, parejas e duelos com privacidade, emoção e facilidade.';
 
   @override
   String get homeHeroHeadline => 'Dinâmicas sociais para grupos reais';
@@ -3071,11 +3071,11 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsPlayful001V1 =>
-      'Duelos prontas. Já podem começar a culpar o algoritmo.';
+      'Duelos prontos. Já podem começar a culpar o algoritmo.';
 
   @override
   String get chatSystemAutoDuelsPlayful002V1 =>
-      'Que equipa vem para ganhar e qual vem pela merenda?';
+      'Que duelo vem para ganhar e qual vem pela merenda?';
 
   @override
   String get chatSystemAutoDuelsPlayful003V1 =>
@@ -3091,7 +3091,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsPlayful006V1 =>
-      'Não importa com quem ficas. Importa quem pede a revanche.';
+      'Não importa contra quem te calhas. Importa quem pede a revanche.';
 
   @override
   String get chatSystemAutoDuelsPlayful007V1 =>
@@ -3107,11 +3107,11 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsPlayful010V1 =>
-      'Ninguém subestime uma equipa calada.';
+      'Ninguém subestime uma duelo calada.';
 
   @override
   String get chatSystemAutoDuelsPlayful011V1 =>
-      'Alguns já celebram. Outros calculam como mudar de equipa sem ser notado.';
+      'Alguns já celebram. Outros calculam como mudar de rival sem ser notado.';
 
   @override
   String get chatSystemAutoDuelsPlayful012V1 =>
@@ -3119,11 +3119,11 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsPlayful013V1 =>
-      'Há química de equipa… ou pelo menos diz a estatística emocional.';
+      'Há química de duelo… ou pelo menos diz a estatística emocional.';
 
   @override
   String get chatSystemAutoDuelsPlayful014V1 =>
-      'Uma boa equipa constrói-se. Uma lendária presume-se antes de jogar.';
+      'Uma boa duelo constrói-se. Uma lendária presume-se antes de jogar.';
 
   @override
   String get chatSystemAutoDuelsPlayful015V1 =>
@@ -3151,7 +3151,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsChallenge001V1 =>
-      'Desafio do dia: cada equipa deve explicar por que merece ganhar.';
+      'Desafio do dia: cada duelo deve explicar por que merece ganhar.';
 
   @override
   String get chatSystemAutoDuelsChallenge002V1 =>
@@ -3171,7 +3171,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsChallenge006V1 =>
-      'Deixem constância: que equipa leva a glória?';
+      'Deixem constância: que duelo leva a glória?';
 
   @override
   String get chatSystemAutoDuelsChallenge007V1 =>
@@ -3183,7 +3183,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsChallenge009V1 =>
-      'Que equipa traz estratégia e qual traz puro coração?';
+      'Que duelo traz estratégia e qual traz puro coração?';
 
   @override
   String get chatSystemAutoDuelsChallenge010V1 =>
@@ -3191,7 +3191,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsChallenge011V1 =>
-      'Cada equipa nomeie um porta-voz espontâneo. Depois neguem que o escolheram.';
+      'Cada duelo nomeie um porta-voz espontâneo. Depois neguem que o escolheram.';
 
   @override
   String get chatSystemAutoDuelsChallenge012V1 =>
@@ -3247,7 +3247,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get chatSystemAutoDuelsCountdown000V1 =>
-      'Hoje é o dia. Duelos prontas, nervos opcionais.';
+      'Hoje é o dia. Duelos prontos, nervos opcionais.';
 
   @override
   String get chatSystemAutoDuelsCountdownExtra001V1 =>
