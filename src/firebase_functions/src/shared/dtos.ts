@@ -394,3 +394,20 @@ export const RemoveRaffleManualParticipantResponseSchema = z.object({
 export type RemoveRaffleManualParticipantResponse = z.infer<
   typeof RemoveRaffleManualParticipantResponseSchema
 >;
+
+export const PushPlatformSchema = z.enum(["android", "ios", "web", "unknown"]);
+export type PushPlatform = z.infer<typeof PushPlatformSchema>;
+
+export const PreferredLocaleSchema = z.enum(["es", "en", "pt", "it", "fr"]);
+
+export const RegisterPushTokenRequestSchema = z.object({
+  token: z.string().min(20).max(4096),
+  platform: PushPlatformSchema.optional(),
+  preferredLocale: PreferredLocaleSchema.optional()
+});
+export type RegisterPushTokenRequest = z.infer<typeof RegisterPushTokenRequestSchema>;
+
+export const RegisterPushTokenResponseSchema = z.object({
+  ok: z.literal(true)
+});
+export type RegisterPushTokenResponse = z.infer<typeof RegisterPushTokenResponseSchema>;

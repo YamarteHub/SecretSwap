@@ -14,6 +14,8 @@ import '../../../../core/routing/app_router.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/theme/premium_ui.dart';
 import '../../domain/group_models.dart';
+import '../../../notifications/presentation/providers.dart';
+import '../../../notifications/presentation/widgets/push_activation_card.dart';
 import '../providers.dart';
 
 bool _isEventCalendarDateBeforeToday(DateTime eventDate) {
@@ -153,6 +155,24 @@ class GroupsHomeScreen extends ConsumerStatefulWidget {
 class _GroupsHomeScreenState extends ConsumerState<GroupsHomeScreen> {
   bool _debugUnlocked = false;
 
+  Future<void> _syncPushLocale(String languageCode) async {
+    await ref
+        .read(pushNotificationsServiceProvider)
+        .syncPreferredLocale(languageCode);
+  }
+
+  Future<void> _selectLocale(Locale? locale) async {
+    final notifier = ref.read(localeControllerProvider.notifier);
+    if (locale == null) {
+      await notifier.useSystemLocale();
+      final device = WidgetsBinding.instance.platformDispatcher.locale;
+      await _syncPushLocale(device.languageCode);
+    } else {
+      await notifier.setLocale(locale);
+      await _syncPushLocale(locale.languageCode);
+    }
+  }
+
   String _shortUid(String? uid) {
     if (uid == null || uid.isEmpty) return '—';
     if (uid.length <= 6) return uid;
@@ -194,44 +214,32 @@ class _GroupsHomeScreenState extends ConsumerState<GroupsHomeScreen> {
                       label: l10n.languageSystem,
                       selected:
                           (current?.languageCode ?? 'system') == 'system',
-                      onTap: () => innerRef
-                          .read(localeControllerProvider.notifier)
-                          .useSystemLocale(),
+                      onTap: () => _selectLocale(null),
                     ),
                     _LangRadio(
                       label: 'Español',
                       selected: current?.languageCode == 'es',
-                      onTap: () => innerRef
-                          .read(localeControllerProvider.notifier)
-                          .setLocale(const Locale('es')),
+                      onTap: () => _selectLocale(const Locale('es')),
                     ),
                     _LangRadio(
                       label: 'English',
                       selected: current?.languageCode == 'en',
-                      onTap: () => innerRef
-                          .read(localeControllerProvider.notifier)
-                          .setLocale(const Locale('en')),
+                      onTap: () => _selectLocale(const Locale('en')),
                     ),
                     _LangRadio(
                       label: 'Português',
                       selected: current?.languageCode == 'pt',
-                      onTap: () => innerRef
-                          .read(localeControllerProvider.notifier)
-                          .setLocale(const Locale('pt')),
+                      onTap: () => _selectLocale(const Locale('pt')),
                     ),
                     _LangRadio(
                       label: 'Italiano',
                       selected: current?.languageCode == 'it',
-                      onTap: () => innerRef
-                          .read(localeControllerProvider.notifier)
-                          .setLocale(const Locale('it')),
+                      onTap: () => _selectLocale(const Locale('it')),
                     ),
                     _LangRadio(
                       label: 'Français',
                       selected: current?.languageCode == 'fr',
-                      onTap: () => innerRef
-                          .read(localeControllerProvider.notifier)
-                          .setLocale(const Locale('fr')),
+                      onTap: () => _selectLocale(const Locale('fr')),
                     ),
                   ],
                 );
@@ -316,6 +324,17 @@ class _GroupsHomeScreenState extends ConsumerState<GroupsHomeScreen> {
                   headline: context.l10n.homeHeroHeadline,
                   tagline: context.l10n.homeHeaderSubtitle,
                   onSecretLongPress: () => _toggleDebugTools(context),
+                ),
+                ref.watch(pushActivationVisibleProvider).when(
+                  data: (visible) {
+                    if (!visible) return const SizedBox.shrink();
+                    return const Padding(
+                      padding: EdgeInsets.only(top: 16),
+                      child: PushActivationCard(),
+                    );
+                  },
+                  loading: () => const SizedBox.shrink(),
+                  error: (_, __) => const SizedBox.shrink(),
                 ),
                 const SizedBox(height: 20),
                 Text(

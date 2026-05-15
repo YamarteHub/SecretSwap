@@ -2229,4 +2229,21 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get raffleDetailInPool => 'Dans le tirage';
+
+  @override
+  String get pushActivationTitle => 'Active les notifications';
+
+  @override
+  String get pushActivationBody =>
+      'Nous t’avertirons quand un tirage est fait ou quand ton Secret Santa est prêt.';
+
+  @override
+  String get pushActivationCta => 'Activer';
+
+  @override
+  String get pushActivationSuccessSnackbar => 'Notifications activées.';
+
+  @override
+  String get pushActivationDeniedSnackbar =>
+      'Impossible d’activer les notifications. Tu peux réessayer plus tard dans les réglages système.';
 }

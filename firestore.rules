@@ -210,5 +210,15 @@ service cloud.firestore {
     match /invite_codes/{codeHash} {
       allow read, write: if false;
     }
+
+    // Perfil mínimo y tokens FCM (escritura vía callable registerPushToken).
+    match /users/{uid} {
+      allow read: if isSignedIn() && request.auth.uid == uid;
+      allow write: if false;
+
+      match /pushTokens/{tokenId} {
+        allow read, write: if false;
+      }
+    }
   }
 }

@@ -2193,4 +2193,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get raffleDetailInPool => 'In the pool';
+
+  @override
+  String get pushActivationTitle => 'Enable notifications';
+
+  @override
+  String get pushActivationBody =>
+      'We’ll let you know when a draw runs or your Secret Santa is ready.';
+
+  @override
+  String get pushActivationCta => 'Enable';
+
+  @override
+  String get pushActivationSuccessSnackbar => 'Notifications enabled.';
+
+  @override
+  String get pushActivationDeniedSnackbar =>
+      'We couldn’t enable notifications. You can try again later in system settings.';
 }

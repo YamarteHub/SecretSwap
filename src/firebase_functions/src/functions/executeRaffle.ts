@@ -11,6 +11,7 @@ import {
   RaffleWinnerSnapshot
 } from "../shared/dtos";
 import { parseOrThrow } from "../shared/validation";
+import { notifyGroupDynamicCompleted } from "../shared/groupNotifications";
 
 type Eligible = {
   participantId: string;
@@ -233,6 +234,17 @@ export const executeRaffle = onCall(async (req: CallableRequest<unknown>): Promi
         winnerParticipantIds: winners.map((w) => w.participantId),
         winnersSnapshot
       };
+    });
+
+    const groupSnapAfter = await groupRef.get();
+    const groupName =
+      typeof (groupSnapAfter.data() as { name?: string } | undefined)?.name === "string"
+        ? ((groupSnapAfter.data() as { name?: string }).name ?? "").trim()
+        : "";
+    await notifyGroupDynamicCompleted(db, {
+      groupId: body.groupId,
+      dynamicType: "simple_raffle",
+      groupName
     });
 
     return result;

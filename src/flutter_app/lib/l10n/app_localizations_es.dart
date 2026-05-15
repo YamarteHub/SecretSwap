@@ -2208,4 +2208,21 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get raffleDetailInPool => 'En el bombo';
+
+  @override
+  String get pushActivationTitle => 'Activa las notificaciones';
+
+  @override
+  String get pushActivationBody =>
+      'Te avisaremos cuando se realice un sorteo o cuando tu amigo secreto esté listo.';
+
+  @override
+  String get pushActivationCta => 'Activar';
+
+  @override
+  String get pushActivationSuccessSnackbar => 'Notificaciones activadas.';
+
+  @override
+  String get pushActivationDeniedSnackbar =>
+      'No pudimos activar las notificaciones. Puedes intentarlo más tarde desde los ajustes del sistema.';
 }

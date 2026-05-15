@@ -997,5 +997,10 @@
   "raffleOwnerParticipantFallback": "Participant",
   "raffleMemberDefaultName": "Participant",
   "raffleDetailStatsWinners": "Nombre de gagnants",
-  "raffleDetailInPool": "Dans le tirage"
+  "raffleDetailInPool": "Dans le tirage",
+  "pushActivationTitle": "Active les notifications",
+  "pushActivationBody": "Nous t’avertirons quand un tirage est fait ou quand ton Secret Santa est prêt.",
+  "pushActivationCta": "Activer",
+  "pushActivationSuccessSnackbar": "Notifications activées.",
+  "pushActivationDeniedSnackbar": "Impossible d’activer les notifications. Tu peux réessayer plus tard dans les réglages système."
 }

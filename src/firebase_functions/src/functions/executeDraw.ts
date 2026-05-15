@@ -17,6 +17,7 @@ import {
 import { AppError } from "../shared/errors";
 import { getDb } from "../shared/firestore";
 import { appendGroupChatSystemMessageIfNew } from "../shared/groupChat";
+import { notifyGroupDynamicCompleted } from "../shared/groupNotifications";
 import { groupPaths } from "../shared/firestorePaths";
 import { acquireDrawingLock, clearDrawingLock } from "../shared/lock";
 import { parseOrThrow } from "../shared/validation";
@@ -725,6 +726,15 @@ export const executeDraw = onCall(async (req: CallableRequest<unknown>): Promise
     if (assignSnap.size !== n) {
       throw new AppError({ code: "INTERNAL", message: "Assignments not written" });
     }
+    const groupName =
+      typeof (groupSnap.data() as { name?: string } | undefined)?.name === "string"
+        ? ((groupSnap.data() as { name?: string }).name ?? "").trim()
+        : "";
+    await notifyGroupDynamicCompleted(db, {
+      groupId: body.groupId,
+      dynamicType: "secret_santa",
+      groupName
+    });
     return await returnSuccessfulDrawWithChat(db, body.groupId, executionId, rulesVersion, outData);
   } catch (e) {
     if (lockHeldForExecution) {

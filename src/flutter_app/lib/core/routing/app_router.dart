@@ -39,8 +39,9 @@ class AppRoutes {
   static String groupDetailFor(String groupId) => '/groups/$groupId';
 }
 
-GoRouter buildRouter() {
+GoRouter buildRouter({GlobalKey<NavigatorState>? navigatorKey}) {
   return GoRouter(
+    navigatorKey: navigatorKey,
     initialLocation: AppRoutes.splash,
     routes: [
       GoRoute(

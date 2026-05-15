@@ -997,5 +997,10 @@
   "raffleOwnerParticipantFallback": "Partecipante",
   "raffleMemberDefaultName": "Partecipante",
   "raffleDetailStatsWinners": "Numero di vincitori",
-  "raffleDetailInPool": "Nel bombo"
+  "raffleDetailInPool": "Nel bombo",
+  "pushActivationTitle": "Attiva le notifiche",
+  "pushActivationBody": "Ti avviseremo quando si svolge un’estrazione o quando il tuo amico segreto è pronto.",
+  "pushActivationCta": "Attiva",
+  "pushActivationSuccessSnackbar": "Notifiche attivate.",
+  "pushActivationDeniedSnackbar": "Non è stato possibile attivare le notifiche. Puoi riprovare più tardi dalle impostazioni di sistema."
 }

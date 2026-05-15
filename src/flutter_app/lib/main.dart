@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app/app.dart';
 import 'app/providers.dart';
+import 'features/notifications/presentation/providers.dart';
 import 'core/firebase/firebase_emulator_config.dart';
 import 'firebase_options.dart';
 
@@ -100,11 +101,24 @@ class _FirebaseErrorApp extends StatelessWidget {
   }
 }
 
-class _Bootstrap extends ConsumerWidget {
+class _Bootstrap extends ConsumerStatefulWidget {
   const _Bootstrap();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<_Bootstrap> createState() => _BootstrapState();
+}
+
+class _BootstrapState extends ConsumerState<_Bootstrap> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(pushNotificationsServiceProvider).initialize();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final router = ref.watch(routerProvider);
     return TarciSwapApp(router: router);
   }

@@ -997,5 +997,10 @@
   "raffleOwnerParticipantFallback": "Participant",
   "raffleMemberDefaultName": "Participant",
   "raffleDetailStatsWinners": "Number of winners",
-  "raffleDetailInPool": "In the pool"
+  "raffleDetailInPool": "In the pool",
+  "pushActivationTitle": "Enable notifications",
+  "pushActivationBody": "We’ll let you know when a draw runs or your Secret Santa is ready.",
+  "pushActivationCta": "Enable",
+  "pushActivationSuccessSnackbar": "Notifications enabled.",
+  "pushActivationDeniedSnackbar": "We couldn’t enable notifications. You can try again later in system settings."
 }

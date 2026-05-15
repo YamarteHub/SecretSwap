@@ -3835,6 +3835,36 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'En el bombo'**
   String get raffleDetailInPool;
+
+  /// No description provided for @pushActivationTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Activa las notificaciones'**
+  String get pushActivationTitle;
+
+  /// No description provided for @pushActivationBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Te avisaremos cuando se realice un sorteo o cuando tu amigo secreto esté listo.'**
+  String get pushActivationBody;
+
+  /// No description provided for @pushActivationCta.
+  ///
+  /// In es, this message translates to:
+  /// **'Activar'**
+  String get pushActivationCta;
+
+  /// No description provided for @pushActivationSuccessSnackbar.
+  ///
+  /// In es, this message translates to:
+  /// **'Notificaciones activadas.'**
+  String get pushActivationSuccessSnackbar;
+
+  /// No description provided for @pushActivationDeniedSnackbar.
+  ///
+  /// In es, this message translates to:
+  /// **'No pudimos activar las notificaciones. Puedes intentarlo más tarde desde los ajustes del sistema.'**
+  String get pushActivationDeniedSnackbar;
 }
 
 class _AppLocalizationsDelegate

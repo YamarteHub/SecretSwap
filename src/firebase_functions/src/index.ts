@@ -20,6 +20,7 @@ import { rotateInviteCode } from "./functions/rotateInviteCode";
 import { sendGroupChatMessage } from "./functions/sendGroupChatMessage";
 import { publishTarciScheduledChatMessages } from "./functions/publishTarciScheduledChatMessages";
 import { devRunTarciChatAutomation } from "./functions/devRunTarciChatAutomation";
+import { registerPushToken } from "./functions/registerPushToken";
 
 export {
   createGroup,
@@ -41,6 +42,7 @@ export {
   setWishlist,
   sendGroupChatMessage,
   publishTarciScheduledChatMessages,
-  devRunTarciChatAutomation
+  devRunTarciChatAutomation,
+  registerPushToken
 };
 
